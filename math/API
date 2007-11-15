@@ -2,13 +2,35 @@ MaxSATzilla Mathematics API
 ---------------------------
 
 MaxSATzilla Mathematics API entrance point is the function:
-MSZDataSet *createDataSet(double**, int, int);
+MSZDataSet *createDataSet(double** matrix, int nrows, int ncols, int ouputs = 1);
 
 Where the first argument is a matrix of doubles, the second and 
 third arguments are respectively the number of lines and the number 
-of columns of the matrix.
+of columns of the matrix and the last is the number of outputs which
+defaults to 1. (in maxsatzilla case is the number of solvers being run 
+for this distribution of features)
 
 From this point on double** IS OWNED BY THE MATH LIBRARY!!!
 This returns MSZDataSet which should be passed to the rest of
 the functions of the library. Once the process is terminated just
 delete (with the delete keyword of C++) it.
+
+Note about matrix structure:
+
+double **m;
+
+// Matrix construction
+...
+// end matrix construction
+
+m[2][5] should refer to the element in the 3rd row, 6th column.
+Which means that m[1] should return the 2nd row starting with index 0
+and going to ncols-1.
+
+A line in this matrix should contain the runtime values in the first k columns 
+(k solvers), and the values of the features on the rest. So the number of features 
+is ncols - outputs. The number of rows is obviously the number of instances ran for 
+this set of features/solvers.
+A matrix for 10 features, 3 solvers, and 500 instances would have the size 500 rows
+by 13 columns. m[i][0], m[i][1] and m[i][2] for 0 <= i < nrows are runtimes and
+m[i][j] for 0 <= i < nrows and 3 <= j < ncols are feature values.
