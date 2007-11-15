@@ -1,0 +1,14 @@
+MaxSATzilla Mathematics API
+---------------------------
+
+MaxSATzilla Mathematics API entrance point is the function:
+MSZDataSet *createDataSet(double**, int, int);
+
+Where the first argument is a matrix of doubles, the second and 
+third arguments are respectively the number of lines and the number 
+of columns of the matrix.
+
+From this point on double** IS OWNED BY THE MATH LIBRARY!!!
+This returns MSZDataSet which should be passed to the rest of
+the functions of the library. Once the process is terminated just
+delete (with the delete keyword of C++) it.
