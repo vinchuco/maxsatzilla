@@ -1,6 +1,12 @@
 #ifndef DATASET_HH
 #define DATASET_HH
 
+#include <string>
+#include <vector>
+
+using std::string;
+using std::vector;
+
 class MSZDataSet {
 public:
   MSZDataSet(double**, int, int, int);
