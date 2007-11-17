@@ -9,6 +9,7 @@
 
 using std::cerr;
 using std::vector;
+using std::string;
 
 MSZDataSet::MSZDataSet(double **matrix, int nrows, int ncols, int outputs) 
   : matrix(matrix), nrows(nrows), ncols(ncols), outputs(outputs) {}
@@ -25,7 +26,7 @@ MSZDataSet::~MSZDataSet() {
   
 }
 
-void MSZDataSet::dumpPlotFiles(vector<string> labels, string prefix) {
+void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefix) {
 
   if(labels.size() != ncols) {
     cerr << "Warning: Trying to dump plot files but labels vector is too small.\n";
@@ -59,6 +60,16 @@ void MSZDataSet::dumpPlotFiles(vector<string> labels, string prefix) {
 
     }
   }
+}
+
+void MSZDataSet::dumpPlotFiles(char **labels, int len, char *prefix) {
+
+  vector<string> vec(len);
+
+  for(int i = 0; i < len; i++)
+    vec[i] = string(labels[i]);
+
+  dumpPlotFile(vec, string(prefix));
 }
 
 /////////////////////////////////////////
