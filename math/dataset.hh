@@ -21,10 +21,10 @@ public:
   double getFeatureValue(size_t, size_t); 
   double getOutputValue(size_t, size_t);
 
-  inline size_t getNRows()     { return nrows;           }
-  inline size_t getNCols()     { return ncols;           }
-  inline size_t getNFeatures() { return ncols - outputs; }
-  inline size_t getNOutputs()  { return outputs;         }
+  inline size_t getNRows()     const { return nrows;           }
+  inline size_t getNCols()     const { return ncols;           }
+  inline size_t getNFeatures() const { return ncols - outputs; }
+  inline size_t getNOutputs()  const { return outputs;         }
 
 private:
   double **matrix;

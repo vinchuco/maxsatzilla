@@ -9,7 +9,7 @@
 using std::cerr;
 using std::ofstream;
 
-MSZDataSet::MSZDataSet(double **matrix, int nrows, int ncols, int outputs) 
+MSZDataSet::MSZDataSet(double **matrix, size_t nrows, size_t ncols, size_t outputs) 
   : matrix(matrix), nrows(nrows), ncols(ncols), outputs(outputs) {}
   
 MSZDataSet::~MSZDataSet() {
@@ -17,7 +17,7 @@ MSZDataSet::~MSZDataSet() {
   // Please God, do not let this Seg Fault!
 
   // Clean up matrix by deleting each line.
-  for(int row = 0; row < nrows; row++) 
+  for(size_t row = 0; row < nrows; row++) 
     free(matrix[row]);
 	 
   free(matrix);
@@ -32,8 +32,8 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
   }
 
   // Dump the files 
-  for(int out = 0; out < outputs; out++) {
-    for(int feature = outputs; feature < ncols; feature++) {
+  for(size_t out = 0; out < outputs; out++) {
+    for(size_t feature = outputs; feature < ncols; feature++) {
       ofstream file;
       file.open((prefix + "_" + labels[out] + "_" + labels[feature] + ".dat").c_str());
       
@@ -48,7 +48,7 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
 	   << "# " << labels[out] << "\t\t" << labels[feature] << "\n";
       
       // For each instance
-      for(int i = 0; i < nrows; i++) 
+      for(size_t i = 0; i < nrows; i++) 
 	file << matrix[i][out] << "\t\t" << matrix[i][feature] << "\n";
 
       file.close();
@@ -56,7 +56,7 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
   }
 }
 
-void MSZDataSet::dumpPlotFiles(char **labels, int len, char *prefix) {
+void MSZDataSet::dumpPlotFiles(char **labels, size_t len, char *prefix) {
 
   vector<string> vec(len);
 
@@ -64,6 +64,20 @@ void MSZDataSet::dumpPlotFiles(char **labels, int len, char *prefix) {
     vec[i] = string(labels[i]);
 
   dumpPlotFiles(vec, string(prefix));
+}
+
+double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
+  assert(row < nrows);
+  assert(col < outputs);
+
+  return matrix[row][col];
+}
+
+double MSZDataSet::getOutputValue(size_t row, size_t col) const {
+  assert(row < nrows);
+  assert(col < ncols - outputs);
+
+  return matrix[row][col+outputs];
 }
 
 /////////////////////////////////////////
@@ -74,14 +88,14 @@ void MSZDataSet::dumpPlotFiles(char **labels, int len, char *prefix) {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-MSZDataSet *createDataSet(double** matrix, int nrows, int ncols, int outputs) {
+MSZDataSet *createDataSet(double** matrix, size_t nrows, size_t ncols, size_t outputs) {
   assert(nrows > 0);
   assert(ncols > 0);
   assert(matrix != 0);
   assert(outputs > 0);
   
 #ifndef NDEBUG
-  for(int r = 0; r < nrows; r++)
+  for(size_t r = 0; r < nrows; r++)
     assert(matrix[r] != 0);
 #endif // NDEBUG
 
