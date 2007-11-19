@@ -1,1 +1,2 @@
-None up until now!
+- Forward Selection Algorithm relies on GSL (http://www.gnu.org/software/gsl/)
+  for algorithms and data structures.
