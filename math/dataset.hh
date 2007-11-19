@@ -9,23 +9,32 @@ using std::vector;
 
 class MSZDataSet {
 public:
-  MSZDataSet(double**, int, int, int);
+  MSZDataSet(double**, size_t, size_t, size_t);
   ~MSZDataSet();
 
   /// Given a vector of labels for matrix columns and a prefix for file names, 
   /// dumps all the files, in a readable format for GNUPlot to use.
   void dumpPlotFiles(const vector<string> &, const string &);
-  void dumpPlotFiles(char **, int, char *);
+  void dumpPlotFiles(char **, size_t, char *);
+
+  /// Accessors
+  double getFeatureValue(size_t, size_t); 
+  double getOutputValue(size_t, size_t);
+
+  inline size_t getNRows()     { return nrows;           }
+  inline size_t getNCols()     { return ncols;           }
+  inline size_t getNFeatures() { return ncols - outputs; }
+  inline size_t getNOutputs()  { return outputs;         }
 
 private:
   double **matrix;
-  int nrows;
-  int ncols;
-  int outputs;
+  size_t nrows;
+  size_t ncols;
+  size_t outputs;
 };
 
 /// API entrace function to create dataset to be used with other
 /// functions. This function NEVER returns a 0 pointer.
-MSZDataSet *createDataSet(double**, int, int, int = 1);
+MSZDataSet *createDataSet(double**, size_t, size_t, size_t = 1);
 
 #endif // DATASET_HH
