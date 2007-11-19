@@ -2,7 +2,7 @@ MaxSATzilla Mathematics API
 ---------------------------
 
 MaxSATzilla Mathematics API entrance point is the function:
-MSZDataSet *createDataSet(double** matrix, int nrows, int ncols, int ouputs = 1);
+MSZDataSet *createDataSet(double** matrix, size_t nrows, size_t ncols, size_t ouputs = 1);
 
 Where the first argument is a matrix of doubles, the second and 
 third arguments are respectively the number of lines and the number 
