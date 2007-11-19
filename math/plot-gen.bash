@@ -1,4 +1,4 @@
-#! /bin/bash -x
+#! /bin/bash 
 #
 # This script receives one argument: the path of the files and the prefix
 # and generates the plots for all the files with that prefix in the same path
