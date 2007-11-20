@@ -4,7 +4,7 @@
 #include "math/dataset.hh"
 // #include "math/forwardselection.hh"
 
-#define INSTANCES 2
+#define INSTANCES 3
 #define SOLVERS 1
 #define FEATURES 8
 #define TOTAL_COLUMNS (SOLVERS+FEATURES)
@@ -40,6 +40,17 @@ int main( int argc, char* argv[] ) {
   data[1][6] = 0.000684369;
   data[1][7] = 0.538188;
   data[1][8] = 0.392691;
+
+  //instance C220_FV_SZ_65.cnf
+  data[2][0] = 50;
+  data[2][1] = 1728;
+  data[2][2] = 4496;
+  data[2][3] = 2.60185;
+  data[2][4] = 1.73043;
+  data[2][5] = 0.403247;
+  data[2][6] = 0.262011;
+  data[2][7] = 0.58919;
+  data[2][8] = 0.0700623;
 
   MSZDataSet *ds = createDataSet( data, INSTANCES, TOTAL_COLUMNS, SOLVERS );
 
