@@ -12,6 +12,7 @@ class MaxSatInstance {
   int numVars, numClauses;
   int *clauseLengths;
   vector<int> *negClausesWithVar, *posClausesWithVar;
+  int unitClauses, binaryClauses, ternaryClauses;
   bool isTautologicalClause(int[MAX_NUM_LITERALS], int&, const int);
  public:
   MaxSatInstance( const char* filename );
@@ -74,6 +75,7 @@ MaxSatInstance::MaxSatInstance( const char* filename )
   clauseLengths = new int[ numClauses ];
   negClausesWithVar = new vector<int>[ numVars+1 ];
   posClausesWithVar = new vector<int>[ numVars+1 ];
+  unitClauses = binaryClauses = ternaryClauses = 0;
 
   int lits[ MAX_NUM_LITERALS ];
  for (int clauseNum=0; clauseNum<numClauses; clauseNum++) {
@@ -86,6 +88,11 @@ MaxSatInstance::MaxSatInstance( const char* filename )
 
     if ( numLits == 1 or !isTautologicalClause( lits, numLits, clauseNum )) {
       clauseLengths[clauseNum] = numLits;
+      switch( numLits ) {
+      case 1: unitClauses++; break;
+      case 2: binaryClauses++; break;
+      case 3: ternaryClauses++; break;
+      }
       
       for (int litNum = 0; litNum < numLits; litNum++)
 	if (lits[litNum] < 0)
@@ -107,10 +114,14 @@ MaxSatInstance::~MaxSatInstance() {
 void MaxSatInstance::printInfo(ostream& os) {
   os << "Num vars: " << numVars << endl;
   os << "Num clauses: " <<  numClauses << endl;
+  os << "Ratio c/v: " << float(numClauses/numVars) << endl;  
   for (int varNum=1; varNum<=numVars; varNum++) {
-    os << "Neg " << negClausesWithVar[ varNum ].size() << endl;
-    os << "Pos " << posClausesWithVar[ varNum ].size() << endl;
+    os << "Neg [" << varNum << "]: " << negClausesWithVar[ varNum ].size() << endl;
+    os << "Pos [" << varNum << "]: " << posClausesWithVar[ varNum ].size() << endl;
   }
+  os << "Unary: " << unitClauses << endl;
+  os << "Binary: " << binaryClauses << endl;
+  os << "Ternary: " << ternaryClauses << endl;
 }
 
 #include <iostream>
