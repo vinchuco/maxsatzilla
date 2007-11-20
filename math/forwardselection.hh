@@ -1,9 +1,14 @@
 #ifndef FORWARDSELECTION_HH
 #define FORWARDSELECTION_HH
 
+#include <vector>
+
+#include <gsl/gsl_vector.h>
 #include <gsl/gsl_matrix.h>
 
 #include "dataset.hh"
+
+using std::vector;
 
 // If FSDEBUG is 1, output regarding Forward Selection computations will be shown
 #define FSDEBUG 1

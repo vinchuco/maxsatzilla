@@ -18,8 +18,8 @@ public:
   void dumpPlotFiles(char **, size_t, char *);
 
   /// Accessors
-  double getFeatureValue(size_t, size_t); 
-  double getOutputValue(size_t, size_t);
+  double getFeatureValue(size_t, size_t) const; 
+  double getOutputValue(size_t, size_t)  const;
 
   inline size_t getNRows()     const { return nrows;           }
   inline size_t getNCols()     const { return ncols;           }

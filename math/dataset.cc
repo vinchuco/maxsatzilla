@@ -60,20 +60,20 @@ void MSZDataSet::dumpPlotFiles(char **labels, size_t len, char *prefix) {
 
   vector<string> vec(len);
 
-  for(int i = 0; i < len; i++)
+  for(size_t i = 0; i < len; i++)
     vec[i] = string(labels[i]);
 
   dumpPlotFiles(vec, string(prefix));
 }
 
-double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
+double MSZDataSet::getOutputValue(size_t row, size_t col) const {
   assert(row < nrows);
   assert(col < outputs);
 
   return matrix[row][col];
 }
 
-double MSZDataSet::getOutputValue(size_t row, size_t col) const {
+double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
   assert(row < nrows);
   assert(col < ncols - outputs);
 

@@ -1,7 +1,8 @@
 # OK, Simple makefile to generate static library
 # and link it to the driver.
 CXXFLAGS = -Wall -std=c++98 -ggdb
-LIB_FILES = dataset.cc
+LDFLAGS = -lgsl
+LIB_FILES = dataset.cc forwardselection.cc
 DRIVER_FILES = driver.cc
 
 LIBOFILES = $(LIB_FILES:%.cc=%.o)
@@ -13,7 +14,7 @@ libmath.a: $(LIBOFILES)
 	ar cq $@ $(LIBOFILES)
 
 driver: $(DRIVER_FILES) libmath.a 
-	g++ $(CXXFLAGS) $(DRIVER_FILES) ./libmath.a -o $@
+	g++ $(LDFLAGS) $(CXXFLAGS) $(DRIVER_FILES) ./libmath.a -o $@
 
 clean: 
 	rm -f $(LIBOFILES) libmath.a driver
