@@ -92,6 +92,10 @@ MaxSatInstance::~MaxSatInstance() {
   delete clauseLengths;
 }
 
+void MaxSatInstance::dumpData( double **data, int& rows, int& columns, int& outputs ){
+  
+}
+
 void MaxSatInstance::printInfo(ostream& os) {
   os << "Vrs " << numVars << endl;
   os << "Cls " <<  numClauses << endl;
