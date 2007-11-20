@@ -1,2 +1,4 @@
-- Forward Selection Algorithm relies on GSL (http://www.gnu.org/software/gsl/)
+- Forward Selection Algorithm relies on GSL >= 1.10 (http://www.gnu.org/software/gsl/)
   for algorithms and data structures.
+  * NOTE THAT VERSION 1.9 DOES NOOOOOOOOOOOOT WORK!
+    AT LEAST GSL_STATS_CORRELATION IS ONLY PRESENT IN 1.10!!!!
