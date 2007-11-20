@@ -103,7 +103,7 @@ void MaxSatInstance::printInfo(ostream& os) {
   }
   os << "Neg : " << (float)negClauses/numClauses << endl;
   os << "Pos : " << (float)posClauses/numClauses << endl;
-  os << "Unary: " << unitClauses << endl;
-  os << "Binary: " << binaryClauses << endl;
-  os << "Ternary: " << ternaryClauses << endl;
+  os << "Unary: " << (float)unitClauses/numClauses << endl;
+  os << "Binary: " << (float)binaryClauses/numClauses << endl;
+  os << "Ternary: " << (float)ternaryClauses/numClauses << endl;
 }
