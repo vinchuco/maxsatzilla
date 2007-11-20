@@ -93,6 +93,7 @@ MSZDataSet *createDataSet(double** matrix, size_t nrows, size_t ncols, size_t ou
   assert(ncols > 0);
   assert(matrix != 0);
   assert(outputs > 0);
+  assert(nrows >= ncols - outputs);
   
 #ifndef NDEBUG
   for(size_t r = 0; r < nrows; r++)
