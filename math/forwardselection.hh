@@ -26,7 +26,7 @@ public:
   vector<size_t> run(double);
   
 private:
-  double ForwardSelection::computeFtest(const vector<bool> &, double, size_t, double *);
+  double computeFtest(const vector<bool> &, double, size_t, double *);
 
   gsl_matrix *fmatrix;///< Feature Matrix
   gsl_vector *ovec;   ///< Output Vector

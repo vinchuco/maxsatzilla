@@ -1,7 +1,10 @@
 #include "forwardselection.hh"
 
 #include <iostream>
+#include <cassert>
 #include <gsl/gsl_statistics.h>
+#include <gsl/gsl_fit.h>
+#include <gsl/gsl_multifit.h>
 
 using std::cerr;
 
@@ -39,17 +42,15 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
   }
 
 #ifdef FSDEBUG
-  cerr << "Best initial feature (highest correlation) is: " << initVar << "\n"
+  cerr << "Best initial feature (highest correlation) is: " << initRegressor << "\n"
        << "Its correlation is " << bestCorrelation << "\n\n";
 #endif // FSDEBUG
 
   // Generates model for initial regressor
   double c0, c1, cov00, cov01, cov11, SSe;
-  gsl_vector_const_view bestRegressorCol = gsl_matrix_const_column(fmatrix, initRegressor);
+  gsl_vector_const_view initRegressorCol = gsl_matrix_const_column(fmatrix, initRegressor);
   gsl_fit_linear((&initRegressorCol.vector)->data, 1, ovec->data, 1, ovec->size, 
 		 &c0, &c1, &cov00, &cov01, &cov11, &SSe);
-
-  initModel = make_pair(c0, c1);
 
 #ifdef FSDEBUG
   cerr << "Best fit using initial regressor: Y = " << c0 << " + " << c1 << " X\n"
@@ -71,7 +72,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
   
 #ifdef FSDEBUG
   cerr << "SSt = " << SSt << "\n"
-       << "SSr = " << SSr << "\n";
+       << "SSr = " << initSSr << "\n";
 #endif // FSDEBUG
 }
 
@@ -84,7 +85,7 @@ ForwardSelection::~ForwardSelection() {
   gsl_matrix_free(fmatrix);
 }
 
-vector<int> ForwardSelection::run(double fin) {
+vector<size_t> ForwardSelection::run(double fin) {
 
   // Current model SSr
   double modelSSr = initSSr;
@@ -98,9 +99,6 @@ vector<int> ForwardSelection::run(double fin) {
     bool foundNew = false; // Found regressor to add with fj > fin
 
     for(size_t rindex = 0; rindex < isInModel.size(); rindex++) {
-      if(rindex == isInModel.size() - 1) // if we reached last regressor, 
-	noMoreVars = true;               // then nothing else todo after it
-
       if(isInModel[rindex]) // if current regressor is in model then we continue
 	continue;
 
@@ -144,7 +142,7 @@ vector<int> ForwardSelection::run(double fin) {
   // Create result vector
   vector<size_t> regs;
   for(size_t i = 0; i < isInModel.size(); i++) 
-    if(isInModel[i]) reqs.push_back(i);
+    if(isInModel[i]) regs.push_back(i);
     
   return regs;
 }
