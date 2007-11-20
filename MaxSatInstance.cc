@@ -93,17 +93,17 @@ MaxSatInstance::~MaxSatInstance() {
 }
 
 void MaxSatInstance::printInfo(ostream& os) {
-  os << "Num vars: " << numVars << endl;
-  os << "Num clauses: " <<  numClauses << endl;
-  os << "Ratio c/v: " << (float)numClauses/numVars << endl;
+  os << "Vrs " << numVars << endl;
+  os << "Cls " <<  numClauses << endl;
+  os << "C/V: " << (float)numClauses/numVars << endl;
   int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
     negClauses += negClausesWithVar[ varNum ].size();
     posClauses += posClausesWithVar[ varNum ].size();
   }
-  os << "Neg : " << (float)negClauses/numClauses << endl;
-  os << "Pos : " << (float)posClauses/numClauses << endl;
-  os << "Unary: " << (float)unitClauses/numClauses << endl;
-  os << "Binary: " << (float)binaryClauses/numClauses << endl;
-  os << "Ternary: " << (float)ternaryClauses/numClauses << endl;
+  os << "Neg " << (float)negClauses/numClauses << endl;
+  os << "Pos " << (float)posClauses/numClauses << endl;
+  os << "Una " << (float)unitClauses/numClauses << endl;
+  os << "Bin " << (float)binaryClauses/numClauses << endl;
+  os << "Ter " << (float)ternaryClauses/numClauses << endl;
 }
