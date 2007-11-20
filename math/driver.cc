@@ -2,7 +2,7 @@
 #include <vector>
 
 #include "dataset.hh"
-#include "forwardselection.hh"
+//#include "forwardselection.hh"
 
 using std::vector;
 
@@ -27,9 +27,9 @@ int main(void) {
   ds->dumpPlotFiles(labels, 5, "./driver");
 
   // Lets do a forward selection
-  ForwardSelection fs(*ds, 0);
+  //ForwardSelection fs(*ds, 0);
 
-  vector<int> res = fs.run(FIN);
+  //vector<int> res = fs.run(FIN);
   
   // Let's not forget to delete the dataset
   delete ds;

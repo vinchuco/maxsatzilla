@@ -2,7 +2,7 @@
 # and link it to the driver.
 CXXFLAGS = -Wall -std=c++98 -ggdb -I/sw/include -L/sw/lib
 LDFLAGS = -lgsl
-LIB_FILES = dataset.cc forwardselection.cc
+LIB_FILES = dataset.cc #forwardselection.cc
 DRIVER_FILES = driver.cc
 
 LIBOFILES = $(LIB_FILES:%.cc=%.o)

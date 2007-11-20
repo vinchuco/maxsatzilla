@@ -14,4 +14,4 @@ run:
 	./math/plot-gen.bash . driver
 
 clean:
-	rm -f driver* *~ *.o 
+	rm -f driver* *~ *.o features maxsatzilla

@@ -57,7 +57,7 @@ int main( int argc, char* argv[] ) {
   ds->dumpPlotFiles( labels, TOTAL_COLUMNS, "./driver" );
 
   //  ForwardSelection fs( *ds, 0 );
-  //  vector<int> res = fs.run( 0.15 );
+  //  vector<int> columns_to_take = fs.run( 0.15 );
 
   return 0;
 }
