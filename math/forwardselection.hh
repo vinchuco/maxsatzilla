@@ -20,15 +20,19 @@ public:
   ForwardSelection(const MSZDataSet &, size_t);
   ~ForwardSelection();
 
-  /// Given a double which is the fin target to add variables,
-  /// returns a vector with the indices of the features
+  /// Given a double which is the fin target to add regressors,
+  /// returns a vector with the indices of the regressors
   /// which should be included in the model.
-  vector<int> run(double);
+  vector<size_t> run(double);
   
 private:
+  double ForwardSelection::computeFtest(const vector<bool> &, double, size_t, double *);
+
   gsl_matrix *fmatrix;///< Feature Matrix
   gsl_vector *ovec;   ///< Output Vector
-  size_t initVar;     ///< Initial FS Variable (highest correlated with output)
+  double SSt;     ///< Total Corrected Sum of Squares
+  size_t initRegressor;     ///< Initial FS Regressor (highest correlated with output)
+  double initSSr;     ///< Initial regression sum of squares 
 };
 
 #endif // FORWARDSELECTION_HH

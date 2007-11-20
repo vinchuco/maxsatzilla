@@ -30,6 +30,9 @@ int main(void) {
   ForwardSelection fs(*ds, 0);
 
   vector<int> res = fs.run(FIN);
-
+  
+  // Let's not forget to delete the dataset
+  delete ds;
+  
   return 0;
 }
