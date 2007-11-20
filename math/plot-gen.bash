@@ -16,7 +16,7 @@ do
     
     rm -f $i.png $i.gp
     touch $i.png
-    echo "set terminal png truecolor medium size 640,480" >> $i.gp
+    echo "set terminal png medium size 640,480" >> $i.gp
     echo "set xlabel \"$XAXIS\"" >> $i.gp
     echo "set ylabel \"$YAXIS\"" >> $i.gp
     echo "plot \"$i\"" >> $i.gp
