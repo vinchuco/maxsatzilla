@@ -45,11 +45,11 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
 	// Outputting timestamp could be nice.
 	//<< "# Timestamp: " << 
 	   << "#\n"
-	   << "# " << labels[out] << "\t\t" << labels[feature] << "\n";
+	   << "# " << labels[feature] << "\t\t" << labels[out] << "\n";
       
       // For each instance
       for(size_t i = 0; i < nrows; i++) 
-	file << matrix[i][out] << "\t\t" << matrix[i][feature] << "\n";
+	file << matrix[i][feature] << "\t\t" << matrix[i][out] << "\n";
 
       file.close();
     }
