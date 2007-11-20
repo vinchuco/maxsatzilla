@@ -1,24 +1,5 @@
 
-#include <fstream>
-#include <vector>
-
-#define MAX_LINE_LENGTH 1024
-#define MAX_NUM_LITERALS 100
-
-using namespace std;
-
-class MaxSatInstance {
-  enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
-  int numVars, numClauses;
-  int *clauseLengths;
-  vector<int> *negClausesWithVar, *posClausesWithVar;
-  int unitClauses, binaryClauses, ternaryClauses;
-  bool isTautologicalClause(int[MAX_NUM_LITERALS], int&, const int);
- public:
-  MaxSatInstance( const char* filename );
-  ~MaxSatInstance();
-  void printInfo( ostream& os );
-};
+#include "MaxSatInstance.hh"
 
 bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& numLits, const int clauseNum ) {
   // sort the clause and remove redundant literals
@@ -114,11 +95,14 @@ MaxSatInstance::~MaxSatInstance() {
 void MaxSatInstance::printInfo(ostream& os) {
   os << "Num vars: " << numVars << endl;
   os << "Num clauses: " <<  numClauses << endl;
-  os << "Ratio c/v: " << float(numClauses/numVars) << endl;  
+  os << "Ratio c/v: " << (float)numClauses/numVars << endl;
+  int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
-    os << "Neg [" << varNum << "]: " << negClausesWithVar[ varNum ].size() << endl;
-    os << "Pos [" << varNum << "]: " << posClausesWithVar[ varNum ].size() << endl;
+    negClauses += negClausesWithVar[ varNum ].size();
+    posClauses += posClausesWithVar[ varNum ].size();
   }
+  os << "Neg : " << (float)negClauses/numClauses << endl;
+  os << "Pos : " << (float)posClauses/numClauses << endl;
   os << "Unary: " << unitClauses << endl;
   os << "Binary: " << binaryClauses << endl;
   os << "Ternary: " << ternaryClauses << endl;
