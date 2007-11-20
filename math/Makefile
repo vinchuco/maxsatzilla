@@ -1,6 +1,6 @@
 # OK, Simple makefile to generate static library
 # and link it to the driver.
-CXXFLAGS = -Wall -std=c++98 -ggdb
+CXXFLAGS = -Wall -std=c++98 -ggdb -I/sw/include -L/sw/lib
 LDFLAGS = -lgsl
 LIB_FILES = dataset.cc forwardselection.cc
 DRIVER_FILES = driver.cc
