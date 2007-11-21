@@ -5,10 +5,10 @@ LDFLAGS=-L/sw/lib ${LIBS}
 
 all: features maxsatzilla 
 
-maxsatzilla : main.o MaxSatInstance.o math/dataset.o math/forwardselection.o ./ubcsat/libubcsat.a
-	g++ ${LDFLAGS} -o $@ $+
+maxsatzilla : main.o MaxSatInstance.o math/dataset.o math/forwardselection.o
+	g++ ${LDFLAGS} -o $@ $+ 
 
-features: features.o MaxSatInstance.o
+features: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 	g++ ${LDFLAGS} -o $@ $+
 
 run:
