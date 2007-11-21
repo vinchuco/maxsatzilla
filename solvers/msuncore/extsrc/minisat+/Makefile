@@ -65,15 +65,15 @@ $(EXEC): $(COBJS)
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@

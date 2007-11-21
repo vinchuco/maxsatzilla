@@ -16,7 +16,7 @@ EXEC      = minisat+
 CXX       = g++
 #CXX      = icpc
 CFLAGS    = -Wall -ffloat-store 
-CFLAGS   += -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
+CFLAGS   += -I/sw/include -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
 COPTIMIZE = -O3 #-fomit-frame-pointer # -falign-loops=4 -falign-functions=16 -foptimize-sibling-calls -finline-functions -fcse-follow-jumps -fcse-skip-blocks -frerun-cse-after-loop -frerun-loop-opt -fgcse
 
 all: r
@@ -60,23 +60,23 @@ clean:
 ## Linking rules (standard/profile/debug/release)
 $(EXEC): $(COBJS)
 	@echo Linking $(EXEC)
-	@$(CXX) $(COBJS) -lz -lgmp -ggdb -Wall -o $@ 
+	@$(CXX) $(COBJS) -lz -L/sw/lib -lgmp -ggdb -Wall -o $@ 
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) -lz -L/sw/lib -lgmp -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) -lz -L/sw/lib -lgmp -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) -lz -L/sw/lib -lgmp -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
