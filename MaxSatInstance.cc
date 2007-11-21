@@ -99,7 +99,7 @@ void MaxSatInstance::dumpData( double **data, int& rows, int& columns, int& outp
 void MaxSatInstance::printInfo(ostream& os) {
   os << "Vrs " << numVars << endl;
   os << "Cls " <<  numClauses << endl;
-  os << "C/V " << (float)numClauses/numVars << endl;
+  os << "CoV " << (float)numClauses/numVars << endl;
   int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
     negClauses += negClausesWithVar[ varNum ].size();
