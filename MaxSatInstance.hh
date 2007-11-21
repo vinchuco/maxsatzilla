@@ -5,10 +5,15 @@
 #define MAX_LINE_LENGTH 1024
 #define MAX_NUM_LITERALS 100
 
+// UBCSAT parameters
+#define UBCSAT_TIME_LIMIT 1
+#define UBCSAT_NUM_RUNS 1000
+#define UBCSAT_SEED 12345
+
 using namespace std;
 
 class MaxSatInstance {
-  string filename;
+  char* inputFileName;
   enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   int numVars, numClauses;
   int *clauseLengths;

@@ -20,8 +20,6 @@
 
 #include "ubcsat.h"
 
-extern void writeFeature(char* name, FLOAT value);
-
 namespace ubcsat {
 
 char sMasterString[MAXITEMLISTSTRINGLENGTH];
@@ -765,6 +763,9 @@ void PrintStats() {
   Print(pRepStats,"\n\n");
 }
 
+void writeFeature(char* name, FLOAT value) {
+  printf("feature %s: val: %f\n", name, value);
+}
 
 void PrintSatzillaStat(REPORTSTAT *pStat, const char *sStatID, char *sPrintID, FLOAT fValue) {
   char buf[256];

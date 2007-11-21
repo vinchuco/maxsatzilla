@@ -1,5 +1,6 @@
 
 #include "MaxSatInstance.hh"
+#include "ubcsat/ubcsat.h"
 
 bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& numLits, const int clauseNum ) {
   // sort the clause and remove redundant literals
@@ -23,14 +24,15 @@ bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& nu
   return false;
 }
 
-MaxSatInstance::MaxSatInstance( const char* filename_in ) 
+MaxSatInstance::MaxSatInstance( const char* filename ) 
 {
-  ifstream infile(filename_in);
+  ifstream infile(filename);
   if (!infile) {
-    fprintf(stderr, "c Error: could not read from %s.\n", filename_in);
+    fprintf(stderr, "c Error: could not read from %s.\n", filename);
     exit(1);
   }
-  filename = filename_in;
+  inputFileName = new char[ strlen( filename ) + 1 ];
+  strcpy( inputFileName, filename );
 
   while (infile.get() != 'p') {
     infile.ignore(MAX_LINE_LENGTH, '\n');
@@ -93,10 +95,49 @@ MaxSatInstance::~MaxSatInstance() {
   delete clauseLengths;
 }
 
+namespace ubcsat { int main(int, char**); }
+
 void MaxSatInstance::computeLocalSearchProperties() {
-  char command[ MAX_LINE_LENGTH ];
-  sprintf( command, "./solvers/ubcsat/ubcsat -alg saps < %s\n", filename.c_str() );
-  system( command );
+  printf("local search probe...\n");
+
+  char sTimeout[64];
+  char sRuns[64];
+
+  sprintf(sTimeout, "%d", UBCSAT_TIME_LIMIT);
+  sprintf(sRuns, "%d", UBCSAT_NUM_RUNS);
+
+
+  char* vlineFilename = new char[512];
+  sprintf(vlineFilename, "%s", P_tmpdir);
+  strcat(vlineFilename, "/XXXXXX");
+  vlineFilename = mktemp(vlineFilename);
+
+
+  char strseed[64];
+  sprintf(strseed, "%d", UBCSAT_SEED );
+
+  char* argv[] = {"ubcsat", 
+		  "-alg", NULL, "-noimprove", NULL,  "-i", inputFileName, 
+		  "-runs", sRuns, "-timeout", sTimeout,
+		  "-r", "satcomp", vlineFilename,
+		  "-seed", strseed,
+		  "-satzilla", "-solve"};
+  
+  int argc = 17;
+  
+  // -- do saps
+  argv[2]="saps";
+  argv[4]="0.1";
+  
+  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+  
+  // -- do gsat
+  argv[2]="gsat";
+  argv[4]="0.5";
+
+  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+
+  delete[] vlineFilename;
 }
 
 void MaxSatInstance::printInfo(ostream& os) {

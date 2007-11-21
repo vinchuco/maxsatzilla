@@ -1,5 +1,8 @@
+
+LIBS=./ubcsat/libubcsat.a
+
 CPPFLAGS=-I/sw/include
-LDFLAGS=-L/sw/lib
+LDFLAGS=-L/sw/lib ${LIBS}
 
 all: features maxsatzilla 
 
