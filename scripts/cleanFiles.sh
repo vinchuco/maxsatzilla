@@ -7,4 +7,4 @@
 if [ -a timetable.dat ] ; then rm -f timetable.dat ; fi
 if [ -a result3 ] ; then rm -f result3 ; fi
 if [ -a $timeFile ] ; then rm -f $timeFile ; fi
-if [ -a $FeaturesFile ] ; then rm -f $FeaturesFile ; fi
+if [ -a $featuresFile ] ; then rm -f $featuresFile ; fi
