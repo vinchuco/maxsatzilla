@@ -6,6 +6,10 @@
 #include <gsl/gsl_fit.h>
 #include <gsl/gsl_multifit.h>
 
+#ifdef OLDGSL
+#include "gslutils.hh"
+#endif // OLDGSL
+
 using std::cerr;
 
 ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
