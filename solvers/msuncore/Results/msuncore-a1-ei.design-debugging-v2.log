@@ -1,0 +1,37 @@
+# Instance						Solution Time
+SM_AS_TOP_buggy1.dimacs					>14400
+SM_MAIN_MEM_buggy1.dimacs				>14400
+SM_RX_TOP.dimacs					>14400
+dividers1.dimacs					OK
+dividers10.dimacs					OK
+dividers11.dimacs					OK
+dividers2.dimacs					OK
+dividers3.dimacs					OK
+dividers4.dimacs					OK
+dividers5.dimacs					OK
+dividers6_hack.dimacs					OK
+dividers7.dimacs					OK
+dividers8.dimacs					OK
+dividers9.dimacs					OK
+dividers_multivec1.dimacs				OK
+i2c_master1.dimacs					OK
+i2c_master2.dimacs					OK
+mem_ctrl1.dimacs					OK
+mrisc_mem2wire1.dimacs					OK
+rsdecoder1.dimacs					935186	644.23
+rsdecoder2.dimacs					1632525	96.10
+rsdecoder3.dimacs					936005	44.36
+rsdecoder4.dimacs					>14400
+rsdecoder5.dimacs					>14400
+rsdecoder6.dimacs					>14400
+rsdecoder_fsm1.dimacs					936005	89.47
+rsdecoder_fsm2.dimacs					936004	965.76
+rsdecoder_multivec1.dimacs				1626308	3613.34
+spi2.dimacs						515812	124.32
+wb1.dimacs						139873	127.43
+wb2.dimacs						>14400
+wb_4m8s1.dimacs						>14400
+wb_4m8s3.dimacs						1759142	122.94
+wb_4m8s4.dimacs						>14400
+wb_conmax1.dimacs					1220980	2530.57
+wb_conmax3.dimacs					1220987	6413.19

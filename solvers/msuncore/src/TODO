@@ -1,0 +1,68 @@
+
+- Simplify msu2
+  * Reduce number of card constraints
+
+- Implement msu 4/3.5
+
+- Implement sorter-based encoding
+
+- Implement full SC encoding
+
+- Implement clause filtering hints:
+  * Clauses less likely to be in more than one core do not get a
+    blocking clause; these clauses become tagged
+  * If a tagged clause participates in another core, then add blocking
+    variables to both cardinality constraints (old and new) for this
+    clause
+  * If a clause contains 1 variable that only occurs in core, then
+    discard the clause; at one clause must be kept
+  * Must ensure clause state is properly handled
+
+
+- Implement (correct) clause filtering					XX
+  * Original ideas, and variations do not work
+  * Moving to structure-based heuristic removal of clauses from cores
+
+- Implement BDD encoding, w/ polarities (exactly as minisat+)		OK
+  * Alternatively, can use encoding of minisat
+
+- Check operation of BDD encoding for <= 1				OK-
+  * It is adding almost twice the number of clauses. Why??
+  * The reason is that the encoding is not exploring polarity and it
+    probably should
+
+- Port msu2, simplify, debug and cleanup				OK-
+
+- Implement constraints on blocking vars of clauses for msu1		OK
+  * There are some gains
+
+- Implement clause filtering						XX
+  * Condition was changed:
+    -> If all lits of a core cl only occur in core,		xx
+       then cl can be discarded
+  * Not working...						<-
+  * Clause filtering does not seem to work
+  * There is a more restrictive criterion,
+    that seems more promising
+
+- Port msu1, debug and cleanup						OK-
+
+- Port msu3, debug and cleanup						OK-
+
+- ds is unique reference to hash keeping all aux names and other data	OK
+  structures
+
+- ds must be passed as argument to all functions			OK-
+
+- finishup should be available from default ds				OK
+
+- Problems with file handles						OK-
+
+- Perl modules:								OK
+  * SATUTILS: interface w/ sat solver
+    -> invoke sat solver, parse sat solver output, compute unsat cores
+
+  * MSUTILS: maxsat actions
+    -> get original clauses, manipulation of blocking vars, generate
+       card constraint
+

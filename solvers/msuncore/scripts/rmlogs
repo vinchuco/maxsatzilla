@@ -1,0 +1,3 @@
+#!/bin/csh
+
+rm msuncore.log mscore.log timetable
