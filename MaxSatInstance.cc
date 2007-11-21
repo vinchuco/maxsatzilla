@@ -23,13 +23,14 @@ bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& nu
   return false;
 }
 
-MaxSatInstance::MaxSatInstance( const char* filename ) 
+MaxSatInstance::MaxSatInstance( const char* filename_in ) 
 {
-  ifstream infile(filename);
+  ifstream infile(filename_in);
   if (!infile) {
-    fprintf(stderr, "c Error: could not read from %s.\n", filename);
+    fprintf(stderr, "c Error: could not read from %s.\n", filename_in);
     exit(1);
   }
+  filename = filename_in;
 
   while (infile.get() != 'p') {
     infile.ignore(MAX_LINE_LENGTH, '\n');
@@ -92,8 +93,10 @@ MaxSatInstance::~MaxSatInstance() {
   delete clauseLengths;
 }
 
-void MaxSatInstance::dumpData( double **data, int& rows, int& columns, int& outputs ){
-  
+void MaxSatInstance::computeLocalSearchProperties() {
+  char command[ MAX_LINE_LENGTH ];
+  sprintf( command, "./solvers/ubcsat/ubcsat -alg saps < %s\n", filename.c_str() );
+  system( command );
 }
 
 void MaxSatInstance::printInfo(ostream& os) {

@@ -1,7 +1,7 @@
 CPPFLAGS=-I/sw/include
 LDFLAGS=-L/sw/lib
 
-all: maxsatzilla features
+all: features maxsatzilla 
 
 maxsatzilla : main.o MaxSatInstance.o math/dataset.o math/forwardselection.o
 	g++ ${LDFLAGS} -o $@ $+

@@ -8,6 +8,7 @@
 using namespace std;
 
 class MaxSatInstance {
+  string filename;
   enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   int numVars, numClauses;
   int *clauseLengths;
@@ -18,6 +19,6 @@ class MaxSatInstance {
   MaxSatInstance( const char* filename );
   ~MaxSatInstance();
 
-  void dumpData( double **data, int&, int&, int&);
+  void computeLocalSearchProperties();
   void printInfo( ostream& os );
 };
