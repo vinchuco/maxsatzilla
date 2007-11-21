@@ -78,7 +78,7 @@ public:
         if (learnt) activity() = 0; }
 
     // -- use this function instead:
-    friend Clause* Clause_new(bool learnt, const vec<Lit>& ps) {
+    static Clause* Clause_new(bool learnt, const vec<Lit>& ps) {
         assert(sizeof(Lit)      == sizeof(uint));
         assert(sizeof(float)    == sizeof(uint));
         void*   mem = xmalloc<char>(sizeof(Clause) + sizeof(uint)*(ps.size() + (int)learnt));

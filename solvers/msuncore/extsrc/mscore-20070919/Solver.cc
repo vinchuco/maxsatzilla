@@ -113,7 +113,7 @@ Clause* Solver::int_add_clause(vec<Lit>& ps, bool learnt)
     ok = false;
   }
   else if (ps.size() == 1){
-    c   = Clause_new(learnt, ps);
+    c   = Clause::Clause_new(learnt, ps);
     if (learnt) {
       DBG(cout<<"Adding learnt unit clause"<<endl;);
       learnt_units++; learnts.push(c);
@@ -136,7 +136,7 @@ Clause* Solver::int_add_clause(vec<Lit>& ps, bool learnt)
       sort((Lit*)ps+1, ps.size()-1, cmp_gt, mseed);
       */
       // Allocate clause:
-      c = Clause_new(learnt, ps);
+      c = Clause::Clause_new(learnt, ps);
 
       /* */
       // Put the second watch on the literal with highest decision level:
@@ -161,7 +161,7 @@ Clause* Solver::int_add_clause(vec<Lit>& ps, bool learnt)
       stats.learnts_literals += c->size();
     }else{
       // Allocate clause:
-      c = Clause_new(learnt, ps);
+      c = Clause::Clause_new(learnt, ps);
       // Store clause:
       clauses.push(c);
       stats.clauses_literals += c->size();

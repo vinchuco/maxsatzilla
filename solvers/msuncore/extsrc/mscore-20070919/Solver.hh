@@ -175,15 +175,15 @@ public:
 	       learnt_units = 0;
 	       new_var();    // Setting 0 as a dummy variable...
 	       vec<Lit> dummy(2,lit_Undef);
-	       propagate_tmpbin = Clause_new(false, dummy);
-	       analyze_tmpbin   = Clause_new(false, dummy);
+	       propagate_tmpbin = Clause::Clause_new(false, dummy);
+	       analyze_tmpbin   = Clause::Clause_new(false, dummy);
 	       dummy.pop();
-	       solve_tmpunit    = Clause_new(false, dummy);
+	       solve_tmpunit    = Clause::Clause_new(false, dummy);
 	       addBinary_tmp .growTo(2);
 	       addTernary_tmp.growTo(3);
 	       assert(trail_lim.size() == 0);
 	       vec<Lit> nops;
-	       empty_cl = Clause_new(true, nops);  // It *was* learnt
+	       empty_cl = Clause::Clause_new(true, nops);  // It *was* learnt
              }
 
    virtual ~Solver() {
