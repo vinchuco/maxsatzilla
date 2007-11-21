@@ -764,7 +764,7 @@ void PrintStats() {
 }
 
 void writeFeature(char* name, FLOAT value) {
-  printf("feature %s: val: %f\n", name, value);
+  printf("feature %s: %f\n", name, value);
 }
 
 void PrintSatzillaStat(REPORTSTAT *pStat, const char *sStatID, char *sPrintID, FLOAT fValue) {

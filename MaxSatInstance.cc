@@ -141,17 +141,17 @@ void MaxSatInstance::computeLocalSearchProperties() {
 }
 
 void MaxSatInstance::printInfo(ostream& os) {
-  os << "Vrs " << numVars << endl;
-  os << "Cls " <<  numClauses << endl;
-  os << "CoV " << (float)numClauses/numVars << endl;
+  os << "Number of Variables: " << numVars << endl;
+  os << "Number of Clauses: " <<  numClauses << endl;
+  os << "Ratio Clauses/Variables: " << (float)numClauses/numVars << endl;
   int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
     negClauses += negClausesWithVar[ varNum ].size();
     posClauses += posClausesWithVar[ varNum ].size();
   }
-  os << "Neg " << (float)negClauses/numClauses << endl;
-  os << "Pos " << (float)posClauses/numClauses << endl;
-  os << "Una " << (float)unitClauses/numClauses << endl;
-  os << "Bin " << (float)binaryClauses/numClauses << endl;
-  os << "Ter " << (float)ternaryClauses/numClauses << endl;
+  os << "Ratio Negative Clauses: " << (float)negClauses/numClauses << endl;
+  os << "Ratio Positive Clauses: " << (float)posClauses/numClauses << endl;
+  os << "Ratio Unit Clauses: " << (float)unitClauses/numClauses << endl;
+  os << "Ratio Binary Clauses: " << (float)binaryClauses/numClauses << endl;
+  os << "Ratio Ternary Clauses: " << (float)ternaryClauses/numClauses << endl;
 }

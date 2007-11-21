@@ -3,12 +3,12 @@ LIBS=-lgsl
 CPPFLAGS=-I/sw/include
 LDFLAGS=-L/sw/lib ${LIBS} 
 
-all: features maxsatzilla 
+all: getfeatures maxsatzilla 
 
 maxsatzilla : main.o MaxSatInstance.o math/dataset.o math/forwardselection.o
 	g++ ${LDFLAGS} -o $@ $+ 
 
-features: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
+getfeatures: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 	g++ ${LDFLAGS} -o $@ $+
 
 run:
