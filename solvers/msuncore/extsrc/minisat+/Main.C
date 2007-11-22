@@ -270,8 +270,10 @@ int main(int argc, char** argv)
 
     parseOptions(argc, argv);
     pb_solver = new PbSolver(); // (must be constructed AFTER parsing commandline options -- constructor uses 'opt_solver' to determinte which SAT solver to use)
+    /*
     signal(SIGINT , SIGINT_handler);
     signal(SIGTERM, SIGTERM_handler);
+    */
 
     // Set command from 'PBSATISFIABILITYONLY':
     char* value = getenv("PBSATISFIABILITYONLY");

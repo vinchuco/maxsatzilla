@@ -44,7 +44,6 @@ typedef unsigned long  ulong;
 typedef const char     cchar;
 typedef short          int16;
 typedef unsigned short uint16;
-typedef unsigned short ushort;
 typedef int            int32;
 typedef unsigned       uint32;
 
