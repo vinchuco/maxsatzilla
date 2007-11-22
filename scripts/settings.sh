@@ -7,20 +7,22 @@
 #cnfDirectory="/benchmark"
 maxsatzDirectory="../solvers/maxsatz"
 minimaxsatDirectory="../solvers/minimaxsat"
-msuncoreDirectory="../solvers/msuncore"
+msuncoreDirectory="../solvers/msuncore/src"
 
 # Executables
 maxsatz="$maxsatzDirectory/maxsatz"
-minimaxsat="$minimaxsatDirectory/minimaxsat"
-msuncore="$msuncoreDirectory/msuncore"
+minimaxsat="$minimaxsatDirectory/minimaxsat -F=1"
+msuncore="$msuncoreDirectory/msuncore -a 1 -e c"
 
 # Solvers
 solversName[0]="maxsatz"
 solversName[1]="minimaxsat"
 solversName[2]="msuncore"
+
 solvers[0]="$maxsatz"
 solvers[1]="$minimaxsat"
 solvers[2]="$msuncore"
+
 nbSolvers=3
 
 # Features
@@ -67,7 +69,7 @@ featuresFile="featuresFile$HOSTNAME.txt"
 featuresExec="../features"
 
 # Timeouts
-cpuTimeOut=1000
+cpuTimeOut=5
 cpuTimeOutReturnCode=9
 
 # Internal constants for results
