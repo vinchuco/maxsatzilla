@@ -5,7 +5,7 @@ ifeq ($(OSTYPE),darwin9.0)
 OLDGSL=true
 endif
 
-LDFLAGS = -L/sw/lib -lgsl
+LDFLAGS = -L/sw/lib -lgsl -lcblas -lblas
 ifdef OLDGSL
 LIB_FILES = dataset.cc forwardselection.cc gslutils.cc
 CXXFLAGS = -Wall -std=c++98 -ggdb -DOLDGSL -I/sw/include
