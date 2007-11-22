@@ -42,6 +42,7 @@ typedef INT_PTR            intp;
 typedef UINT_PTR           uintp;
 #define I64_fmt "I64d"
 #else
+typedef unsigned int       uint;
 typedef long long          int64;
 typedef unsigned long long uint64;
 typedef __PTRDIFF_TYPE__   intp;

@@ -1,12 +1,17 @@
 # OK, Simple makefile to generate static library
 # and link it to the driver.
+
+ifeq ($(OSTYPE),darwin9.0)
+OLDGSL=true
+endif
+
 LDFLAGS = -L/sw/lib -lgsl
 ifdef OLDGSL
 LIB_FILES = dataset.cc forwardselection.cc gslutils.cc
 CXXFLAGS = -Wall -std=c++98 -ggdb -DOLDGSL -I/sw/include
 else
 LIB_FILES = dataset.cc forwardselection.cc
-CXXFLAGS = -Wall -std=c++98 -ggdb -I/sw/include
+CXXFLAGS = -Wall -std=c++98 -ggdb
 endif
 DRIVER_FILES = driver.cc
 
