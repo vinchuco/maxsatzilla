@@ -1362,33 +1362,11 @@ int choose_and_instantiate_variable() {
     return NONE;
   for (var = 0; var < NB_VAR; var++) {
     if (var_state[var] == ACTIVE) {
-      /*   
-      if (nb_neg_clause_of_length1[var]>nb_pos_clause_of_length1[var])
-	cont1=cont-nb_pos_clause_of_length1[var];
-      else cont1=cont-nb_neg_clause_of_length1[var];
-      if (nb_neg_clause_of_length1[var]+cont1+NB_EMPTY>=UB) {
-	if (assign_value(var, FALSE, NONE)==NONE)
-	  return NONE;
+      poid = (float)random();
+      if (poid>max_poid) {
+	chosen_var=var;
+	max_poid=poid;
       }
-      else if (nb_pos_clause_of_length1[var]+cont1+NB_EMPTY>=UB) {
-	if (assign_value(var, TRUE, NONE)==NONE)
-	  return NONE;
-      }
-      else {
-      */
-	reduce_if_positive[var]=nb_neg_clause_of_length1[var]*2+
-	  nb_neg_clause_of_length2[var]*4+ 
-	  nb_neg_clause_of_length3[var];
-	reduce_if_negative[var]=nb_pos_clause_of_length1[var]*2+
-	  nb_pos_clause_of_length2[var]*4+ 
-	  nb_pos_clause_of_length3[var];
-	poid=reduce_if_positive[var]*reduce_if_negative[var]*64+
-	  reduce_if_positive[var]+reduce_if_negative[var];
-	if (poid>max_poid) {
-	  chosen_var=var;
-	  max_poid=poid;
-	}
-	//	 }
     }
   }
   if (chosen_var == NONE) return FALSE;
@@ -1412,6 +1390,7 @@ int dpl() {
   int var, nb;
   do {
     if (VARIABLE_STACK_fill_pointer==NB_VAR) {
+      printf("Leaf\n"); break;
       UB=NB_EMPTY; 
       nb=verify_solution();
       if (nb!=NB_EMPTY)
@@ -1448,6 +1427,7 @@ void init() {
     lit_to_fix[clause]=NONE;
     clause_involved[clause]=NONE;
   }
+  srandom( time(NULL) );
 }
  
 main(int argc, char *argv[]) {
@@ -1480,10 +1460,10 @@ main(int argc, char *argv[]) {
   printf("Best Solution=%d\n", UB);
   printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
 	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
-	        
+  /*	        
   printf ("Program terminated in %5.3f seconds.\n",
 	  ((double)(endtime-begintime)/CLK_TCK));
-
+  
   fp_time = fopen("timetable", "a");
   fprintf(fp_time, "maxsatz14bis+fl %s %5.3f %ld %ld %d %d %d %d\n", 
 	  saved_input_file, ((double)(endtime-begintime)/CLK_TCK), 
@@ -1494,5 +1474,6 @@ main(int argc, char *argv[]) {
 	 NB_BRANCHE, NB_BACK,
 	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE);
   fclose(fp_time);
+  */
   return TRUE;
 }
