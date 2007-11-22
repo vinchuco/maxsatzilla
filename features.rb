@@ -1,5 +1,8 @@
 #!/usr/bin/env ruby
 
+# future extension: 
+# STDIN.each_line do |line|
+
 `#{ARGV[0]} #{ARGV[1]}`.each_line do |line|
   case line
   when /Number of Variables: (\d+)/
