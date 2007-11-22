@@ -1,7 +1,7 @@
 CFLAGS=-O3
 
-knuth.maxsatz+fl:
+all: knuth.maxsatz+fl timeout.maxsatz+fl
 
 clean:
-	rm knuth.maxsatz+fl
+	rm knuth.maxsatz+fl timeout.maxsatz+fl
 
