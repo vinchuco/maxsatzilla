@@ -3,6 +3,9 @@
 
 #include <cstdlib>
 #include <cassert>
+#include <cmath>
+
+#include <gsl/gsl_math.h>
 
 #include "dataset.hh"
 
@@ -24,7 +27,7 @@ MSZDataSet::~MSZDataSet() {
   
 }
 
-void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefix) {
+void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefix) const {
 
   if(labels.size() != ncols) {
     cerr << "Warning: Trying to dump plot files but labels vector is too small.\n";
@@ -56,7 +59,7 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
   }
 }
 
-void MSZDataSet::dumpPlotFiles(char **labels, size_t len, char *prefix) {
+void MSZDataSet::dumpPlotFiles(char **labels, size_t len, char *prefix) const {
 
   vector<string> vec(len);
 
@@ -78,6 +81,50 @@ double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
   assert(col < ncols - outputs);
 
   return matrix[row][col+outputs];
+}
+
+void MSZDataSet::standardize() {
+  
+  static bool stdDone = false;
+
+  if(!stdDone) {
+    for(size_t c = outputs; c < ncols; c++) {
+
+      // Compute column mean and compute column variance.
+      double mean = 0.0;
+      for(size_t r = 0; r < nrows; r++) 
+	mean += matrix[r][c];
+      mean /= nrows;
+
+      // Compute column standard deviation. 
+      double sdv = 0.0;
+      for(size_t r = 0; r < nrows; r++) 
+	sdv += gsl_pow_2(matrix[r][c] - mean);
+      sdv /= nrows;
+
+      for(size_t r = 0; r < nrows; r++) 
+	matrix[r][c] = (matrix[r][c] - mean) / sdv;
+	
+    }
+
+  }
+
+
+  stdDone = true;
+
+}
+
+void MSZDataSet::standardizeOutputs() {
+
+  static bool stdDone = false;
+
+  if(!stdDone) {
+    for(size_t c = 0; c < outputs; c++)
+      for(size_t r = 0; r < nrows; r++)
+	matrix[r][c] = log(matrix[r][c]);
+  }
+
+  stdDone = true;
 }
 
 /////////////////////////////////////////
