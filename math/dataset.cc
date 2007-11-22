@@ -13,7 +13,7 @@ using std::cerr;
 using std::ofstream;
 
 MSZDataSet::MSZDataSet(double **matrix, size_t nrows, size_t ncols, size_t outputs) 
-  : matrix(matrix), nrows(nrows), ncols(ncols), outputs(outputs) {}
+  : matrix(matrix), nrows(nrows), rfeatures(ncols - outputs), ncols(ncols), outputs(outputs) {}
   
 MSZDataSet::~MSZDataSet() {
 
@@ -125,6 +125,106 @@ void MSZDataSet::standardizeOutputs() {
   }
 
   stdDone = true;
+}
+
+void MSZDataSet::expand(size_t n) { 
+  vector<size_t> pvec(ncols - outputs); 
+  for(size_t i = 0; i < pvec.size(); i++)
+    pvec[i] = i;
+
+  expandOnPartition(n, pvec);
+}
+
+void MSZDataSet::expand(size_t n, const vector<vector<size_t> > &pvec) {
+  for(size_t i = 0; i < pvec.size(); i++)
+    expandOnPartition(n, pvec[i]);
+}
+
+void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
+  
+  // expansion is quadratic at the minimum and 
+  // and be bigger than partition size.
+  assert(k > 2 && k <= pvec.size());
+
+  // Standardize features
+  standardize();
+
+  // Reallocate the data.
+  // If we have N features, then, to expand to a order-K polynomial
+  // we are adding 
+  // n + (n !) / (k! (n-k!))
+  size_t num = 1;
+  for(size_t i = 0; i < k; i++) num *= rfeatures - i; // for big k hell breaks loose
+  size_t den = 1;
+  for(size_t i = k; i > 0; i--) den *= i; 
+  size_t nNewF = rfeatures;
+  nNewF += num / den;
+  ncols += nNewF; // Update number of columns
+
+  // Now, we need to realloc all the structure
+  for(size_t r = 0; r < nrows; r++) {
+    matrix[r] = (double*)realloc(matrix[r], sizeof(**matrix) * (nNewF + ncols));
+    if(matrix[r] == 0) {
+      cerr << "Bad news... while trying to allocate memory...\n"; 
+      exit(EXIT_FAILURE);
+    }
+  }
+  
+  // Compute the cross products
+  // To do this we compute all the indices combinations and use them
+  // to compute the cross product on columns defined in pvec.
+  size_t currColumn = rfeatures + outputs;
+  size_t *ind = new size_t [k];
+  for(size_t i = 0; i < k; i++) ind[i] = i;
+
+  // Compute cross product for initial configuration
+  for(size_t r = 0; r < nrows; r++) {
+    matrix[r][currColumn] = computeCrossProduct(r, ind, k, pvec);
+  }
+  currColumn++;
+
+  size_t n = pvec.size();
+  while(1) {
+    if(ind[0] == n - k) break;
+
+    for(size_t p = 0; p < k; p++) {
+      size_t i = k - p - 1;
+      bool incp = false;
+      
+      // Can I increment this index?
+      if(ind[i] < n - p - 1) {
+	ind[i]++; // YES
+	
+	for(size_t inc = 1; inc + i < k; inc++)
+	  ind[inc+i] = ind[i] + inc;
+	incp = true;
+
+	// Compute cross product in current configuration
+	for(size_t r = 0; r < nrows; r++) {
+	  matrix[r][currColumn] = computeCrossProduct(r, ind, k, pvec);
+	}
+	currColumn++;
+      }
+      if(incp) break;
+    }
+  }
+  delete ind;
+
+  // Compute Powers
+  for(size_t i = 0; i < pvec.size(); i++) {
+    for(size_t r = 0; r < nrows; r++) {
+      // Compute powers for pvec[i] feature
+      matrix[r][currColumn] = gsl_pow_int(matrix[r][pvec[i]], k);
+    }
+  }
+
+}
+
+double MSZDataSet::computeCrossProduct(size_t r, size_t *ind, size_t k, const vector<size_t> &vec) {
+  double cp = 1.0; // Cross-product
+  for(size_t i = 0; i < k; i++)
+   cp *= matrix[r][vec[ind[i]]];
+  return cp;
 }
 
 /////////////////////////////////////////

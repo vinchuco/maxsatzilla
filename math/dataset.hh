@@ -30,8 +30,8 @@ public:
   /// Implement basis function expansions of any given order throughout
   /// any set of partitions provided. If no partition is provided it'll perform
   /// expansion throughtout all set.
-  //void expand(size_t);
-  //void expand(size_t, const vector<vector<size_t>> &);
+  void expand(size_t);
+  void expand(size_t, const vector<vector<size_t> > &);
   
   /// Implements standardization of the feature set
   void standardize();
@@ -40,8 +40,12 @@ public:
   void standardizeOutputs();
 
 private:
+  void expandOnPartition(size_t, const vector<size_t> &);
+  double computeCrossProduct(size_t, size_t *, size_t, const vector<size_t> &);
+  
   double **matrix;
   size_t nrows;
+  size_t rfeatures; ///< Number of raw features
   size_t ncols;
   size_t outputs;
 };
