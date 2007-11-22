@@ -1,8 +1,0 @@
-Vrs 3
-Cls 5
-CoV 1.66667
-Neg 1
-Pos 1.4
-Una 0
-Bin 0.6
-Ter 0.4
