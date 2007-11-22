@@ -15,8 +15,8 @@ EXEC      = minisat+
 
 CXX       = g++
 #CXX      = icpc
-CFLAGS    = -Wall -ffloat-store 
-CFLAGS   += -I/sw/include -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
+CFLAGS    = -Wall -ffloat-store -I/sw/include
+CFLAGS   += -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
 COPTIMIZE = -O3 #-fomit-frame-pointer # -falign-loops=4 -falign-functions=16 -foptimize-sibling-calls -finline-functions -fcse-follow-jumps -fcse-skip-blocks -frerun-cse-after-loop -frerun-loop-opt -fgcse
 
 all: r
@@ -76,7 +76,7 @@ $(EXEC)_release: $(RCOBJS)
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) -lz -L/sw/lib -lgmp -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
