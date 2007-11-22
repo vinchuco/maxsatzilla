@@ -66,7 +66,7 @@ time="/usr/bin/time -p"
 
 # Features commands
 featuresFile="featuresFile$HOSTNAME.txt"
-featuresExec="../features"
+featuresExec="../features.rb ../getfeatures"
 
 # Timeouts
 cpuTimeOut=5
