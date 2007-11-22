@@ -1,0 +1,198 @@
+#!/usr/bin/perl
+
+use strict;
+use Data::Dumper;
+use POSIX;
+use Getopt::Std;
+
+my $progname = &get_progname();
+
+my %opts = ();
+getopts('hd', \%opts);
+# d: Debug mode
+# h: print Help
+
+if ($opts{h} || $#ARGV < 0) {
+    print <<EOF;
+  $progname: OPB to PMCNF converter
+  Usage:
+    $progname [-h] [-d] <opb file>
+     -d    debug mode
+     -h    prints this help
+  Author: jpms\@soton.ac.uk
+EOF
+exit(0);
+}
+
+my $debug = ($opts{d}) ? 1 : 0;
+
+my @hard_clset = ();
+my @soft_clset = ();
+my $nvars = 0;
+my $ncls = 0;
+my $objoff = 0;
+
+&load_opb();
+&print_pmcnf();
+
+1;
+
+
+sub load_opb() {
+    my $cf_patt = 'min:';
+    my $obj_mode = 0;
+    my $buffer = '';
+    while(<>) {
+	chomp;
+	next if m/^\*/;
+	if (m/$cf_patt(.*)/) {
+	    my $buffer .= $1;
+	    if ($buffer !~ m/([^;]*);/) {
+		$buffer = $1;
+		$obj_mode = 1;
+	    } else {
+		$buffer =~ m/([^;]*);/;
+		$buffer = $1;
+		&proc_obj($buffer);
+		$obj_mode = 0;
+	    }
+	    $buffer = '';
+	} else {
+	    $buffer .= $_;
+	    if ($buffer =~ m/([^;]*);/) {
+		$buffer = $1;
+		if ($obj_mode) {
+		    &proc_obj($buffer);
+		    $obj_mode = 0;
+		} else {
+		    &proc_constr($buffer);
+		}
+		$buffer = '';
+	    }
+	}
+    }
+}
+
+sub proc_obj() {
+    my $buff = shift;
+    my ($varids, $oper, $rhs) = &parse_linfunc($buff, 1);
+    if ($rhs != 0) { &xabort("Invalid RHS for cost function? $rhs\n"); }
+    if ($oper ne '') { &xabort("Invalid OPER for cost function? $oper\n"); }
+    foreach my $vid (@{$varids}) {
+	push @soft_clset, -$vid;  # Since it is min, must take complement...
+	$ncls++;
+    }
+}
+
+sub proc_constr() {
+    my $buff = shift;
+    my ($varids, $oper, $rhs) = &parse_linfunc($buff, 0);
+    if ($rhs != 1) { &xabort("Invalid RHS for constraint? |$rhs|\n"); }
+    if ($oper ne ">=") { &xabort("Invalid OPER for constraint? |$oper|\n"); }
+    my $cl = join(' ', @{$varids});
+    push @hard_clset, $cl;
+    $ncls++;
+}
+
+sub parse_linfunc() {
+    my $buff = shift;
+    my $cfmode = shift;
+    if ($debug) { print "BUFFER: |$buff|\n"; }
+
+    my @btoks = split(/\s+/, $buff);
+    if ($btoks[0] == '') { shift @btoks; }
+    #if ($btoks[$#btoks] == '') { pop @btoks; }
+    my $rhs = 0;
+    my $op = '';
+    my $rhsv = 0;
+    if (!$cfmode) {
+	$rhs = pop @btoks;
+	$op = pop @btoks;
+	if ($debug) {
+	    print "CFMODE: $cfmode; RHS: $rhs; OPER: $op\n";
+	    print "Current BTOKS: |@btoks| w/ $#btoks as last pos\n";
+	}
+    }
+    my @litset = ();
+    my $vtog = 0;
+    my $negv = 0;
+    for (my $i=0; $i<=$#btoks; $i++) {
+	if (!$vtog) {
+	    if ($i==$#btoks && $btoks[$i] =~ m/\+?(\d+)/) {
+		$objoff = $1;
+	    } elsif ($btoks[$i] eq '1' || $btoks[$i] eq '+1') {
+		$negv = 0;
+	    } elsif ($btoks[$i] eq '-1') {
+		$rhsv++;
+		$negv = 1;
+	    } else {
+		#print "BTOKS: |@btoks|\n";
+		&xabort("Invalid coefficient NV (pos:$i vs $#btoks): |$btoks[$i]|. Terminating...\n");;
+	    }
+	    $vtog = 1;
+	} else {
+	    my $vid = '';
+	    if ($btoks[$i] =~ m/[xX](\d+)/) {
+		$vid = $1;
+		if ($vid > $nvars) { $nvars = $vid; }
+		if ($negv) { $vid = -$vid; }
+	    } else {
+		&xabort("Invalid var name $btoks[$i]? Terminating...\n")
+	    }
+	    #if ($debug) { print "Current vid: $vid\n"; }
+	    push @litset, $vid;
+	    $vtog = 0;
+	}
+    }
+    if ($debug) { print "LITSET: @litset\n"; }
+    return (\@litset, $op, $rhs + $rhsv);
+}
+
+sub print_pmcnf() {
+    print "c Output of opb2pmcnf by jpms\@ecs.soton.ac.uk\n";
+    print "c \n";
+    if ($debug) { print "OBJOFF: $objoff\n"; }
+    $nvars += $objoff;
+    $ncls += 2 * $objoff;
+    print "p pmcnf $nvars $ncls\n";
+    print "p hard\n";
+    foreach my $cl (@hard_clset) {
+	print "$cl 0\n";
+    }
+    if ($objoff > 0) {    # Handle constant value in cost function...
+	if ($debug) { print "OBJOFF: $objoff\n"; }
+	$nvars -= $objoff;
+	for (my $i=0; $i<$objoff; $i++) {
+	    ++$nvars;
+	    print "$nvars 0\n";  # Positive value
+	}
+    }
+    print "p soft\n";
+    foreach my $cl (@soft_clset) {
+	print "$cl 0\n";
+    }
+    if ($objoff > 0) {    # Handle constant value in cost function...
+	$nvars -= $objoff;
+	for (my $i=0; $i<$objoff; $i++) {
+	    ++$nvars;
+	    print "-$nvars 0\n";  # Positive value
+	}
+    }
+}
+
+sub xabort() {
+    my $msg = shift;
+    print "ERROR: $msg\n";
+    exit(2);
+}
+
+sub get_progname() {
+    my @progname_toks = split(/\//, $0);
+    my $progname = $progname_toks[$#progname_toks];
+    #print "$progname\n";
+    return $progname;
+}
+
+1;
+
+# jpms

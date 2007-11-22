@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+while(<>) {
+    chomp;
+    next if m/^\*/;
+    s/([\-\+]\d+)\s+(x\d+)/$1\*$2/g;
+    s/([\-\+])\s+(\d+)/$1$2/g;
+    print "$_\n";
+}
+
+# jpms
+

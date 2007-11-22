@@ -1,0 +1,29 @@
+### README --- msuncore project
+
+1- To run msuncore, type src/msuncore. Another option is to cd to src
+   and then type msuncore. In this case, links to the core extractor
+   must be added in src.
+
+2- To install, type 'make clean; make'
+
+3- To make a distribution, type 'make dist'
+
+4- For additional uses, see examples in runmsuncore and runonebench
+
+5- Additional explanation regarding msuncore can be found under
+   src/README.
+
+6- To run msuncore, execute the command:
+
+% src/msuncore -a 1 -e i -v 2 <file>
+
+7- For other options, execute the comannd:
+
+% src/msuncore -h
+
+
+## Author:   jpms
+## Keywords: 
+## Revision: $Id$.
+## Copyright (c) 2007, Joao Marques-Silva
+

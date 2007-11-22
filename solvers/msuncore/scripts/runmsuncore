@@ -1,0 +1,110 @@
+#!/usr/bin/perl
+
+use strict;
+
+use src::UTILS;
+die "Usage: $0 <msu alg> <bench> [<encoding>] [<opts>] [<timeout>] [<memout>]\n" if ($#ARGV<=1);
+
+my $launcher = "scripts/tlaunch.bash";
+my $tool = 'src/msuncore';
+my $algv = (@ARGV) ? shift @ARGV : die "Must specify msu algorithm\n";
+my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
+my $encoding = (@ARGV) ? shift @ARGV : 'b';    # by default use BDDs
+my $opts = (@ARGV) ? shift @ARGV : '';         # by default no additional options
+my $timeout = (@ARGV) ? shift @ARGV : 1000;
+my $memout = (@ARGV) ? shift @ARGV : 2000000;
+my $outfile = '__msu__xyzOUTyxz__';
+my $logfile = '__msu__xyzLOGyxz__';
+
+$bench =~ m/.+\/([^\/\s]+)$/;
+my $inst = $1;
+
+# NOTE: option -m is hardcoded
+#print "$launcher \"$tool -v 1 -a $algv -e $encoding $opts\" $timeout $memout $bench $logfile\n";
+system("$launcher \"$tool -v 1 -a $algv -e $encoding $opts\" $timeout $memout $bench $logfile");
+my $prtstr = '';
+
+my $runtime = &match_run_time($logfile);
+#print "RUNTIME: $runtime\n";
+
+if (&match_usage_limit($logfile)) {
+    #$prtstr = 'CPU time limit exceeded by msuncore';
+    #$prtstr .= sprintf("%-50s  --", $inst);
+    $prtstr .= sprintf("%-50s  %5s%10s%5.2f", $inst, '--', ' ', $timeout);
+} elsif (&match_error_condition($logfile)) {
+    #$prtstr = 'Error condition from msuncore';
+    $prtstr .= sprintf("%-50s  %5s%10s%5.2f", $inst, 'xx', ' ', $timeout);
+} else {
+    my $mssol = &parse_output_file($logfile);
+    #&UTILS::report_item('INFO: Computed maxsat solution', $mssol);
+    #$prtstr .= sprintf("%-50s  %d", $inst, $mssol);
+    $prtstr .= sprintf("%-50s  %5d%10s%5.2f", $inst, $mssol, ' ', $runtime);
+}
+print "$prtstr\n";
+system("rm -f $outfile $logfile >& /dev/null");
+
+1;
+
+sub parse_output_file() {
+    my $fname = shift;
+    open (OUTF, "<$fname") || die "Unable to open output file $fname";
+    my $ncls = -1;
+    my $mssol = -1;
+    while (<OUTF>) {
+	if (m/Number of clauses:\s+(\d+)/)           { $ncls = $1; }
+	elsif (m/Computed maxsat solution:\s+(\d+)/) { $mssol = $1; }
+    }
+    close(OUTF);
+    return ($ncls, $mssol);
+}
+
+sub match_usage_limit() {
+    my $fname = shift;
+    open (LOGF, "<$fname") || die "Unable to open log file $fname\n";
+    my $timeout = 0;
+    while (<LOGF>) {
+	if (m/Command exited with non-zero status [1-9][0-9]/ ||
+	    m/Command exited with non-zero status [2-9]/) {
+	    $timeout=1; last;
+	}
+	if (m/Command terminated by signal /) { $timeout=1; last; }
+	if (m/Command terminated abnormally/) { $timeout=1; last; }
+	if (m/Cputime limit exceeded/) { $timeout=1; last; }
+	if (m/Out of memory/) { $timeout=1; last; }
+	if (m/\s+(\d+\.?\d*)\s+real\s+(\d+\.?\d*)\s+user\s+(\d+\.?\d*)\s+sys/){
+	    $runtime = $2+$3;
+	}
+    }
+    close(LOGF);
+    return $timeout;
+}
+
+sub match_error_condition() {
+    my $fname = shift;
+    open (LOGF, "<$fname") || die "Unable to open log file $fname\n";
+    my $notok = 0;
+    while (<LOGF>) {
+	if (m/Segmentation fault/) { $notok=1; last; }
+	if (m/Bus [Ee]rror/) { $notok=1; last; }
+    }
+    close(LOGF);
+    return $notok;
+}
+
+sub match_run_time() {
+    my $fname = shift;
+    open (LOGF, "<$fname") || die "Unable to open log file $fname\n";
+    my $tuser = 0;
+    my $tsys = 0;
+    while (<LOGF>) {  # This is for Linux machines!!!
+        if (m/\s*user\s+(\d+\.?\d*)/) {
+            $tuser = $1;
+        } elsif (m/\s*sys\s+(\d+\.?\d*)/) {
+            $tsys = $1; last;
+        }
+    }
+    close(LOGF);
+    return $tuser+$tsys;
+}
+
+# jpms

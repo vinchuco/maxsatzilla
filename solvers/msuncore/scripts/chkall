@@ -1,0 +1,39 @@
+#!/usr/bin/perl
+
+# Script for validating *all* results. Each tool is compared against every
+# other tool, on all benchmark classes
+
+use strict;
+
+my @ttoks = split(/\//, $0);
+my $tname = pop @ttoks;
+my $tpath = join('/', @ttoks);
+#print "TOOL NAME: $tname\n"; print "TOOL PATH: $tpath\n"; exit;
+
+my $resdir = shift @ARGV || die "Usage: $tname <result dir>\n";
+
+my @toolset = ();
+my @benchset = ();
+my $toolstr = `$tpath/get-tools TOOLSET`;
+my @toolset = split(/\s+/, $toolstr);
+my $benchstr = `cat BENCHSET`;
+my @benchset = split(/\s+/, $benchstr);
+#{ local $/ = "\n"; $" = ' ';
+#  print "TOOLS: @toolset\n"; print "BENCHS: @benchset\n";
+#  print "TOOL0: $toolset[0]\n"; print "BENCH0: $benchset[0]\n";
+#}
+
+foreach my $bench (@benchset) {
+    for(my $i=0; $i<=$#toolset; ++$i) {
+	my $toolA = $toolset[$i];
+	for(my $j=$i+1; $j<=$#toolset; ++$j) {
+	    my $toolB = $toolset[$j];
+	    print "Checking $toolA vs. $toolB on $bench\n";
+	    print "Files: $toolA-$bench.log $toolB-$bench.log\n";
+	    `$tpath/chkres $toolA-$bench.log $toolB-$bench.log`;
+	    print "Done...\n";
+	}
+    }
+}
+
+# jpms

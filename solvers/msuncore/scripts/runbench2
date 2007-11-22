@@ -1,0 +1,14 @@
+#!/bin/csh
+
+set bdir = $argv[1]
+set ref = $argv[2]
+
+set msz_log = "Results/maxsatz-$ref.log"
+
+rm -f $msz_log
+
+touch $msz_log
+foreach bench ($bdir/*)
+    ./runmaxsatz $bench 1000 >> $msz_log
+end
+

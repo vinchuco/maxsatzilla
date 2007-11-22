@@ -1,0 +1,38 @@
+#!/usr/bin/perl
+
+my $varids = ();
+my $vcnt = 0;
+
+my $buffer = '';
+while(<>) {
+    chomp;
+    next if m/^\*/;
+    s/(\d+)\s*\*\s*([^\s\*]+)/$1 $2/g;
+    s/([\-\+])\s+(\d+)/$1$2/g;
+    $buffer .= $_;
+    if ($buffer =~ m/([^;]+);/) {
+	$buffer = $1;
+	my @ltoks = split(/\s+/, $buffer);
+	my $vtog = 0;
+	my $rhs = 0;
+	for (my $i=0; $i<=$#ltoks; ++$i) {
+	    next if ($ltoks[$i] eq 'min:');
+	    next if $rhs;
+	    if (!$vtog) {
+		if ($ltoks[$i] eq '>=') { $rhs = 1; }
+		else                    { $vtog = 1; }
+	    } else {
+		my $vref = $ltoks[$i];
+		if (!defined($varids{$vref})) {
+		    $varids{$vref} = ++$vcnt;
+		}
+		$ltoks[$i] = "x$varids{$vref}";
+		$vtog = 0;
+	    }
+	}
+	print "@ltoks ;\n";
+	$buffer = '';
+    }
+}
+
+# jpms

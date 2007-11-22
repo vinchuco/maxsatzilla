@@ -1,0 +1,49 @@
+#!/usr/bin/perl
+
+use strict;
+
+my $resf1 = shift @ARGV || die "Usage: $0 <res file 1> <res file 2>\n";
+my $resf2 = shift @ARGV || die "Usage: $0 <res file 1> <res file 2>\n";
+
+my %soldb = ();
+
+open (RESF1, "$resf1") || die "Unable to open $resf1\n";
+while (<RESF1>) {
+    if (m/(\S+)\s+(\d+)\s+(\d+\.?\d*)/) {
+	$soldb{$1} = $2;
+    }
+    if (m/(\S+)\s+(\-\-)\s+(\d+\.?\d*)/) {
+	$soldb{$1} = '--';
+    }
+}
+close RESF1;
+
+my $nerr = 0;
+open (RESF2, "$resf2") || die "Unable to open $resf2\n";
+while (<RESF2>) {
+    if (m/(\S+)\s+(\d+)\s+(\d+\.?\d*)/ || m/(\S+)\s+(\-\-)\s+(\d+\.?\d*)/ ) {
+	my $inst = $1;
+	my $sval2 = $2;
+	if (defined($soldb{$inst})) {
+	    my $sval1 = $soldb{$inst};
+	    if ($sval1 ne $sval2 && $sval1 ne '--' && $sval2 ne '--') {
+		print "ERROR: Results for $inst differ, $sval1 vs. $sval2\n";
+		++$nerr;
+	    }
+	} else {
+	    print "ERROR: Undefined $inst in $resf1\n";
+	    ++$nerr;
+	}
+    }
+}
+close RESF2;
+
+if (!$nerr) {
+    print "INFO: No errors found\n";
+} else {
+    print "ERROR: Found $nerr errors\n";
+}
+
+1;
+
+# jpms
