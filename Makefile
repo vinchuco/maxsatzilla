@@ -1,4 +1,4 @@
-LIBS=-lgsl
+LIBS=-lgsl -lcblas -lblas
 
 CPPFLAGS=-I/sw/include
 LDFLAGS=-L/sw/lib ${LIBS} 
