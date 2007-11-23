@@ -23,7 +23,7 @@ solvers[0]="$maxsatz"
 solvers[1]="$msuncore"
 solvers[2]="$minimaxsat"
 
-nbSolvers=2
+nbSolvers=3
 
 # Features
 features[0]="SBC"
