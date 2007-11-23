@@ -1,6 +1,5 @@
 
 #include <iostream>
-#include "MaxSatInstance.hh"
 #include "math/dataset.hh"
 #include "math/forwardselection.hh"
 

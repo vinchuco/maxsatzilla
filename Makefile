@@ -1,11 +1,11 @@
-LIBS=-lgsl -lgslcblas
+LIBS=-lgsl
 
 CPPFLAGS=-I/sw/include
 LDFLAGS=-L/sw/lib ${LIBS} 
 
 all: getfeatures maxsatzilla 
 
-maxsatzilla : main.o MaxSatInstance.o math/dataset.o math/forwardselection.o
+maxsatzilla : main.o math/dataset.o math/forwardselection.o math/libmath.a
 	g++ ${LDFLAGS} -o $@ $+ 
 
 getfeatures: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
@@ -19,4 +19,4 @@ run:
 	./math/plot-gen.bash . driver
 
 clean:
-	rm -f driver* *~ *.o features maxsatzilla
+	rm -f driver* *~ *.o getfeatures maxsatzilla mszparse

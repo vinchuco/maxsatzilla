@@ -1450,7 +1450,7 @@ void init() {
   }
 }
  
-#define TIMEOUT 10
+#define TIMEOUT 5
 
 void timeout_handler( int signal ) {
   printf("Time out %d sec.\n", TIMEOUT );
