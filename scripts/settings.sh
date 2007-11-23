@@ -16,12 +16,12 @@ minimaxsat="$minimaxsatDirectory/minimaxsat -F=1"
 
 # Solvers
 solversName[0]="maxsatz"
-solversName[2]="msuncore"
-solversName[1]="minimaxsat"
+solversName[1]="msuncore"
+solversName[2]="minimaxsat"
 
 solvers[0]="$maxsatz"
-solvers[2]="$msuncore"
-solvers[1]="$minimaxsat"
+solvers[1]="$msuncore"
+solvers[2]="$minimaxsat"
 
 nbSolvers=2
 
