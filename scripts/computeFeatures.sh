@@ -20,7 +20,7 @@ for argument in $arguments ; do
     while [ $i -lt $nbSolvers ] ; do
 	# Try to find if time has already been computed for this solver on this instance
 	if [ -a ${solversName[$i]}.slv ] ; then
-	    solvingLine=`/usr/bin/grep $instanceName ${solversName[$i]}.slv`
+	    solvingLine=`grep $instanceName ${solversName[$i]}.slv`
 	else
 	    solvingLine=""
 	fi

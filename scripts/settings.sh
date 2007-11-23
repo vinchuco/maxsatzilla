@@ -6,24 +6,24 @@
 # Directories
 #cnfDirectory="/benchmark"
 maxsatzDirectory="../solvers/maxsatz"
-minimaxsatDirectory="../solvers/minimaxsat"
 msuncoreDirectory="../solvers/msuncore/src"
+minimaxsatDirectory="../solvers/minimaxsat"
 
 # Executables
 maxsatz="$maxsatzDirectory/maxsatz"
-minimaxsat="$minimaxsatDirectory/minimaxsat -F=1"
 msuncore="$msuncoreDirectory/msuncore -a 1 -e c"
+minimaxsat="$minimaxsatDirectory/minimaxsat -F=1"
 
 # Solvers
 solversName[0]="maxsatz"
-solversName[1]="minimaxsat"
 solversName[2]="msuncore"
+solversName[1]="minimaxsat"
 
 solvers[0]="$maxsatz"
-solvers[1]="$minimaxsat"
 solvers[2]="$msuncore"
+solvers[1]="$minimaxsat"
 
-nbSolvers=3
+nbSolvers=2
 
 # Features
 features[0]="SBC"
@@ -69,7 +69,7 @@ featuresFile="featuresFile$HOSTNAME.txt"
 featuresExec="../features.rb ../getfeatures"
 
 # Timeouts
-cpuTimeOut=5
+cpuTimeOut=1000
 cpuTimeOutReturnCode=9
 
 # Internal constants for results
