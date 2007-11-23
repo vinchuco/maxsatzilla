@@ -1,14 +1,16 @@
-LIBS=-lgsl -lcblas -lblas
+LDFLAGS=-lgsl -lcblas -lblas
 
-CPPFLAGS=-I/sw/include
-LDFLAGS=-L/sw/lib ${LIBS} 
+ifeq ($(shell uname),Darwin)
+	CPPFLAGS = -I/sw/include
+	LDFLAGS += -L/sw/lib 
+endif
 
 all: getfeatures maxsatzilla 
 
 maxsatzilla : main.o math/dataset.o math/forwardselection.o math/libmath.a
 	g++ ${LDFLAGS} -o $@ $+ 
 
-getfeatures: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
+getfeatures: features.o MaxSatInstance.o ubcsat/libubcsat.a
 	g++ ${LDFLAGS} -o $@ $+
 
 mszparse: mszparse.o mszreader.h
