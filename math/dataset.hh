@@ -24,6 +24,7 @@ public:
   inline size_t getNRows()     const { return nrows;           }
   inline size_t getNCols()     const { return ncols;           }
   inline size_t getNFeatures() const { return ncols - outputs; }
+  inline size_t getNRFeatures()const { return rfeatures;       }
   inline size_t getNOutputs()  const { return outputs;         }
 
   // Dataset transformations

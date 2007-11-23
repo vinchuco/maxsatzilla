@@ -7,10 +7,10 @@ endif
 
 LDFLAGS = -L/sw/lib -lgsl -lcblas -lblas
 ifdef OLDGSL
-LIB_FILES = dataset.cc forwardselection.cc gslutils.cc
+LIB_FILES = dataset.cc forwardselection.cc gslutils.cc ridgeregression.cc
 CXXFLAGS = -Wall -std=c++98 -ggdb -DOLDGSL -I/sw/include
 else
-LIB_FILES = dataset.cc forwardselection.cc
+LIB_FILES = dataset.cc forwardselection.cc ridgeregression.cc
 CXXFLAGS = -Wall -std=c++98 -ggdb
 endif
 DRIVER_FILES = driver.cc
