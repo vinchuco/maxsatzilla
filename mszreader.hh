@@ -184,7 +184,7 @@ namespace iomsz {
 
 	  const int nbCases=nbSolvers+nbFeatures;
 	  matrix=new double* [nbInstances];
-	  for (int i=0; i<nbInstances; i++)
+	  for (unsigned int i=0; i<nbInstances; i++)
 	    matrix[i]=new double [nbCases];
 	  timeOut = parseInt(in);
 	  reportf("c Number of solvers:    %2d\n", nbSolvers);
