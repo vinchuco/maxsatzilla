@@ -163,7 +163,7 @@ namespace iomsz {
 			       string*& featuresNames,
 			       string*& instancesNames,
 			       double**& matrix) {
-    for (int inst=0; inst<nbInstances;){
+    for (unsigned int inst=0; inst<nbInstances;){
       skipWhitespace(in);
       //reportf("caractere lu : %c\n", *in);
       //(*in == 'q') ? reportf("OK\n") : reportf("KO\n");
@@ -184,7 +184,7 @@ namespace iomsz {
 
 	  const int nbCases=nbSolvers+nbFeatures;
 	  matrix=new double* [nbInstances];
-	  for (int i=0; i<nbCases; i++)
+	  for (int i=0; i<nbInstances; i++)
 	    matrix[i]=new double [nbCases];
 	  timeOut = parseInt(in);
 	  reportf("c Number of solvers:    %2d\n", nbSolvers);
@@ -194,7 +194,7 @@ namespace iomsz {
 	}
 	else if ((*in=='s') && (match(in, "slv"))) {
 	  reportf("c Solvers:");
-	  for (int i=0; i<nbSolvers; i++) {
+	  for (unsigned int i=0; i<nbSolvers; i++) {
 	    readWord(in,solversNames[i]);
 	    reportf(" %s", solversNames[i].c_str());
 	  }
@@ -202,7 +202,7 @@ namespace iomsz {
 	}
 	else if ((*in=='f') && (match(in, "ftr"))) {
 	  reportf("c Features:");
-	  for (int i=0; i<nbFeatures; i++) {
+	  for (unsigned int i=0; i<nbFeatures; i++) {
 	    readWord(in,featuresNames[i]);
 	    reportf(" %s", featuresNames[i].c_str());
 	  }
@@ -217,11 +217,11 @@ namespace iomsz {
 	reportf("Instance: %s\n", instancesNames[inst].c_str());
 
 	reportf("matrix:\n");
-	for (int i=0; i<nbSolvers; i++) {
+	for (unsigned int i=0; i<nbSolvers; i++) {
 	  matrix[inst][i]=parseDouble(in);
 	  reportf(" %f", matrix[inst][i]);
 	}
-	for (int i=0; i<nbFeatures; i++) {
+	for (unsigned int i=nbSolvers; i<nbSolvers+nbFeatures; i++) {
 	  matrix[inst][i]=parseDouble(in);
 	  reportf(" %f", matrix[inst][i]);
 	}
