@@ -682,7 +682,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
 	// Assume 
 	Lit next;
 	stats.decisions++;
-	next=~toLit(trail_dec[trail_dec.size()-1].lit);
+	next=~Lit::toLit(trail_dec[trail_dec.size()-1].lit);
 	trail_dec[trail_dec.size()-1].lit=index(next);
 	trail_dec[trail_dec.size()-1].values=0;
 	trail_lim.push(trail.size());
@@ -747,7 +747,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
 	else if(sug!=-1 and search_state==1){
 		search_state=1;
 		// Assume 
-		Lit next=toLit(sug);
+		Lit next=Lit::toLit(sug);
 		
 		stats.decisions++;
 		trail_dec.push_();
@@ -1233,7 +1233,8 @@ Clause* Solver::propagateMaxSAT(int limit_up)
 
 void Solver::paintClause(Clause *c1)
 {
- printf("    CLAUSE %X : ",(int)c1);
+  // COMMENTED BY POCM BECAUSE IS NOT GOOD CAST
+  // printf("    CLAUSE %X : ",(int)c1);
  if(c1->isUsed())printf(" used=t ");
  else printf(" used=f ");
  for(int i=0;i<c1->size();i++) {
@@ -1286,7 +1287,7 @@ void Solver::generateComp(Lit & clash,vec<Lit> & cA, vec<Lit> & cB)
 {
  int i,j;
  bool create=false;
- Lit p=toLit(indexRest());
+ Lit p=Lit::toLit(indexRest());
  
  
  for(i=0;i<cB.size();i++)
@@ -1324,7 +1325,7 @@ void Solver::generateComp(Lit & clash,vec<Lit> & cA, vec<Lit> & cB)
 
 void Solver::compClauses(Clause*& c1,Clause*& c2,Lit & clash)
 {
- Lit p=toLit(indexRest());
+ Lit p=Lit::toLit(indexRest());
  
  if(not c1->isHard()) {
   if(not c1->isVirtual() and c1->getWeight()==minAux) {
@@ -1549,7 +1550,7 @@ void Solver::detectInconsistency(Clause*& a,bool singleton=false)
   
   if(clash!=-1)
   {
-   x=toLit(clash);
+   x=Lit::toLit(clash);
    if(not singleton) modifyUnitCost(b,-minAux);
    resolution(a,b,x);
    
@@ -1569,7 +1570,7 @@ void Solver::detectInconsistency(Clause*& a,bool singleton=false)
       changeUnaryCost((*a)[0],minAux);
       array_rest[indexRest()].pushNC(index((*a)[0]),minAux);
       
-      Lit p=toLit(indexRest());
+      Lit p=Lit::toLit(indexRest());
       executeNC((*a)[0],p);
       end=true;
      }
@@ -1731,7 +1732,7 @@ Int Solver::applyLC()
 	}
  
 	for(int i=reasons.restNC.size()-1;i>=0;i--) {
-	changeUnaryCost(toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
+	changeUnaryCost(Lit::toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
 	reasons.restNC.pop_();
  }
  /*
@@ -1813,8 +1814,8 @@ void Solver::createMaxSATStructures(void)
  }
  
  psAux.clear_();
- //for(int i=0;i<nVars()*2;i++) psAux.push(toLit(i));
- for(int i=0;i<nVars()*2;i++) { psAux.push_(); psAux[psAux.size()-1]=toLit(i); }
+ //for(int i=0;i<nVars()*2;i++) psAux.push(Lit::toLit(i));
+ for(int i=0;i<nVars()*2;i++) { psAux.push_(); psAux[psAux.size()-1]=Lit::toLit(i); }
  void*   mem = xmalloc<char>(sizeof(Clause) + sizeof(unsigned)*(psAux.size() + (int)true));
  newClaAux = new (mem) Clause(false,psAux,0,true);
 }
@@ -1885,7 +1886,7 @@ void Solver::restoreAssumption(int lit)
  LB=array_rest[lit].prevLB;
  for(i=array_rest[lit].restNC.size()-1;i>=0;i--)
  {
-  changeUnaryCost(toLit(array_rest[lit].restNC[i].lit),-array_rest[lit].restNC[i].cost);
+  changeUnaryCost(Lit::toLit(array_rest[lit].restNC[i].lit),-array_rest[lit].restNC[i].cost);
   array_rest[lit].restNC.pop_();
  }
  

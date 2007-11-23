@@ -82,8 +82,8 @@ public:
 
     // Helpers (semi-internal):
     //
-    lbool   value(Var x) const { return toLbool(assigns[x]); }
-    lbool   value(Lit p) const { return sign(p) ? ~toLbool(assigns[var(p)]) : toLbool(assigns[var(p)]); }
+    lbool   value(Var x) const { return lbool::toLbool(assigns[x]); }
+    lbool   value(Lit p) const { return sign(p) ? ~lbool::toLbool(assigns[var(p)]) : lbool::toLbool(assigns[var(p)]); }
     int     nVars()      const { return assigns.size(); }
     int     nConstrs()   const { return constrs.size(); }
     Solver & getSolver() {return sat_solver;}

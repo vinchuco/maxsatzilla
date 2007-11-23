@@ -80,7 +80,7 @@ public:
 
     bool        isLit             (void)     const { return ((intp)data & 1) == 1; }
     bool        isNull            (void)     const { return data == NULL; }
-    Lit         getLit            (void)     const { return toLit((int)(((intp)data)>>1)); }
+    Lit         getLit            (void)     const { return Lit::toLit((int)(((intp)data)>>1)); }
     Clause*     getClause         (void)     const { return (Clause*)data; }
     bool        operator==(LitClauseUnion c) const { return data == c.data; }
     bool        operator!=(LitClauseUnion c) const { return data != c.data; }
@@ -435,8 +435,8 @@ public:
        
     // Helpers: (semi-internal)
     //
-    lbool   value(Var x) const { return toLbool(assigns[x]); }
-    lbool   value(Lit p) const { return sign(p) ? ~toLbool(assigns[var(p)]) : toLbool(assigns[var(p)]); }
+    lbool   value(Var x) const { return lbool::toLbool(assigns[x]); }
+    lbool   value(Lit p) const { return sign(p) ? ~lbool::toLbool(assigns[var(p)]) : lbool::toLbool(assigns[var(p)]); }
 
     int     nAssigns(void) { return trail.size(); }
     int     nClauses(void) { return clauses.size(); }
