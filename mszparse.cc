@@ -1,7 +1,7 @@
 #include <iostream>
 #include <zlib.h>
 #include <string>
-#include "mszreader.h"
+#include "mszreader.hh"
 
 using namespace std;
 using namespace iomsz;
