@@ -1,7 +1,8 @@
-LDFLAGS=-lgsl -lcblas -lblas
+LDFLAGS = -lgsl -lcblas -lblas
+CPPFLAGS = -Wall
 
 ifeq ($(shell uname),Darwin)
-	CPPFLAGS = -I/sw/include
+	CPPFLAGS += -I/sw/include
 	LDFLAGS += -L/sw/lib 
 endif
 
