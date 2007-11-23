@@ -39,9 +39,12 @@ int main(int argc, char *argv[]) {
 
   parse_DIMACS(in, nbSolvers, nbFeatures, nbInstances, timeOut, solversNames, featuresNames, instancesNames, data);
 
+  cerr << "\n\n\nPOCM part... from now, all problems are MINE! :)\n";
+
   cerr << "Read file: " << inputFileName << "\n"
        << "Number of Solvers: " << nbSolvers << "\n"
        << "Number of Features: " << nbFeatures << "\n"
+       << "Number of Instances: " << nbInstances << "\n"
        << "Timeout: " << timeOut << "\n";
 
   cerr << "Solver Names: ";
@@ -55,11 +58,20 @@ int main(int argc, char *argv[]) {
   cerr << "\nInstance Names: ";
   for(size_t i = 0; i < nbInstances; i++)
     cerr << instancesNames[i] << " ";
+  cerr << "\n";
 
-  MSZDataSet *ds = createDataSet(data, 3, 5, 2);
+  MSZDataSet *ds = createDataSet(data, nbInstances, nbFeatures+nbSolvers, nbSolvers);
 
   // Lets create the plot files
-  //ds->dumpPlotFiles(labels, 5, "./driver");
+  vector<string> labels;
+  for(size_t i = 0; i < nbSolvers; i++)
+    labels.push_back(solversNames[i]);
+  for(size_t i = 0; i < nbFeatures; i++)
+    labels.push_back(featuresNames[i]);
+
+  cerr << "Created labels for solvers and features of size : " << labels.size() << "\n";
+  cerr << "features (" << nbFeatures << ") + solvers(" << nbSolvers << ") = " << labels.size() << "\n";
+  ds->dumpPlotFiles(labels, "./driver");
 
   // Lets do a forward selection
   ForwardSelection fs(*ds, 0);

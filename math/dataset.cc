@@ -32,6 +32,7 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
 
   if(labels.size() != ncols) {
     cerr << "Warning: Trying to dump plot files but labels vector is too small.\n";
+    cerr << "Labels has size " << labels.size() << " but we have " << ncols << " columns.\n";
     return;
   }
 

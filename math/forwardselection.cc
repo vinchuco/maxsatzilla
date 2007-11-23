@@ -98,6 +98,10 @@ vector<size_t> ForwardSelection::run(double fin) {
   vector<bool> isInModel(fmatrix->size2, false);
   isInModel[initRegressor] = true;
 
+#ifdef FSDEBUG
+  cerr << "Doing FS on " << isInModel.size() << " regressors.\n";
+#endif //FSDEBUG
+
   while(1) { // This is broken later on...
     vector<double> ssrvalues(fmatrix->size2, 0.0);
     bool foundNew = false; // Found regressor to add with fj > fin
@@ -116,7 +120,11 @@ vector<size_t> ForwardSelection::run(double fin) {
 
 	foundNew = true;
 	ssrvalues[rindex] = newModelSSr;
-      }
+      } 
+#ifdef FSDEBUG
+      else 
+	cerr << "Regressor " << rindex << " will not be added. Ftest below threshold.\n";
+#endif // FSDEBUG
     }
 
     if(foundNew) {
@@ -134,7 +142,7 @@ vector<size_t> ForwardSelection::run(double fin) {
       isInModel[bestIndex] = true;
 
 #ifdef FSDEBUG
-      cerr << "*** Adding " << bestIndex << "to the model.\n"; 
+      cerr << "*** Adding " << bestIndex << " to the model.\n"; 
 #endif //FSDEBUG
     } else {
       cerr << "*** No more interesting regressors.\n";
