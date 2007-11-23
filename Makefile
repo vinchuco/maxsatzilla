@@ -13,7 +13,7 @@ maxsatzilla : main.o math/dataset.o math/forwardselection.o math/libmath.a
 getfeatures: features.o MaxSatInstance.o ubcsat/libubcsat.a
 	g++ ${LDFLAGS} -o $@ $+
 
-mszparse: mszparse.o mszreader.h
+mszparse: mszparse.o mszreader.hh
 	g++ ${LDFLAGS} -o $@ $+ -lz
 
 run:
