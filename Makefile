@@ -5,7 +5,7 @@ ifeq ($(shell uname),Darwin)
 	LDFLAGS += -L/sw/lib 
 endif
 
-all: getfeatures maxsatzilla 
+all: getfeatures maxsatzilla mszparse
 
 maxsatzilla : main.o math/dataset.o math/forwardselection.o math/libmath.a
 	g++ ${LDFLAGS} -o $@ $+ 
