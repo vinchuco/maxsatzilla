@@ -6,6 +6,7 @@
 #include <cmath>
 
 #include <gsl/gsl_math.h>
+#include <gsl/gsl_combination.h>
 
 #include "dataset.hh"
 
@@ -174,40 +175,25 @@ void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
   // To do this we compute all the indices combinations and use them
   // to compute the cross product on columns defined in pvec.
   size_t currColumn = rfeatures + outputs;
+  const size_t n = pvec.size();
+  gsl_combination * c;
+  c = gsl_combination_calloc (n, k);
   size_t *ind = new size_t [k];
-  for(size_t i = 0; i < k; i++) ind[i] = i;
-
+  
   // Compute cross product for initial configuration
-  for(size_t r = 0; r < nrows; r++) {
-    matrix[r][currColumn] = computeCrossProduct(r, ind, k, pvec);
-  }
-  currColumn++;
+  // Now using the very nice combination structure from GSL.
+  // Up to rev. 121, we used custom combination generator.
+  do {
+    for(size_t i = 0; i < k; i++)
+      ind[i] = gsl_combination_get(c, i);
 
-  size_t n = pvec.size();
-  while(1) {
-    if(ind[0] == n - k) break;
-
-    for(size_t p = 0; p < k; p++) {
-      size_t i = k - p - 1;
-      bool incp = false;
-      
-      // Can I increment this index?
-      if(ind[i] < n - p - 1) {
-	ind[i]++; // YES
-	
-	for(size_t inc = 1; inc + i < k; inc++)
-	  ind[inc+i] = ind[i] + inc;
-	incp = true;
-
-	// Compute cross product in current configuration
-	for(size_t r = 0; r < nrows; r++) {
-	  matrix[r][currColumn] = computeCrossProduct(r, ind, k, pvec);
-	}
-	currColumn++;
-      }
-      if(incp) break;
+    // Compute cross product in current configuration
+    for(size_t r = 0; r < nrows; r++) {
+      matrix[r][currColumn] = computeCrossProduct(r, ind, k, pvec);
     }
-  }
+    currColumn++;
+  } while(gsl_combination_next (c) == GSL_SUCCESS);
+  gsl_combination_free (c);
   delete ind;
 
   // Compute Powers
