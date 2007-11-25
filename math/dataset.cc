@@ -62,7 +62,9 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
 
   // Dump the files for plotting features against themselves
   for(size_t f1 = outputs; f1 < ncols-1; f1++) {
-    for(size_t f2 = outputs+1; f2 < ncols; f2++) {
+    for(size_t f2 = f1+1; f2 < ncols; f2++) {
+      assert(f1 != f2); // Shouldn't be plotting same features
+      assert(labels[f1] != labels[f2]); // There shouldn't be two labels with the same name
       ofstream file;
       file.open((prefix + "_" + labels[f1] + "_" + labels[f2] + ".dat").c_str());
       
