@@ -32,24 +32,35 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
   // Compute initial variable index for forward selection
   initRegressor = 0;
   gsl_vector_const_view col0 = gsl_matrix_const_column(fmatrix, 0);
-  double bestCorrelation = gsl_stats_correlation(ovec->data, 1, (&col0.vector)->data, 1, ovec->size);
+  double bestCorrelation = fabs(gsl_stats_correlation(ovec->data, 1, (&col0.vector)->data, 1, ovec->size));
+  
+#ifdef FSDEBUG
+    cerr << "corr(0)=" << bestCorrelation << " ";
+#endif // FSDEBUG
 
   for(size_t rindex = 1; rindex < fmatrix->size2; rindex++) {
     // Computes the correlation between column vindex and column output
     gsl_vector_const_view col = gsl_matrix_const_column(fmatrix, rindex);
-    double currentCorrelation = gsl_stats_correlation(ovec->data, 1, (&col.vector)->data, 1, ovec->size);
+    double posCurrentCorrelation = fabs(gsl_stats_correlation(ovec->data, 1, (&col.vector)->data, 1, ovec->size));
+    
+#ifdef FSDEBUG
+    cerr << "corr(" << rindex << ")=" << posCurrentCorrelation << " ";
+#endif // FSDEBUG
 
-    if(currentCorrelation > bestCorrelation) {
+    if(posCurrentCorrelation > bestCorrelation) {
       initRegressor = rindex;
-      bestCorrelation = currentCorrelation;
+      bestCorrelation = posCurrentCorrelation;
+#ifdef FSDEBUG
+      cerr << "[B] ";
+#endif // FSDEBUG
     }
   }
-
+  
 #ifdef FSDEBUG
   cerr << "Best initial feature (highest correlation) is: " << initRegressor << "\n"
        << "Its correlation is " << bestCorrelation << "\n\n";
 #endif // FSDEBUG
-
+  
   // Generates model for initial regressor
   double c0, c1, cov00, cov01, cov11, SSe;
   gsl_vector_const_view initRegressorCol = gsl_matrix_const_column(fmatrix, initRegressor);
@@ -76,7 +87,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
   
 #ifdef FSDEBUG
   cerr << "SSt = " << SSt << "\n"
-       << "SSr = " << initSSr << "\n";
+       << "SSr = " << initSSr << "\n\n";
 #endif // FSDEBUG
 }
 
@@ -164,7 +175,8 @@ vector<size_t> ForwardSelection::run(double fin) {
 double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr, size_t newRegressorIndex, double *newSSr) {
 
 #ifdef FSDEBUG
-  cerr << "Given the model with vars: ";
+  cerr << "\n\n*******************************\n"
+       << "Given the model with vars: ";
   for(size_t i = 0; i < model.size(); i++)
     if(model[i]) cerr << i << " ";
   cerr << "\n" << "trying to add " << newRegressorIndex << "\n";
@@ -224,7 +236,10 @@ double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr
     cerr << gsl_vector_get(betas, i) << " "; 
   cerr << "]\n"
        << "SSe = " << SSe << "\n"
-       << "FTest value = " << ftest << "\n";
+       << "R-Sq = " << (double)(1.0-(SSe / SSt)) << "\n"
+       << "R-Sq(adj) = " << (double)(1.0 - ((SSe / (fmatrix->size1 - numberParams)) / (SSt / (fmatrix->size1 - 1)))) << "\n"
+       << "FTest value = " << ftest << "\n"
+       << "*******************************\n\n";
 #endif // FSDEBUG
   
   gsl_matrix_free(matrix);
