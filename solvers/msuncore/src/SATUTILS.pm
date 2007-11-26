@@ -19,6 +19,9 @@ use Data::Dumper;
 
 use POSIX;
 
+require UTILS;  # Must use require, to get INC updated
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
+
 require MSUDS;  # Must use require, to get INC updated
 import MSUDS;
 
