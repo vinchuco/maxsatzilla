@@ -52,7 +52,7 @@ build:
 
 clean:
 	@rm -f $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static \
-	  $(COBJS) $(PCOBJS) $(DCOBJS) $(RCOBJS) $(R64COBJS) $(R32COBJS) depend.mak
+	$(COBJS) $(PCOBJS) $(DCOBJS) $(RCOBJS) $(R64COBJS) $(R32COBJS) depend.mak
 
 ## Build rule
 %.o %.op %.od %.or %.ox %.oi: %.C
@@ -83,7 +83,7 @@ $(EXEC)_bignum_static: $(RCOBJS)
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
 	@$(CXX) --static $(R64COBJS) -lz -Wall -o $@
-	
+
 $(EXEC)_32-bit_static: $(R32COBJS)
 	@echo Linking $@
 	@$(CXX) --static $(R32COBJS) -lz -Wall -o $@

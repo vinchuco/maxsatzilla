@@ -97,7 +97,7 @@ sub write_dimacs() {
     my $self = shift;
     my $fname = shift;
     local *CNFF;
-    open (CNFF, ">$fname") || die "Unable to open write file $fname";
+    open (CNFF, ">$fname") || &exit_err("Unable to open write file $fname");
     my $vnum = &IDGEN::num_id();
     $self->recalc_clnum();
     my $cnum = $self->{CL_NUM};

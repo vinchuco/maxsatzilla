@@ -1494,5 +1494,5 @@ main(int argc, char *argv[]) {
 	 NB_BRANCHE, NB_BACK,
 	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE);
   fclose(fp_time);
-  return TRUE;
+  exit (10);
 }

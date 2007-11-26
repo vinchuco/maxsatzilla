@@ -24,7 +24,7 @@ use Data::Dumper;
 use POSIX;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require IDGEN;
 import IDGEN qw( &num_id &gen_id &set_id );
@@ -73,7 +73,7 @@ sub run_msu() {    # Unique interface with msuncore front-end
 	${$opts}{e} = 'i';
     } else {
 	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c') {
-	    die "Unavailable cardinality constraint encoding option\n"; }
+	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu2_algorithm($ds);
     return 0;
@@ -85,7 +85,8 @@ sub msu2_algorithm() {    # actual algorithm being run
     my $clmset = $ds->clmset;
     #
     if (${$opts}{d}) {
-	open (DBGF, ">$dbgfile") || die "Unable to open dbg file $dbgfile\n";
+	open (DBGF, ">$dbgfile") ||
+	    &exit_err("Unable to open dbg file $dbgfile\n");
 	$ds->set_dbghandle(\*DBGF);
 	&MSUTILS::register_dbghandle($ds->dbghandle);
     }
@@ -147,13 +148,14 @@ sub msu2_algorithm() {    # actual algorithm being run
 		# 3.2.2 Else output max sat solution and terminate
 		&UTILS::report_item("Number of block vars", $minbs);
 		&UTILS::report_item("Computed maxsat solution", $ncls - $minbs);
-		last;
+		return 0;
 	    }
 	}
 	# 3.3 Else
 	elsif ($outcome == 1) {
 	    if ($iternum == 1) {
-		&UTILS::report_item("Computed maxsat solution", $ncls); last;
+		&UTILS::report_item("Computed maxsat solution", $ncls);
+		return 0;
 	    }
 	    # Parse computed solution
 	    my @vassigns = split('\s+', $assign);
@@ -187,9 +189,10 @@ sub msu2_algorithm() {    # actual algorithm being run
 	    my $lbv = $ncls-$minbs;
 	    &UTILS::report_item("Current lower bound for maxsat solution",$lbv);
 	    &UTILS::report_item("Current upper bound for maxsat solution",$ubv);
-	    print "Cputime limit exceeded\n"; return 0;
+	    &exit_quit("Cputime limit exceeded\n"); last;
 	}
     }
+    &exit_err("Should *not* get to this part. Terminating...");
     return 0;
 }
 

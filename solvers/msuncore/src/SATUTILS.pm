@@ -92,20 +92,20 @@ sub parse_sat_solver_output() {
     my $abort = 0;
     my $outcome = -1;
     my $assign = '';
-    open (TMPF, "<$tname") || die "Unable to open TMP output file\n";
+    open (TMPF, "<$tname") || &exit_err("Unable to open TMP output file\n");
     while(<TMPF>) {
 	if (m/Cputime limit exceeded/) { $abort = 1; last; }
     }
     close TMPF;
     if (!$abort) {
-	open (SATF, "<$fname") || die "Unable to open SAT output file\n";
+	open (SATF, "<$fname") || &exit_err("Unable to open SAT output file\n");
 	while(<SATF>) {
 	    chomp;
 	    if (m/UNSAT/)  { $outcome = 0; last; }
 	    elsif (m/SAT/) { $outcome = 1; }
 	    else           { $assign = $_; last; }
 	}
-	if ($outcome < 0) { die "Invalid SAT solver outcome??\n"; }
+	if ($outcome < 0) { &exit_err("Invalid SAT solver outcome??\n"); }
 	close SATF;
     }
     return ($outcome, $assign);
@@ -138,7 +138,8 @@ sub load_unsat_core() {
     my $clset = shift;
     my $corefile = shift;
     my $corecls = [];
-    open (COREF, "<$corefile") || die "Unable to open core file $corefile\n";
+    open (COREF, "<$corefile") ||
+	&exit_err("Unable to open core file $corefile\n");
     while(<COREF>) {
 	chomp;
 	next if (m/^c /);

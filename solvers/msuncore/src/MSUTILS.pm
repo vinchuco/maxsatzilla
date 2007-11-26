@@ -20,7 +20,7 @@ use Data::Dumper;
 use POSIX;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require CLUTILS;
 import CLUTILS;
@@ -64,7 +64,7 @@ sub gen_card_constraint() {
 	my $msg =
 	    'Use of Adders (-e a) for encoding cardinality constraints' .
 	    ' not yet implemented';
-	die "$msg\n";
+	&exit_err("$msg\n");
     } elsif (${$opts}{e} eq 'b') {
 	&CARD::bdd_set_mode(1);    # set equiv mode
 	$clstr = &CARD::gen_bdd_atmostN(\@auxbvs, $tval);
@@ -82,7 +82,7 @@ sub gen_card_constraint() {
 	    my $msg =
 		'Use of exponential enconding (-e e) for cardinality' .
 		' constraints w/ rhs > 1 not to be implemented';
-	    die "$msg\n";
+	    &exit_err("$msg\n");
 	} else {
 	    $clstr = &CARD::gen_pw_atmost1(\@auxbvs);
 	}
@@ -90,7 +90,7 @@ sub gen_card_constraint() {
 	my $msg =
 	    'Use of Sorters (-e a) for encoding cardinality constraints' .
 	    ' not yet implemented';
-	die "$msg\n";
+	&exit_err("$msg\n");
     }
     my @newcls = split("\n", $clstr);
     for(my $i=0; $i<=$#newcls; $i++) {
@@ -117,7 +117,7 @@ sub gen_extra_card_constraint() {
 	my $msg =
 	    'Use of Adders (-e a) for encoding cardinality constraints' .
 	    ' not yet implemented';
-	die "$msg\n";
+	&exit_err("$msg\n");
     } elsif (${$opts}{e} eq 'b') {
 	&CARD::bdd_set_mode(1);    # set equiv mode
 	$clstr = &CARD::gen_bdd_atleastN(\@auxbvs, $tval);
@@ -135,7 +135,7 @@ sub gen_extra_card_constraint() {
 	    my $msg =
 		'Use of exponential enconding (-e e) for cardinality' .
 		' constraints w/ rhs > 1 not to be implemented';
-	    die "$msg\n";
+	    &exit_err("$msg\n");
 	} else {
 	    $clstr = &CARD::gen_pw_atleast1(\@auxbvs);
 	}
@@ -143,7 +143,7 @@ sub gen_extra_card_constraint() {
 	my $msg =
 	    'Use of Sorters (-e a) for encoding cardinality constraints' .
 	    ' not yet implemented';
-	die "$msg\n";
+	&exit_err("$msg\n");
     }
     my @newcls = split("\n", $clstr);
     for(my $i=0; $i<=$#newcls; $i++) {

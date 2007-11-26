@@ -21,13 +21,7 @@ use POSIX;
 
 BEGIN {
     @UTILS::ISA = ('Exporter');
-    @UTILS::EXPORT_OK = qw( );
-}
-
-
-BEGIN {
-    @UTILS::ISA = ('Exporter');
-    @UTILS::EXPORT_OK = qw( &get_progname &get_progpath );
+    @UTILS::EXPORT_OK = qw( &get_progname &get_progpath &vassert &exit_ok &exit_err &exit_quit );
 }
 
 
@@ -129,7 +123,7 @@ sub resolve_inc() {    # Kept here as a template; need a copy in each script
     my $progpath = join('/', @progname_toks);
     my $fullname = $progpath . '/' . $pmname;
     my $fh;
-    open($fh, "<$fullname") || die "non-existing $pmname\n";
+    open($fh, "<$fullname") || &exit_err("non-existing $pmname\n");
     return $fh;
 }
 
@@ -140,9 +134,22 @@ sub resolve_inc() {    # Kept here as a template; need a copy in each script
 
 sub vassert() {
     my $cond = shift;
-    die "ASSERTION FAILED: @_\n" if !$cond;
+    &exit_err("ASSERTION FAILED: @_\n") if !$cond;
 }
 
+sub exit_ok() { exit 10; }    # 10 denotes ok condition
+
+sub exit_quit() {
+    my $msg = shift;
+    print "$msg\n";
+    exit 20;    # 20 denotes resources exceeded condition
+}
+
+sub exit_err() {
+    my $msg = shift;
+    print "ERROR: $msg\n";
+    exit 30;    # 30 denotes abort/error condition
+}
 
 END {
 }

@@ -14,7 +14,7 @@ use Data::Dumper;
 use POSIX;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require IDGEN;  # Must use require, to get INC updated
 import IDGEN qw( &num_id &gen_id &set_id );
@@ -72,14 +72,15 @@ sub run_msu() {    # Unique interface with msuncore front-end
 	${$opts}{e} = 'b';
     } else {
 	if (${$opts}{e} ne 'c' && ${$opts}{e} ne 'e') {
-	    die "Unavailable cardinality constraint encoding option\n"; }
+	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu4_algorithm();
 }
 
 sub msu4_algorithm() {    # actual algorithm being run
     if (${$opts}{d}) {
-	open (DBGF, ">$dbgfile") || die "Unable to open log file $dbgfile\n";
+	open (DBGF, ">$dbgfile") ||
+	    &exit_err("Unable to open log file $dbgfile\n");
     }
     # 2. Load CNF formula
     my $clset = CLSET->new();
@@ -92,9 +93,7 @@ sub msu4_algorithm() {    # actual algorithm being run
 	my $nid = &IDGEN::num_id(); print DBGF "IDGEN ids: $nid\n"; }
     &UTILS::report_item("Number of clauses", $ncls);
 
-
-    die "This is a stub for alg 4...\n";
-
+    &exit_err("This is a stub for alg 4...\n");
 
     my $ndcores = 0;
     my $mxub = $ncls;
@@ -237,20 +236,20 @@ sub parse_sat_outfile() {
     my $abort = 0;
     my $outcome = -1;
     my $assign = '';
-    open (TMPF, "<$tname") || die "Unable to open TMP output file\n";
+    open (TMPF, "<$tname") || &exit_err("Unable to open TMP output file\n");
     while(<TMPF>) {
 	if (m/Cputime limit exceeded/) { $abort = 1; last; }
     }
     close TMPF;
     if (!$abort) {
-	open (SATF, "<$fname") || die "Unable to open SAT output file\n";
+	open (SATF, "<$fname") || &exit_err("Unable to open SAT output file\n");
 	while(<SATF>) {
 	    chomp;
 	    if (m/UNSAT/)  { $outcome = 0; last; }
 	    elsif (m/SAT/) { $outcome = 1; }
 	    else           { $assign = $_; last; }
 	}
-	if ($outcome < 0) { die "Invalid SAT solver outcome??\n"; }
+	if ($outcome < 0) { &exit_err("Invalid SAT solver outcome??\n"); }
 	close SATF;
     }
     return ($outcome, $assign);
@@ -271,7 +270,8 @@ sub compute_core() {
 sub parse_core_file() {
     my $corefile = shift;
     my @corecls = ();
-    open (COREF, "<$corefile") || die "Unable to open core file $corefile\n";
+    open (COREF, "<$corefile") ||
+	&exit_err("Unable to open core file $corefile\n");
     while(<COREF>) {
 	chomp;
 	next if (m/^c /);

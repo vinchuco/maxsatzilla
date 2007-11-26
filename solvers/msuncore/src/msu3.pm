@@ -22,7 +22,7 @@ use Data::Dumper;
 use POSIX;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require IDGEN;
 import IDGEN qw( &num_id &gen_id &set_id );
@@ -74,7 +74,7 @@ sub run_msu() {    # Unique interface with msuncore front-end
 	${$opts}{e} = 'i';
     } else {
 	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c') {
-	    die "Unavailable cardinality constraint encoding option\n"; }
+	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu3_algorithm($ds);
     return 0;
@@ -86,7 +86,8 @@ sub msu3_algorithm() {    # actual algorithm being run
     my $clmset = $ds->clmset;
     #
     if (${$opts}{d}) {
-	open (DBGF, ">$dbgfile") || die "Unable to open dbg file $dbgfile\n";
+	open (DBGF, ">$dbgfile") ||
+	    &exit_err("Unable to open dbg file $dbgfile\n");
 	$ds->set_dbghandle(\*DBGF);
 	&MSUTILS::register_dbghandle($ds->dbghandle);
     }
@@ -124,9 +125,9 @@ sub msu3_algorithm() {    # actual algorithm being run
 		print DBGF "Instance is SAT; Moving to next phase...\n";
 	    }
 	    last;
-	} else { print "No LB/UB data\nCputime limit exceeded\n"; exit(1); }
+	} else {
+	    &exit_quit("No LB/UB data\nCputime limit exceeded\n"); return 0; }
     }
-
     my $ncs = $#{$coreset} + 1;
     print "Number of cores: $ncs\n";
     my $tub = $nscls - $ncs;
@@ -190,10 +191,10 @@ sub msu3_algorithm() {    # actual algorithm being run
 	    $mxub = $nscls-$nbvlb;
 	    &UTILS::report_item("Lower bound for maxsat solution", $mxlb);
 	    &UTILS::report_item("Upper bound for maxsat solution", $mxub);
-	    print "Cputime limit exceeded\n";
-	    return 0;
+	    &exit_quit("Cputime limit exceeded\n"); last;
 	}
     }
+    &exit_err("Should *not* get to this part. Terminating...");
     return 0;
 }
 

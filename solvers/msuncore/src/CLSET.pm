@@ -429,7 +429,7 @@ sub print() {
     my $self = shift;
     my $fname = shift;
     local *CNFF;
-    open (CNFF, ">$fname") || die "Unable to open write file $fname";
+    open (CNFF, ">$fname") || &exit_err("Unable to open write file $fname");
     foreach my $cl (sort keys %{$self->{CL_SET}}) {
 	#print "Printing another clause: $cl\n";
 	print CNFF "$cl\n";
@@ -442,7 +442,7 @@ sub print_dimacs() {
     #local *FH = @_;
     my $fname = shift;
     local *CNFF;
-    open (CNFF, ">>$fname") || die "Unable to open write file $fname";
+    open (CNFF, ">>$fname") || &exit_err("Unable to open write file $fname");
     foreach my $cl (sort keys %{$self->{CL_SET}}) {
 	#print "Printing another clause: $cl\n";
 	print CNFF "$cl 0\n";
@@ -454,7 +454,7 @@ sub write_dimacs() {
     my $self = shift;
     my $fname = shift;
     local *CNFF;
-    open (CNFF, ">$fname") || die "Unable to open write file $fname";
+    open (CNFF, ">$fname") || &exit_err("Unable to open write file $fname");
     my $vnum = &IDGEN::num_id();
     my $cnum = $self->{CL_NUM};
     print CNFF "p cnf $vnum $cnum\n";

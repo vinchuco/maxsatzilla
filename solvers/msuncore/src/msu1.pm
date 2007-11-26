@@ -22,7 +22,7 @@ use Data::Dumper;
 use POSIX;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require IDGEN;
 import IDGEN qw( &num_id &gen_id &set_id );
@@ -72,7 +72,7 @@ sub run_msu() {    # Unique interface with msuncore front-end
     } else {
 	if (${$opts}{e} ne 'c' && ${$opts}{e} ne 'e' &&
 	    ${$opts}{e} ne 'b' && ${$opts}{e} ne 'i') {
-	    die "Unavailable cardinality constraint encoding option\n"; }
+	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu1_algorithm($ds);
     return 0;
@@ -84,7 +84,8 @@ sub msu1_algorithm() {    # actual algorithm being run
     my $clmset = $ds->clmset;
     #
     if (${$opts}{d}) {
-	open (DBGF, ">$dbgfile") || die "Unable to open dbg file $dbgfile\n";
+	open (DBGF, ">$dbgfile") ||
+	    &exit_err("Unable to open dbg file $dbgfile\n");
 	$ds->set_dbghandle(\*DBGF);
 	&MSUTILS::register_dbghandle($ds->dbghandle);
     }
@@ -170,15 +171,16 @@ sub msu1_algorithm() {    # actual algorithm being run
 							$cardset,$bvref,1);
 		}
 	    } else {
-		print "Must always have init clauses for max sat. ";
-		print "There is a bug. Terminating...\n";
-		last;
+		my $err_msg = "Must always have init clauses for max sat. ";
+		$err_msg .= "There is a bug. Terminating...\n";
+		&exit_err($err_msg); last;
 	    }
 	}
 	# 3.3 Else
 	elsif ($outcome == 1) {
 	    if ($iternum == 1) {
-		&UTILS::report_item("Computed maxsat solution", $nscls); last;
+		&UTILS::report_item("Computed maxsat solution", $nscls);
+		return 0;
 	    }
 	    # Parse computed solution
 	    my @vassigns = split('\s+', $assign);
@@ -186,7 +188,8 @@ sub msu1_algorithm() {    # actual algorithm being run
 	    pop @vassigns;  # Remove 0 marker
 	    # Access blocking vars assigned value 1
 	    my $bvref = &MSUTILS::get_blocking_vars($opts,$blockvs,\@vassigns);
-	    if ($#{$bvref}+1 >= $minbs) { die "Too many blocking vars??\n"; }
+	    if ($#{$bvref}+1 >= $minbs) {
+		&exit_err("Too many blocking vars??\n"); }
 	    $minbs = $#{$bvref}+1;
 	    # 3.3.1 Output max sat solution and terminate
 	    if (${$opts}{v} > 1) {
@@ -200,10 +203,10 @@ sub msu1_algorithm() {    # actual algorithm being run
 	    &UTILS::report_item("Current lower bound for maxsat solution",$lbv);
 	    # Can update UB: use num of iters when extracting cores (as in MSU3)
 	    &UTILS::report_item("Current upper bound for maxsat solution",$ubv);
-	    print "Cputime limit exceeded\n";
-	    return 0;
+	    &exit_quit("Cputime limit exceeded\n"); last;
 	}
     }
+    &exit_err("Should *not* get to this part. Terminating...");
     return 0;
 }
 
