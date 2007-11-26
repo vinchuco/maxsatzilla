@@ -29,6 +29,7 @@ for argument in $arguments ; do
 	    echo ${solversName[$i]} >> $logFile
 	    $time ${solvers[$i]} $adimacsInstance >> $logFile 2> $timeFile
 	    returnValue=$?
+	    cat $timeFile >> $logFile
 	    runningTime=`grep user $timeFile | tail -c +6`
 	    # Write in solver file .slv
 	    if [ $returnValue == $cpuTimeOutReturnCode ] ; then
