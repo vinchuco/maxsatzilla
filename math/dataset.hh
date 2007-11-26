@@ -40,6 +40,9 @@ public:
   /// Implements standardization of the outputs
   void standardizeOutputs();
 
+  /// Removes from current dataset the features in the vector
+  void removeFeatures(const vector<size_t> &);
+
 private:
   void expandOnPartition(size_t, const vector<size_t> &);
   double computeCrossProduct(size_t, size_t *, size_t, const vector<size_t> &);

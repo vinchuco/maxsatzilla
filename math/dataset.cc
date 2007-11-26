@@ -139,9 +139,42 @@ void MSZDataSet::standardize() {
     }
 
   }
-
-
   stdDone = true;
+}
+
+void MSZDataSet::removeFeatures(const vector<size_t> &vec) {
+  // We need to remove the feature indexes in vec from the current data.
+  
+  // Let's setup all the variables
+  size_t currRawFeatures = rfeatures;
+  size_t currCols = ncols;
+  for(size_t i = 0; i < vec.size(); i++) {
+    ncols--;
+    if(vec[i] < currRawFeatures)
+      rfeatures--; 
+  }
+  
+  // Now we need to recreate matrix.
+  double **newMatrix = (double**)malloc(nrows * sizeof(*newMatrix));
+  for(size_t r = 0; r < nrows; r++)
+    newMatrix[r] = (double*)malloc(ncols * sizeof(**newMatrix));
+  
+  // Copy every column to the new matrix except those listed in vec.
+  size_t destc = 0;
+  for(size_t origc = 0; origc < currCols; origc++) {
+    if(find(vec.begin(), vec.end(), origc) != vec.end())
+      continue;
+    for(size_t r = 0; r < nrows; r++)
+      newMatrix[r][destc] = matrix[r][origc];
+    destc++;
+  }
+  
+  // free previous matrix
+  for(size_t r = 0; r < nrows; r++)
+    free(matrix[r]);
+  free(matrix);
+
+  matrix = newMatrix;
 
 }
 
