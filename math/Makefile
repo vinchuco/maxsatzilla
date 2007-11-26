@@ -13,10 +13,11 @@ ifeq ($(shell uname),Darwin)
 endif
 
 DRIVER_FILES = driver.cc
+FSTEST_FILES = fstest.cc
 
 LIBOFILES = $(LIB_FILES:%.cc=%.o)
 
-all: libmath.a driver
+all: libmath.a driver fstest
 
 libmath.a: $(LIBOFILES) $(HEADERS)
 	rm -f $@
@@ -25,5 +26,8 @@ libmath.a: $(LIBOFILES) $(HEADERS)
 driver: $(DRIVER_FILES) $(HEADERS) libmath.a 
 	g++ $(LDFLAGS) $(CXXFLAGS) $(DRIVER_FILES) ./libmath.a -o $@
 
+fstest: $(FSTEST_FILES) $(HEADERS) libmath.a
+	g++ $(LDFLAGS) $(CXXFLAGS) $(FSTEST_FILES) ./libmath.a -o $@
+
 clean: 
-	rm -f $(LIBOFILES) libmath.a driver
+	rm -f $(LIBOFILES) libmath.a driver fstest
