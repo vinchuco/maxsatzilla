@@ -1,7 +1,7 @@
 # OK, Simple makefile to generate static library
 # and link it to the driver.
 
-LDFLAGS = -lgsl -lz
+LDFLAGS = -lgsl -lgslcblas -lz
 CXXFLAGS = -Wall -std=c++98 -ggdb
 LIB_FILES = dataset.cc forwardselection.cc ridgeregression.cc
 HEADERS = $(LIB_FILES:%.cc=%.hh)
