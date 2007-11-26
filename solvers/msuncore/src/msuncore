@@ -24,7 +24,7 @@ use POSIX;
 use Getopt::Std;
 
 require UTILS;  # Must use require, to get INC updated
-import UTILS;
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
 
 require MSUDS;
 import MSUDS;
@@ -106,6 +106,8 @@ if (${$opts}{a}) {
 
 &finishup($ds);
 
+exit 10;
+
 1;
 
 
@@ -139,7 +141,7 @@ sub resolve_inc() {    # Copy from template kept in UTILS package
     my $progpath = join('/', @progname_toks);
     my $fullname = $progpath . '/' . $pmname;
     my $fh;
-    open($fh, "<$fullname") || die "non-existing $pmname\n";
+    open($fh, "<$fullname") || &exit_err("non-existing $pmname\n");
     return $fh;
 }
 
