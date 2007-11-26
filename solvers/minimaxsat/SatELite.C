@@ -428,7 +428,7 @@ void Solver::unlinkClause(Clause c, Var elim)
     if (elim != var_Undef){
         assert(!c.learnt());
         io_tmp.clear();
-        io_tmp.push(toLit(c.size()));
+        io_tmp.push(Lit::toLit(c.size()));
         for (int i = 0; i < c.size(); i++)
             io_tmp.push(c[i]);
         fwrite((Lit*)io_tmp, 4, io_tmp.size(), elim_out);
