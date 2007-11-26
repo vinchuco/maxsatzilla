@@ -71,9 +71,13 @@ int main(int argc, char *argv[]) {
   cerr << "features (" << nbFeatures << ") + solvers(" << nbSolvers << ") = " << labels.size() << "\n";
   ds->dumpPlotFiles(labels, "./driver");
 
+  // Let's apply dataset transformations
+  ds->standardize();
+  ds->standardizeOutputs();
+  ds->expand(1); // always calls standardize() if you didn't before
+
   // Lets do a forward selection
   ForwardSelection fs(*ds, 1);
-
   vector<size_t> res = fs.run(0.15);
   
   ds->removeFeatures(res);
