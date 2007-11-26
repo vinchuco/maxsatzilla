@@ -1,6 +1,7 @@
 #include "forwardselection.hh"
 
 #include <iostream>
+#include <iterator>
 #include <cassert>
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_fit.h>
@@ -11,6 +12,7 @@
 #endif // OLDGSL
 
 using std::cerr;
+using std::cout;
 
 ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
 
@@ -166,7 +168,11 @@ vector<size_t> ForwardSelection::run(double fin) {
   vector<size_t> regs;
   for(size_t i = 0; i < isInModel.size(); i++) 
     if(isInModel[i]) regs.push_back(i);
-    
+
+  cout << "Forward Selection finished by choosing variables:\n";
+  copy(regs.begin(), regs.end(), std::ostream_iterator<size_t>(cout, " "));
+  cout << std::endl;
+
   return regs;
 }
 
