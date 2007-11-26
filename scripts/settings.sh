@@ -72,6 +72,10 @@ featuresExec="../features.rb ../getfeatures"
 cpuTimeOut=1000
 cpuTimeOutReturnCode=9
 
+# Log file for trace
+logFile="logFile$HOSTNAME.log"
+
 # Internal constants for results
+exitCode=10
 answered=1
 cpuTimeOutted=2

@@ -26,23 +26,28 @@ for argument in $arguments ; do
 	fi
         # Resolution (if necessary)
 	if [ `echo $solvingLine | wc -c` -eq 1 ] ; then
-	    $time ${solvers[$i]} $adimacsInstance > /dev/null 2> $timeFile
+	    echo ${solversName[$i]} >> $logFile
+	    $time ${solvers[$i]} $adimacsInstance >> $logFile 2> $timeFile
 	    returnValue=$?
 	    runningTime=`grep user $timeFile | tail -c +6`
 	    # Write in solver file .slv
 	    if [ $returnValue == $cpuTimeOutReturnCode ] ; then
 		echo "$instanceName $cpuTimeOut" >> ${solversName[$i]}.slv
-	    else echo "$instanceName $runningTime" >> ${solversName[$i]}.slv
+	    elif [ $returnValue == $exitCode ] ; then
+		echo "$instanceName $runningTime" >> ${solversName[$i]}.slv
+	    else echo "$instanceName $(($cpuTimeOut*2))" >> ${solversName[$i]}.slv
 	    fi
 	else
 	    set $solvingLine
-	    returnValue=$answered
+	    returnValue=$exitCode
 	    runningTime=$2
 	fi
         # Computing output
 	if [ $returnValue == $cpuTimeOutReturnCode ] ; then
 	    echo -n " $cpuTimeOut"
-	else echo -n " $runningTime"
+	elif [ $returnValue == $exitCode ] ; then
+	    echo -n " $runningTime"
+	else echo -n " $(($cpuTimeOut*2))"
 	fi
 	i=$(($i+1))
     done
