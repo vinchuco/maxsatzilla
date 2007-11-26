@@ -15,8 +15,6 @@ using std::cerr;
 
 using namespace iomsz;
 
-#define FIN 0.15
-
 int main(int argc, char *argv[]) {
 
    if (argc <= 1) exit(EXIT_FAILURE);
@@ -74,10 +72,15 @@ int main(int argc, char *argv[]) {
   ds->dumpPlotFiles(labels, "./driver");
 
   // Lets do a forward selection
-  ForwardSelection fs(*ds, 0);
+  ForwardSelection fs(*ds, 1);
 
-  vector<size_t> res = fs.run(FIN);
+  vector<size_t> res = fs.run(0.15);
   
+  ds->removeFeatures(res);
+
+  RidgeRegression rr(*ds);
+  rr.run(0.1, 1, "./msuncore-model.hh");
+
   // Let's not forget to delete the dataset
   delete ds;
   

@@ -26,7 +26,7 @@ public:
   void run(double, size_t, const string &);
 
 private:
-  gsl_matrix *matrix_mult(gsl_matrix *, gsl_matrix *) const;
+  gsl_matrix *matrix_mult(const gsl_matrix *, const gsl_matrix *) const;
 
   const MSZDataSet &data; ///< Reference to data is kept.
 };

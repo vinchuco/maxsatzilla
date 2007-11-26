@@ -74,18 +74,23 @@ void RidgeRegression::run(double delta, size_t out, const string &path) {
   gsl_matrix_free(final);
 }
 
-gsl_matrix *RidgeRegression::matrix_mult(gsl_matrix *m1, gsl_matrix *m2) const {
+gsl_matrix *RidgeRegression::matrix_mult(const gsl_matrix *m1, const gsl_matrix *m2) const {
   
   assert(m1->size2 == m2->size1);
 
   gsl_matrix *prod = gsl_matrix_alloc(m1->size1, m2->size2);
   
   for(size_t r = 0; r < m1->size1; r++) {
-    gsl_vector_view rowm1 = gsl_matrix_row(m1, r);
+    gsl_vector_const_view rowm1 = gsl_matrix_const_row(m1, r);
 
     for(size_t c = 0; c < m2->size2; c++) {
-      gsl_vector_view colm2 = gsl_matrix_column(m2, c);
-      gsl_matrix_set(prod, r, c, gsl_vector_mul(&rowm1.vector, &colm2.vector));
+      gsl_vector_const_view colm2 = gsl_matrix_const_column(m2, c);
+      assert((&rowm1.vector)->size == (&colm2.vector)->size);
+      double vprod = 0.0;
+      for(size_t i = 0; i < (&rowm1.vector)->size; i++)
+	vprod += gsl_vector_get((&rowm1.vector), i) * gsl_vector_get((&colm2.vector), i); 
+
+      gsl_matrix_set(prod, r, c, vprod);
     }
   }
 

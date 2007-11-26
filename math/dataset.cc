@@ -1,6 +1,8 @@
 #include <iostream>
 #include <fstream>
 
+#include <iostream>
+#include <iterator>
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
@@ -10,6 +12,7 @@
 
 #include "dataset.hh"
 
+using std::cout;
 using std::cerr;
 using std::ofstream;
 
@@ -22,9 +25,9 @@ MSZDataSet::~MSZDataSet() {
 
   // Clean up matrix by deleting each line.
   for(size_t row = 0; row < nrows; row++) 
-    free(matrix[row]);
+    delete[] matrix[row];
 	 
-  free(matrix);
+  delete[] matrix;
   
 }
 
@@ -116,6 +119,8 @@ double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
 
 void MSZDataSet::standardize() {
   
+  cout << "Standardizing features ...";
+
   static bool stdDone = false;
 
   if(!stdDone) {
@@ -140,11 +145,30 @@ void MSZDataSet::standardize() {
 
   }
   stdDone = true;
+
+  cout << "DONE\n";
+
 }
 
-void MSZDataSet::removeFeatures(const vector<size_t> &vec) {
+void MSZDataSet::removeFeatures(const vector<size_t> &keepVec) {
   // We need to remove the feature indexes in vec from the current data.
   
+  cout << "Pruning features from dataset: ";
+
+  // Create the indices to remove
+  vector<size_t> vec;
+  for(size_t i = outputs; i < ncols; i++)
+    if(find(keepVec.begin(), keepVec.end(), i-outputs) == keepVec.end())
+      vec.push_back(i);
+
+  if(vec.size() == 0) { 
+    cout << "NONE\n";
+    return;
+  } else {
+    copy(vec.begin(), vec.end(), std::ostream_iterator<size_t>(cout, " "));
+    cout << std::endl;
+  }
+
   // Let's setup all the variables
   size_t currRawFeatures = rfeatures;
   size_t currCols = ncols;
@@ -164,6 +188,7 @@ void MSZDataSet::removeFeatures(const vector<size_t> &vec) {
   for(size_t origc = 0; origc < currCols; origc++) {
     if(find(vec.begin(), vec.end(), origc) != vec.end())
       continue;
+    assert(destc < ncols);
     for(size_t r = 0; r < nrows; r++)
       newMatrix[r][destc] = matrix[r][origc];
     destc++;
@@ -175,10 +200,11 @@ void MSZDataSet::removeFeatures(const vector<size_t> &vec) {
   free(matrix);
 
   matrix = newMatrix;
-
 }
 
 void MSZDataSet::standardizeOutputs() {
+
+  cout << "Standardizing outputs... ";
 
   static bool stdDone = false;
 
@@ -189,6 +215,9 @@ void MSZDataSet::standardizeOutputs() {
   }
 
   stdDone = true;
+
+  cout <<  "DONE\n";
+
 }
 
 void MSZDataSet::expand(size_t n) { 
