@@ -118,19 +118,29 @@ namespace iomsz {
   }
 
   template<class B>
+  static int parseDecimal(B& in, int& nbDec=0) {
+    int     val = 0;
+    if (*in < '0' || *in > '9') reportf("PARSE ERROR! (parseInt) Unexpected char: %c\n", *in), exit(3);
+    while (*in >= '0' && *in <= '9')
+      val = val*10 + (*in - '0'),
+	++in, ++nbDec;
+    return val;
+  }
+
+  template<class B>
     static double parseDouble(B& in) {
-    int     valReal;
+    int     valReal, nbDec=0;
     double valDecimal;
     valReal=parseInt(in);
     //reportf("valReal: %d\n", valReal);
 
     if (*in == '.') {
       ++in;
-      valDecimal=(double)parseInt(in);
+      valDecimal=(double)parseDecimal(in,nbDec);
     }
     else return (double)valReal;
 
-    while (valDecimal>1)
+    for (;nbDec!=0; nbDec--)
       valDecimal/=10;
     return valReal+valDecimal;
   }
