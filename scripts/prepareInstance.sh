@@ -17,3 +17,4 @@ else
 fi
 adimacsInstance="$instanceDirectory/$instanceName.$extension"
 echo "$instanceName"
+echo "$instanceName" >> $logFile
