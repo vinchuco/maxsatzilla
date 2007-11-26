@@ -164,7 +164,7 @@ void build_structure() {
       }
     }
     if (sat[i][clause_length[i]] !=NONE)
-      printf("erreur ");
+      printf("erreur "), exit(0);
   }
   for(clause=0;clause<NB_CLAUSE;clause++) {
     length = clause_length[clause];

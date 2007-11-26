@@ -374,7 +374,7 @@ int replace_clause(int newclause, int clause_to_replace, int *clauses) {
     }
   }
   if (flag==FALSE)
-    printf("problem...");
+    printf("problem..."), exit(0);
   return flag;
 }
 
@@ -409,14 +409,14 @@ int verify_binary_clauses(int *varssigns, int var1, int sign1, int var2, int sig
   if (var1==*varssigns) {
     if ((*(varssigns+1)!=1-sign1) || (var2!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign2)) {
-      printf("problem..");
+      printf("problem.."), exit(0);
       return FALSE;
     }
   }
   else {
     if ((var2 != *varssigns) || (*(varssigns+1)!=1-sign2) || (var1!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign1)) {
-      printf("problem..");
+      printf("problem.."), exit(0);
       return FALSE;
     }
   }
@@ -552,7 +552,7 @@ int create_complementary_binclause(int clause, int clause1, int clause2) {
     varssigns[0]=var; varssigns[1]=sign;
   }
   if ((i!=4) || (check_reason(varssigns, clause, clause1, clause2)==FALSE))
-    printf("problem...");
+    printf("problem..."), exit(0);
   create_binaryclause(varssigns[0], 1-varssigns[1],
 		      varssigns[2], 1-varssigns[3], clause1, clause2);
   return TRUE;
@@ -565,7 +565,7 @@ int get_satisfied_literal(int clause) {
     if (*(vars_signs+1) == var_current_value[var])
       return var;
   }
-  printf("erreur");
+  printf("erreur"), exit(0);
   return NONE;
 }
 
@@ -633,7 +633,7 @@ int linear_conflict(int clause) {
   }
   if (i>4) return FALSE;
   if (i==0)
-    printf("bizzar...\n");
+    printf("bizzar...\n"), exit(0);
   else {
     for(j=0; j<LINEAR_REASON_STACK1_fill_pointer; j++) 
       clause_involved[LINEAR_REASON_STACK1[j]]=NONE;
@@ -971,7 +971,7 @@ void create_unitclause(int lit, int subsumedclause, int *clauses) {
     }
   }
   if (flag==FALSE)
-    printf("erreur ");
+    printf("erreur "), exit(0);
   NB_CLAUSE++;
 }
 
@@ -979,9 +979,9 @@ int verify_resolvent(int lit, int clause1, int clause2) {
   int *vars_signs1, *vars_signs2, lit1, lit2, temp, flag=FALSE, var, nb=0;
 
   if ((clause_state[clause1]!=ACTIVE) || (clause_state[clause2]!=ACTIVE))
-      printf("erreur ");
+      printf("erreur "), exit(0);
   if ((clause_length[clause1]!=2) || (clause_length[clause2]!=2))
-    printf("erreur ");
+    printf("erreur "), exit(0);
   vars_signs1=var_sign[clause1];
   vars_signs2=var_sign[clause2];
   for(var=*vars_signs1; var!=NONE; var=*(vars_signs1+=2)) {
@@ -997,7 +997,7 @@ int verify_resolvent(int lit, int clause1, int clause2) {
     }
   }
   if ((nb!=2) || (flag==FALSE))
-    printf("erreur ");
+    printf("erreur "), exit(0);
   nb=0; flag=FALSE;
   for(var=*vars_signs2; var!=NONE; var=*(vars_signs2+=2)) {
     if (var_state[var] == ACTIVE ) {
@@ -1012,9 +1012,9 @@ int verify_resolvent(int lit, int clause1, int clause2) {
     }
   }
   if ((nb!=2) || (flag==FALSE))
-    printf("erreur ");
+    printf("erreur "), exit(0);
   if (!complement(lit1, lit2))
-    printf("erreur ");
+    printf("erreur "), exit(0);
 }
 
 int searching_two_clauses_to_fix_neglit(int clause, int lit) {
@@ -1239,7 +1239,7 @@ int satisfy_literal(int lit) {
 
 int assign_value(int var, int current_value, int rest_value) {
   if (var_state[var]==PASSIVE)
-    printf("erreur1...\n");
+    printf("erreur1...\n"), exit(0);
   var_state[var] = PASSIVE;
   push(var, VARIABLE_STACK);
   var_current_value[var] = current_value;
@@ -1415,7 +1415,7 @@ int dpl() {
       UB=NB_EMPTY; 
       nb=verify_solution();
       if (nb!=NB_EMPTY)
-      	printf("problem nb...");
+      	printf("problem nb..."), exit(0);
       while (backtracking()==NONE);
       if (VARIABLE_STACK_fill_pointer==0)
 	break;
@@ -1458,7 +1458,7 @@ main(int argc, char *argv[]) {
   FILE *fp_time;
 
   if (argc<2) {
-    printf("Using format: maxsatz input_instance [upper_bound]\n");
+    printf("Using format: maxsatz input_instance [upper_bound]\n"), exit(0);
     return FALSE;
   }
   for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
@@ -1467,13 +1467,13 @@ main(int argc, char *argv[]) {
   mess=times(a_tms); begintime = a_tms->tms_utime;
 
   switch (build_simple_sat_instance(argv[1])) {
-  case FALSE: printf("Input file error\n"); return FALSE;
+  case FALSE: printf("Input file error\n"), exit(0); return FALSE;
   case TRUE:
     if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
     init();
     dpl();
     break;
-  case NONE: printf("An empty resolvant is found!\n"); break;
+  case NONE: printf("An empty resolvant is found!\n"), exit(0); break;
   }
   mess=times(a_tms); endtime = a_tms->tms_utime;
 
