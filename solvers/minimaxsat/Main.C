@@ -28,7 +28,7 @@ char*    opt_wcnf2       = NULL;
 int      opt_verbosity = 1;
 bool     opt_try       = false;     // (hidden option -- if set, then "try" to parse, but don't output "s UNKNOWN" if you fail, instead exit with error code 5)
 
-FileT    opt_file_type  = ft_Pseudo;
+FileT    opt_file_type     = ft_Cnf;
 SolverT  opt_solver        = st_MiniSat;
 ConvertT opt_convert       = ct_Mixed;
 ConvertT opt_convert_goal  = ct_Undef;
@@ -146,10 +146,14 @@ void parseOptions(int argc, char** argv)
             else if (oneof(arg, "S,satelite")) opt_solver = st_SatELite;
 	    else if (strncmp(arg, "-F="      ,   3) == 0)
 	    {
-	       int iaux=atoi(arg+ 3);
-	       if(iaux==0) opt_file_type= ft_Pseudo;
-	       else if(iaux==1) opt_file_type= ft_Cnf;
-	       else if(iaux==2) opt_file_type= ft_Wcnf;
+	      switch( atoi(arg+3) ) {
+	      case 0:
+		opt_file_type = ft_Pseudo; break;
+	      case 1:
+		opt_file_type= ft_Cnf; break;
+	      case 2:
+	        opt_file_type= ft_Wcnf;break;
+	      }
 	    }
 	    else if (strncmp(arg, "-H="      ,   3) == 0)
 	    {

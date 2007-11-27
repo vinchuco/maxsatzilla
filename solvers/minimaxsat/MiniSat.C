@@ -3,7 +3,7 @@
 #include "Sort.h"
 #include <cmath>
 
-
+#include "libubcsat/ubcsat.h"
 
 namespace MiniSat {
 //=================================================================================================
@@ -927,7 +927,7 @@ bool Solver::solve(const vec<Lit>& assumps)
     while (status == l_Undef){
 	learn=true;
 	if(opt_ls==1) {
-		localSearch();
+	  localSearch( 2, 10, 12345 );
 		if(topUB==-1) resultado=true; // UB es una solucion
 		if(topUB!=-1 and UB < topUB) resultado=true; // UB es una solucion
 	}
@@ -2093,60 +2093,61 @@ int Solver::calculateJeroslow()
 	return -1;
 }
 
-void Solver::localSearch(){
- 
- if(opt_file_type!=ft_Pseudo){
- FILE *ft;
- int max_cars=1000;
-	char line[max_cars];
-	char file_ub[max_cars];
+void Solver::localSearch( int iTimeOut, int iNumRuns, int iSeed ){
+  if(opt_file_type == ft_Pseudo) {
+    setTop(-1);  
+    return;
+  }
 
-	int idproc=getpid();
-	
-	if(opt_file_type==ft_Cnf) sprintf(line,"./ubcsat -rprocid %d -r out none -r best -alg irots -i %s",idproc,opt_input);
-	else sprintf(line,"./ubcsat -rprocid %d -r out none -r best -alg irots -w -i %s",idproc,opt_input);
-	system(line);
-	
-	sprintf(file_ub,"ls_id_%d.txt",idproc);
+  printf("local search probe...\n");
 
-	ft = fopen(file_ub, "r");
-	if(ft != NULL)
-	{
-		// Read the UB given by SLS
-		fgets(line, max_cars, ft);
-		int target;
-		float target_w;
-		sscanf(line,"%d %f ",&target,&target_w);
-		Int res=0;
-		if(opt_file_type==ft_Cnf)  res=target;
-		else res=int(target_w);
-		//res=res+1;
-		if(res<UB) { 
-			if(res==0) UB=1;
-			else UB=res;
-			//reportf("LOCAL SEARCH UB %d \n",toint(UB));
-			//reportf("o %d \n",toint(UB));
-			printf("o %d \n",toint(UB));
-			fflush(stdout);
-		}
-		
-		// Read the model associated with the UB
-		int nv;
-		model.growTo(nVars());
-		for(int j=0;j<nVars();j++)
-		{
-			fgets(line, max_cars, ft);
-			sscanf(line,"%d",&nv);
-			if(nv>0) model[j]=l_True;
-			else model[j]=l_False;
-		}
-		fclose(ft);
-		sprintf(line,"rm ls_id_%d.txt -f",idproc);
-		system(line);
-		
-	}
-	}
-	else setTop(-1);
+  char sTimeout[64];
+  char sRuns[64];
+
+  sprintf(sTimeout, "%d", iTimeOut );
+  sprintf(sRuns, "%d", iNumRuns );
+
+  char* vlineFilename = new char[512];
+  sprintf(vlineFilename, "%s", P_tmpdir);
+  strcat(vlineFilename, "/XXXXXX");
+  vlineFilename = mktemp(vlineFilename);
+
+  char strseed[64];
+  sprintf(strseed, "%d", iSeed );
+
+  char* argv[] = {"ubcsat", 
+		  "-alg", NULL, "-noimprove", NULL,  "-i", opt_input, 
+		  "-runs", sRuns, "-timeout", sTimeout,
+		  "-r", "stats", vlineFilename, "best",
+		  "-seed", strseed,
+		  "-satzilla",
+		  NULL
+  };
+  
+  int argc = 17;
+  
+  // -- do saps
+  argv[2]="saps";
+  argv[4]="0.1";
+
+  if( opt_file_type != ft_Cnf ) { argv[argc] = "-w"; argc++; }
+  
+  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+
+  FILE *ft;
+#define MAX_CARS 1000
+  float best_solution;
+  char line[ MAX_CARS ];
+  
+  ft = fopen(vlineFilename, "r");
+   while( fgets( line, MAX_CARS, ft ) != NULL ) {     
+     sscanf( line, "BestSolution_Mean = %f\n", &best_solution );
+   }
+  printf("o %d \n", (int)best_solution );
+  fflush(stdout);    
+  fclose(ft);	
+  
+  delete[] vlineFilename;
 }
 
 void Solver::DoHardening() {

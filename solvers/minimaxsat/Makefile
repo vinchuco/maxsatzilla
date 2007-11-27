@@ -62,31 +62,31 @@ clean:
 ## Linking rules (standard/profile/debug/release)
 $(EXEC): $(COBJS)
 	@echo Linking $(EXEC)
-	@$(CXX) $(COBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
+	@$(CXX) $(COBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) -L /sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R64COBJS) -lz -Wall -o $@
+	@$(CXX) --static $(R64COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
 
 $(EXEC)_32-bit_static: $(R32COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R32COBJS) -lz -Wall -o $@
+	@$(CXX) --static $(R32COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
 
 
 ## Make dependencies
