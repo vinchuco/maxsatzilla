@@ -103,6 +103,8 @@ void HelpPrintReports() {
           case TypeString:
             PrintString(pRepOut," [%s] \n",(char *)aReports[j].aParameters[k]);          
             break;
+	  default:
+	    break;
           }
         }
       }
@@ -266,6 +268,8 @@ void HelpPrintParameters(ALGPARMLIST *pParmList) {
         case TypeReport:
           Print(pRepOut,"reportname [filename [parameters]]");
           break;
+        default:
+	  break;
       }  
       Print(pRepOut,"\n");
     }

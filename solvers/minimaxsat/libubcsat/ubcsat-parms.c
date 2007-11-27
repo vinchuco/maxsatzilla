@@ -238,6 +238,8 @@ void ParseParameters(ALGPARMLIST *pParmList) {
                       SetString((char **) &pRep->aParameters[iNumRepParms],aTotalParms[iCurParm]);
                       bValidArgument[iCurParm++] = 1;
                       break;
+		  default:
+		    break;
                   }
                 }
               }
