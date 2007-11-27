@@ -53,8 +53,8 @@ public:
     Lit&    operator [] (int index)       { return data[index]; }
     float&  activity    (void)      const { return *((float*)&data[size()]); }
     Int     getWeight   (void)            { return weight;}
-    void    setWeight   (Int c)           {weight=c;}
-    bool    isHard      (void)      { return hard;}
+    void    setWeight   (Int c)           { weight=c; }
+    bool    isHard      (void)            { return hard;}
     void    setHard     (bool b)          {hard=b;}
     bool    isUsed      (void)            {return used;}
     void    setUsed     (bool b)          {used=b;}

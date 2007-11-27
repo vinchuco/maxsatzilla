@@ -6,7 +6,8 @@
 
 template<class T>
 struct Allocator {
-    virtual T* alloc(int nwords) = 0;
+  virtual ~Allocator(){}
+  virtual T* alloc(int nwords) = 0;
 };
 
 
