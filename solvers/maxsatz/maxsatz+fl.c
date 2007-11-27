@@ -1468,8 +1468,8 @@ int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
 		  "-alg", NULL, "-noimprove", NULL,  "-i", filename, 
 		  "-runs", sRuns, "-timeout", sTimeout,
 		  "-r", "stats", vlineFilename, "best",
-		  "-seed", strseed,
-		  "-satzilla",
+		  //"-seed", strseed,
+		  //"-satzilla",
 		  NULL
   };
   FILE *ft;
@@ -1484,7 +1484,7 @@ int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
   argv[2]="saps";
   argv[4]="0.1";
 
-  if ( ubcsat_main( 17, argv) == 10 ) printf("Instance satisfiable\n");
+  if ( ubcsat_main( 14, argv) == 10 ) printf("Instance satisfiable\n");
  
   ft = fopen(vlineFilename, "r");
    while( fgets( line, 1000, ft ) != NULL ) {     
