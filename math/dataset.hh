@@ -17,6 +17,11 @@ public:
   void dumpPlotFiles(const vector<string> &, const string &) const;
   void dumpPlotFiles(char **, size_t, char *) const ;
 
+  /// Outputs information regarding the number of timeouts
+  /// segmentation faults, etc. for each solver.
+  /// Shouldn't be run AFTER output standardization.
+  void printSolverStats(size_t, const vector<string> &);
+
   /// Accessors
   double getFeatureValue(size_t, size_t) const; 
   double getOutputValue(size_t, size_t)  const;

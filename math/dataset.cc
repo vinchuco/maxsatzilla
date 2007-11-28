@@ -88,8 +88,33 @@ void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefi
       file.close();
     }
   }
+}
 
+void MSZDataSet::printSolverStats(size_t timeout, const vector<string> &slabels) {
 
+  if(slabels.size() != outputs) {
+    cerr << "printSolverStats: You're passing in " << slabels.size() << " solver labels but there are " << outputs << " outputs in dataset.\n";
+    return;
+  }
+
+  vector<size_t> nbTimeouts(outputs, 0);
+  vector<size_t> nbOtherErrors(outputs, 0);
+
+  for(size_t s = 0; s < outputs; s++) {
+    for(size_t i = 0; i < nrows; i++) {
+      if(matrix[i][s] == timeout)
+	nbTimeouts[s]++;
+      else if(matrix[i][s] == 2*timeout)
+	nbOtherErrors[s]++;
+    }
+  }
+
+  for(size_t s = 0; s < outputs; s++) {
+    cout << "Solver: " << slabels[s] << "\n"
+	 << "\t\tTimeouts: " << nbTimeouts[s] << " (" << (((double)(nbTimeouts[s])) / nrows)*100.0 << ")\n"
+	 << "\t\tOther Errors: " << nbOtherErrors[s] << " (" << (((double)(nbOtherErrors[s])) / nrows)*100.0 << ")\n"
+	 << "\t\tUsable Instances: " << nrows - nbTimeouts[s] - nbOtherErrors[s] << " (" << (((double)(nrows - nbTimeouts[s] - nbOtherErrors[s])) / nrows)*100.0 << ")\n";
+  }
 
 }
 
