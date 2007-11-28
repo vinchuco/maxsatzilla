@@ -17,6 +17,8 @@
     puts 'Pos ' + $1
   when /Ratio Unit Clauses: (\d+.\d+)/
     puts 'Uni ' + $1
+  when /Ratio Unit Clauses: (\d+)/
+    puts 'Uni ' + $1
   when /Ratio Binary Clauses: (\d+.\d+)/
     puts 'Bin ' + $1
   when /Ratio Ternary Clauses: (\d+.\d+)/
