@@ -10,7 +10,7 @@ SUBDIRS = ubcsat math
 
 ifeq ($(shell uname),Darwin)
 	CPPFLAGS += -I/sw/include
-	LDFLAGS = -L/sw/lib 
+	LDFLAGS += -L/sw/lib 
 endif
 
 all: getfeatures maxsatzilla mszparse coach
@@ -22,7 +22,7 @@ mathlib:
 	cd math && $(MAKE)
 
 coach: $(COACH_FILES) $(COACH_HEADERS) ./math/libmath.a
-	g++ $(LDFLAGS) $(CXXFLAGS) -o $@ $+
+	g++ $(LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+
 
 subdirs: $(SUBDIRS)
 
