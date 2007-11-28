@@ -120,7 +120,7 @@ namespace iomsz {
   template<class B>
   static int parseDecimal(B& in, int& nbDec=0) {
     int     val = 0;
-    if (*in < '0' || *in > '9') reportf("PARSE ERROR! (parseInt) Unexpected char: %c\n", *in), exit(3);
+    if (*in < '0' || *in > '9') reportf("PARSE ERROR! (parseDecimal) Unexpected char: %c\n", *in), exit(3);
     while (*in >= '0' && *in <= '9')
       val = val*10 + (*in - '0'),
 	++in, ++nbDec;
