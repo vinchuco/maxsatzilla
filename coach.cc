@@ -3,11 +3,11 @@
 
 #include <zlib.h>
 
-#include "../mszreader.hh"
+#include "mszreader.hh"
 
-#include "dataset.hh"
-#include "forwardselection.hh"
-#include "ridgeregression.hh"
+#include "math/dataset.hh"
+#include "math/forwardselection.hh"
+#include "math/ridgeregression.hh"
 
 using std::vector;
 using std::string;
