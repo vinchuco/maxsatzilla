@@ -31,7 +31,7 @@ rs:	WAY="release static / bignums"
 rx:	WAY="release static / 64-bit integers"
 ri:	WAY="release static / 32-bit integers"
 
-s:	CFLAGS+=$(COPTIMIZE) -ggdb -D DEBUG
+s:	CFLAGS+=$(COPTIMIZE) -D NDEBUG
 p:	CFLAGS+=$(COPTIMIZE) -pg -ggdb -D DEBUG
 d:	CFLAGS+=-O0 -ggdb -D DEBUG
 r:	CFLAGS+=$(COPTIMIZE) -D NDEBUG
