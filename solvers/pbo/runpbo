@@ -2,10 +2,10 @@
 
 use strict;
 
-use src::UTILS;
+use UTILS;
 die "Usage: $0 <bench> [<timeout>] [<memout>]\n" if ($#ARGV<=0);
 
-my $launcher = "scripts/tlaunch.bash";
+my $launcher = "./tlaunch.bash";
 my $tool = './pbo';
 my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
 my $timeout = (@ARGV) ? shift @ARGV : 1000;
