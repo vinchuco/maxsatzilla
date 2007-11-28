@@ -220,8 +220,8 @@ namespace iomsz {
 	}
 	else reportf("PARSE ERROR! (parse_MSZ) Unexpected char: %c %c %c\n", *in, *in, *in), exit(3);
       }
-      else if (*in == 'c' || *in == 'p')
-	skipLine(in);
+      //else if (*in == 'c' || *in == 'p')
+      //skipLine(in);
       else {
 	readWord(in,instancesNames[inst]);
 	reportf("Instance: %s\n", instancesNames[inst].c_str());
