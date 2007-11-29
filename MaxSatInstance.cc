@@ -1,3 +1,8 @@
+/*******************************************************************************[MaxSatInstance.cc]
+Magpie -- Florian Letombe, Joao Marques-Silva, Paulo Matos, Jordi Planes (2007)
+
+Parts of the code in this file have been extracted from SATzilla.
+**************************************************************************************************/
 
 #include "MaxSatInstance.hh"
 #include "ubcsat/ubcsat.h"
@@ -8,7 +13,7 @@ bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& nu
   int temp, tempLit;
   for (int i=0; i<numLits-1; tempLit = lits[i++]) {
     for (int j=i+1; j<numLits; j++) {
-      if (abs(tempLit) > abs(lits[j])) {
+      if (abs(tempLit) > abs(lits[j])) { // Bubble sort
 	temp = lits[j];
 	lits[j] = tempLit;
 	tempLit = temp;
@@ -56,22 +61,23 @@ MaxSatInstance::MaxSatInstance( const char* filename )
 
   infile >> numVars >> numClauses;
 
-  clauseLengths = new int[ numClauses ];
-  negClausesWithVar = new vector<int>[ numVars+1 ];
-  posClausesWithVar = new vector<int>[ numVars+1 ];
+  negClausesWithVar = new int[ numVars+1 ];
+  posClausesWithVar = new int[ numVars+1 ];
+  fill( negClausesWithVar, &negClausesWithVar[numVars+1], 0 );
+  fill( posClausesWithVar, &posClausesWithVar[numVars+1], 0 );
+
   unitClauses = binaryClauses = ternaryClauses = 0;
 
   int lits[ MAX_NUM_LITERALS ];
- for (int clauseNum=0; clauseNum<numClauses; clauseNum++) {
-
+  for (int clauseNum=0; clauseNum<numClauses; clauseNum++) {
+    
     int numLits = 0;
-
+    
     infile >> lits[numLits];
     while (lits[numLits] != 0)
       infile >> lits[++numLits];
-
+    
     if ( numLits == 1 or !isTautologicalClause( lits, numLits, clauseNum )) {
-      clauseLengths[clauseNum] = numLits;
       switch( numLits ) {
       case 1: unitClauses++; break;
       case 2: binaryClauses++; break;
@@ -80,9 +86,9 @@ MaxSatInstance::MaxSatInstance( const char* filename )
       
       for (int litNum = 0; litNum < numLits; litNum++)
 	if (lits[litNum] < 0)
-	  negClausesWithVar[abs(lits[litNum])].push_back(clauseNum);
+	  negClausesWithVar[abs(lits[litNum])]++;
 	else
-	  posClausesWithVar[lits[litNum]].push_back(clauseNum);
+	  posClausesWithVar[lits[litNum]]++;
       
     } else {
       clauseNum--;
@@ -92,7 +98,8 @@ MaxSatInstance::MaxSatInstance( const char* filename )
 }
 
 MaxSatInstance::~MaxSatInstance() {
-  delete clauseLengths;
+  delete negClausesWithVar;
+  delete posClausesWithVar;
 }
 
 namespace ubcsat { int main(int, char**); }
@@ -146,8 +153,8 @@ void MaxSatInstance::printInfo(ostream& os) {
   os << "Ratio Clauses/Variables: " << (float)numClauses/numVars << endl;
   int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
-    negClauses += negClausesWithVar[ varNum ].size();
-    posClauses += posClausesWithVar[ varNum ].size();
+    negClauses += negClausesWithVar[ varNum ];
+    posClauses += posClausesWithVar[ varNum ];
   }
   os << "Ratio Negative Clauses: " << (float)negClauses/numClauses << endl;
   os << "Ratio Positive Clauses: " << (float)posClauses/numClauses << endl;

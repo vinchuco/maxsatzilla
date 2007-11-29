@@ -1,6 +1,6 @@
 CPPFLAGS = 
-CXXFLAGS = -Wall -std=c++98 -ggdb
-LDFLAGS = -lgsl -lgslcblas -lz
+CXXFLAGS = -Wall -std=c++98 -ggdb -I/sw/include 
+LDFLAGS = -lgsl -lgslcblas -lz -L/sw/lib
 
 COACH_FILES = coach.cc
 COACH_HEADERS =

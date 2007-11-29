@@ -16,8 +16,7 @@ class MaxSatInstance {
   char* inputFileName;
   enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   int numVars, numClauses;
-  int *clauseLengths;
-  vector<int> *negClausesWithVar, *posClausesWithVar;
+  int *negClausesWithVar, *posClausesWithVar;
   int unitClauses, binaryClauses, ternaryClauses;
   bool isTautologicalClause(int[MAX_NUM_LITERALS], int&, const int);
  public:
