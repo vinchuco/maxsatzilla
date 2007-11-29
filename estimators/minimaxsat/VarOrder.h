@@ -77,14 +77,14 @@ Var VarOrder::select(double random_var_freq)
     // Random decision:
     if (drand(random_seed) < random_var_freq){
         Var next = irand(random_seed,assigns.size());
-        if (toLbool(assigns[next]) == l_Undef)
+        if (lbool::toLbool(assigns[next]) == l_Undef)
             return next;
     }
 
     // Activity based decision:
     while (!heap.empty()){
         Var next = heap.getmin();
-        if (toLbool(assigns[next]) == l_Undef)
+        if (lbool::toLbool(assigns[next]) == l_Undef)
             return next;
     }
     

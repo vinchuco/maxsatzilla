@@ -3,7 +3,7 @@
 #include "Sort.h"
 #include <cmath>
 
-
+#include "libubcsat/ubcsat.h"
 
 namespace MiniSat {
 //=================================================================================================
@@ -682,7 +682,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
 	// Assume 
 	Lit next;
 	stats.decisions++;
-	next=~toLit(trail_dec[trail_dec.size()-1].lit);
+	next=~Lit::toLit(trail_dec[trail_dec.size()-1].lit);
 	trail_dec[trail_dec.size()-1].lit=index(next);
 	trail_dec[trail_dec.size()-1].values=0;
 	trail_lim.push(trail.size());
@@ -747,7 +747,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
 	else if(sug!=-1 and search_state==1){
 		search_state=1;
 		// Assume 
-		Lit next=toLit(sug);
+		Lit next=Lit::toLit(sug);
 		
 		stats.decisions++;
 		trail_dec.push_();
@@ -927,7 +927,7 @@ bool Solver::solve(const vec<Lit>& assumps)
     while (status == l_Undef){
 	learn=true;
 	if(opt_ls==1) {
-		localSearch();
+	  localSearch( 2, 10, 12345 );
 		if(topUB==-1) resultado=true; // UB es una solucion
 		if(topUB!=-1 and UB < topUB) resultado=true; // UB es una solucion
 	}
@@ -1233,7 +1233,8 @@ Clause* Solver::propagateMaxSAT(int limit_up)
 
 void Solver::paintClause(Clause *c1)
 {
- printf("    CLAUSE %X : ",(int)c1);
+  // COMMENTED BY POCM BECAUSE IS NOT GOOD CAST
+  // printf("    CLAUSE %X : ",(int)c1);
  if(c1->isUsed())printf(" used=t ");
  else printf(" used=f ");
  for(int i=0;i<c1->size();i++) {
@@ -1286,7 +1287,7 @@ void Solver::generateComp(Lit & clash,vec<Lit> & cA, vec<Lit> & cB)
 {
  int i,j;
  bool create=false;
- Lit p=toLit(indexRest());
+ Lit p=Lit::toLit(indexRest());
  
  
  for(i=0;i<cB.size();i++)
@@ -1324,7 +1325,7 @@ void Solver::generateComp(Lit & clash,vec<Lit> & cA, vec<Lit> & cB)
 
 void Solver::compClauses(Clause*& c1,Clause*& c2,Lit & clash)
 {
- Lit p=toLit(indexRest());
+ Lit p=Lit::toLit(indexRest());
  
  if(not c1->isHard()) {
   if(not c1->isVirtual() and c1->getWeight()==minAux) {
@@ -1549,7 +1550,7 @@ void Solver::detectInconsistency(Clause*& a,bool singleton=false)
   
   if(clash!=-1)
   {
-   x=toLit(clash);
+   x=Lit::toLit(clash);
    if(not singleton) modifyUnitCost(b,-minAux);
    resolution(a,b,x);
    
@@ -1569,7 +1570,7 @@ void Solver::detectInconsistency(Clause*& a,bool singleton=false)
       changeUnaryCost((*a)[0],minAux);
       array_rest[indexRest()].pushNC(index((*a)[0]),minAux);
       
-      Lit p=toLit(indexRest());
+      Lit p=Lit::toLit(indexRest());
       executeNC((*a)[0],p);
       end=true;
      }
@@ -1731,7 +1732,7 @@ Int Solver::applyLC()
 	}
  
 	for(int i=reasons.restNC.size()-1;i>=0;i--) {
-	changeUnaryCost(toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
+	changeUnaryCost(Lit::toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
 	reasons.restNC.pop_();
  }
  /*
@@ -1813,8 +1814,8 @@ void Solver::createMaxSATStructures(void)
  }
  
  psAux.clear_();
- //for(int i=0;i<nVars()*2;i++) psAux.push(toLit(i));
- for(int i=0;i<nVars()*2;i++) { psAux.push_(); psAux[psAux.size()-1]=toLit(i); }
+ //for(int i=0;i<nVars()*2;i++) psAux.push(Lit::toLit(i));
+ for(int i=0;i<nVars()*2;i++) { psAux.push_(); psAux[psAux.size()-1]=Lit::toLit(i); }
  void*   mem = xmalloc<char>(sizeof(Clause) + sizeof(unsigned)*(psAux.size() + (int)true));
  newClaAux = new (mem) Clause(false,psAux,0,true);
 }
@@ -1885,7 +1886,7 @@ void Solver::restoreAssumption(int lit)
  LB=array_rest[lit].prevLB;
  for(i=array_rest[lit].restNC.size()-1;i>=0;i--)
  {
-  changeUnaryCost(toLit(array_rest[lit].restNC[i].lit),-array_rest[lit].restNC[i].cost);
+  changeUnaryCost(Lit::toLit(array_rest[lit].restNC[i].lit),-array_rest[lit].restNC[i].cost);
   array_rest[lit].restNC.pop_();
  }
  
@@ -2092,60 +2093,61 @@ int Solver::calculateJeroslow()
 	return -1;
 }
 
-void Solver::localSearch(){
- 
- if(opt_file_type!=ft_Pseudo){
- FILE *ft;
- int max_cars=1000;
-	char line[max_cars];
-	char file_ub[max_cars];
+void Solver::localSearch( int iTimeOut, int iNumRuns, int iSeed ){
+  if(opt_file_type == ft_Pseudo) {
+    setTop(-1);  
+    return;
+  }
 
-	int idproc=getpid();
-	
-	if(opt_file_type==ft_Cnf) sprintf(line,"./ubcsat -rprocid %d -r out none -r best -alg irots -i %s",idproc,opt_input);
-	else sprintf(line,"./ubcsat -rprocid %d -r out none -r best -alg irots -w -i %s",idproc,opt_input);
-	system(line);
-	
-	sprintf(file_ub,"ls_id_%d.txt",idproc);
+  printf("local search probe...\n");
 
-	ft = fopen(file_ub, "r");
-	if(ft != NULL)
-	{
-		// Read the UB given by SLS
-		fgets(line, max_cars, ft);
-		int target;
-		float target_w;
-		sscanf(line,"%d %f ",&target,&target_w);
-		Int res=0;
-		if(opt_file_type==ft_Cnf)  res=target;
-		else res=int(target_w);
-		//res=res+1;
-		if(res<UB) { 
-			if(res==0) UB=1;
-			else UB=res;
-			//reportf("LOCAL SEARCH UB %d \n",toint(UB));
-			//reportf("o %d \n",toint(UB));
-			printf("o %d \n",toint(UB));
-			fflush(stdout);
-		}
-		
-		// Read the model associated with the UB
-		int nv;
-		model.growTo(nVars());
-		for(int j=0;j<nVars();j++)
-		{
-			fgets(line, max_cars, ft);
-			sscanf(line,"%d",&nv);
-			if(nv>0) model[j]=l_True;
-			else model[j]=l_False;
-		}
-		fclose(ft);
-		sprintf(line,"rm ls_id_%d.txt -f",idproc);
-		system(line);
-		
-	}
-	}
-	else setTop(-1);
+  char sTimeout[64];
+  char sRuns[64];
+
+  sprintf(sTimeout, "%d", iTimeOut );
+  sprintf(sRuns, "%d", iNumRuns );
+
+  char* vlineFilename = new char[512];
+  sprintf(vlineFilename, "%s", P_tmpdir);
+  strcat(vlineFilename, "/XXXXXX");
+  vlineFilename = mktemp(vlineFilename);
+
+  char strseed[64];
+  sprintf(strseed, "%d", iSeed );
+
+  char* argv[] = {"ubcsat", 
+		  "-alg", NULL, "-noimprove", NULL,  "-i", opt_input, 
+		  "-runs", sRuns, "-timeout", sTimeout,
+		  "-r", "stats", vlineFilename, "best",
+		  "-seed", strseed,
+		  "-satzilla",
+		  NULL
+  };
+  
+  int argc = 17;
+  
+  // -- do saps
+  argv[2]="saps";
+  argv[4]="0.1";
+
+  if( opt_file_type != ft_Cnf ) { argv[argc] = "-w"; argc++; }
+  
+  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+
+  FILE *ft;
+#define MAX_CARS 1000
+  float best_solution;
+  char line[ MAX_CARS ];
+  
+  ft = fopen(vlineFilename, "r");
+   while( fgets( line, MAX_CARS, ft ) != NULL ) {     
+     sscanf( line, "BestSolution_Mean = %f\n", &best_solution );
+   }
+  printf("o %d \n", (int)best_solution );
+  fflush(stdout);    
+  fclose(ft);	
+  
+  delete[] vlineFilename;
 }
 
 void Solver::DoHardening() {

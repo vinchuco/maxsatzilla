@@ -405,8 +405,8 @@ struct Solver {
 
     // Helpers: (semi-internal)
     //
-    lbool   value(Var x) { return toLbool(assigns[x]); }
-    lbool   value(Lit p) { return sign(p) ? ~toLbool(assigns[var(p)]) : toLbool(assigns[var(p)]); }
+    lbool   value(Var x) { return lbool::toLbool(assigns[x]); }
+    lbool   value(Lit p) { return sign(p) ? ~lbool::toLbool(assigns[var(p)]) : lbool::toLbool(assigns[var(p)]); }
 
     int     nAssigns (void) { return trail.size(); }
     int     nLiterals(void) { return n_literals; }

@@ -53,8 +53,8 @@ public:
     Lit&    operator [] (int index)       { return data[index]; }
     float&  activity    (void)      const { return *((float*)&data[size()]); }
     Int     getWeight   (void)            { return weight;}
-    void    setWeight   (Int c)           {weight=c;}
-    bool    isHard      (void)      { return hard;}
+    void    setWeight   (Int c)           { weight=c; }
+    bool    isHard      (void)            { return hard;}
     void    setHard     (bool b)          {hard=b;}
     bool    isUsed      (void)            {return used;}
     void    setUsed     (bool b)          {used=b;}
@@ -80,7 +80,7 @@ public:
 
     bool        isLit             (void)     const { return ((intp)data & 1) == 1; }
     bool        isNull            (void)     const { return data == NULL; }
-    Lit         getLit            (void)     const { return toLit((int)(((intp)data)>>1)); }
+    Lit         getLit            (void)     const { return Lit::toLit((int)(((intp)data)>>1)); }
     Clause*     getClause         (void)     const { return (Clause*)data; }
     bool        operator==(LitClauseUnion c) const { return data == c.data; }
     bool        operator!=(LitClauseUnion c) const { return data != c.data; }
@@ -333,7 +333,7 @@ private:
     // Activity:
     //
     void    calculateStaticOrdering(void);
-    void    localSearch(void);
+    void    localSearch(int,int,int);
     void    DoHardening(void);
     int     calculateJeroslow(void);
 
@@ -435,8 +435,8 @@ public:
        
     // Helpers: (semi-internal)
     //
-    lbool   value(Var x) const { return toLbool(assigns[x]); }
-    lbool   value(Lit p) const { return sign(p) ? ~toLbool(assigns[var(p)]) : toLbool(assigns[var(p)]); }
+    lbool   value(Var x) const { return lbool::toLbool(assigns[x]); }
+    lbool   value(Lit p) const { return sign(p) ? ~lbool::toLbool(assigns[var(p)]) : lbool::toLbool(assigns[var(p)]); }
 
     int     nAssigns(void) { return trail.size(); }
     int     nClauses(void) { return clauses.size(); }

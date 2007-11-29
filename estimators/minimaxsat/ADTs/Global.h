@@ -341,14 +341,14 @@ public:
     lbool operator ~  (void)               const { return lbool(-value); }
 
     friend int   toInt  (lbool l) { return l.toInt(); }
-    friend lbool toLbool(int   v) { return lbool(v); }
+    static lbool toLbool(int   v) { return lbool(v); }
     friend char  name   (lbool l) { static char name[4] = {'!','0','?','1'}; int x = l.value; x = 2 + ((x >> (sizeof(int)*8-2)) | (x & ~(1 << (sizeof(int)*8-1)))); return name[x]; }
 };
 
-const lbool l_True  = toLbool( 1);
-const lbool l_False = toLbool(-1);
-const lbool l_Undef = toLbool( 0);
-const lbool l_Error = toLbool(1 << (sizeof(int)*8-1));
+const lbool l_True  = lbool::toLbool( 1);
+const lbool l_False = lbool::toLbool(-1);
+const lbool l_Undef = lbool::toLbool( 0);
+const lbool l_Error = lbool::toLbool(1 << (sizeof(int)*8-1));
 
 
 //=================================================================================================

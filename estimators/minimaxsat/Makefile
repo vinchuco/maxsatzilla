@@ -31,7 +31,7 @@ rs:	WAY="release static / bignums"
 rx:	WAY="release static / 64-bit integers"
 ri:	WAY="release static / 32-bit integers"
 
-s:	CFLAGS+=$(COPTIMIZE) -ggdb -D DEBUG
+s:	CFLAGS+=$(COPTIMIZE) -D NDEBUG
 p:	CFLAGS+=$(COPTIMIZE) -pg -ggdb -D DEBUG
 d:	CFLAGS+=-O0 -ggdb -D DEBUG
 r:	CFLAGS+=$(COPTIMIZE) -D NDEBUG
@@ -52,7 +52,7 @@ build:
 
 clean:
 	@rm -f $(EXEC) $(EXEC)_profile $(EXEC)_debug $(EXEC)_release $(EXEC)_static \
-	  $(COBJS) $(PCOBJS) $(DCOBJS) $(RCOBJS) $(R64COBJS) $(R32COBJS) depend.mak
+	$(COBJS) $(PCOBJS) $(DCOBJS) $(RCOBJS) $(R64COBJS) $(R32COBJS) depend.mak
 
 ## Build rule
 %.o %.op %.od %.or %.ox %.oi: %.C
@@ -62,31 +62,31 @@ clean:
 ## Linking rules (standard/profile/debug/release)
 $(EXEC): $(COBJS)
 	@echo Linking $(EXEC)
-	@$(CXX) $(COBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
+	@$(CXX) $(COBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) -L /sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R64COBJS) -lz -Wall -o $@
-	
+	@$(CXX) --static $(R64COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
+
 $(EXEC)_32-bit_static: $(R32COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R32COBJS) -lz -Wall -o $@
+	@$(CXX) --static $(R32COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
 
 
 ## Make dependencies

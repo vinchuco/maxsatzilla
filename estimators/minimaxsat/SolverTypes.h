@@ -34,7 +34,7 @@ public:
     friend bool sign (Lit p) { return p.x & 1; }
     friend int  var  (Lit p) { return p.x >> 1; }
     friend int  index(Lit p) { return p.x; }        // A "toInt" method that guarantees small, positive integers suitable for array indexing.
-    friend Lit  toLit(int i) { Lit p; p.x = i; return p; }
+    static Lit  toLit(int i) { Lit p; p.x = i; return p; }
     
     friend void printfLit(Lit p) { if(!sign(p)) printf("-");printf("%d\n",var(p));}
 

@@ -51,10 +51,8 @@ extern char*    opt_result;
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 void reportf(const char* format, ...);      // 'printf()' replacer -- will put "c " first at each line if 'opt_satlive' is TRUE.
-#ifdef INT_BASIC
 extern char* toString(Int num);
 extern int   toint   (Int num);
-#endif
 
 
 //=================================================================================================
