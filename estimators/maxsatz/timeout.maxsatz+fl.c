@@ -52,6 +52,7 @@ An actual unit clause is an existing clause before look-ahead starts
 #include <sys/times.h>
 #include <sys/types.h>
 #include <limits.h>
+#include <string.h>
 
 typedef signed char my_type;
 typedef unsigned char my_unsigned_type;
@@ -1460,6 +1461,51 @@ void timeout_handler( int signal ) {
   exit(0);
 }
 
+char* emptyFileName() {
+  char *vlineFilename = malloc( sizeof(char) * 512 );  
+  sprintf(vlineFilename, "%s", P_tmpdir);
+  strcat(vlineFilename, "/XXXXXX");
+  vlineFilename = mktemp(vlineFilename);
+  return vlineFilename;
+}
+
+int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
+  char sTimeout[64];
+  char sRuns[64];
+  char* vlineFilename = emptyFileName();
+  char strseed[64];
+  char* argv[] = {"ubcsat", 
+		  "-alg", NULL, "-noimprove", NULL,  "-i", filename, 
+		  "-runs", sRuns, "-timeout", sTimeout,
+		  "-r", "stats", vlineFilename, "best",
+		  //"-seed", strseed,
+		  //"-satzilla",
+		  NULL
+  };
+  FILE *ft;
+  float best_solution;
+  char line[ 1000 ];
+
+  sprintf(sTimeout, "%d", iTimeOut );
+  sprintf(sRuns, "%d", iNumRuns );
+  sprintf(strseed, "%d", iSeed );
+  
+  // -- do saps
+  argv[2]="saps";
+  argv[4]="0.1";
+
+  if ( ubcsat_main( 14, argv) == 10 ) printf("Instance satisfiable\n");
+ 
+  ft = fopen(vlineFilename, "r");
+   while( fgets( line, 1000, ft ) != NULL ) {     
+     sscanf( line, "BestSolution_Mean = %f\n", &best_solution );
+   }
+  printf("o %d \n", (int)best_solution );
+  fflush(stdout);    
+  fclose(ft);
+  return (int)best_solution;
+}
+
 main(int argc, char *argv[]) {
   char saved_input_file[WORD_LENGTH];
   int i,  var; 
@@ -1482,7 +1528,7 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
+    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], 5, 100, 12345 );
     init();
     dpl();
     break;

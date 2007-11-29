@@ -52,6 +52,7 @@ An actual unit clause is an existing clause before look-ahead starts
 #include <sys/times.h>
 #include <sys/types.h>
 #include <limits.h>
+#include <string.h>
 
 typedef signed char my_type;
 typedef unsigned char my_unsigned_type;
