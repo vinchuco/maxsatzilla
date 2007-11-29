@@ -1451,10 +1451,12 @@ void init() {
   }
 }
  
-#define TIMEOUT 5
+#define LOCAL_SEARCH_TIMEOUT 5
+#define LOCAL_SEARCH_MAX_RUNS 100
+#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + 5)
 
 void timeout_handler( int signal ) {
-  printf("Time out %d sec.\n", TIMEOUT );
+  printf("Time out %d sec.\n", TOTAL_TIMEOUT );
   printf("Best Solution=%d\n", UB);
   printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
 	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
@@ -1520,7 +1522,7 @@ main(int argc, char *argv[]) {
   for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
 
   signal( SIGALRM, timeout_handler );
-  alarm ( TIMEOUT );
+  alarm ( TOTAL_TIMEOUT );
 
   a_tms = ( struct tms *) malloc( sizeof (struct tms));
   mess=times(a_tms); begintime = a_tms->tms_utime;
@@ -1528,7 +1530,7 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], 5, 100, 12345 );
+    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
     init();
     dpl();
     break;

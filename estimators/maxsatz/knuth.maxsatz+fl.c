@@ -1431,6 +1431,9 @@ void init() {
   srandom( time(NULL) );
 }
  
+#define LOCAL_SEARCH_TIMEOUT 5
+#define LOCAL_SEARCH_MAX_RUNS 100
+
 char* emptyFileName() {
   char *vlineFilename = malloc( sizeof(char) * 512 );  
   sprintf(vlineFilename, "%s", P_tmpdir);
@@ -1495,7 +1498,7 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], 5, 100, 12345 );
+    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
     init();
     dpl();
     break;
