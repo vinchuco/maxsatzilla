@@ -109,6 +109,7 @@ int pos_nb[tab_variable_size];
 my_type var_current_value[tab_variable_size];
 my_type var_rest_value[tab_variable_size];
 my_type var_state[tab_variable_size];
+my_type solution[tab_variable_size];
 
 int saved_clause_stack[tab_variable_size];
 int saved_reducedclause_stack[tab_variable_size];
@@ -138,7 +139,7 @@ int REDUCEDCLAUSE_STACK_fill_pointer = 0;
 int VARIABLE_STACK[tab_variable_size];
 int CLAUSE_STACK[tab_clause_size];
 int UNITCLAUSE_STACK[tab_unitclause_size];
-int REDUCEDCLAUSE_STACK[tab_clause_size];
+int REDUCEDCLAUSE_STACK[tab_clause_size*10];
 
 int PREVIOUS_REDUCEDCLAUSE_STACK_fill_pointer = 0;
 
@@ -266,7 +267,7 @@ void print_values(int nb_var) {
 } 
 
 int backtracking() {
-  int var, index,clause, *position, saved;
+  int var, index, *position, saved;
       
   NB_BACK++;
 
@@ -284,7 +285,7 @@ int backtracking() {
       for (index = saved_reducedclause_stack[var];
 	   index < REDUCEDCLAUSE_STACK_fill_pointer;
 	   index++) {	
-	clause = REDUCEDCLAUSE_STACK[index];
+	//clause = REDUCEDCLAUSE_STACK[index];
 	clause_length[REDUCEDCLAUSE_STACK[index]]++;
       }
       REDUCEDCLAUSE_STACK_fill_pointer = saved_reducedclause_stack[var];
@@ -328,6 +329,8 @@ int verify_solution() {
       }
     if (clause_truth == FALSE) nb++;
   }
+  for (i=0; i<NB_VAR; i++)
+    solution[i] = var_current_value[i];
   return nb;
 }
 
@@ -1414,6 +1417,7 @@ int dpl() {
   do {
     if (VARIABLE_STACK_fill_pointer==NB_VAR) {
       UB=NB_EMPTY; 
+      printf("o %d\n", UB );
       nb=verify_solution();
       if (nb!=NB_EMPTY)
       	printf("problem nb..."), exit(0);
@@ -1523,13 +1527,23 @@ main(int argc, char *argv[]) {
   }
   mess=times(a_tms); endtime = a_tms->tms_utime;
 
-  printf("Best Solution=%d\n", UB);
-  printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
+  printf("c Best Solution=%d\n", UB);
+  printf("c NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
 	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
 	        
-  printf ("Program terminated in %5.3f seconds.\n",
+  printf ("c Program terminated in %5.3f seconds.\n",
 	  ((double)(endtime-begintime)/CLK_TCK));
 
+  printf("o %d\n", UB );
+  printf("s OPTIMUM FOUND\nv ");
+  for (i=0; i<NB_VAR; i++) {
+    if( solution[ i ] == 1 ) printf("%d ", i+1 );
+    else printf("%d ", 0-i-1 );
+  }
+  printf("\n");
+
+
+  /*
   fp_time = fopen("timetable", "a");
   fprintf(fp_time, "maxsatz14bis+fl %s %5.3f %ld %ld %d %d %d %d\n", 
 	  saved_input_file, ((double)(endtime-begintime)/CLK_TCK), 
@@ -1540,5 +1554,6 @@ main(int argc, char *argv[]) {
 	 NB_BRANCHE, NB_BACK,
 	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE);
   fclose(fp_time);
+  */
   exit (10);
 }
