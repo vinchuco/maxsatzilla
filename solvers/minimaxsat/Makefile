@@ -4,7 +4,7 @@
 
 CSRCS     = $(wildcard *.C)
 CHDRS     = $(wildcard *.h)
-COBJS     = $(addsuffix .o, $(basename $(CSRCS))) ADTs/Global.o ADTs/FEnv.o ADTs/File.o
+COBJS     = $(addsuffix .o, $(basename $(CSRCS))) ADTs/Global.o ADTs/FEnv.o ADTs/File.o libubcsat/libubcsat.a
 #COBJS     = PbSolver_convertSort.o PbSolver.o PbSolver_convertAdd.o PbSolver_convertBdd.o PbSolver_convert.o Debug.o Hardware_adders.o Hardware_clausify.o Hardware_sorters.o Main.o MiniSat.o PbParser.o SatELite.o ADTs/Global.o ADTs/FEnv.o ADTs/File.o
 PCOBJS    = $(addsuffix p,  $(COBJS))
 DCOBJS    = $(addsuffix d,  $(COBJS))
@@ -62,32 +62,35 @@ clean:
 ## Linking rules (standard/profile/debug/release)
 $(EXEC): $(COBJS)
 	@echo Linking $(EXEC)
-	@$(CXX) $(COBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
+	@$(CXX) $(COBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) ./libubcsat/libubcsat.a -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R64COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
+	@$(CXX) --static $(R64COBJS) -lz -Wall -o $@
 
 $(EXEC)_32-bit_static: $(R32COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R32COBJS) ./libubcsat/libubcsat.a -lz -Wall -o $@
+	@$(CXX) --static $(R32COBJS) -lz -Wall -o $@
 
+libubcsat/libubcsat.a:
+	@echo Building UBCSAT
+	(cd libubcsat; make)
 
 ## Make dependencies
 depend:	depend.mak
