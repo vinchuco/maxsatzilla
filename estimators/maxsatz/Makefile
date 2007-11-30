@@ -1,11 +1,9 @@
 CFLAGS=-O3
 
-all: knuth.maxsatz+fl timeout.maxsatz+fl
+maxsatz+fl: maxsatz+fl.c libubcsat/libubcsat.a
 
-knuth.maxsatz+fl: knuth.maxsatz+fl.c libubcsat/libubcsat.a
-
-timeout.maxsatz+fl: timeout.maxsatz+fl.c libubcsat/libubcsat.a
+libubcsat/libubcsat.a:
+	(cd libubcsat; make)
 
 clean:
-	rm knuth.maxsatz+fl timeout.maxsatz+fl
-
+	rm maxsatz+fl
