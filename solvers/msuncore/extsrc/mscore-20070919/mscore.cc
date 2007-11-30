@@ -11,6 +11,8 @@
  *                                     Copyright (c) 2007, Joao Marques-Silva
 \*----------------------------------------------------------------------------*/
 
+#include <string>
+
 #include "globals.hh"
 #include "logger.hh"
 #include "std_clause.hh"
@@ -23,7 +25,7 @@
 
 using namespace std;
 
-void print_header(char *msg);
+void print_header(char* wdir, char* msg);
 void print_core(char* fname, Solver& ssolv, ClIDMap& cl2id, ClRefSet& clset);
 
 
@@ -33,14 +35,14 @@ void print_core(char* fname, Solver& ssolv, ClIDMap& cl2id, ClRefSet& clset);
 
 int main(int argc, char** argv)
 {
-  print_header("Unsat core extractor");
-  assert(argc>1);
-  gzFile in = gzopen(argv[1], "rb");
-  if (in == NULL) {cout<<"ERROR! Could not open file: "<<argv[1]<<"\n";exit(1);}
+  assert(argc>2);  // Must specify log dir
+  print_header(argv[1], "Unsat core extractor");
+  gzFile in = gzopen(argv[2], "rb");
+  if (in == NULL) {cout<<"ERROR! Could not open file: "<<argv[2]<<"\n";exit(1);}
   CNFParser parser;
   Solver ssolv;
   ClIDMap cl2id;
-  FILE* fout = (argc > 2) ? fopen(argv[2], "w") : NULL;
+  FILE* fout = (argc > 3) ? fopen(argv[3], "w") : NULL;
 
   parser.load_cnf_file(in, ssolv, cl2id);
   DBG(cout << "Map of Cls to IDs:\n" << cl2id << endl;);
@@ -84,7 +86,7 @@ int main(int argc, char** argv)
 
   DBG(cout << "Unsat Core:\n" << uc;);
 
-  print_core(argv[1], ssolv, cl2id, uc.cl_refs());
+  print_core(argv[2], ssolv, cl2id, uc.cl_refs());
 }
 
 void print_core(char* fname, Solver& ssolv, ClIDMap& cl2id, ClRefSet& clset)
@@ -102,9 +104,13 @@ void print_core(char* fname, Solver& ssolv, ClIDMap& cl2id, ClRefSet& clset)
   }
 }
 
-void print_header(char *msg)
+void print_header(char *wdir, char *msg)
 {
-  FLOG(LogUtils::set_log_fname(log_file););
+  string logfstr(wdir);
+  logfstr.append("/");
+  logfstr.append(log_file);
+  const char *full_log_name = logfstr.c_str();
+  FLOG(LogUtils::set_log_fname(full_log_name););
   //CLOG(clog<<"c *** "<<msg<<" ***"<<endl;);
   //CLOG(clog<<"c *** "<<toolname<<", version "<<release;);
   //CLOG(clog<<", distrib "<<dist_date;);
