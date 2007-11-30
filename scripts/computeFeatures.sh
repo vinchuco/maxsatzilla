@@ -1,66 +1,78 @@
 #!/bin/bash
 
-nbInstances=$#
-if [ $nbInstances -eq 0 ] ; then
-    echo "Usage: $0 <CNF file 1> [<CNF File 2> [... <CNF File i>]]"
-    exit 0
+nbParameters=$#
+if [ $nbParameters -eq 0 ] ; then
+    echo "Usage: $0
+       \"<Solver 1 [arguments 1]>\" [\"<Solver 2 [arguments 2]>\" [... \"<Solver n [arguments n]>\"]]
+       -instances <CNF file 1> [<CNF File 2> [... <CNF File i>]]"
+    exit
 fi
 
-arguments="$@"
-
+# echo "Settings"
 source settings.sh
 ulimit -t $cpuTimeOut
+ulimit -v $cpuTimeOut
 
-source writeHeaders.sh
+# echo "Inits"
+arguments="$@"
+readingInstances=0
+nbSolvers=0
+nbInstances=0
 
-for argument in $arguments ; do
-    source prepareInstance.sh $argument
+# echo "Arguments"
+for argument in "$@" ; do
+    if [ "$argument" == "-instances" ] ; then
+	# Start reading instances names after this point
+	readingInstances=1
+	nbInstances=$(($nbParameters-$nbSolvers-1))
+	#echo $nbInstances
+	source writeHeaders.sh
+    elif [ $readingInstances == 0 ] ; then
+	# Reading solvers names
+	source solverScriptFactory.sh $argument
+    else
+	# Preparing instance
+	source prepareInstance.sh $argument
 
-    i=0
-    while [ $i -lt $nbSolvers ] ; do
-	# Try to find if time has already been computed for this solver on this instance
-	if [ -a ${solversName[$i]}.slv ] ; then
-	    solvingLine=`grep $instanceName ${solversName[$i]}.slv`
-	else
-	    solvingLine=""
-	fi
-        # Resolution (if necessary)
-	if [ `echo $solvingLine | wc -c` -eq 1 ] ; then
-	    echo ${solversName[$i]} >> $logFile
-	    $time ${solvers[$i]} $adimacsInstance >> $logFile 2> $timeFile
-	    returnValue=$?
-	    cat $timeFile >> $logFile
-	    runningTime=`grep user $timeFile | tail -c +6`
-	    # Write in solver file .slv
-	    if [ $returnValue == $cpuTimeOutReturnCode ] ; then
-		echo "$instanceName $cpuTimeOut" >> ${solversName[$i]}.slv
-	    elif [ $returnValue == $exitCode ] ; then
-		echo "$instanceName $runningTime" >> ${solversName[$i]}.slv
-	    else echo "$instanceName $(($cpuTimeOut*2))" >> ${solversName[$i]}.slv
+	# Computing CPU times for each solver
+	currentAnswer=$unknownAnswer
+	i=0
+	while [ $i -lt $nbSolvers ] ; do
+	    source ${solvers[$i]}
+	    source mergeAnswers.sh
+	    source writeSolverResult.sh
+	    i=$(($i+1))
+	done
+	echo
+
+	# Computing features
+	featuringLineFirst=""
+	featuringLineLast=""
+	if [ -a "${features[0]}.ftr" ] ; then
+	    featuringLineFirst=`grep $instanceName ${features[0]}.ftr`
+	    if [ -a "${features[$((nbFeatures-1))]}.ftr" ] ; then
+		featuringLineLast=`grep $instanceName ${features[$((nbFeatures-1))]}.ftr`
 	    fi
+	fi
+	if [ `echo $featuringLineFirst | wc -c` -eq 1 ] || [ `echo $featuringLineLast | wc -c` -eq 1 ] ; then
+	    $featuresExec $adimacsInstance > $featuresFile
+	    i=0
+	    while [ $i -lt $nbFeatures ] ; do
+		value=`grep ${features[$i]} $featuresFile | tail -c +4`
+		echo -n "$value"
+		echo "$instanceName $value" >> ${features[$i]}.ftr
+		i=$(($i+1))
+	    done
 	else
-	    set $solvingLine
-	    returnValue=$exitCode
-	    runningTime=$2
+	    i=0
+	    while [ $i -lt $nbFeatures ] ; do
+		set `grep $instanceName ${features[$i]}.ftr`
+		value=$2
+		echo -n " $value"
+		i=$(($i+1))
+	    done
 	fi
-        # Computing output
-	if [ $returnValue == $cpuTimeOutReturnCode ] ; then
-	    echo -n " $cpuTimeOut"
-	elif [ $returnValue == $exitCode ] ; then
-	    echo -n " $runningTime"
-	else echo -n " $(($cpuTimeOut*2))"
-	fi
-	i=$(($i+1))
-    done
-
-    echo
-    $featuresExec $adimacsInstance > $featuresFile
-    i=0
-    while [ $i -lt $nbFeatures ] ; do
-	value=`grep ${features[$i]} $featuresFile | tail -c +4`
-	echo -n "$value"
-	i=$(($i+1))
-    done
-    echo
+	echo
+    fi
 done
 source cleanFiles.sh

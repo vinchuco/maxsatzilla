@@ -11,19 +11,10 @@ minimaxsatDirectory="../solvers/minimaxsat"
 
 # Executables
 maxsatz="$maxsatzDirectory/maxsatz"
-msuncore="$msuncoreDirectory/msuncore -a 1 -e c"
-minimaxsat="$minimaxsatDirectory/minimaxsat -F=1"
-
-# Solvers
-solversName[0]="maxsatz"
-solversName[1]="msuncore"
-solversName[2]="minimaxsat"
-
-solvers[0]="$maxsatz"
-solvers[1]="$msuncore"
-solvers[2]="$minimaxsat"
-
-nbSolvers=3
+# -a 1 -e c
+msuncore="$msuncoreDirectory/msuncore"
+# -F=1
+minimaxsat="$minimaxsatDirectory/minimaxsat"
 
 # Features
 features[0]="SBC"
@@ -64,18 +55,36 @@ nbFeatures=32
 timeFile="timeFile$HOSTNAME.txt"
 time="/usr/bin/time -p"
 
-# Features commands
+# Solvers/Features commands
+solversFile="solversFile$HOSTNAME.txt"
 featuresFile="featuresFile$HOSTNAME.txt"
 featuresExec="../features.rb ../getfeatures"
 
-# Timeouts
-cpuTimeOut=1000
-cpuTimeOutReturnCode=9
+# Timeouts/Memory limits
+cpuTimeOut=3
+source setCPULimit.sh
+#echo "exitcode=$cpuTimeOutReturnCode"
+memOut=4000000
 
 # Log file for trace
 logFile="logFile$HOSTNAME.log"
 
 # Internal constants for results
 exitCode=10
+alreadyCode=20
+
+# status values
 answered=1
 cpuTimeOutted=2
+unknownError=3
+alreadyDone=4
+noAnswerGiven=5
+
+# currentAnswer values
+answerConflict=-10
+unknownAnswer=-20
+
+#Print values
+cpuPrint=-1
+errorPrint=-2
+noAnswerPrint=-3

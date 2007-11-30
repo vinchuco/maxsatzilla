@@ -8,7 +8,7 @@ echo "p msz $nbSolvers $nbFeatures $nbInstances $cpuTimeOut"
 echo -n "p slv"
 i=0
 while [ $i -lt $nbSolvers ] ; do
-    echo -n " ${solversName[$i]}"
+    echo -n " ${solverName[$i]}"
     i=$((i+1))
 done
 echo
