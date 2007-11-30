@@ -46,6 +46,7 @@ typedef short          int16;
 typedef unsigned short uint16;
 typedef int            int32;
 typedef unsigned       uint32;
+typedef unsigned short ushort;
 
 
 #ifdef __LP64__
