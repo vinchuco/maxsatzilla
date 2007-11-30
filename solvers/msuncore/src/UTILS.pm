@@ -82,7 +82,11 @@ sub INT_handler {
 my $host_time_stamp = '';
 
 sub set_host_time_stamp() {
-    my $hostname = $ENV{HOST};
+    my $progname = &get_progname();
+    #my $hostname = $ENV{HOST};
+    #my $hostname = $ENV{HOSTNAME};
+    my $hostname = `hostname -s`; chomp($hostname);
+    #print "|$hostname|\n"; exit;
     my @ttoks = localtime time;
     my $sec =  sprintf("%02s", $ttoks[0]);
     my $min =  sprintf("%02s", $ttoks[1]);
@@ -90,7 +94,7 @@ sub set_host_time_stamp() {
     my $day =  sprintf("%02s", $ttoks[3]);
     my $mon =  sprintf("%02s", $ttoks[4] + 1);
     my $year = sprintf("20%02s", $ttoks[5]-100);
-    $host_time_stamp = "$hostname-$year$mon$day-$hour$min$sec";
+    $host_time_stamp = "$progname-$hostname-$year$mon$day-$hour$min$sec";
     return $host_time_stamp;
 }
 
@@ -162,12 +166,14 @@ sub exit_ok() { exit 10; }    # 10 denotes ok condition
 sub exit_quit() {
     my $msg = shift;
     print "$msg\n";
+    &{$cleanref}($msudsref); 
     exit 20;    # 20 denotes resources exceeded condition
 }
 
 sub exit_err() {
     my $msg = shift;
     print "ERROR: $msg\n";
+    &{$cleanref}($msudsref); 
     exit 30;    # 30 denotes abort/error condition
 }
 
