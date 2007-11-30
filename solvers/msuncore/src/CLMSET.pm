@@ -19,7 +19,9 @@ use Data::Dumper;
 
 use POSIX;
 
-use UTILS;
+require UTILS;  # Must use require, to get INC updated
+import UTILS qw( &get_progname &get_progpath &exit_ok &exit_err &exit_quit );
+
 use IDGEN qw( &num_id &gen_id &set_id );
 use CLUTILS;
 

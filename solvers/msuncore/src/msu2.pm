@@ -124,8 +124,10 @@ sub msu2_algorithm() {    # actual algorithm being run
 	my ($outcome, $assign) = &SATUTILS::run_sat_solver($ds);
 	# 3.2 If unsat
 	if ($outcome == 0) {
-	    if ($frstsat) { $nunsat++; }
+#	    if ($frstsat) { $nunsat++; }
+$nunsat++;
 	    if (${$opts}{d}) { print DBGF "Instance is UNSAT\n"; }
+print "Instance is UNSAT\n";
 	    # 3.2.1 Parse computed unsat core
 	    my $coreref = &SATUTILS::compute_unsat_core($ds);
 	    # 3.2.2 Identify original clauses w/o blocking vars
@@ -143,7 +145,8 @@ sub msu2_algorithm() {    # actual algorithm being run
 		if (${$opts}{d}) {
 		    $"=' ';print DBGF "New blocking vars: @bvs\n";$"=' ';}
 		# 3.2.3.3 Add new card constraint
-		&MSUTILS::gen_card_constraint($opts,$cardset,$bvref,$#bvs);
+# TEMP: jpms:20071128
+#		&MSUTILS::gen_card_constraint($opts,$cardset,$bvref,$#bvs);
 	    } else {
 		# 3.2.2 Else output max sat solution and terminate
 		&UTILS::report_item("Number of block vars", $minbs);
@@ -153,6 +156,8 @@ sub msu2_algorithm() {    # actual algorithm being run
 	}
 	# 3.3 Else
 	elsif ($outcome == 1) {
+	    if (${$opts}{d}) { print DBGF "Instance is SAT\n"; }
+print "Instance is SAT\n";
 	    if ($iternum == 1) {
 		&UTILS::report_item("Computed maxsat solution", $ncls);
 		return 0;
@@ -176,13 +181,20 @@ sub msu2_algorithm() {    # actual algorithm being run
 		&UTILS::report_item('Number of blocking vars', $nbs);
 		&UTILS::report_item('Card constraint rhs', $nbb);
 	    }
+	    $cardset->erase;    # erase previous card clset
 	    &MSUTILS::gen_card_constraint($opts,$cardset,$blockvs, $#{$bvref});
-	    if ($frstsat) {
-		$frstsat = 0;  # found first sat instance
+#	    if ($frstsat) {
+#		$frstsat = 0;  # found first sat instance
 		$lbv = $ncls-($#{$bvref}+1);
 		$ubv = $ncls-$nunsat;
 		&UTILS::report_item("Lower bound for maxsat solution", $lbv);
 		&UTILS::report_item("Upper bound for maxsat solution", $ubv);
+		if ($lbv == $ubv) {
+		    # If bounds are equal, can terminate...
+		    &UTILS::report_item("Number of block vars", $minbs);
+		    &UTILS::report_item("Computed maxsat solution", $lbv);
+		    return 0;
+#		}
 	    }
 	}
 	else {
@@ -190,6 +202,14 @@ sub msu2_algorithm() {    # actual algorithm being run
 	    &UTILS::report_item("Current lower bound for maxsat solution",$lbv);
 	    &UTILS::report_item("Current upper bound for maxsat solution",$ubv);
 	    &exit_quit("Cputime limit exceeded\n"); last;
+	}
+
+	$ubv = $ncls-$nunsat;
+	if ($lbv == $ubv) {
+	    # If bounds are equal, can terminate...
+	    &UTILS::report_item("Number of block vars", $minbs);
+	    &UTILS::report_item("Computed maxsat solution", $lbv);
+	    return 0;
 	}
     }
     &exit_err("Should *not* get to this part. Terminating...");

@@ -75,6 +75,26 @@ sub INT_handler {
     exit(0);
 }
 
+#------------------------------------------------------------------------------#
+# Time/Host stamp utilities
+#------------------------------------------------------------------------------#
+
+my $host_time_stamp = '';
+
+sub set_host_time_stamp() {
+    my $hostname = $ENV{HOST};
+    my @ttoks = localtime time;
+    my $sec =  sprintf("%02s", $ttoks[0]);
+    my $min =  sprintf("%02s", $ttoks[1]);
+    my $hour = sprintf("%02s", $ttoks[2]);
+    my $day =  sprintf("%02s", $ttoks[3]);
+    my $mon =  sprintf("%02s", $ttoks[4] + 1);
+    my $year = sprintf("20%02s", $ttoks[5]-100);
+    $host_time_stamp = "$hostname-$year$mon$day-$hour$min$sec";
+    return $host_time_stamp;
+}
+
+sub get_host_time_stamp() { return $host_time_stamp; }
 
 #------------------------------------------------------------------------------#
 # Time utilities

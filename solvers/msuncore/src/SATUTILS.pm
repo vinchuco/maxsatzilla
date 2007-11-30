@@ -38,6 +38,7 @@ BEGIN {
 # Run SAT solver on clause set/multiset
 sub run_sat_solver() {
     my $ds = shift;
+    my $workdir = $ds->workdir;
     my $clmset = $ds->clmset;
     my $cnffile = $ds->cnffile;
     my $outfile = $ds->outfile;
@@ -47,7 +48,7 @@ sub run_sat_solver() {
     $clmset->write_dimacs($cnffile);
     # 2. Invoke mscore
     my $progpath = &UTILS::get_progpath();
-    my $csh_cmd = "$progpath/../mscore $cnffile $outfile";
+    my $csh_cmd = "$progpath/../mscore $workdir $cnffile $outfile";
     ##print "CSH_CMD: $csh_cmd\n";
     if (${$opts}{T} ne '') {
 	my $time_limit = &UTILS::available_time(${$opts}{T});

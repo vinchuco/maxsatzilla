@@ -35,14 +35,16 @@ sub new {
     my $self  = {};
     #
     my $progname = &UTILS::get_progname();
+    my $host_time_stamp = &UTILS::get_host_time_stamp();
     $self->{PROGNAME} = $progname;
-    $self->{STRPREF} = "___$progname\_";
+    $self->{WORKDIR} = "$host_time_stamp/";
+    $self->{STRPREF} = "$host_time_stamp/___$progname\_";
     $self->{CNFFILE} = $self->{STRPREF} . '__xyzCNFzyx__';
     $self->{OUTFILE} = $self->{STRPREF} . '__xyzOUTzyx__';
     $self->{TMPFILE} = $self->{STRPREF} . '__xyzTMPzyx__';
     $self->{DBGFILE} = $self->{STRPREF} . '__xyzDBGzyx__';
-    $self->{COREFILE} = 'mscore.log';
-    $self->{LOGFILE} = "$progname\.log";
+    $self->{COREFILE} = "$host_time_stamp/mscore.log";
+    $self->{LOGFILE} = "$host_time_stamp/$progname\.log";
     $self->{INPFILE} = '';
     $self->{TIMEOUT} = 0;
     $self->{CLSET} = CLSET::new();    # default clause set
@@ -69,6 +71,8 @@ sub new {
 sub version() { my $self = shift; return $self->{MSUVERSION}; }
 
 sub progname() { my $self = shift; return $self->{PROGNAME}; }
+
+sub workdir() { my $self = shift; return $self->{WORKDIR}; }
 
 sub cnffile() { my $self = shift; return $self->{CNFFILE}; }
 

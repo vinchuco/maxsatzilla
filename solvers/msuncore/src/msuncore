@@ -42,8 +42,10 @@ require msu4;
 import msu4;
 
 my $progname = &UTILS::get_progname();
+my $host_time_stamp = &UTILS::set_host_time_stamp();
 
 # 1. Setup script
+&startup();
 my $ds = MSUDS::new();   # MaxSAT data structures
 &UTILS::register_cleanup(\&finishup);
 &UTILS::register_ds($ds);
@@ -93,6 +95,7 @@ if (${$opts}{d}) { print Dumper($opts); print Dumper($ds); }
 $ds->set_inpfile(shift @ARGV);
 if(${$opts}{T}) { $ds->set_timeout(${$opts}{T}); }    # Specify timeout
 
+
 if (${$opts}{a}) {
     my $msuv = ${$opts}{a};
     if ($msuv eq '1')    { $ds->set_version($msuv); &msu1::run_msu($ds); }
@@ -112,6 +115,15 @@ exit 10;
 
 
 #------------------------------------------------------------------------------#
+# Initial setup
+#------------------------------------------------------------------------------#
+
+sub startup() { 
+    #print "HOSTTIMESTAMP: $host_time_stamp\n";
+    system("mkdir $host_time_stamp"); }
+
+
+#------------------------------------------------------------------------------#
 # Final cleanup
 #------------------------------------------------------------------------------#
 
@@ -124,9 +136,12 @@ sub finishup() {
     my $dbgfile = $ds->dbgfile;
     my $corefile = $ds->corefile;
     my $logfile = $ds->logfile;
-    if (!${$opts}{c}) { system("rm -f $cnffile $outfile $xtmpfile $corefile"); }
-    if (${$opts}{d} && !${$opts}{c}) {
-	close DBGF; system("rm -f $dbgfile $logfile"); }
+    if (!${$opts}{c}) {
+	system("rm -f $cnffile $outfile $xtmpfile $corefile");
+	if (${$opts}{d}) {
+	    close DBGF; system("rm -f $dbgfile $logfile"); }
+	system("rmdir $host_time_stamp");
+    }
 }
 
 
