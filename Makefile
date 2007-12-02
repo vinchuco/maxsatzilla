@@ -32,6 +32,9 @@ $(SUBDIRS):
 getfeatures: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 	g++ ${LDFLAGS} -o $@ $+
 
+./ubcsat/libubcsat.a:
+	(cd ubcsat; make)
+
 mszparse: mszparse.o
 	g++ ${LDFLAGS} -o $@ $+ -lz
 
