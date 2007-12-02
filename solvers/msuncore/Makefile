@@ -10,14 +10,14 @@ DISTDATE= $(shell date +'%Y%m%d')
 MSU= msuncore
 
 MSCOREDIR = extsrc/mscore
-MAXSATZDIR = extsrc/maxsatz
+MAXSATZDIR = extsrc/maxsatz-stable
 MINISATPDIR = extsrc/minisat+
 
 DISTLIST:= $(MSU)/src $(MSU)/extsrc $(MSU)/scripts $(MSU)/docs
 DISTLIST:= $(DISTLIST) $(MSU)/README $(MSU)/Makefile
 DISTLIST:= $(DISTLIST) $(MSU)/Results $(MSU)/test-cores
-DISTLIST:= $(DISTLIST) $(MSU)/mscore $(MSU)/maxsatz $(MSU)/minisat+
-DISTLIST:= $(DISTLIST) $(MSU)/extsrc/mscore $(MSU)/extsrc/maxsatz
+DISTLIST:= $(DISTLIST) $(MSU)/mscore $(MSU)/maxsatz-stable $(MSU)/minisat+
+DISTLIST:= $(DISTLIST) $(MSU)/extsrc/mscore $(MSU)/extsrc/maxsatz-stable
 
 all: clean
 	(cd $(MSCOREDIR); make all)
