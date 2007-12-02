@@ -1,6 +1,6 @@
 s/Vrs/Number\ of\ Variables/
 s/Cls/Number\ of\ Clauses/
-s/CoV/Ratio\ Clasues\/Variables/
+s/CoV/Ratio\ Clauses\/Variables/
 s/Neg/Ratio\ Negative\ Clauses/
 s/Pos/Ratio\ Positive\ Clauses/
 s/Uni/Ratio\ Unit\ Clauses/

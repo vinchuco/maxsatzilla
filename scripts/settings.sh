@@ -58,7 +58,6 @@ time="/usr/bin/time -p"
 # Solvers/Features commands
 solversFile="solversFile$HOSTNAME.txt"
 featuresFile="featuresFile$HOSTNAME.txt"
-featuresExec="../features.rb ../getfeatures"
 
 # Timeouts/Memory limits
 cpuTimeOut=3

@@ -14,7 +14,6 @@ ulimit -t $cpuTimeOut
 ulimit -v $cpuTimeOut
 
 # echo "Inits"
-arguments="$@"
 readingInstances=0
 nbSolvers=0
 nbInstances=0
@@ -55,10 +54,10 @@ for argument in "$@" ; do
 	    fi
 	fi
 	if [ `echo $featuringLineFirst | wc -c` -eq 1 ] || [ `echo $featuringLineLast | wc -c` -eq 1 ] ; then
-	    $featuresExec $adimacsInstance > $featuresFile
+	    ../getfeatures $adimacsInstance | sed -f ../filter.sed > $featuresFile
 	    i=0
 	    while [ $i -lt $nbFeatures ] ; do
-		value=`grep ${features[$i]} $featuresFile | tail -c +4`
+		value=`grep ${features[$i]} $featuresFile | cut -d':' -f2`
 		echo -n "$value"
 		echo "$instanceName $value" >> ${features[$i]}.ftr
 		i=$(($i+1))
