@@ -1,4 +1,5 @@
 CFLAGS=-O3
+LDFLAGS=-lm
 
 all: maxsatz+fl
 
