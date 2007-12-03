@@ -17,7 +17,8 @@ using std::cerr;
 using std::ofstream;
 
 MSZDataSet::MSZDataSet(double **m, size_t nrows, size_t ncols, size_t outputs) 
-  : nrows(nrows), rfeatures(ncols - outputs), ncols(ncols), outputs(outputs) {
+  : nrows(nrows), rfeatures(ncols - outputs), ncols(ncols), outputs(outputs),
+    stdDone(false), oStdDone(false) {
 
   // Recomputing matrix to be made of columns instead of lines
   matrix = new double* [ncols];
@@ -35,6 +36,22 @@ MSZDataSet::MSZDataSet(double **m, size_t nrows, size_t ncols, size_t outputs)
   delete[] m;
 }
   
+MSZDataSet::MSZDataSet(const MSZDataSet& ds) 
+  : nrows(ds.nrows), rfeatures(ds.rfeatures), ncols(ds.ncols),
+    outputs(ds.outputs), stdDone(ds.stdDone), oStdDone(ds.oStdDone) 
+{
+  
+  // Now we just need to copy the matrix.
+  matrix = new double* [ncols];
+  for(size_t c = 0; c < ncols; c++)
+    setMColumn(c, new double [nrows]);
+
+  for(size_t r = 0; r < nrows; r++)
+    for(size_t c = 0; c < ncols; c++)
+      setMValue(r, c, ds.getMValue(r, c));
+
+}
+
 MSZDataSet::~MSZDataSet() {
 
   // Please God, do not let this Seg Fault!
@@ -136,8 +153,6 @@ void MSZDataSet::standardize() {
   
   cout << "Standardizing features ...";
 
-  static bool stdDone = false;
-
   if(!stdDone) {
     for(size_t c = outputs; c < ncols; c++) {
 
@@ -228,15 +243,13 @@ void MSZDataSet::standardizeOutputs() {
 
   cout << "Standardizing outputs... ";
 
-  static bool stdDone = false;
-
   if(!stdDone) {
     for(size_t c = 0; c < outputs; c++)
       for(size_t r = 0; r < nrows; r++)
 	setMValue(r, c, log(getMValue(r, c)));
   }
 
-  stdDone = true;
+  oStdDone = true;
 
   cout <<  "DONE\n";
 

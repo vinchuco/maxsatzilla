@@ -10,6 +10,7 @@ using std::vector;
 class MSZDataSet {
 public:
   MSZDataSet(double**, size_t, size_t, size_t);
+  MSZDataSet(const MSZDataSet&);
   ~MSZDataSet();
 
   /// Given a vector of labels for matrix columns and a prefix for file names, 
@@ -62,6 +63,8 @@ private:
   size_t rfeatures; ///< Number of raw features
   size_t ncols;     ///< Number of columns (outputs + features)
   size_t outputs;   ///< Number of outputs
+  bool stdDone;     ///< Flag for feature standardization
+  bool oStdDone;    ///< Flag for output standardization
 };
 
 /// API entrace function to create dataset to be used with other
