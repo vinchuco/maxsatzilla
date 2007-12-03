@@ -51,9 +51,9 @@ int main(void) {
   const size_t rows = 38;
   const size_t cols = 6;
 
-  double **stdformat = (double**) malloc(rows * sizeof(*stdformat));
+  double **stdformat = new double** [rows];
   for(size_t i = 0; i < rows; i++)
-    stdformat[i] = (double*) malloc(cols * sizeof(**stdformat));
+    stdformat[i] = new double* [cols];
 
   // fill values
   for(size_t r = 0; r < rows; r++)
