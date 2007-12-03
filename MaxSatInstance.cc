@@ -4,23 +4,22 @@ Magpie -- Florian Letombe, Joao Marques-Silva, Paulo Matos, Jordi Planes (2007)
 Parts of the code in this file have been extracted from SATzilla.
 **************************************************************************************************/
 
+#include <algorithm>
+
 #include "MaxSatInstance.hh"
 #include "ubcsat/ubcsat.h"
 
 bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& numLits, const int clauseNum ) {
   // sort the clause and remove redundant literals
   //!! For large clauses better use sort()
-  int temp, tempLit;
-  for (int i=0; i<numLits-1; tempLit = lits[i++]) {
+  for (int i=0; i<numLits-1; i++) {
     for (int j=i+1; j<numLits; j++) {
-      if (abs(tempLit) > abs(lits[j])) { // Bubble sort
-	temp = lits[j];
-	lits[j] = tempLit;
-	tempLit = temp;
-      } else if (tempLit == lits[j]) {
+      if (abs(lits[i]) > abs(lits[j])) { // Bubble sort
+        swap( lits[i], lits[j] );
+      } else if (lits[i] == lits[j]) {
 	lits[j--] = lits[--numLits];
-	printf("c literal %d is redundant in clause %d\n", tempLit, clauseNum);
-      } else if (abs(tempLit) == abs(lits[j])) {
+	printf("c literal %d is redundant in clause %d\n", lits[i], clauseNum);
+      } else if (abs(lits[i]) == abs(lits[j])) {
 	printf("c Clause %d is tautological.\n", clauseNum);
 	return true;
       }
@@ -74,17 +73,17 @@ MaxSatInstance::MaxSatInstance( const char* filename )
     int numLits = 0;
     
     infile >> lits[numLits];
-    while (lits[numLits] != 0)
+    while (lits[numLits] != 0) 
       infile >> lits[++numLits];
-    
+
     if ( numLits == 1 or !isTautologicalClause( lits, numLits, clauseNum )) {
       switch( numLits ) {
       case 1: unitClauses++; break;
       case 2: binaryClauses++; break;
       case 3: ternaryClauses++; break;
       }
-      
-      for (int litNum = 0; litNum < numLits; litNum++)
+ 
+      for (int litNum = 0; litNum < numLits; litNum++) 
 	if (lits[litNum] < 0)
 	  negClausesWithVar[abs(lits[litNum])]++;
 	else
