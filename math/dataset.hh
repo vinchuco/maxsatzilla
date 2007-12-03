@@ -49,14 +49,19 @@ public:
   void removeFeatures(const vector<size_t> &);
 
 private:
+  double *getMColumn(size_t c)           const { return matrix[c];    }
+  double getMValue(size_t r, size_t c)   const { return matrix[c][r]; }
+  void setMValue(size_t r, size_t c, double v) { matrix[c][r] = v;    }
+  void setMColumn(size_t c, double *col)       { matrix[c] = col;     }
+
   void expandOnPartition(size_t, const vector<size_t> &);
   double computeCrossProduct(size_t, size_t *, size_t, const vector<size_t> &);
   
-  double **matrix;
-  size_t nrows;
+  double **matrix;   ///< Matrix of doubles allocated as an array of columns
+  size_t nrows;     ///< Number of rows
   size_t rfeatures; ///< Number of raw features
-  size_t ncols;
-  size_t outputs;
+  size_t ncols;     ///< Number of columns (outputs + features)
+  size_t outputs;   ///< Number of outputs
 };
 
 /// API entrace function to create dataset to be used with other
