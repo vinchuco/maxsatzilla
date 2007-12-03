@@ -19,6 +19,8 @@ use Data::Dumper;
 
 use POSIX;
 
+use Sys::Hostname;
+
 BEGIN {
     @UTILS::ISA = ('Exporter');
     @UTILS::EXPORT_OK = qw( &get_progname &get_progpath &vassert &exit_ok &exit_err &exit_quit );
@@ -85,7 +87,7 @@ sub set_host_time_stamp() {
     my $progname = &get_progname();
     #my $hostname = $ENV{HOST};
     #my $hostname = $ENV{HOSTNAME};
-    my $hostname = `hostname -s`; chomp($hostname);
+    #my $hostname = `hostname -s`; chomp($hostname);
     #print "|$hostname|\n"; exit;
     my @ttoks = localtime time;
     my $sec =  sprintf("%02s", $ttoks[0]);
@@ -94,7 +96,7 @@ sub set_host_time_stamp() {
     my $day =  sprintf("%02s", $ttoks[3]);
     my $mon =  sprintf("%02s", $ttoks[4] + 1);
     my $year = sprintf("20%02s", $ttoks[5]-100);
-    $host_time_stamp = "$progname-$hostname-$year$mon$day-$hour$min$sec";
+    $host_time_stamp = "$progname-hostname()-$year$mon$day-$hour$min$sec";
     return $host_time_stamp;
 }
 

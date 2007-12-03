@@ -1,48 +1,49 @@
-CPPFLAGS = 
-CXXFLAGS = -Wall -std=c++98 -ggdb -I/sw/include 
-LDFLAGS = -lgsl -lgslcblas -lz -L/sw/lib
+CXXFLAGS = -Wall -std=c++98 -ggdb
 
 COACH_FILES = coach.cc
 COACH_HEADERS =
 SUBDIRS = ubcsat math
 
-.PHONY : all clean run subdirs $(SUBDIRS)
+MAXSATZILLA_OBJECT_FILES = main.o math/dataset.o math/forwardselection.o ./math/libmath.a
+FEATURES_OBJECT_FILES = features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 
 ifeq ($(shell uname),Darwin)
 	CPPFLAGS += -I/sw/include
 	LDFLAGS += -L/sw/lib 
 endif
 
+MAXSATZILLA_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas $(LDFLAGS)
+COACH_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas -lz $(LDFLAGS)
+MSZPARSE_LDFLAGS = -lz $(LDFLAGS)
+
+.PHONY : all clean run subdirs $(SUBDIRS)
+
 all: getfeatures maxsatzilla mszparse coach
 
-maxsatzilla : main.o math/dataset.o math/forwardselection.o ./math/libmath.a
-	g++ -lgsl -lgslcblas -lcblas -lblas ${LDFLAGS} -o $@ $+ 
+maxsatzilla : $(MAXSATZILLA_OBJECT_FILES)
+	g++ ${MAXSATZILLA_LDFLAGS} -o $@ $+ 
 
-mathlib: 
+./math/libmath.a: 
 	cd math && $(MAKE)
 
 coach: $(COACH_FILES) $(COACH_HEADERS) ./math/libmath.a
-	g++ $(LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+
+	g++ $(COACH_LDFLAGS) $(CPPFLAGS) $(CXXFLAGS) -o $@ $+
 
 subdirs: $(SUBDIRS)
 
 $(SUBDIRS): 
 	$(MAKE) -C $@
 
-getfeatures: features.o MaxSatInstance.o ./ubcsat/libubcsat.a
-	g++ ${LDFLAGS} -o $@ $+
+getfeatures: $(FEATURES_OBJECT_FILES)
+	g++ $(LDFLAGS) -o $@ $+
 
 ./ubcsat/libubcsat.a:
-	(cd ubcsat; make)
+	cd ubcsat && $(MAKE)
 
 mszparse: mszparse.o
-	g++ ${LDFLAGS} -o $@ $+ -lz
+	g++ ${MSZPARSE_LDFLAGS} -o $@ $+
 
 mszparse.o: mszparse.cc mszreader.hh
 
-run:
-	./maxsatzilla
-	./math/plot-gen.bash . driver
-
 clean:
-	rm -f driver* *~ *.o getfeatures maxsatzilla mszparse coach
+	rm -f *~ *.o getfeatures maxsatzilla mszparse coach ./ubcsat/libubcsat.a ./math/libmath.a
