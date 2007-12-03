@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, glob
+import sys, glob, os
 
 instance_list = sys.argv[1]
 target_directory = sys.argv[2]
@@ -13,6 +13,5 @@ for line in open( instance_list ):
     path = path[0:-1] # Removing \n
     print "Obtaining features from " + name
     for file in glob.glob( path ):
-        print getfeatures_exec + file + '>' + target_directory + '/' + name + '.' + name + '.features'
-        #os.system( getfeatures_exec + file + '>' + target_directory + '/' + name + '.' + name + '.features' )
+        os.system( getfeatures_exec + file + ' > ' + target_directory + '/' + name + '.' + os.path.basename(file) + '.features' )
             
