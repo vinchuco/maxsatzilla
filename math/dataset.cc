@@ -205,9 +205,9 @@ void MSZDataSet::removeFeatures(const vector<size_t> &keepVec) {
   
   // Now we need to recreate matrix.
   // KILL ME
-  double **newMatrix = new double** [nrows];
+  double **newMatrix = new double* [nrows];
   for(size_t r = 0; r < nrows; r++)
-    newMatrix[r] = new double* [ncols];
+    newMatrix[r] = new double [ncols];
   
   // Copy every column to the new matrix except those listed in vec.
   size_t destc = 0;
