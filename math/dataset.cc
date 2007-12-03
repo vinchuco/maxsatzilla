@@ -169,7 +169,7 @@ void MSZDataSet::standardize() {
       sdv /= nrows;
 
       for(size_t r = 0; r < nrows; r++) 
-	matrix[c][r] = (getMValue(r, c) - mean) / sdv;
+	setMValue(r, c, (getMValue(r, c) - mean) / sdv);
 	
     }
 
@@ -277,6 +277,11 @@ void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
   // Standardize features
   standardize();
 
+  // Output information
+  cout << "Expanding feature set by order " << k << " on partition:\n";
+  copy(pvec.begin(), pvec.end(), std::ostream_iterator<size_t>(cout, " "));
+  cout << "\n";
+
   // Reallocate the data.
   // If we have N features, then, to expand to a order-K polynomial
   // we are adding 
@@ -289,12 +294,17 @@ void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
   nNewF += num / den;
   ncols += nNewF; // Update number of columns
 
+  cout << "Expansion increases feature set by " << nNewF << " columns " << " summing a total of " << ncols << " columns.\n";
+  
   // Reallocating main vector and copying all the others to their initial places.
   double **newMatrix = new double* [ncols];
   for(size_t c = 0; c < ncols - nNewF; c++)
     newMatrix[c] = getMColumn(c);
   delete[] matrix;
   matrix = newMatrix;
+
+  for(size_t nc = ncols - nNewF; nc < ncols; nc++)
+    setMColumn(nc, new double [nrows]);
 
   // Compute the cross products
   // To do this we compute all the indices combinations and use them
@@ -314,12 +324,13 @@ void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
 
     // Compute cross product in current configuration
     for(size_t r = 0; r < nrows; r++) {
-      matrix[currColumn][r] = computeCrossProduct(r, ind, k, pvec);
+      const double cprod = computeCrossProduct(r, ind, k, pvec);
+      setMValue(r, currColumn, cprod);
     }
     currColumn++;
   } while(gsl_combination_next (c) == GSL_SUCCESS);
   gsl_combination_free (c);
-  delete ind;
+  delete[] ind;
 
   // Compute Powers
   for(size_t i = 0; i < pvec.size(); i++) {

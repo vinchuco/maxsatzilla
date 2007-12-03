@@ -72,39 +72,49 @@ int main(int argc, char *argv[]) {
     cerr << instancesNames[i] << " ";
   cerr << "\n";
 
-  MSZDataSet *ds = createDataSet(data, nbInstances, nbFeatures+nbSolvers, nbSolvers);
+  try {
+    MSZDataSet *ds = createDataSet(data, nbInstances, nbFeatures+nbSolvers, nbSolvers);
+    
+    vector<string> snames;
+    for(size_t s = 0; s < nbSolvers; s++) snames.push_back(solversNames[s]);
+    ds->printSolverStats(timeOut, snames);
+    
+    // Lets create the plot files
+    vector<string> labels;
+    for(size_t i = 0; i < nbSolvers; i++)
+      labels.push_back(solversNames[i]);
+    for(size_t i = 0; i < nbFeatures; i++)
+      labels.push_back(featuresNames[i]);
+    
+    cerr << "Created labels for solvers and features of size : " << labels.size() << "\n";
+    cerr << "features (" << nbFeatures << ") + solvers(" << nbSolvers << ") = " << labels.size() << "\n";
+    ds->dumpPlotFiles(labels, "./coach");
+    
+    // Let's apply dataset transformations
+    ds->standardize();
+    ds->standardizeOutputs();
+    ds->expand(2); // always calls standardize() if you didn't before
+    
+    // Lets do a forward selection
+    for(size_t s = 0; s < nbSolvers; s++) {
+      ForwardSelection fs(*ds, s);
+      vector<size_t> res = fs.run(threshold);
+      
+      MSZDataSet solverDS = *ds;
+      solverDS.removeFeatures(res);
+      
+      RidgeRegression rr(solverDS);
+      rr.run(delta, s, snames[s]);
+    }
 
-  vector<string> snames;
-  for(size_t s = 0; s < nbSolvers; s++) snames.push_back(solversNames[s]);
-  ds->printSolverStats(timeOut, snames);
+    // Let's not forget to delete the dataset
+    delete ds;
+ 
+  } catch(std::bad_alloc) {
+    cerr << "Coach: Bad memory allocation or not enough memory on the system\n."
+	 << "Exiting peacefully...\n";
+    exit(EXIT_FAILURE);
+  }
 
-  // Lets create the plot files
-  vector<string> labels;
-  for(size_t i = 0; i < nbSolvers; i++)
-    labels.push_back(solversNames[i]);
-  for(size_t i = 0; i < nbFeatures; i++)
-    labels.push_back(featuresNames[i]);
-
-  cerr << "Created labels for solvers and features of size : " << labels.size() << "\n";
-  cerr << "features (" << nbFeatures << ") + solvers(" << nbSolvers << ") = " << labels.size() << "\n";
-  ds->dumpPlotFiles(labels, "./coach");
-
-  // Let's apply dataset transformations
-  ds->standardize();
-  ds->standardizeOutputs();
-  ds->expand(2); // always calls standardize() if you didn't before
-
-  // Lets do a forward selection
-  ForwardSelection fs(*ds, 1);
-  vector<size_t> res = fs.run(threshold);
-  
-  ds->removeFeatures(res);
-
-  RidgeRegression rr(*ds);
-  rr.run(delta, 1, headerPrefix);
-
-  // Let's not forget to delete the dataset
-  delete ds;
-  
   return 0;
 }
