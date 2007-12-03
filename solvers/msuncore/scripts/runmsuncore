@@ -3,7 +3,7 @@
 use strict;
 
 use src::UTILS;
-die "Usage: $0 <msu alg> <bench> [<encoding>] [<opts>] [<timeout>] [<memout>]\n" if ($#ARGV<=1);
+die "Usage: $0 <msu alg> <bench> [<encoding>] [<opts>] [<timeout>] [<memout>]\n" if ($#ARGV<=0);
 
 my $launcher = "scripts/tlaunch.bash";
 my $tool = 'src/msuncore';

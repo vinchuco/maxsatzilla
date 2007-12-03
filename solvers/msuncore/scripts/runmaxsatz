@@ -3,10 +3,10 @@
 use strict;
 
 use src::UTILS;
-die "Usage: $0 <bench> [<timeout>] [<memout>]\n" if ($#ARGV<=0);
+die "Usage: $0 <bench> [<timeout>] [<memout>]\n" if ($#ARGV<=-1);
 
 my $launcher = "scripts/tlaunch.bash";
-my $tool = 'maxsatz';
+my $tool = './maxsatz';
 my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
 my $timeout = (@ARGV) ? shift @ARGV : 1000;
 my $memout = (@ARGV) ? shift @ARGV : 2000000;
