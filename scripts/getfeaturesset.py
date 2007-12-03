@@ -14,4 +14,3 @@ for line in open( instance_list ):
     print "Obtaining features from " + name
     for file in glob.glob( path ):
         os.system( getfeatures_exec + file + ' > ' + target_directory + '/' + name + '.' + os.path.basename(file) + '.features' )
-            
