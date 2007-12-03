@@ -1,0 +1,63 @@
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+c Clause 38354 is tautological.
+local search probe...
+feature saps_BestSolution_Mean: 1913.000000
+feature saps_BestSolution_CoeffVariance: 0.000000
+feature saps_BestStep_Mean: 8188.000000
+feature saps_BestStep_CoeffVariance: 0.000000
+feature saps_BestStep_Median: 8188.000000
+feature saps_BestStep_Q.10: 8188.000000
+feature saps_BestStep_Q.90: 8188.000000
+feature saps_AvgImproveToBest_Mean: 2.003542
+feature saps_AvgImproveToBest_CoeffVariance: 0.000000
+feature saps_FirstLMRatio_Mean: 0.952636
+feature saps_FirstLMRatio_CoeffVariance: 0.000000
+feature saps_BestCV_Mean: 0.096913
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 1399.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 13878.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 13878.000000
+feature gsat_BestStep_Q.10: 13878.000000
+feature gsat_BestStep_Q.90: 13878.000000
+feature gsat_AvgImproveToBest_Mean: 1.219124
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.921863
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.189253
+feature gsat_totaltime: 1.010000
+Number of Variables: 24025
+Number of Clauses: 88459
+Ratio Clauses/Variables: 3.68196
+Ratio Negative Clauses: 1.33623
+Ratio Positive Clauses: 1.18858
+Ratio Unit Clauses: 0.00448796
+Ratio Binary Clauses: 0.721747
+Ratio Ternary Clauses: 0.173572

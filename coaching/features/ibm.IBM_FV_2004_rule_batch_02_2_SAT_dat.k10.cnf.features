@@ -1,0 +1,42 @@
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+c Clause 16211 is tautological.
+local search probe...
+feature saps_BestSolution_Mean: 192.214286
+feature saps_BestSolution_CoeffVariance: 1.251763
+feature saps_BestStep_Mean: 4515.500000
+feature saps_BestStep_CoeffVariance: 0.288196
+feature saps_BestStep_Median: 4743.000000
+feature saps_BestStep_Q.10: 3741.000000
+feature saps_BestStep_Q.90: 4956.000000
+feature saps_AvgImproveToBest_Mean: 0.982215
+feature saps_AvgImproveToBest_CoeffVariance: 0.615904
+feature saps_FirstLMRatio_Mean: 0.888914
+feature saps_FirstLMRatio_CoeffVariance: 0.037164
+feature saps_BestCV_Mean: 0.351829
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 207.000000
+feature gsat_BestSolution_CoeffVariance: 0.297876
+feature gsat_BestStep_Mean: 13979.000000
+feature gsat_BestStep_CoeffVariance: 0.528719
+feature gsat_BestStep_Median: 15565.000000
+feature gsat_BestStep_Q.10: 3748.000000
+feature gsat_BestStep_Q.90: 17039.000000
+feature gsat_AvgImproveToBest_Mean: 0.416654
+feature gsat_AvgImproveToBest_CoeffVariance: 0.924176
+feature gsat_FirstLMRatio_Mean: 0.901070
+feature gsat_FirstLMRatio_CoeffVariance: 0.013695
+feature gsat_BestCV_Mean: 0.286797
+feature gsat_totaltime: 1.010000
+Number of Variables: 5620
+Number of Clauses: 18745
+Ratio Clauses/Variables: 3.33541
+Ratio Negative Clauses: 1.32766
+Ratio Positive Clauses: 1.14276
+Ratio Unit Clauses: 0.0173913
+Ratio Binary Clauses: 0.702321
+Ratio Ternary Clauses: 0.18933

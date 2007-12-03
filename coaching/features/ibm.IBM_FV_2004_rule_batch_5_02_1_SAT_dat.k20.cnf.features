@@ -1,0 +1,52 @@
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+c Clause 38048 is tautological.
+local search probe...
+feature saps_BestSolution_Mean: 2390.750000
+feature saps_BestSolution_CoeffVariance: 1.771934
+feature saps_BestStep_Mean: 7536.750000
+feature saps_BestStep_CoeffVariance: 0.669960
+feature saps_BestStep_Median: 9691.000000
+feature saps_BestStep_Q.10: 1.000000
+feature saps_BestStep_Q.90: 9727.000000
+feature saps_AvgImproveToBest_Mean: 10.878457
+feature saps_AvgImproveToBest_CoeffVariance: 1.845949
+feature saps_FirstLMRatio_Mean: 0.913513
+feature saps_FirstLMRatio_CoeffVariance: 0.063240
+feature saps_BestCV_Mean: 0.282805
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 387.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 25917.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 25917.000000
+feature gsat_BestStep_Q.10: 25917.000000
+feature gsat_BestStep_Q.90: 25917.000000
+feature gsat_AvgImproveToBest_Mean: 0.316896
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.894436
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.310817
+feature gsat_totaltime: 1.010000
+Number of Variables: 12294
+Number of Clauses: 42070
+Ratio Clauses/Variables: 3.42199
+Ratio Negative Clauses: 1.34678
+Ratio Positive Clauses: 1.15165
+Ratio Unit Clauses: 0.00777276
+Ratio Binary Clauses: 0.708129
+Ratio Ternary Clauses: 0.190017
