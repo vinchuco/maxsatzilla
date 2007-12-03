@@ -205,9 +205,9 @@ void MSZDataSet::removeFeatures(const vector<size_t> &keepVec) {
   
   // Now we need to recreate matrix.
   // KILL ME
-  double **newMatrix = (double**)malloc(nrows * sizeof(*newMatrix));
+  double **newMatrix = new double** [nrows];
   for(size_t r = 0; r < nrows; r++)
-    newMatrix[r] = (double*)malloc(ncols * sizeof(**newMatrix));
+    newMatrix[r] = new double* [ncols];
   
   // Copy every column to the new matrix except those listed in vec.
   size_t destc = 0;
@@ -263,7 +263,7 @@ void MSZDataSet::expandOnPartition(size_t k, const vector<size_t> &pvec) {
   
   // expansion is quadratic at the minimum and 
   // and be bigger than partition size.
-  assert(k > 2 && k <= pvec.size());
+  assert(k >= 2 && k <= pvec.size());
 
   // Standardize features
   standardize();
