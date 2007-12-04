@@ -1,0 +1,67 @@
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+c Clause 64236 is tautological.
+local search probe...
+feature saps_BestSolution_Mean: 770.000000
+feature saps_BestSolution_CoeffVariance: 0.000000
+feature saps_BestStep_Mean: 13057.000000
+feature saps_BestStep_CoeffVariance: 0.000000
+feature saps_BestStep_Median: 13057.000000
+feature saps_BestStep_Q.10: 13057.000000
+feature saps_BestStep_Q.90: 13057.000000
+feature saps_AvgImproveToBest_Mean: 1.107222
+feature saps_AvgImproveToBest_CoeffVariance: 0.000000
+feature saps_FirstLMRatio_Mean: 0.892301
+feature saps_FirstLMRatio_CoeffVariance: 0.000000
+feature saps_BestCV_Mean: 0.296491
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 1041.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 15283.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 15283.000000
+feature gsat_BestStep_Q.10: 15283.000000
+feature gsat_BestStep_Q.90: 15283.000000
+feature gsat_AvgImproveToBest_Mean: 0.928221
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.909841
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.222839
+feature gsat_totaltime: 1.010000
+Number of Variables: 21808
+Number of Clauses: 74555
+Ratio Clauses/Variables: 3.4187
+Ratio Negative Clauses: 1.34848
+Ratio Positive Clauses: 1.15479
+Ratio Unit Clauses: 0.0043592
+Ratio Binary Clauses: 0.70501
+Ratio Ternary Clauses: 0.195413

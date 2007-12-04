@@ -1,0 +1,35 @@
+local search probe...
+feature saps_BestSolution_Mean: 39.500000
+feature saps_BestSolution_CoeffVariance: 1.494964
+feature saps_BestStep_Mean: 2701.235294
+feature saps_BestStep_CoeffVariance: 0.312588
+feature saps_BestStep_Median: 2819.500000
+feature saps_BestStep_Q.10: 1662.000000
+feature saps_BestStep_Q.90: 3790.000000
+feature saps_AvgImproveToBest_Mean: 0.562776
+feature saps_AvgImproveToBest_CoeffVariance: 0.502661
+feature saps_FirstLMRatio_Mean: 0.849676
+feature saps_FirstLMRatio_CoeffVariance: 0.032718
+feature saps_BestCV_Mean: 0.465663
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 99.478261
+feature gsat_BestSolution_CoeffVariance: 0.079954
+feature gsat_BestStep_Mean: 4772.521739
+feature gsat_BestStep_CoeffVariance: 0.277689
+feature gsat_BestStep_Median: 5095.000000
+feature gsat_BestStep_Q.10: 3296.000000
+feature gsat_BestStep_Q.90: 6213.000000
+feature gsat_AvgImproveToBest_Mean: 0.291347
+feature gsat_AvgImproveToBest_CoeffVariance: 0.376137
+feature gsat_FirstLMRatio_Mean: 0.887734
+feature gsat_FirstLMRatio_CoeffVariance: 0.012293
+feature gsat_BestCV_Mean: 0.249283
+feature gsat_totaltime: 1.010000
+Number of Variables: 2281
+Number of Clauses: 7248
+Ratio Clauses/Variables: 3.17755
+Ratio Negative Clauses: 1.44578
+Ratio Positive Clauses: 1.09313
+Ratio Unit Clauses: 0.000689845
+Ratio Binary Clauses: 0.539045
+Ratio Ternary Clauses: 0.391418
