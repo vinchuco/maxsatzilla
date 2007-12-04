@@ -1,2 +1,6 @@
 # set-name path
-automotive /benchmark/cnf/automotive/unsat/*.cnf
+AUTO /benchmark/cnf/automotive/unsat/*.cnf
+DEBUG /benchmark/cnf/design-debugging/*.seq
+BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf
+SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf
+PIMAG /benchmark/cnf/pimag/selected/*.cnf
