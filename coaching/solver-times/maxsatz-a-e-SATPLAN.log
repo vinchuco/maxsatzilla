@@ -1,0 +1,9 @@
+bw_large.a.cnf                                       3290           0.18
+bw_large.b.cnf                                      11487          33.90
+bw_large.c.cnf                                         --          1000.00
+bw_large.d.cnf                                         --          1000.00
+logistics.a.cnf                                        --          1000.00
+logistics.b.cnf                                        --          1000.00
+logistics.c.cnf                                        --          1000.00
+rocket_ext.a.cnf                                     1691           0.37
+rocket_ext.b.cnf                                     1843          12.38
