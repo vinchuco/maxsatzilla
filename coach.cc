@@ -93,7 +93,7 @@ int main(int argc, char *argv[]) {
     // Let's apply dataset transformations
     ds->standardize();
     ds->standardizeOutputs();
-    ds->expand(2); // always calls standardize() if you didn't before
+    //ds->expand(2); // always calls standardize() if you didn't before
     
     // Lets do a forward selection
     for(size_t s = 0; s < nbSolvers; s++) {
@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
-      rr.run(delta, s, snames[s]);
+      rr.run(delta, s, string(headerPrefix)+snames[s]);
     }
 
     // Let's not forget to delete the dataset

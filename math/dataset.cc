@@ -349,6 +349,56 @@ double MSZDataSet::computeCrossProduct(size_t r, size_t *ind, size_t k, const ve
   return cp;
 }
 
+void MSZDataSet::removeTimeouts(size_t timeout, size_t out) {
+  assert(out < outputs);
+
+  if(oStdDone) {
+    cerr << "Output standardization already performed. Cannot remove timeouts.\n";
+    return;
+  }
+
+  // Count and keep rows without timeouts
+  vector<size_t> keepRows;
+  for(size_t r = 0; r < nrows; r++) {
+    if(getMValue(r, out) != timeout) 
+      keepRows.push_back(r);
+  }
+
+  if(keepRows.size() == nrows) {
+    cout << "There are no rows to remove.\n";
+    return;
+  }
+
+  cout << "Removing " << nrows - keepRows.size() 
+       << " (" <<  (double)(nrows - keepRows.size()) / nrows << "%) of dataset due to timeout.\n";
+
+  // Allocating new matrix
+  double **newMatrix = new double* [ncols];
+  for(size_t c = 0; c < ncols; c++)
+    newMatrix[c] = new double [keepRows.size()];
+
+  nrows = keepRows.size();
+
+  for(size_t c = 0; c < ncols; c++) {
+    size_t nr = 0;
+    for(vector<size_t>::const_iterator rptr = keepRows.begin();
+	rptr != keepRows.end();
+	rptr++) {
+      assert(*rptr >= nr);
+
+      newMatrix[c][nr] = getMValue(*rptr, c);
+    }
+  }
+
+  // delete old matrix
+  for(size_t c = 0; c < ncols; c++)
+    delete [] matrix[c];
+  delete [] matrix;
+
+  matrix = newMatrix;
+
+}
+
 /////////////////////////////////////////
 /////////////////////////////////////////
 //

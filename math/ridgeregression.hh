@@ -7,6 +7,8 @@
 
 #include "dataset.hh"
 
+#define RRDEBUG 1
+
 using std::string;
 
 /** This class implements

@@ -49,6 +49,8 @@ public:
   /// Removes from current dataset the features in the vector
   void removeFeatures(const vector<size_t> &);
 
+  /// Removes the instances with timeouts in the given solver
+  void removeTimeouts(size_t, size_t);
 private:
   double *getMColumn(size_t c)           const { return matrix[c];    }
   double getMValue(size_t r, size_t c)   const { return matrix[c][r]; }
