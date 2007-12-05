@@ -35,9 +35,9 @@ for feature in open( feature_list ):
     features.append( feature.rstrip() )
     feature_names.append( feature.rstrip().replace( ' ', '_' ) )
 
-print 'msz ' + str( len( solvers ) ) + ' ' + str( len( features ) ) + ' XXX ' + timeout
-print 'slv ' + ' '.join( solvers )
-print 'ftr ' + ' '.join( feature_names )
+print 'p msz ' + str( len( solvers ) ) + ' ' + str( len( features ) ) + ' XXX ' + timeout
+print 'p slv ' + ' '.join( solvers )
+print 'p ftr ' + ' '.join( feature_names )
 
 for line in open( instance_set_list ):
     if line[0] == '#':
