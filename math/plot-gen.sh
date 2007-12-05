@@ -3,7 +3,7 @@
 # This script receives one argument: the path of the files and the prefix
 # and generates the plots for all the files with that prefix in the same path
 FILEPATH=$1
-PREFIX="$2_"
+PREFIX="$2@"
 TMPDIR=/usr/tmp/
 
 for i in $FILEPATH/$PREFIX*.dat
@@ -11,8 +11,8 @@ do
     echo "Processing $i..."
     NOEXT=$(basename $i .dat)
     STRIPPEDFILE=${NOEXT#$PREFIX}
-    YAXIS=${STRIPPEDFILE%_*}
-    XAXIS=${STRIPPEDFILE#*_}
+    YAXIS=${STRIPPEDFILE%@*}
+    XAXIS=${STRIPPEDFILE#*@}
     
     rm -f $FILEPATH/$i.png $TMPDIR/$i.gp
     touch $TMPDIR/$i.gp
