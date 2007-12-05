@@ -4,7 +4,7 @@ import sys
 
 if len( sys.argv ) < 3:
     print "usage " + sys.argv[0] + " <instance list file> <directory>"
-    exit(0)
+    sys.exit(0)
 
 import glob, os
 
