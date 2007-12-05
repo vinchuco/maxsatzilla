@@ -1,10 +1,10 @@
 # set-name path
-AUTO /benchmark/cnf/automotive/unsat/*.cnf
-IBM /benchmark/cnf/ibm/new/TAR/selected/*.cnf
-DEBUG /benchmark/cnf/design-debugging/*.seq
-design-debug2 /benchmark/cnf/design-debugging-v2/*.dimacs
-BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf
-SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf
-PIMAG /benchmark/cnf/pimag/selected/*.cnf
-SATPLAN /benchmark/cnf/satplan/unsat/*.cnf
-UCLID /benchmark/cnf/uclid/SAT_BENCH/*.cnf
+AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
+IBM /benchmark/cnf/ibm/new/TAR/selected/*.cnf 341 
+DEBUG /benchmark/cnf/design-debugging/*.seq 30
+DEBUG2 /benchmark/cnf/design-debugging-v2/*.dimacs 36
+BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
+SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
+PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
+SATPLAN /benchmark/cnf/satplan/unsat/*.cnf 9
+UCLID /benchmark/cnf/uclid/SAT_BENCH/*.cnf 31
