@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, glob
+import sys, glob, StringIO
 
 solver_list = sys.argv[1]
 feature_list = sys.argv[2]
@@ -16,9 +16,11 @@ def get_instance_time( solver, name, instance ):
     raise Exception('Instance not found' + instance )
 
 def get_feature_value( instance, feature ):
+    output = StringIO.StringIO()
     for line in open( instance ):
         if line.startswith( feature ):
-            return line[ line.rfind(' ') : -1 ]
+            print >> output, "%f" % float( line[ line.rfind(' ') : -1 ] ),
+            return output.getvalue()
     raise Exception('Feature not found ' + feature )
 
 solvers = []
@@ -43,7 +45,7 @@ for line in open( instance_set_list ):
     if line[0] == '#':
         continue        
     set_name, path = line.split(' ')
-    #print '# Set ' + set_name
+    print 'c Set name ' + set_name
     for instance in glob.glob( features_directory + set_name + '*.features' ):
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
         print instance_basename
