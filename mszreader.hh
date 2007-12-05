@@ -10,6 +10,7 @@
 
 #include <ctime>
 #include <cstring>
+#include <cassert>
 #include <stdint.h>
 #include <errno.h>
 
@@ -173,7 +174,28 @@ namespace iomsz {
 			       string*& featuresNames,
 			       string*& instancesNames,
 			       double**& matrix) {
-    for (unsigned int inst=0; inst<nbInstances;){
+    
+    // Simple solving of previous bug
+    match(in, "p msz");
+    nbSolvers = parseInt(in);
+    solversNames=new string [nbSolvers];
+    nbFeatures = parseInt(in);
+    featuresNames=new string [nbFeatures];
+    nbInstances = parseInt(in);
+    instancesNames=new string [nbInstances];
+    
+    const int nbCases = nbSolvers+nbFeatures;
+    matrix=new double* [nbInstances];
+    for (unsigned int i=0; i<nbInstances; i++)
+      matrix[i]=new double [nbCases];
+    timeOut = parseInt(in);
+    reportf("c Number of solvers:    %2d\n", nbSolvers);
+    reportf("c Number of features:   %2d\n", nbFeatures);
+    reportf("c Number of instances:  %2d\n", nbInstances);
+    reportf("c Timeout:              %2d\n", timeOut);
+
+
+    for(unsigned int inst = 0; inst < nbInstances;){
       skipWhitespace(in);
       //reportf("caractere lu : %c\n", *in);
       //(*in == 'q') ? reportf("OK\n") : reportf("KO\n");
@@ -184,25 +206,7 @@ namespace iomsz {
 	++in;++in;
 	//reportf("Current character: %c\n", *in);
 
-	if ((*in=='m') && (match(in, "msz"))){
-	  nbSolvers = parseInt(in);
-	  solversNames=new string [nbSolvers];
-	  nbFeatures = parseInt(in);
-	  featuresNames=new string [nbFeatures];
-	  nbInstances = parseInt(in);
-	  instancesNames=new string [nbInstances];
-
-	  const int nbCases=nbSolvers+nbFeatures;
-	  matrix=new double* [nbInstances];
-	  for (unsigned int i=0; i<nbInstances; i++)
-	    matrix[i]=new double [nbCases];
-	  timeOut = parseInt(in);
-	  reportf("c Number of solvers:    %2d\n", nbSolvers);
-	  reportf("c Number of features:   %2d\n", nbFeatures);
-	  reportf("c Number of instances:  %2d\n", nbInstances);
-	  reportf("c Timeout:              %2d\n", timeOut);
-	}
-	else if ((*in=='s') && (match(in, "slv"))) {
+	if ((*in=='s') && (match(in, "slv"))) {
 	  reportf("c Solvers:");
 	  for (unsigned int i=0; i<nbSolvers; i++) {
 	    readWord(in,solversNames[i]);
@@ -220,8 +224,6 @@ namespace iomsz {
 	}
 	else reportf("PARSE ERROR! (parse_MSZ) Unexpected char: %c %c %c\n", *in, *in, *in), exit(3);
       }
-      //else if (*in == 'c' || *in == 'p')
-      //skipLine(in);
       else {
 	readWord(in,instancesNames[inst]);
 	reportf("Instance: %s\n", instancesNames[inst].c_str());
