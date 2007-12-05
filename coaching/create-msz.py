@@ -45,7 +45,7 @@ for line in open( instance_set_list ):
     if line[0] == '#':
         continue        
     set_name, path = line.split(' ')
-    print 'c Set name ' + set_name
+    #print 'c Set name ' + set_name
     for instance in glob.glob( features_directory + set_name + '*.features' ):
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
         print instance_basename
