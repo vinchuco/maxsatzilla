@@ -26,4 +26,4 @@ for line in open( instance_list ):
     files = glob.glob( path )
     print " with " + str( len( files ) ) + " instances"
     for file in files:
-        os.system( getfeatures_exec + file + ' > ' + target_directory + '/' + name + '.' + os.path.basename(file) + '.features' )
+        os.pipe2( getfeatures_exec + file + ' > ' + target_directory + '/' + name + '.' + os.path.basename(file) + '.features' )
