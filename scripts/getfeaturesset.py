@@ -21,10 +21,9 @@ signal.signal( signal.SIGINT, handler )
 for line in open( instance_list ):
     if line[0] == '#':
         continue
-    print line
     name, path, number = line.split(' ')
     print "Obtaining features from " + name,
     files = glob.glob( path )
-    print " with " + str( len( files ) ) + " instances"
+    print "with " + str( len( files ) ) + " instances"
     for file in files:
         os.popen2( getfeatures_exec + file + ' > ' + target_directory + '/' + name + '.' + os.path.basename(file) + '.features' )
