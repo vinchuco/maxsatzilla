@@ -2,6 +2,7 @@
 #include <vector>
 #include <fstream>
 #include <iterator>
+#include <map>
 
 #include <zlib.h>
 
@@ -15,10 +16,17 @@ using std::vector;
 using std::string;
 using std::cerr;
 using std::ofstream;
+using std::map;
 
 using namespace iomsz;
 
-void outputModelHeader(const vector<double> &w, const vector<string> &labels, const string& path) {
+#ifndef MODELHEADER
+#define MODELHEADER "msz_model.hh"
+#endif
+
+void outputModelHeader(const map<string, pair<vector<double>, vector<string> > > &m) {
+
+  const string path(MODELHEADER);
 
   ofstream file;
   file.open(path.c_str());
@@ -33,19 +41,66 @@ void outputModelHeader(const vector<double> &w, const vector<string> &labels, co
 
   file << "#ifndef " << guard << "\n"
        << "#define " << guard << "\n"
-       << "\n"
-       << "static double w[] = {";
-  copy(w.begin(), w.end(), std::ostream_iterator<double>(file, ", "));
-  file << "};\n\n";
+       << "\n";
+
+  file << "enum Solver {";
+  for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
+      it != m.end();
+      it++) {
+    file << it->first << ", "; 
+  }
+  file << " NUMSOLVERS};\n\n";
+
   
-  file << "static char* features[" << labels.size() << "] = {";
-  for(size_t i = 0; i < labels.size(); i++)  {
-    file << "\"" << labels[i] << "\"";
-    if(i != labels.size() - 1)
+  file << "size_t nbFeatures[] = {";
+  vector<size_t> nbFeatures;
+  for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
+      it != m.end();
+      it++) {
+    nbFeatures.push_back(it->second.first.size());
+  }
+  for(size_t i = 0; i < nbFeatures.size(); i++) {
+    file << nbFeatures[i];
+    if(i != nbFeatures.size() - 1)
       file << ", ";
   }
   file << "};\n\n";
 
+  file << "double weights[" << m.size() << "][] = {";
+  size_t mindex = 0;
+  for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
+      it != m.end();
+      it++) {
+    const bool last = (mindex++ == m.size()-1);
+    const vector<double> &w = it->second.first;
+    file << "{";
+    for(size_t i = 0; i < w.size(); i++) {
+      file << w[i];
+      if(i != w.size())
+	file << ", ";
+    }
+    file << "}";
+    if(!last) file << ", ";
+  }
+  file << "};\n\n";
+
+  file << "char* features[" << m.size() << "][] = {";
+  mindex = 0;
+  for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
+      it != m.end();
+      it++) {
+    const bool last = (mindex++ == m.size()-1);
+    const vector<string> &l = it->second.second;
+    file << "{";
+    for(size_t i = 0; i < l.size(); i++) {
+      file << "\"" << l[i] << "\"";
+      if(i != l.size() - 1) 
+	file << ", ";
+    }
+    file << "}";
+    if(!last) file << ", ";
+  }
+  file << "};\n\n";
   file << "#endif";
 
   file.close();
@@ -63,8 +118,8 @@ void outputModelHeader(const vector<double> &w, const vector<string> &labels, co
  */
 int main(int argc, char *argv[]) {
 
-  if (argc <= 1 || argc >= 6) {
-    cerr << "usage: coach <fsthreshold> <delta> <trainingset> <headerprefix>\n";
+  if (argc != 4) {
+    cerr << "usage: coach <fsthreshold> <delta> <trainingset>\n";
     exit(EXIT_FAILURE);
   }
 
@@ -77,10 +132,9 @@ int main(int argc, char *argv[]) {
   double threshold = atof(argv[1]);
   double delta = atof(argv[2]);
   char *inputFileName = argv[3];
-  char *headerPrefix = argv[4];
   
-  gzFile in=(inputFileName==NULL? gzdopen(0,"rb"): gzopen(inputFileName,"rb"));
-  if (in==NULL) {
+  gzFile in =(inputFileName == NULL ? gzdopen(0,"rb"): gzopen(inputFileName,"rb"));
+  if (in == NULL) {
     cerr<<"Error: Could not open file: "
         <<(inputFileName==NULL? "<stdin>": inputFileName)
         <<endl;
@@ -132,6 +186,8 @@ int main(int argc, char *argv[]) {
     ds->standardize();
     ds->standardizeOutputs();
     //ds->expand(2); // always calls standardize() if you didn't before
+
+    map<string, pair<vector<double>, vector<string> > > model;
     
     // Lets do a forward selection
     for(size_t s = 0; s < nbSolvers; s++) {
@@ -150,8 +206,10 @@ int main(int argc, char *argv[]) {
 	wlabels.push_back(featuresNames[res[i]]);
 
       assert(w.size() == wlabels.size());
-      outputModelHeader(w, wlabels, string(headerPrefix)+snames[s]+".hh");
+      model[solversNames[s]] = make_pair(w, wlabels);
     }
+
+    outputModelHeader(model);
 
     // Let's not forget to delete the dataset
     delete ds;
