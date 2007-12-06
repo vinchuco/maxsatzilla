@@ -101,7 +101,7 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
     if(!last) file << ", ";
   }
   file << "};\n\n";
-  file << "#endif";
+  file << "#endif\n";
 
   file.close();
 
