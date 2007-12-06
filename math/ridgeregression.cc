@@ -127,8 +127,16 @@ void RidgeRegression::run(double delta, size_t out, const string &path) {
   ofstream file;
   file.open(path.c_str());
 
-  file << "#ifndef MAXSATZILLA_MODEL_FILE_HH\n"
-       << "#define MAXSATZILLA_MODEL_FILE_HH\n"
+  // Generate Header Guard
+  size_t slashpos = path.find_last_of("/");
+  string guard(path, slashpos+1);
+  for(size_t i = 0; i < guard.size(); i++) {
+    if(isalpha(guard[i])) guard[i] = toupper(guard[i]); 
+    else if(guard[i] == '.') guard[i] = '_';
+  }
+
+  file << "#ifndef " << guard << "\n"
+       << "#define " << guard << "\n"
        << "static double w[] = {";
     
   for(size_t i = 0; i < final->size1; i++) {

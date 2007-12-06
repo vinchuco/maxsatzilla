@@ -104,7 +104,7 @@ int main(int argc, char *argv[]) {
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
-      rr.run(delta, s, string(headerPrefix)+snames[s]);
+      rr.run(delta, s, string(headerPrefix)+snames[s]+".hh");
     }
 
     // Let's not forget to delete the dataset
