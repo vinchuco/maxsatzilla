@@ -104,7 +104,6 @@ MaxSatInstance::~MaxSatInstance() {
 namespace ubcsat { int main(int, char**); }
 
 void MaxSatInstance::computeLocalSearchProperties() {
-  printf("local search probe...\n");
 
   char sTimeout[64];
   char sRuns[64];
