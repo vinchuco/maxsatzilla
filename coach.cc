@@ -1,5 +1,7 @@
 #include <iostream>
 #include <vector>
+#include <fstream>
+#include <iterator>
 
 #include <zlib.h>
 
@@ -12,8 +14,44 @@
 using std::vector;
 using std::string;
 using std::cerr;
+using std::ofstream;
 
 using namespace iomsz;
+
+void outputModelHeader(const vector<double> &w, const vector<string> &labels, const string& path) {
+
+  ofstream file;
+  file.open(path.c_str());
+
+  // Generate Header Guard
+  size_t slashpos = path.find_last_of("/");
+  string guard(path, slashpos+1);
+  for(size_t i = 0; i < guard.size(); i++) {
+    if(isalpha(guard[i])) guard[i] = toupper(guard[i]); 
+    else if(guard[i] == '.') guard[i] = '_';
+  }
+
+  file << "#ifndef " << guard << "\n"
+       << "#define " << guard << "\n"
+       << "\n"
+       << "static double w[] = {";
+  copy(w.begin(), w.end(), std::ostream_iterator<double>(file, ", "));
+  file << "};\n\n";
+  
+  file << "static char* features[" << labels.size() << "] = {";
+  for(size_t i = 0; i < labels.size(); i++)  {
+    file << "\"" << labels[i] << "\"";
+    if(i != labels.size() - 1)
+      file << ", ";
+  }
+  file << "};\n\n";
+
+  file << "#endif";
+
+  file.close();
+
+}
+
 
 /**
  * Main function for MaxSATzilla training.
@@ -104,7 +142,15 @@ int main(int argc, char *argv[]) {
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
-      rr.run(delta, s, string(headerPrefix)+snames[s]+".hh");
+      vector<double> w;
+      w = rr.run(delta, s);
+
+      vector<string> wlabels;
+      for(size_t i = 0; i < res.size(); i++)
+	wlabels.push_back(featuresNames[res[i]]);
+
+      assert(w.size() == wlabels.size());
+      outputModelHeader(w, wlabels, string(headerPrefix)+snames[s]+".hh");
     }
 
     // Let's not forget to delete the dataset
