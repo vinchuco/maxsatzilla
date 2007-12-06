@@ -4,7 +4,7 @@ COACH_FILES = coach.cc
 COACH_HEADERS =
 SUBDIRS = ubcsat math
 
-MAXSATZILLA_OBJECT_FILES = main.o math/dataset.o math/forwardselection.o ./math/libmath.a
+MAXSATZILLA_OBJECT_FILES = main.o getfeatures_wrapper.o math/dataset.o math/forwardselection.o ./math/libmath.a
 FEATURES_OBJECT_FILES = features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 
 ifeq ($(shell uname),Darwin)
@@ -35,7 +35,7 @@ $(SUBDIRS):
 	$(MAKE) -C $@
 
 getfeatures: $(FEATURES_OBJECT_FILES)
-	g++ $(LDFLAGS) -o $@ $+
+	g++ $(CXXFLAGS) $(LDFLAGS) -o $@ $+
 
 ./ubcsat/libubcsat.a:
 	cd ubcsat && $(MAKE)

@@ -3,7 +3,7 @@
 #include <vector>
 
 #define MAX_LINE_LENGTH 1024
-#define MAX_NUM_LITERALS 100
+#define MAX_NUM_LITERALS 10000
 
 // UBCSAT parameters
 #define UBCSAT_TIME_LIMIT 1
