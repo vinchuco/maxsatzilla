@@ -1,8 +1,8 @@
 #!/bin/csh
-set bdir = $argv[1]
-set ref = $argv[2]
+set bdir = $argv[2]
+set name = $argv[1]
 
-set ref_log = "coaching/features/$ref"
+set ref_log = "coaching/features/$name"
 
 foreach bench ($bdir/*)
 	echo "Obtaining features from " $bench
