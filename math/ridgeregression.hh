@@ -2,6 +2,7 @@
 #define RIDGEREGRESSION_HH
 
 #include <string>
+#include <vector>
 
 #include<gsl/gsl_matrix.h>
 
@@ -10,6 +11,7 @@
 #define RRDEBUG 1
 
 using std::string;
+using std::vector;
 
 /** This class implements
  *  the ridge regression algorithm.
@@ -25,7 +27,7 @@ public:
   // Runs ridge regression algorithm and outputs 
   // header file with static definition of model
   // for a given output.
-  void run(double, size_t, const string &);
+  vector<double> run(double, size_t);
 
 private:
   gsl_matrix *matrix_mult(const gsl_matrix *, const gsl_matrix *) const;

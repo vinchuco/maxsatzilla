@@ -3,10 +3,8 @@
 #include <gsl/gsl_linalg.h>
 
 #include <iostream>
-#include <fstream>
 #include <cassert>
 
-using std::ofstream;
 using std::cerr;
 
 RidgeRegression::RidgeRegression(const MSZDataSet &data) :
@@ -14,7 +12,7 @@ RidgeRegression::RidgeRegression(const MSZDataSet &data) :
 
 RidgeRegression::~RidgeRegression() { }
 
-void RidgeRegression::run(double delta, size_t out, const string &path) {
+vector<double> RidgeRegression::run(double delta, size_t out) {
 
   // Create PHI matrix
   gsl_matrix *phi = gsl_matrix_alloc(data.getNRows(), data.getNFeatures());
@@ -124,34 +122,13 @@ void RidgeRegression::run(double delta, size_t out, const string &path) {
   // Let's output this final matrix which should be m x 1.
   assert(final->size1 == data.getNFeatures());
   assert(final->size2 == 1);
-  ofstream file;
-  file.open(path.c_str());
 
-  // Generate Header Guard
-  size_t slashpos = path.find_last_of("/");
-  string guard(path, slashpos+1);
-  for(size_t i = 0; i < guard.size(); i++) {
-    if(isalpha(guard[i])) guard[i] = toupper(guard[i]); 
-    else if(guard[i] == '.') guard[i] = '_';
-  }
-
-  file << "#ifndef " << guard << "\n"
-       << "#define " << guard << "\n"
-       << "static double w[] = {";
-    
-  for(size_t i = 0; i < final->size1; i++) {
-    file << gsl_matrix_get(final, i, 0);
-
-    if(i != final->size1 - 1)
-      file << ", ";
-  }
-
-  file << "};\n"
-       << "#endif";
-
-  file.close();
+  vector<double> w;
+  for(size_t i = 0; i < final->size1; i++) 
+    w.push_back(gsl_matrix_get(final, i, 0));
 
   gsl_matrix_free(final);
+  return w;
 }
 
 gsl_matrix *RidgeRegression::matrix_mult(const gsl_matrix *m1, const gsl_matrix *m2) const {
