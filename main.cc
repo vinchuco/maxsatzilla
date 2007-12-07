@@ -42,8 +42,8 @@ int main(int argc, char *argv[]) {
   map<Solver, double> predRt;
   for(int s = 0; s < NUMSOLVERS; s++) {
     // Computing model for solver s.
-    double runtime = 0.0;
-    for(size_t f = 0; f < nbFeatures[s]; f++) {
+    double runtime = weights[s][0]; 
+    for(size_t f = 1; f < nbFeatures[s]; f++) {
       assert(feats.find(features[s][f]) != feats.end());
       assert(weights[f] != 0);
       runtime += feats[features[s][f]] * weights[s][f];

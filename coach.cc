@@ -55,12 +55,18 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
        << "\n";
 
   file << "enum Solver {";
+  vector<string> solverNames;
   for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
       it != m.end();
-      it++) {
-    file << it->first << ", "; 
-  }
+      it++) 
+    solverNames.push_back(it->first);
+  outputVectorComma(file, solverNames);
+  file << ", ";
   file << " NUMSOLVERS};\n\n";
+
+  file << "char *solverNames[] = {";
+  outputVectorComma(file, solverNames, true);
+  file << "};\n\n";
 
   file << "size_t nbFeatures[] = {";
   vector<size_t> nbFeatures;
@@ -154,27 +160,6 @@ int main(int argc, char *argv[]) {
 
   parse_DIMACS(in, nbSolvers, nbFeatures, nbInstances, timeOut, solversNames, featuresNames, instancesNames, data);
 
-  cerr << "\n\n\nPOCM part... from now, all problems are MINE! :)\n";
-
-  cerr << "Read file: " << inputFileName << "\n"
-       << "Number of Solvers: " << nbSolvers << "\n"
-       << "Number of Features: " << nbFeatures << "\n"
-       << "Number of Instances: " << nbInstances << "\n"
-       << "Timeout: " << timeOut << "\n";
-
-  cerr << "Solver Names: ";
-  for(size_t i = 0; i < nbSolvers; i++)
-    cerr << solversNames[i] << " ";
-
-  cerr << "\nFeature Names: ";
-  for(size_t i = 0; i < nbFeatures; i++)
-    cerr << featuresNames[i] << " ";
-  
-  cerr << "\nInstance Names: ";
-  for(size_t i = 0; i < nbInstances; i++)
-    cerr << instancesNames[i] << " ";
-  cerr << "\n";
-
   try {
     MSZDataSet *ds = createDataSet(data, nbInstances, nbFeatures+nbSolvers, nbSolvers);
     
@@ -193,19 +178,17 @@ int main(int argc, char *argv[]) {
     cerr << "features (" << nbFeatures << ") + solvers(" << nbSolvers << ") = " << labels.size() << "\n";
     ds->dumpPlotFiles(labels, "./coach");
     
-    // Let's apply dataset transformations
-    ds->standardize();
-    ds->standardizeOutputs();
-    //ds->expand(2); // always calls standardize() if you didn't before
-
     map<string, pair<vector<double>, vector<string> > > model;
     
     // Lets do a forward selection
     for(size_t s = 0; s < nbSolvers; s++) {
-      ForwardSelection fs(*ds, s);
-      vector<size_t> res = fs.run(threshold);
-      
       MSZDataSet solverDS = *ds;
+      solverDS.removeTimeouts(timeOut, s);
+      solverDS.standardizeOutputs();
+      solverDS.standardize();
+
+      ForwardSelection fs(solverDS, s);
+      vector<size_t> res = fs.run(threshold);
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
@@ -213,6 +196,7 @@ int main(int argc, char *argv[]) {
       w = rr.run(delta, s);
 
       vector<string> wlabels;
+      wlabels.push_back("freeParameter");
       for(size_t i = 0; i < res.size(); i++)
 	wlabels.push_back(featuresNames[res[i]]);
 

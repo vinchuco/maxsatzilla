@@ -14,13 +14,20 @@ RidgeRegression::~RidgeRegression() { }
 
 vector<double> RidgeRegression::run(double delta, size_t out) {
 
+  const size_t nbParams = data.getNFeatures()+1;
+
   // Create PHI matrix
-  gsl_matrix *phi = gsl_matrix_alloc(data.getNRows(), data.getNFeatures());
+  gsl_matrix *phi = gsl_matrix_alloc(data.getNRows(), nbParams);
 
   // populate phi
-  for(size_t r = 0; r < phi->size1; r++)
-    for(size_t c = 0; c < phi->size2; c++)
-      gsl_matrix_set(phi, r, c, data.getFeatureValue(r, c));
+  for(size_t r = 0; r < phi->size1; r++) {
+    for(size_t c = 0; c < phi->size2; c++) {
+      if(c == 0)
+	gsl_matrix_set(phi, r, c, 1.0);
+      else
+	gsl_matrix_set(phi, r, c, data.getFeatureValue(r, c-1));
+    }
+  }
   
 #ifdef RRDEBUG
   cerr << "PHI (" << phi->size1 << ", " << phi->size2 << "):\n";
@@ -37,7 +44,7 @@ vector<double> RidgeRegression::run(double delta, size_t out) {
 #endif
 
   // initialize delta matrix
-  gsl_matrix *deltam = gsl_matrix_alloc(data.getNFeatures(), data.getNFeatures());
+  gsl_matrix *deltam = gsl_matrix_alloc(nbParams, nbParams);
   gsl_matrix_set_identity(deltam);
   gsl_matrix_scale(deltam, delta);
 
@@ -120,7 +127,7 @@ vector<double> RidgeRegression::run(double delta, size_t out) {
   gsl_permutation_free(p);
 
   // Let's output this final matrix which should be m x 1.
-  assert(final->size1 == data.getNFeatures());
+  assert(final->size1 == nbParams);
   assert(final->size2 == 1);
 
   vector<double> w;
