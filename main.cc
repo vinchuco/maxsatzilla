@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cassert>
 
 #include "getfeatures_wrapper.hh"
 #include "msz_model.hh"
@@ -35,13 +36,27 @@ int main(int argc, char *argv[]) {
 #ifndef NDEBUG
   for(std::map<string, double>::const_iterator it = feats.begin(); it != feats.end(); it++) 
     cout << it->first << " : " << it->second << "\n";
-#endif NDEBUG
+#endif // NDEBUG
   
   // Let's compute the model
-    
+  map<Solver, double> predRt;
+  for(int s = 0; s < NUMSOLVERS; s++) {
+    // Computing model for solver s.
+    double runtime = 0.0;
+    for(size_t f = 0; f < nbFeatures[s]; f++) {
+      assert(feats.find(features[s][f]) != feats.end());
+      assert(weights[f] != 0);
+      runtime += feats[features[s][f]] * weights[s][f];
+    }
+    predRt[(Solver)s] = runtime;
+  }
 
   // Let's display the models, from best to worst.
-
+  cout << "Predicted Runtimes:\n";
+  for(map<Solver, double>::const_iterator it = predRt.begin();
+      it != predRt.end();
+      it++)
+    cout << "\t" << solverNames[it->first] << ": " << it->second << "\n";
 
   return 0;
 }
