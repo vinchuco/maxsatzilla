@@ -24,6 +24,17 @@ using namespace iomsz;
 #define MODELHEADER "msz_model.hh"
 #endif
 
+template <class T>
+void outputVectorComma(ofstream& file, const vector<T>& strs, bool strp = false) {
+  for(size_t i = 0; i < strs.size(); i++) {
+    if(strp) file << "\"";
+    file << strs[i];
+    if(strp) file << "\"";
+    if(i != strs.size() - 1)
+      file << ", ";
+  }
+}
+
 void outputModelHeader(const map<string, pair<vector<double>, vector<string> > > &m) {
 
   const string path(MODELHEADER);
@@ -51,22 +62,19 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
   }
   file << " NUMSOLVERS};\n\n";
 
-  
   file << "size_t nbFeatures[] = {";
   vector<size_t> nbFeatures;
+  size_t maxFeatures = 0;
   for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
       it != m.end();
       it++) {
+    maxFeatures = (maxFeatures < it->second.first.size() ? it->second.first.size() : maxFeatures);
     nbFeatures.push_back(it->second.first.size());
   }
-  for(size_t i = 0; i < nbFeatures.size(); i++) {
-    file << nbFeatures[i];
-    if(i != nbFeatures.size() - 1)
-      file << ", ";
-  }
+  outputVectorComma(file, nbFeatures);
   file << "};\n\n";
 
-  file << "double weights[" << m.size() << "][] = {";
+  file << "double weights[][" << maxFeatures << "] = {";
   size_t mindex = 0;
   for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
       it != m.end();
@@ -74,17 +82,19 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
     const bool last = (mindex++ == m.size()-1);
     const vector<double> &w = it->second.first;
     file << "{";
-    for(size_t i = 0; i < w.size(); i++) {
-      file << w[i];
-      if(i != w.size())
-	file << ", ";
+    outputVectorComma(file, w);
+    // Add extra zeros
+    const vector<size_t> zeros(w.size() - maxFeatures, 0);
+    if(zeros.size() > 0) {
+      file << ", ";
+      outputVectorComma(file, zeros);
     }
     file << "}";
     if(!last) file << ", ";
   }
   file << "};\n\n";
 
-  file << "char* features[" << m.size() << "][] = {";
+  file << "char* features[][" << maxFeatures << "] = {";
   mindex = 0;
   for(map<string, pair<vector<double>, vector<string> > >::const_iterator it = m.begin();
       it != m.end();
@@ -92,10 +102,11 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
     const bool last = (mindex++ == m.size()-1);
     const vector<string> &l = it->second.second;
     file << "{";
-    for(size_t i = 0; i < l.size(); i++) {
-      file << "\"" << l[i] << "\"";
-      if(i != l.size() - 1) 
-	file << ", ";
+    outputVectorComma(file, l, true);
+    const vector<size_t> zeros(l.size() - maxFeatures, 0);
+    if(zeros.size() > 0) {
+      file << ", ";
+      outputVectorComma(file, zeros);
     }
     file << "}";
     if(!last) file << ", ";
