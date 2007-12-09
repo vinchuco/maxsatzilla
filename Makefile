@@ -1,7 +1,7 @@
 CXXFLAGS = -Wall -std=c++98 -ggdb
 
-COACH_FILES = coach.cc
-COACH_HEADERS =
+COACH_FILES = coach.cc coachconfigreader.cc
+COACH_HEADERS = coachconfigreader.hh
 SUBDIRS = ubcsat math
 
 MAXSATZILLA_OBJECT_FILES = main.o getfeatures_wrapper.o math/dataset.o math/forwardselection.o ./math/libmath.a

@@ -7,6 +7,7 @@
 #include <zlib.h>
 
 #include "mszreader.hh"
+#include "coachconfigreader.hh"
 
 #include "math/dataset.hh"
 #include "math/forwardselection.hh"
@@ -135,10 +136,13 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
  */
 int main(int argc, char *argv[]) {
 
-  if (argc != 4) {
-    cerr << "usage: coach <fsthreshold> <delta> <trainingset>\n";
+  if (argc != 1) {
+    cerr << "usage: coach <coachconfigfile>\n";
     exit(EXIT_FAILURE);
   }
+
+  CoachConfigReader creader(argv[1]);
+  creader
 
   unsigned int nbSolvers, nbFeatures, nbInstances, timeOut;
   string *solversNames;
@@ -152,10 +156,10 @@ int main(int argc, char *argv[]) {
   
   gzFile in =(inputFileName == NULL ? gzdopen(0,"rb"): gzopen(inputFileName,"rb"));
   if (in == NULL) {
-    cerr<<"Error: Could not open file: "
-        <<(inputFileName==NULL? "<stdin>": inputFileName)
-        <<endl;
-    exit(1);
+    cerr << "Error: Could not open file: "
+         << (inputFileName==NULL? "<stdin>": inputFileName)
+         << endl;
+    exit(EXIT_FAILURE);
   }
 
   parse_DIMACS(in, nbSolvers, nbFeatures, nbInstances, timeOut, solversNames, featuresNames, instancesNames, data);
