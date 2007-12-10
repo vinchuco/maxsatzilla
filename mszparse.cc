@@ -1,6 +1,6 @@
 #include <iostream>
-#include <zlib.h>
-#include <string>
+#include <fstream>
+
 #include "mszreader.hh"
 
 using namespace std;
@@ -13,8 +13,8 @@ int main( int argc, char* argv[] ) {
   string* solversNames, *featuresNames, *instancesNames;
   double** matrix;
 
-  char * inputFileName=argv[1];
-  gzFile in=(inputFileName==NULL? gzdopen(0,"rb"): gzopen(inputFileName,"rb"));
+  char * inputFileName = argv[1];
+  ifstream in(inputFileName);
   if (in==NULL) {
     cerr<<"Error: Could not open file: "
 	<<(inputFileName==NULL? "<stdin>": inputFileName)
