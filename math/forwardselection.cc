@@ -31,6 +31,9 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
     for(size_t c = 0; c < ds.getNFeatures(); c++) 
       gsl_matrix_set(fmatrix, r, c, ds.getFeatureValue(r, c));
 
+  // Printing Matris
+  gsl_matrix_fprintf(stderr, fmatrix, "%f");
+
   // Compute initial variable index for forward selection
   initRegressor = 0;
   gsl_vector_const_view col0 = gsl_matrix_const_column(fmatrix, 0);

@@ -11,6 +11,7 @@
 #include <gsl/gsl_combination.h>
 
 #include "dataset.hh"
+#include "pputils.hh"
 
 using std::cout;
 using std::cerr;
@@ -26,10 +27,21 @@ MSZDataSet::MSZDataSet(double **m, size_t nrows, size_t ncols, size_t outputs)
     setMColumn(c, new double [nrows]);
   
   // Copy the elements
-  for(size_t r = 0; r < nrows; r++)
-    for(size_t c = 0; c < ncols; c++)
-      setMValue(r, c, m[r][c]);
+  for(uint r = 0; r < nrows; r++) {
+    for(uint c = 0; c < ncols; c++) {
+      double val = m[r][c];
+
+      if(c < outputs && val < 0.01) {
+	MSZWarn("Output %u in row %u is less than 0.01. Resizing to 0.01.", c, r);
+	val = 0.01;
+      }
+      
+      setMValue(r, c, val);
+    }
+  }
   
+  printRawMatrix();
+
   // Delete old matrix
   for(size_t r = 0; r < nrows; r++)
     delete[] m[r];
@@ -40,7 +52,7 @@ MSZDataSet::MSZDataSet(const MSZDataSet& ds)
   : nrows(ds.nrows), rfeatures(ds.rfeatures), ncols(ds.ncols),
     outputs(ds.outputs), stdDone(ds.stdDone), oStdDone(ds.oStdDone) 
 {
-  
+
   // Now we just need to copy the matrix.
   matrix = new double* [ncols];
   for(size_t c = 0; c < ncols; c++)
@@ -62,6 +74,19 @@ MSZDataSet::~MSZDataSet() {
 	 
   delete[] matrix;
   
+}
+
+void MSZDataSet::printRawMatrix() {
+
+  cerr << "Printing all matrix [" << nrows << ", " << ncols << "]\n";
+  for(size_t r = 0; r < nrows; r++) {
+    cerr << "[Row " << r << "] ";
+    for(size_t c = 0; c < ncols; c++) {
+      cerr << getMValue(r, c) << " ";
+    }
+    cerr << "\n";
+  }
+
 }
 
 void MSZDataSet::dumpPlotFiles(const vector<string> &labels, const string &prefix) const {
@@ -151,7 +176,7 @@ double MSZDataSet::getFeatureValue(size_t row, size_t col) const {
 
 void MSZDataSet::standardize() {
   
-  cout << "Standardizing features ...";
+  cout << "Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...\n";
 
   if(!stdDone) {
     for(size_t c = outputs; c < ncols; c++) {
@@ -162,11 +187,16 @@ void MSZDataSet::standardize() {
 	mean += getMValue(r, c);
       mean /= nrows;
 
+      cout << "[Feature " << c-outputs << "] Centering = " << mean << "; ";
+
       // Compute column standard deviation. 
       double sdv = 0.0;
       for(size_t r = 0; r < nrows; r++) 
 	sdv += gsl_pow_2(getMValue(r, c) - mean);
       sdv /= nrows;
+      sdv = sqrt(sdv);
+
+      cout << "Scaling = " << sdv << "\n";
 
       for(size_t r = 0; r < nrows; r++) 
 	setMValue(r, c, (getMValue(r, c) - mean) / sdv);
@@ -244,9 +274,11 @@ void MSZDataSet::standardizeOutputs() {
   cout << "Standardizing outputs... ";
 
   if(!stdDone) {
-    for(size_t c = 0; c < outputs; c++)
-      for(size_t r = 0; r < nrows; r++)
+    for(size_t c = 0; c < outputs; c++) {
+      for(size_t r = 0; r < nrows; r++) {
 	setMValue(r, c, log(getMValue(r, c)));
+      }
+    }
   }
 
   oStdDone = true;
@@ -386,7 +418,7 @@ void MSZDataSet::removeTimeouts(size_t timeout, size_t out) {
 	rptr++) {
       assert(*rptr >= nr);
 
-      newMatrix[c][nr] = getMValue(*rptr, c);
+      newMatrix[c][nr++] = getMValue(*rptr, c);
     }
   }
 

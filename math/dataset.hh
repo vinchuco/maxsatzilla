@@ -51,6 +51,10 @@ public:
 
   /// Removes the instances with timeouts in the given solver
   void removeTimeouts(size_t, size_t);
+
+  /// Prints raw matrix, no strings attached. Just for debugging purposes.
+  void printRawMatrix(); 
+
 private:
   double *getMColumn(size_t c)           const { return matrix[c];    }
   double getMValue(size_t r, size_t c)   const { return matrix[c][r]; }

@@ -4,9 +4,16 @@
 #ifndef PPUTILS_HH
 #define PPUTILS_HH
 
-#define MSZWarn(msg) "ERROR"
+#define MSZWarn(msg, ...)					\
+  fprintf(stderr, "WARNING (%s:%d) ", __FILE__,  __LINE__);     \
+  fprintf(stderr, msg, ##__VA_ARGS__);                          \
+  fprintf(stderr, "\n");
 
-#define MSZErr(msg) "ERROR"
+#define MSZError(msg)                                                 \
+  fprintf(stderr, "ERROR (%s:%d) ", __FILE__, __LINE__);              \
+  fprintf(stderr, msg, ##__VA_ARGS__);                                \
+  fprintf(stderr, "\n");                                              \
+  exit(EXIT_FAILURE);
 
 #define MSZMemOut(msg) "ERROR"
 
