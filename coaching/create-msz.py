@@ -2,7 +2,7 @@
 
 import sys
 
-if len( sys.argv ) < 4:
+if len( sys.argv ) < 5:
     print "usage " + sys.argv[0] + " solver-list feature-list instance-set-list msz-file"
     sys.exit(0)
 
@@ -35,11 +35,14 @@ def get_feature_value( instance, feature ):
 
 def get_number_of_instances():
     total_number = 0
+    print >> msz_file, 'c Instances from sets: ',
     for line in open( instance_set_list ):
         if line[0] == '#':
             continue
         set_name, path, number = line.split()
+        print >> msz_file, set_name,
         total_number += int( number )
+    print >> msz_file
     return str( total_number )
 
 
@@ -66,18 +69,18 @@ for line in open( instance_set_list ):
     if line[0] == '#':
         continue        
     set_name, path, number = line.split()
-    #print >> msz_file, '# Set name ' + set_name
+    print >> msz_file, 'c Set name ' + set_name
     for instance in glob.glob( features_directory + set_name + '*.features' ):
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
-        print >> msz_file, instance_basename
+        print >> msz_file, 'i ' + instance_basename
         solvers_times = []
         feature_values = []
         try:
             for solver in solvers:
                 solution, time = get_instance_time( solver, set_name, instance_basename )
                 solvers_times.append ( time )
-                for feature in features:
-                    feature_values.append( get_feature_value( instance, feature ) )
+            for feature in features:
+                feature_values.append( get_feature_value( instance, feature ) )
             print >> msz_file, ' '.join( solvers_times )
             print >> msz_file, ' '.join( feature_values )
         except Exception:
