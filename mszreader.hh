@@ -225,12 +225,12 @@ namespace iomsz {
       reportf("\n");
     }
     else if ( match(in, "ftr") ) {
-      reportf("c Features:");
+      //reportf("c Features:");
       for (unsigned int i=0; i<nbFeatures; i++) {
 	readWord(in,featuresNames[i]);
-	reportf(" %s", featuresNames[i].c_str());
+	//reportf(" %s", featuresNames[i].c_str());
       }
-      reportf("\n");
+      //reportf("\n");
     }
     else reportf("PARSE ERROR! (parse_MSZ) Unexpected params chars: %c %c %c\n", *in, *in, *in), exit(3);
   }
@@ -258,23 +258,20 @@ namespace iomsz {
       else if (*in == 'i') {
 	++in;
 	readWord(in,instancesNames[inst]);
-	reportf("c Instance: %s\n", instancesNames[inst].c_str());
+	//reportf("c Instance: %s\n", instancesNames[inst].c_str());
       } else {
-	printf("Current character : %c\n", *in );
-	reportf("c matrix:\n");
+	//reportf("c matrix:\n");
 	for (unsigned int i=0; i<nbSolvers; i++) {
 	  matrix[inst][i]=parseDouble(in);
-	  reportf(" %f", matrix[inst][i]);
-	  printf("Iteration %d\n", i);
+	  //reportf(" %f", matrix[inst][i]);
 	}
-	reportf("\n");
+	//reportf("\n");
 	skipWhitespace(in);
 	for (unsigned int i=nbSolvers; i<nbSolvers+nbFeatures; i++) {
 	  matrix[inst][i]=parseDouble(in);
-	  reportf(" %f", matrix[inst][i]);
-	  printf("Iteration %d\n", i);
+	  //reportf(" %f", matrix[inst][i]);
 	}
-	reportf("\n");
+	//reportf("\n");
 	inst++;
       }
     }
