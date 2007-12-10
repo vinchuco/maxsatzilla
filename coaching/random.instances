@@ -1,0 +1,7 @@
+2SAT100 /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX2SAT/100VARS
+2SAT60  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX2SAT/60VARS
+2SAT140 /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX2SAT/140VARS
+3SAT40  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX3SAT/40VARS
+3SAT60  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX3SAT/60VARS
+3SAT80  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RANDOM/MAX3SAT/80VARS
+RAMSEY  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RAMSEY
