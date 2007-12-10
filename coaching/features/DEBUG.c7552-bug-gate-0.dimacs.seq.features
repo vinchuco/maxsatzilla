@@ -1,0 +1,53 @@
+c literal -317 is redundant in clause 1448
+c literal -317 is redundant in clause 1451
+c literal -2 is redundant in clause 1477
+c literal -55 is redundant in clause 1480
+c literal -940 is redundant in clause 1486
+c literal -6 is redundant in clause 1489
+c literal -940 is redundant in clause 1492
+c literal -944 is redundant in clause 1499
+c literal -6 is redundant in clause 1502
+c literal -944 is redundant in clause 1505
+c literal -317 is redundant in clause 1508
+c literal -1573 is redundant in clause 3425
+c literal -1573 is redundant in clause 3428
+c literal -1573 is redundant in clause 4466
+c literal -792 is redundant in clause 4707
+c literal -792 is redundant in clause 4710
+c literal -1966 is redundant in clause 4713
+c literal -1966 is redundant in clause 4716
+c literal -166 is redundant in clause 5933
+feature saps_BestSolution_Mean: 551.295455
+feature saps_BestSolution_CoeffVariance: 0.461313
+feature saps_BestStep_Mean: 568.386364
+feature saps_BestStep_CoeffVariance: 0.602460
+feature saps_BestStep_Median: 497.500000
+feature saps_BestStep_Q.10: 243.000000
+feature saps_BestStep_Q.90: 875.000000
+feature saps_AvgImproveToBest_Mean: 2.152326
+feature saps_AvgImproveToBest_CoeffVariance: 0.245907
+feature saps_FirstLMRatio_Mean: 0.960908
+feature saps_FirstLMRatio_CoeffVariance: 0.102562
+feature saps_BestCV_Mean: 0.039222
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 566.960000
+feature gsat_BestSolution_CoeffVariance: 0.570100
+feature gsat_BestStep_Mean: 704.506667
+feature gsat_BestStep_CoeffVariance: 1.287291
+feature gsat_BestStep_Median: 550.000000
+feature gsat_BestStep_Q.10: 130.000000
+feature gsat_BestStep_Q.90: 1017.000000
+feature gsat_AvgImproveToBest_Mean: 2.127471
+feature gsat_AvgImproveToBest_CoeffVariance: 0.340680
+feature gsat_FirstLMRatio_Mean: 0.961401
+feature gsat_FirstLMRatio_CoeffVariance: 0.084131
+feature gsat_BestCV_Mean: 0.046918
+feature gsat_totaltime: 1.010000
+Number of Variables: 2640
+Number of Clauses: 7008
+Ratio Clauses/Variables: 2.65455
+Ratio Negative Clauses: 1.01241
+Ratio Positive Clauses: 1.20063
+Ratio Unit Clauses: 0.0449486
+Ratio Binary Clauses: 0.713756
+Ratio Ternary Clauses: 0.227026

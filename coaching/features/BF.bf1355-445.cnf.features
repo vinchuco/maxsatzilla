@@ -1,0 +1,35 @@
+c literal 709 is redundant in clause 7094
+feature saps_BestSolution_Mean: 50.830508
+feature saps_BestSolution_CoeffVariance: 0.684063
+feature saps_BestStep_Mean: 2402.118644
+feature saps_BestStep_CoeffVariance: 0.218386
+feature saps_BestStep_Median: 2497.000000
+feature saps_BestStep_Q.10: 1730.000000
+feature saps_BestStep_Q.90: 2948.000000
+feature saps_AvgImproveToBest_Mean: 0.594706
+feature saps_AvgImproveToBest_CoeffVariance: 0.391445
+feature saps_FirstLMRatio_Mean: 0.852935
+feature saps_FirstLMRatio_CoeffVariance: 0.041493
+feature saps_BestCV_Mean: 0.407599
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 93.350000
+feature gsat_BestSolution_CoeffVariance: 0.103059
+feature gsat_BestStep_Mean: 5350.900000
+feature gsat_BestStep_CoeffVariance: 0.218017
+feature gsat_BestStep_Median: 5606.000000
+feature gsat_BestStep_Q.10: 3622.000000
+feature gsat_BestStep_Q.90: 6878.000000
+feature gsat_AvgImproveToBest_Mean: 0.252995
+feature gsat_AvgImproveToBest_CoeffVariance: 0.234747
+feature gsat_FirstLMRatio_Mean: 0.888859
+feature gsat_FirstLMRatio_CoeffVariance: 0.015555
+feature gsat_BestCV_Mean: 0.259259
+feature gsat_totaltime: 1.010000
+Number of Variables: 2297
+Number of Clauses: 7305
+Ratio Clauses/Variables: 3.18024
+Ratio Negative Clauses: 1.446
+Ratio Positive Clauses: 1.09309
+Ratio Unit Clauses: 0.000684463
+Ratio Binary Clauses: 0.538261
+Ratio Ternary Clauses: 0.392608

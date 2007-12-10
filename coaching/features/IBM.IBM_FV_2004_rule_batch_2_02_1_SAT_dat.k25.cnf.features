@@ -1,0 +1,56 @@
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+c Clause 53473 is tautological.
+feature saps_BestSolution_Mean: 1306.500000
+feature saps_BestSolution_CoeffVariance: 1.000720
+feature saps_BestStep_Mean: 9329.000000
+feature saps_BestStep_CoeffVariance: 0.872571
+feature saps_BestStep_Median: 9329.000000
+feature saps_BestStep_Q.10: 3573.000000
+feature saps_BestStep_Q.90: 3573.000000
+feature saps_AvgImproveToBest_Mean: 1.704748
+feature saps_AvgImproveToBest_CoeffVariance: 0.766173
+feature saps_FirstLMRatio_Mean: 0.941064
+feature saps_FirstLMRatio_CoeffVariance: 0.088568
+feature saps_BestCV_Mean: 0.189841
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 705.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 17365.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 17365.000000
+feature gsat_BestStep_Q.10: 17365.000000
+feature gsat_BestStep_Q.90: 17365.000000
+feature gsat_AvgImproveToBest_Mean: 0.660006
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.904197
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.253893
+feature gsat_totaltime: 1.010000
+Number of Variables: 16723
+Number of Clauses: 58163
+Ratio Clauses/Variables: 3.47802
+Ratio Negative Clauses: 1.35289
+Ratio Positive Clauses: 1.15372
+Ratio Unit Clauses: 0.00601757
+Ratio Binary Clauses: 0.715919
+Ratio Ternary Clauses: 0.186115

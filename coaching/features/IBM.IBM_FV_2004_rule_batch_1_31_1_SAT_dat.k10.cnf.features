@@ -1,0 +1,126 @@
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2350 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 2479 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 12792 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 15441 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 34993 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 35096 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36295 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 36398 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 37122 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38076 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 38678 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+c Clause 41516 is tautological.
+feature saps_BestSolution_Mean: 534.666667
+feature saps_BestSolution_CoeffVariance: 1.001817
+feature saps_BestStep_Mean: 10377.000000
+feature saps_BestStep_CoeffVariance: 0.562873
+feature saps_BestStep_Median: 13065.000000
+feature saps_BestStep_Q.10: 3676.000000
+feature saps_BestStep_Q.90: 13065.000000
+feature saps_AvgImproveToBest_Mean: 1.302966
+feature saps_AvgImproveToBest_CoeffVariance: 0.752325
+feature saps_FirstLMRatio_Mean: 0.910862
+feature saps_FirstLMRatio_CoeffVariance: 0.057623
+feature saps_BestCV_Mean: 0.307851
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 395.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 34097.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 34097.000000
+feature gsat_BestStep_Q.10: 34097.000000
+feature gsat_BestStep_Q.90: 34097.000000
+feature gsat_AvgImproveToBest_Mean: 0.287327
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.894866
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.341350
+feature gsat_totaltime: 1.010000
+Number of Variables: 11536
+Number of Clauses: 46830
+Ratio Clauses/Variables: 4.05947
+Ratio Negative Clauses: 1.2965
+Ratio Positive Clauses: 1.16983
+Ratio Unit Clauses: 0.0259236
+Ratio Binary Clauses: 0.746808
+Ratio Ternary Clauses: 0.121589

@@ -1,0 +1,166 @@
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44299 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 44454 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46462 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 46617 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48625 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 48780 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 53134 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 54044 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 55354 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 56264 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 57221 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+c Clause 58131 is tautological.
+feature saps_BestSolution_Mean: 278.000000
+feature saps_BestSolution_CoeffVariance: 0.000000
+feature saps_BestStep_Mean: 28834.000000
+feature saps_BestStep_CoeffVariance: 0.000000
+feature saps_BestStep_Median: 28834.000000
+feature saps_BestStep_Q.10: 28834.000000
+feature saps_BestStep_Q.90: 28834.000000
+feature saps_AvgImproveToBest_Mean: 0.566831
+feature saps_AvgImproveToBest_CoeffVariance: 0.000000
+feature saps_FirstLMRatio_Mean: 0.883749
+feature saps_FirstLMRatio_CoeffVariance: 0.000000
+feature saps_BestCV_Mean: 0.459167
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 799.000000
+feature gsat_BestSolution_CoeffVariance: 0.000000
+feature gsat_BestStep_Mean: 18878.000000
+feature gsat_BestStep_CoeffVariance: 0.000000
+feature gsat_BestStep_Median: 18878.000000
+feature gsat_BestStep_Q.10: 18878.000000
+feature gsat_BestStep_Q.90: 18878.000000
+feature gsat_AvgImproveToBest_Mean: 0.838171
+feature gsat_AvgImproveToBest_CoeffVariance: 0.000000
+feature gsat_FirstLMRatio_Mean: 0.912785
+feature gsat_FirstLMRatio_CoeffVariance: 0.000000
+feature gsat_BestCV_Mean: 0.275235
+feature gsat_totaltime: 1.010000
+Number of Variables: 17545
+Number of Clauses: 72732
+Ratio Clauses/Variables: 4.14545
+Ratio Negative Clauses: 1.31404
+Ratio Positive Clauses: 1.18003
+Ratio Unit Clauses: 0.0166639
+Ratio Binary Clauses: 0.75671
+Ratio Ternary Clauses: 0.116537

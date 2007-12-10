@@ -1,0 +1,41 @@
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+c Clause 18018 is tautological.
+feature saps_BestSolution_Mean: 293.000000
+feature saps_BestSolution_CoeffVariance: 2.065888
+feature saps_BestStep_Mean: 4588.928571
+feature saps_BestStep_CoeffVariance: 0.345371
+feature saps_BestStep_Median: 4611.000000
+feature saps_BestStep_Q.10: 3760.000000
+feature saps_BestStep_Q.90: 5439.000000
+feature saps_AvgImproveToBest_Mean: 1.186760
+feature saps_AvgImproveToBest_CoeffVariance: 1.096758
+feature saps_FirstLMRatio_Mean: 0.895619
+feature saps_FirstLMRatio_CoeffVariance: 0.035272
+feature saps_BestCV_Mean: 0.347707
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 167.666667
+feature gsat_BestSolution_CoeffVariance: 0.038806
+feature gsat_BestStep_Mean: 18228.000000
+feature gsat_BestStep_CoeffVariance: 0.298584
+feature gsat_BestStep_Median: 16079.000000
+feature gsat_BestStep_Q.10: 14188.000000
+feature gsat_BestStep_Q.90: 16079.000000
+feature gsat_AvgImproveToBest_Mean: 0.234223
+feature gsat_AvgImproveToBest_CoeffVariance: 0.262830
+feature gsat_FirstLMRatio_Mean: 0.895811
+feature gsat_FirstLMRatio_CoeffVariance: 0.011670
+feature gsat_BestCV_Mean: 0.327560
+feature gsat_totaltime: 1.010000
+Number of Variables: 5795
+Number of Clauses: 19536
+Ratio Clauses/Variables: 3.37118
+Ratio Negative Clauses: 1.332
+Ratio Positive Clauses: 1.14276
+Ratio Unit Clauses: 0.0171478
+Ratio Binary Clauses: 0.707054
+Ratio Ternary Clauses: 0.185043

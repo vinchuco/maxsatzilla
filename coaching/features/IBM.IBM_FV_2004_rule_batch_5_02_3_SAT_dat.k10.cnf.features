@@ -1,0 +1,42 @@
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+c Clause 11974 is tautological.
+feature saps_BestSolution_Mean: 404.000000
+feature saps_BestSolution_CoeffVariance: 1.759819
+feature saps_BestStep_Mean: 6053.125000
+feature saps_BestStep_CoeffVariance: 0.372489
+feature saps_BestStep_Median: 6716.000000
+feature saps_BestStep_Q.10: 941.000000
+feature saps_BestStep_Q.90: 7465.000000
+feature saps_AvgImproveToBest_Mean: 1.227353
+feature saps_AvgImproveToBest_CoeffVariance: 0.868317
+feature saps_FirstLMRatio_Mean: 0.898958
+feature saps_FirstLMRatio_CoeffVariance: 0.045692
+feature saps_BestCV_Mean: 0.357932
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 216.000000
+feature gsat_BestSolution_CoeffVariance: 0.019642
+feature gsat_BestStep_Mean: 20098.500000
+feature gsat_BestStep_CoeffVariance: 0.224004
+feature gsat_BestStep_Median: 20098.500000
+feature gsat_BestStep_Q.10: 16915.000000
+feature gsat_BestStep_Q.90: 16915.000000
+feature gsat_AvgImproveToBest_Mean: 0.285998
+feature gsat_AvgImproveToBest_CoeffVariance: 0.258818
+feature gsat_FirstLMRatio_Mean: 0.894590
+feature gsat_FirstLMRatio_CoeffVariance: 0.009464
+feature gsat_BestCV_Mean: 0.343196
+feature gsat_totaltime: 1.010000
+Number of Variables: 7537
+Number of Clauses: 27317
+Ratio Clauses/Variables: 3.62439
+Ratio Negative Clauses: 1.32002
+Ratio Positive Clauses: 1.17769
+Ratio Unit Clauses: 0.0147161
+Ratio Binary Clauses: 0.721456
+Ratio Ternary Clauses: 0.166709

@@ -1,0 +1,41 @@
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+c Clause 19798 is tautological.
+feature saps_BestSolution_Mean: 445.083333
+feature saps_BestSolution_CoeffVariance: 2.424314
+feature saps_BestStep_Mean: 4898.916667
+feature saps_BestStep_CoeffVariance: 0.345976
+feature saps_BestStep_Median: 5138.000000
+feature saps_BestStep_Q.10: 4384.000000
+feature saps_BestStep_Q.90: 5470.000000
+feature saps_AvgImproveToBest_Mean: 1.817282
+feature saps_AvgImproveToBest_CoeffVariance: 1.818274
+feature saps_FirstLMRatio_Mean: 0.898762
+feature saps_FirstLMRatio_CoeffVariance: 0.036211
+feature saps_BestCV_Mean: 0.353483
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 162.500000
+feature gsat_BestSolution_CoeffVariance: 0.004351
+feature gsat_BestStep_Mean: 24453.500000
+feature gsat_BestStep_CoeffVariance: 0.216323
+feature gsat_BestStep_Median: 24453.500000
+feature gsat_BestStep_Q.10: 20713.000000
+feature gsat_BestStep_Q.90: 20713.000000
+feature gsat_AvgImproveToBest_Mean: 0.185714
+feature gsat_AvgImproveToBest_CoeffVariance: 0.206358
+feature gsat_FirstLMRatio_Mean: 0.892910
+feature gsat_FirstLMRatio_CoeffVariance: 0.001096
+feature gsat_BestCV_Mean: 0.355247
+feature gsat_totaltime: 1.010000
+Number of Variables: 6334
+Number of Clauses: 21794
+Ratio Clauses/Variables: 3.4408
+Ratio Negative Clauses: 1.33661
+Ratio Positive Clauses: 1.14554
+Ratio Unit Clauses: 0.0166101
+Ratio Binary Clauses: 0.717445
+Ratio Ternary Clauses: 0.177618

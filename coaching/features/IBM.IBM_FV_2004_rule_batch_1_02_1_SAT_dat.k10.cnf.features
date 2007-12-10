@@ -1,0 +1,41 @@
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+c Clause 20535 is tautological.
+feature saps_BestSolution_Mean: 247.272727
+feature saps_BestSolution_CoeffVariance: 1.750816
+feature saps_BestStep_Mean: 5682.909091
+feature saps_BestStep_CoeffVariance: 0.463530
+feature saps_BestStep_Median: 5121.000000
+feature saps_BestStep_Q.10: 4283.000000
+feature saps_BestStep_Q.90: 8996.000000
+feature saps_AvgImproveToBest_Mean: 1.072065
+feature saps_AvgImproveToBest_CoeffVariance: 0.805679
+feature saps_FirstLMRatio_Mean: 0.893451
+feature saps_FirstLMRatio_CoeffVariance: 0.041007
+feature saps_BestCV_Mean: 0.378627
+feature saps_totaltime: 1.010000
+feature gsat_BestSolution_Mean: 176.000000
+feature gsat_BestSolution_CoeffVariance: 0.040177
+feature gsat_BestStep_Mean: 24749.000000
+feature gsat_BestStep_CoeffVariance: 0.045885
+feature gsat_BestStep_Median: 24749.000000
+feature gsat_BestStep_Q.10: 25552.000000
+feature gsat_BestStep_Q.90: 25552.000000
+feature gsat_AvgImproveToBest_Mean: 0.190994
+feature gsat_AvgImproveToBest_CoeffVariance: 0.005425
+feature gsat_FirstLMRatio_Mean: 0.890436
+feature gsat_FirstLMRatio_CoeffVariance: 0.013536
+feature gsat_BestCV_Mean: 0.354099
+feature gsat_totaltime: 1.010000
+Number of Variables: 6482
+Number of Clauses: 22557
+Ratio Clauses/Variables: 3.47994
+Ratio Negative Clauses: 1.33923
+Ratio Positive Clauses: 1.14732
+Ratio Unit Clauses: 0.0164916
+Ratio Binary Clauses: 0.72186
+Ratio Ternary Clauses: 0.174004
