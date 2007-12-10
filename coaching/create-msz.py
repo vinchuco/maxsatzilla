@@ -45,6 +45,14 @@ def get_number_of_instances():
     print >> msz_file
     return str( total_number )
 
+def check_solution( solution, solver_solution ):
+    if solver_solution != '--':
+        if solution == -1:
+            solution = int( solver_solution )
+        else:
+            if solution != int( solver_solution ):
+                raise( Exception( 'Solution mistmatch' ) ) 
+
 
 solvers = []
 for solver in open( solver_list ):
@@ -61,23 +69,28 @@ for feature in open( feature_list ):
     feature_names.append( feature.rstrip().replace('.','_').replace(' ','_') )
 
 msz_file = open( msz_file_name, 'w' )
-print >> msz_file, 'p msz ' + str( len( solvers ) ) + ' ' + str( len( features ) ) + ' ' + get_number_of_instances() + ' ' + timeout
+number_of_instances = get_number_of_instances()
+print >> msz_file, 'p msz ' + str( len( solvers ) ) + ' ' + str( len( features ) ) + ' ' + number_of_instances + ' ' + timeout
 print >> msz_file, 'p slv ' + ' '.join( solvers )
 print >> msz_file, 'p ftr ' + ' '.join( feature_names )
 
 for line in open( instance_set_list ):
     if line[0] == '#':
         continue        
+    instance_counter = 0
     set_name, path, number = line.split()
     print >> msz_file, 'c Set name ' + set_name
     for instance in glob.glob( features_directory + set_name + '*.features' ):
+        instance_counter += 1
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
         print >> msz_file, 'i ' + instance_basename
         solvers_times = []
         feature_values = []
+        solution = -1
         try:
             for solver in solvers:
-                solution, time = get_instance_time( solver, set_name, instance_basename )
+                solver_sol, time = get_instance_time( solver, set_name, instance_basename )
+                check_solution( solution, solver_sol )
                 solvers_times.append ( time )
             for feature in features:
                 feature_values.append( get_feature_value( instance, feature ) )
@@ -85,3 +98,6 @@ for line in open( instance_set_list ):
             print >> msz_file, ' '.join( feature_values )
         except Exception:
             print >> sys.stderr, "Error instance " + instance
+    if instance_counter != int( number ):
+        print 'Values for ' + set_name + ' : ' + str( instance_counter) + ' ' + number
+        raise( Exception( 'Incorrect number of instances' ) )
