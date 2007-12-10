@@ -24,5 +24,12 @@ int main( int argc, char* argv[] ) {
 
   parse_DIMACS(in, nbSolvers, nbFeatures, nbInstances, timeOut, solversNames, featuresNames, instancesNames, matrix);
 
+  delete[] solversNames;
+  delete[] featuresNames;
+  delete[] instancesNames;
+  for(size_t i = 0; i < nbSolvers+nbInstances; i++)
+    delete[] matrix[i];
+  delete[] matrix;
+
   return 0;
 }

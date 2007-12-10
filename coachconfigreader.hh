@@ -1,7 +1,17 @@
 #ifndef COACHCONFIGREADER_HH
 #define COACHCONFIGREADER_HH
 
+#include <string>
+#include <vector>
+#include <iostream>
+#include <fstream>
+
 #include "math/pputils.hh"
+
+using std::string;
+using std::vector;
+using std::ifstream;
+using std::cout;
 
 class CoachConfigReader {
 public:
@@ -13,17 +23,19 @@ public:
   uint   getFSInsts()                     const { return fsInsts;             }
   double getRRDelta()                     const { return rrDelta;             }
   vector<vector<uint> > getFEPartitions() const { return fePartitions;        }
-  bool   featureStd()                     const { return featureStd;          }
-  bool   outputStd ()                     const { return outputStd;           }
+  bool   getFeatureStd()                  const { return featureStd;          }
+  bool   getOutputStd ()                  const { return outputStd;           }
 
 private:
-  void eatSpaces(ifstream &);
-  void eatLine(ifstream&);
-  string getString(ifstream &);
-  double getDouble(ifstream&);
-  uint getUInt(ifstream&);
-  vector<uint> getVectorUInt(ifstream&);
-
+  void parseConfig();
+  void eatSpaces();
+  void eatLine();
+  string getString();
+  double getDouble();
+  uint getUInt();
+  vector<uint> getVectorUInt();
+  
+  ifstream file;                      ///< File to read the configuration
   string trainingSetFilename;         ///< Filename that will contain the training set to read from.
   string outputModelFilename;         ///< Filename that will contain the model to output.
   double fsDelta;                     ///< Forward Selection threshold (alt. to fsInsts).

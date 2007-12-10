@@ -4,12 +4,15 @@
 #ifndef PPUTILS_HH
 #define PPUTILS_HH
 
-#define MSZWarn
+#define MSZWarn(msg) "ERROR"
 
-#define MSZErr
+#define MSZErr(msg) "ERROR"
 
-#define MSZMemOut
+#define MSZMemOut(msg) "ERROR"
 
-#define MSZSegFault
+#define MSZSegFault(msg) "ERROR"
+
+// type shortcuts
+typedef unsigned int uint;
 
 #endif // PPUTILS_HH

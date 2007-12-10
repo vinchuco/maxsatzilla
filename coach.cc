@@ -3,8 +3,8 @@
 #include <fstream>
 #include <iterator>
 #include <map>
-
-#include <zlib.h>
+#include <cassert>
+#include <cstdlib>
 
 #include "mszreader.hh"
 #include "coachconfigreader.hh"
@@ -17,6 +17,7 @@ using std::vector;
 using std::string;
 using std::cerr;
 using std::ofstream;
+using std::ifstream;
 using std::map;
 
 using namespace iomsz;
@@ -136,13 +137,12 @@ void outputModelHeader(const map<string, pair<vector<double>, vector<string> > >
  */
 int main(int argc, char *argv[]) {
 
-  if (argc != 1) {
+  if (argc != 2) {
     cerr << "usage: coach <coachconfigfile>\n";
     exit(EXIT_FAILURE);
   }
 
   CoachConfigReader creader(argv[1]);
-  creader
 
   unsigned int nbSolvers, nbFeatures, nbInstances, timeOut;
   string *solversNames;
@@ -150,15 +150,9 @@ int main(int argc, char *argv[]) {
   string *instancesNames;
   double **data;
   
-  double threshold = atof(argv[1]);
-  double delta = atof(argv[2]);
-  char *inputFileName = argv[3];
-  
-  gzFile in =(inputFileName == NULL ? gzdopen(0,"rb"): gzopen(inputFileName,"rb"));
-  if (in == NULL) {
-    cerr << "Error: Could not open file: "
-         << (inputFileName==NULL? "<stdin>": inputFileName)
-         << endl;
+  ifstream in(creader.getTrainingSetFilename().c_str());
+  if (!in.is_open()) {
+    cerr << "Error: Could not open file: "<< creader.getTrainingSetFilename() << "\n";
     exit(EXIT_FAILURE);
   }
 
@@ -170,7 +164,7 @@ int main(int argc, char *argv[]) {
     vector<string> snames;
     for(size_t s = 0; s < nbSolvers; s++) snames.push_back(solversNames[s]);
     ds->printSolverStats(timeOut, snames);
-    
+
     // Lets create the plot files
     vector<string> labels;
     for(size_t i = 0; i < nbSolvers; i++)
@@ -192,12 +186,12 @@ int main(int argc, char *argv[]) {
       solverDS.standardize();
 
       ForwardSelection fs(solverDS, s);
-      vector<size_t> res = fs.run(threshold);
+      vector<size_t> res = fs.run(creader.getFSDelta());
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
       vector<double> w;
-      w = rr.run(delta, s);
+      w = rr.run(creader.getRRDelta(), s);
 
       vector<string> wlabels;
       wlabels.push_back("freeParameter");

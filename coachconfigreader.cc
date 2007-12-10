@@ -1,44 +1,51 @@
 #include "coachconfigreader.hh"
 
-CoachConfigReader::CoachConfigReader(const string &configFile) {
+#include <iostream>
+#include <iterator>
 
-  ifstream file(configFile); 
+using std::cerr;
+
+CoachConfigReader::CoachConfigReader(const string &configFile)
+  : file(configFile.c_str()) {
+
+  cout << "Parsing " << configFile << "\n";
+  
   if(!file.is_open()) {
     cout << "Unable to open config file.\n";
     exit(EXIT_FAILURE);
   }
 
-  parseConfig(file);
+  parseConfig();
   file.close();
 
 }
 
-CoachConfigReader::parseConfig(ifstream &file) {
+void CoachConfigReader::parseConfig() {
 
   // For each loop we read a line in the file.
-  while(file.good()) {
-    eatSpaces(file);
+  while(!file.eof()) {
+    eatSpaces();
     
     // If it is a comment we read everything up to the end of file.
     char c;
     c = file.get();
     if(c == 'c') {
-      eatLine(file);
+      eatLine();
     }
     else if(c == 'p') {
       // Read everything up to the first non-space
       eatSpaces();
 
       // Read string up to the next space
-      string paramName = getString(file);
+      string paramName = getString();
 
       // Read everything up to the first non-space
-      eatSpaces(file);
+      eatSpaces();
 
       if(paramName == "training") 
-	trainingSetFilename = getString(file);
+	trainingSetFilename = getString();
       else if(paramName == "model")
-	outputModelFilename = getString(file);
+	outputModelFilename = getString();
       else if(paramName == "fsdelta")
 	fsDelta = getDouble();
       else if(paramName == "fsinst")
@@ -53,44 +60,47 @@ CoachConfigReader::parseConfig(ifstream &file) {
 	featureStd = true;
       else { // error
 	cerr << "Error during parsing of config.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
-	exit(FAILURE);
+	exit(EXIT_FAILURE);
       }
     } else { // error
       cerr << "Error during parsing of config.\nExpected comment of parameter declaration, got character: " << c << "\n";
-      exit(FAILURE);
+      exit(EXIT_FAILURE);
     }
   }
 
 }
 
-void CoachConfigReader::eatSpaces(ifstream &file) {
+void CoachConfigReader::eatSpaces() {
   while(isspace(file.peek())) file.get();
 }
 
-void CoachConfigReader::eatLine(ifstream& file) {
+void CoachConfigReader::eatLine() {
   while(file.peek() != '\n') file.get();
-  eatSpaces(file);
+  eatSpaces();
 }
 
-string CoachConfigReader::getString(ifstream &file) {
+string CoachConfigReader::getString() {
   string str;
-  while(!isspace(file.peek())) str += ((char)(file.get()));
+  while(!isspace(file.peek())) {
+    char c = file.get();
+    str += c;
+  }
   return str;
 }
 
-double CoachConfigReader::getDouble(ifstream& file) {
+double CoachConfigReader::getDouble() {
   double num;
   file >> num;
   return num;
 }
 
-uint CoachConfigReader::getUInt(ifstream& file) {
+uint CoachConfigReader::getUInt() {
   uint val;
   file >> val;
   return val;
 }
 
-vector<uint> CoachConfigReader::getVectorUInt(ifstream& file) {
+vector<uint> CoachConfigReader::getVectorUInt() {
   vector<uint> vec;
   while(file.peek() != '\n') {
     uint val;
