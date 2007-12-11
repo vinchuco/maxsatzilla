@@ -12,16 +12,16 @@ RidgeRegression::RidgeRegression(const MSZDataSet &data) :
 
 RidgeRegression::~RidgeRegression() { }
 
-vector<double> RidgeRegression::run(double delta, size_t out) {
+vector<double> RidgeRegression::run(double delta, uint out) {
 
-  const size_t nbParams = data.getNFeatures()+1;
+  const uint nbParams = data.getNFeatures()+1;
 
   // Create PHI matrix
   gsl_matrix *phi = gsl_matrix_alloc(data.getNRows(), nbParams);
 
   // populate phi
-  for(size_t r = 0; r < phi->size1; r++) {
-    for(size_t c = 0; c < phi->size2; c++) {
+  for(uint r = 0; r < phi->size1; r++) {
+    for(uint c = 0; c < phi->size2; c++) {
       if(c == 0)
 	gsl_matrix_set(phi, r, c, 1.0);
       else
@@ -55,7 +55,7 @@ vector<double> RidgeRegression::run(double delta, size_t out) {
 
   // initialize y vector as matrix
   gsl_matrix *y = gsl_matrix_alloc(data.getNRows(), 1);
-  for(size_t r = 0; r < data.getNRows(); r++)
+  for(uint r = 0; r < data.getNRows(); r++)
     gsl_matrix_set(y, r, 0, data.getOutputValue(r, out));
 
 #ifdef RRDEBUG
@@ -131,7 +131,7 @@ vector<double> RidgeRegression::run(double delta, size_t out) {
   assert(final->size2 == 1);
 
   vector<double> w;
-  for(size_t i = 0; i < final->size1; i++) 
+  for(uint i = 0; i < final->size1; i++) 
     w.push_back(gsl_matrix_get(final, i, 0));
 
   gsl_matrix_free(final);
@@ -144,14 +144,14 @@ gsl_matrix *RidgeRegression::matrix_mult(const gsl_matrix *m1, const gsl_matrix 
 
   gsl_matrix *prod = gsl_matrix_alloc(m1->size1, m2->size2);
   
-  for(size_t r = 0; r < m1->size1; r++) {
+  for(uint r = 0; r < m1->size1; r++) {
     gsl_vector_const_view rowm1 = gsl_matrix_const_row(m1, r);
 
-    for(size_t c = 0; c < m2->size2; c++) {
+    for(uint c = 0; c < m2->size2; c++) {
       gsl_vector_const_view colm2 = gsl_matrix_const_column(m2, c);
       assert((&rowm1.vector)->size == (&colm2.vector)->size);
       double vprod = 0.0;
-      for(size_t i = 0; i < (&rowm1.vector)->size; i++)
+      for(uint i = 0; i < (&rowm1.vector)->size; i++)
 	vprod += gsl_vector_get((&rowm1.vector), i) * gsl_vector_get((&colm2.vector), i); 
 
       gsl_matrix_set(prod, r, c, vprod);

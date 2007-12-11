@@ -14,21 +14,21 @@
 using std::cerr;
 using std::cout;
 
-ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
+ForwardSelection::ForwardSelection(const MSZDataSet &ds, uint output) {
 
   /// \todo No error checking is being done on GSL output
   
   // Copying the output vector of interest
   ovec = gsl_vector_alloc(ds.getNRows());
   
-  for(size_t i = 0; i < ds.getNRows(); i++)
+  for(uint i = 0; i < ds.getNRows(); i++)
     gsl_vector_set(ovec, i, ds.getOutputValue(i, output));
 
   // Copying the matrix
   fmatrix = gsl_matrix_alloc(ds.getNRows(), ds.getNFeatures());
 
-  for(size_t r = 0; r < ds.getNRows(); r++)
-    for(size_t c = 0; c < ds.getNFeatures(); c++) 
+  for(uint r = 0; r < ds.getNRows(); r++)
+    for(uint c = 0; c < ds.getNFeatures(); c++) 
       gsl_matrix_set(fmatrix, r, c, ds.getFeatureValue(r, c));
 
   // Printing Matris
@@ -43,7 +43,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
     cerr << "corr(0)=" << bestCorrelation << " ";
 #endif // FSDEBUG
 
-  for(size_t rindex = 1; rindex < fmatrix->size2; rindex++) {
+  for(uint rindex = 1; rindex < fmatrix->size2; rindex++) {
     // Computes the correlation between column vindex and column output
     gsl_vector_const_view col = gsl_matrix_const_column(fmatrix, rindex);
     double posCurrentCorrelation = fabs(gsl_stats_correlation(ovec->data, 1, (&col.vector)->data, 1, ovec->size));
@@ -85,7 +85,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, size_t output) {
   // SSt is given by Sum (yi - mean(yi))^2
   SSt = 0.0;
   const double outmean = gsl_stats_mean(ovec->data, 1, ovec->size);
-  for(size_t oi = 0; oi < ovec->size; oi++)
+  for(uint oi = 0; oi < ovec->size; oi++)
     SSt += gsl_pow_2(gsl_vector_get(ovec, oi) - outmean);
 
   initSSr = SSt - SSe;
@@ -105,7 +105,7 @@ ForwardSelection::~ForwardSelection() {
   gsl_matrix_free(fmatrix);
 }
 
-vector<size_t> ForwardSelection::run(double fin) {
+vector<uint> ForwardSelection::run(double fin) {
 
   // Current model SSr
   double modelSSr = initSSr;
@@ -122,7 +122,7 @@ vector<size_t> ForwardSelection::run(double fin) {
     vector<double> ssrvalues(fmatrix->size2, 0.0);
     bool foundNew = false; // Found regressor to add with fj > fin
 
-    for(size_t rindex = 0; rindex < isInModel.size(); rindex++) {
+    for(uint rindex = 0; rindex < isInModel.size(); rindex++) {
       if(isInModel[rindex]) // if current regressor is in model then we continue
 	continue;
 
@@ -146,8 +146,8 @@ vector<size_t> ForwardSelection::run(double fin) {
     if(foundNew) {
       // Find regressor with maximum SSr
       double maxSSr = 0.0;
-      size_t bestIndex = 0;
-      for(size_t i = 0; i < ssrvalues.size(); i++) {
+      uint bestIndex = 0;
+      for(uint i = 0; i < ssrvalues.size(); i++) {
 	if(ssrvalues[i] > maxSSr) {
 	  maxSSr = ssrvalues[i];
 	  bestIndex = i;
@@ -168,12 +168,12 @@ vector<size_t> ForwardSelection::run(double fin) {
   }
 
   // Create result vector
-  vector<size_t> regs;
-  for(size_t i = 0; i < isInModel.size(); i++) 
+  vector<uint> regs;
+  for(uint i = 0; i < isInModel.size(); i++) 
     if(isInModel[i]) regs.push_back(i);
 
   cout << "Forward Selection finished by choosing variables:\n";
-  copy(regs.begin(), regs.end(), std::ostream_iterator<size_t>(cout, " "));
+  copy(regs.begin(), regs.end(), std::ostream_iterator<uint>(cout, " "));
   cout << std::endl;
 
   return regs;
@@ -181,22 +181,22 @@ vector<size_t> ForwardSelection::run(double fin) {
 
 /// This function computes the Ftest for adding the new regressor to the existent model.
 /// Returns the result of the Ftest and as parameter returns the new regression sum of squares.
-double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr, size_t newRegressorIndex, double *newSSr) {
+double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr, uint newRegressorIndex, double *newSSr) {
 
 #ifdef FSDEBUG
   cerr << "\n\n*******************************\n"
        << "Given the model with vars: ";
-  for(size_t i = 0; i < model.size(); i++)
+  for(uint i = 0; i < model.size(); i++)
     if(model[i]) cerr << i << " ";
   cerr << "\n" << "trying to add " << newRegressorIndex << "\n";
 #endif // FSDEBUG
 
-  size_t numberRegressors = 0;
-  for(size_t i = 0; i < model.size(); i++)
+  uint numberRegressors = 0;
+  for(uint i = 0; i < model.size(); i++)
     if(model[i]) numberRegressors++;
   numberRegressors++; // The new model will have all previous regressors plus another one.
 
-  const size_t numberParams = numberRegressors + 1;
+  const uint numberParams = numberRegressors + 1;
 
   // Generate matrix of features for the new model
   // We are going to create this matrix by allocating it first and then
@@ -204,7 +204,7 @@ double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr
   // way to do it.
   // Note AGAIN the number of parameters (B) is the number of regressors + 1
   gsl_matrix *matrix = gsl_matrix_alloc(fmatrix->size1, numberParams);
-  size_t setColumn = 1; // Next column to set of matrix
+  uint setColumn = 1; // Next column to set of matrix
 
   // Let's set the 0th column to 1.
   gsl_vector *vec1 = gsl_vector_alloc(ovec->size);
@@ -213,7 +213,7 @@ double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr
   gsl_vector_free(vec1);
  
   // Set the rest of the matrix.
-  for(size_t i = 0; i < model.size(); i++) {
+  for(uint i = 0; i < model.size(); i++) {
     if(model[i] || i == newRegressorIndex) {
       gsl_vector_const_view col = gsl_matrix_const_column(fmatrix, i);
       gsl_matrix_set_col(matrix, setColumn, &col.vector);
@@ -241,7 +241,7 @@ double ForwardSelection::computeFtest(const vector<bool> &model, double modelSSr
 
 #ifdef FSDEBUG
   cerr << "Multiple Regression finished, parameter vector is:\n[ ";
-  for(size_t i = 0; i < betas->size; i++)
+  for(uint i = 0; i < betas->size; i++)
     cerr << gsl_vector_get(betas, i) << " "; 
   cerr << "]\n"
        << "SSe = " << SSe << "\n"

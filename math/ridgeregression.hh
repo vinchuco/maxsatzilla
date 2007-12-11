@@ -27,7 +27,7 @@ public:
   // Runs ridge regression algorithm and outputs 
   // header file with static definition of model
   // for a given output.
-  vector<double> run(double, size_t);
+  vector<double> run(double, uint);
 
 private:
   gsl_matrix *matrix_mult(const gsl_matrix *, const gsl_matrix *) const;

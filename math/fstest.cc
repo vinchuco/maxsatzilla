@@ -3,6 +3,7 @@
 
 #include "dataset.hh"
 #include "forwardselection.hh"
+#include "pputils.hh"
 
 using std::vector;
 using std::string;
@@ -48,19 +49,19 @@ int main(void) {
 		       {0.8, 3.5, 4.7, 4.2, 3.3, 12.2},
 		       {0.8, 4.3, 5.5, 3.5, 5.8, 10.3},
 		       {0.8, 5.2, 4.8, 5.7, 3.5, 13.2}};
-  const size_t rows = 38;
-  const size_t cols = 6;
+  const uint rows = 38;
+  const uint cols = 6;
 
   double **stdformat = new double* [rows];
-  for(size_t i = 0; i < rows; i++)
+  for(uint i = 0; i < rows; i++)
     stdformat[i] = new double [cols];
 
   // fill values
-  for(size_t r = 0; r < rows; r++)
+  for(uint r = 0; r < rows; r++)
     stdformat[r][0] = data[r][4];
 
-  for(size_t r = 0; r < rows; r++)
-    for(size_t c = 1; c < cols; c++)
+  for(uint r = 0; r < rows; r++)
+    for(uint c = 1; c < cols; c++)
       stdformat[r][c] = data[r][c-1];
 
   // Call forward selection
@@ -78,7 +79,7 @@ int main(void) {
 
   // Lets do a forward selection
   ForwardSelection fs(*ds, 0);
-  vector<size_t> res = fs.run(0.15);
+  vector<uint> res = fs.run(0.15);
 
   // free
   delete ds;
