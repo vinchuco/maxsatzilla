@@ -1,6 +1,33 @@
 #!/usr/bin/perl
+# Copyright (c) 2007 Joao Marques-Silva. All rights reserved.
 
-my $varids = ();
+use strict;
+use Data::Dumper;
+use POSIX;
+use Getopt::Std;
+
+my $progname = &get_progname();
+
+my %opts = ();
+getopts('hd', \%opts);
+# d: Debug mode
+# h: print Help
+
+if ($opts{h} || $#ARGV < 0) {
+    print <<EOF;
+  $progname: PB to OPB converter
+  Usage:
+    $progname [-h] [-d] <opb file>
+     -d    debug mode
+     -h    prints this help
+  Author: jpms\@soton.ac.uk
+EOF
+exit(0);
+}
+
+my $debug = ($opts{d}) ? 1 : 0;
+
+my %varids = ();
 my $vcnt = 0;
 
 my $buffer = '';
@@ -33,6 +60,21 @@ while(<>) {
 	print "@ltoks ;\n";
 	$buffer = '';
     }
+}
+
+1;
+
+sub xabort() {
+    my $msg = shift;
+    print "ERROR: $msg\n";
+    exit(2);
+}
+
+sub get_progname() {
+    my @progname_toks = split(/\//, $0);
+    my $progname = $progname_toks[$#progname_toks];
+    #print "$progname\n";
+    return $progname;
 }
 
 # jpms

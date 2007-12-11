@@ -3,7 +3,7 @@
 use strict;
 
 use src::UTILS;
-die "Usage: $0 <msu alg> <bench> [<encoding>] [<opts>] [<timeout>] [<memout>]\n" if ($#ARGV<=0);
+die "Usage: $0 <msu alg> <bench> [<encoding>] [<opts>] [<timeout>] [<memout>]\n" if ($#ARGV<=1);
 
 my $launcher = "scripts/tlaunch.bash";
 my $tool = 'src/msuncore';
@@ -20,12 +20,13 @@ $bench =~ m/.+\/([^\/\s]+)$/;
 my $inst = $1;
 
 # NOTE: option -m is hardcoded
-#print "$launcher \"$tool -v 1 -a $algv -e $encoding $opts\" $timeout $memout $bench $logfile\n";
+#print "$launcher \"$tool -v 1 -a $algv -e $encoding $opts\" $timeout $memout $bench $logfile\n"; #exit;
+
 system("$launcher \"$tool -v 1 -a $algv -e $encoding $opts\" $timeout $memout $bench $logfile");
 my $prtstr = '';
 
 my $runtime = &match_run_time($logfile);
-#print "RUNTIME: $runtime\n";
+#print "RUNTIME: $runtime\n"; #exit;
 
 if (&match_usage_limit($logfile)) {
     #$prtstr = 'CPU time limit exceeded by msuncore';
@@ -63,7 +64,8 @@ sub match_usage_limit() {
     open (LOGF, "<$fname") || die "Unable to open log file $fname\n";
     my $timeout = 0;
     while (<LOGF>) {
-	if (m/Command exited with non-zero status [1-9][0-9]/ ||
+	if (m/Command exited with non-zero status [2-9][0-9]/ ||
+	    m/Command exited with non-zero status 1[1-9]/ ||
 	    m/Command exited with non-zero status [2-9]/) {
 	    $timeout=1; last;
 	}

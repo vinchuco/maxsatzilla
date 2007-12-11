@@ -1,4 +1,5 @@
 #!/usr/bin/perl
+# Copyright (c) 2007 Joao Marques-Silva. All rights reserved.
 
 use strict;
 use Data::Dumper;
@@ -126,8 +127,8 @@ sub parse_linfunc() {
 		$rhsv++;
 		$negv = 1;
 	    } else {
-		#print "BTOKS: |@btoks|\n";
-		&xabort("Invalid coefficient NV (pos:$i vs $#btoks): |$btoks[$i]|. Terminating...\n");;
+		print "BTOKS: |@btoks|\n";
+		&xabort("Invalid coefficient NV (pos:$i vs $#btoks) \@ line $.: |$btoks[$i]|. Terminating...\n");;
 	    }
 	    $vtog = 1;
 	} else {
@@ -137,7 +138,7 @@ sub parse_linfunc() {
 		if ($vid > $nvars) { $nvars = $vid; }
 		if ($negv) { $vid = -$vid; }
 	    } else {
-		&xabort("Invalid var name $btoks[$i]? Terminating...\n")
+		&xabort("Invalid var name $btoks[$i] \@ line $.? Terminating...\n")
 	    }
 	    #if ($debug) { print "Current vid: $vid\n"; }
 	    push @litset, $vid;
@@ -180,6 +181,8 @@ sub print_pmcnf() {
     }
 }
 
+1;
+
 sub xabort() {
     my $msg = shift;
     print "ERROR: $msg\n";
@@ -192,7 +195,5 @@ sub get_progname() {
     #print "$progname\n";
     return $progname;
 }
-
-1;
 
 # jpms

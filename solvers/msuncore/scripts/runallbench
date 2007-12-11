@@ -1,25 +1,26 @@
 #!/bin/csh
 
-if ($#argv != 2) then
-   echo "usage: '$0' directory result-file-name"
-   exit(0)
-endif
-
 set bdir = $argv[1]
 set ref = $argv[2]
 
+set ref_log = "Results/numcls-$ref.log"
 set msu_log = "Results/msuncore-$ref.log"
 set msz_log = "Results/maxsatz-$ref.log"
 
-rm -f $msu_log $msz_log
+rm -f $ref_log $msu_log $msz_log
+
+touch $ref_log
+foreach bench ($bdir/*)
+    ./scripts/numcls $bench >> $ref_log
+end
 
 touch $msu_log
 foreach bench ($bdir/*)
-    ./scripts/runmsuncore 2 $bench >> $msu_log
+    ./runmsuncore $bench 1000 >> $msu_log
 end
 
 touch $msz_log
 foreach bench ($bdir/*)
-    ./scripts/runmaxsatz $bench >> $msz_log
+    ./runmaxsatz $bench 1000 >> $msz_log
 end
 

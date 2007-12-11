@@ -3,11 +3,12 @@
 use strict;
 
 use src::UTILS;
-die "Usage: $0 <bench> [<timeout>] [<memout>]\n" if ($#ARGV<0);
+die "Usage: $0 <bench> \"\" [<timeout>] [<memout>]\n" if ($#ARGV<0);
 
 my $launcher = "scripts/tlaunch.bash";
 my $tool = './src/mspbo';
 my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
+my $noarg = (@ARGV) ? shift @ARGV : die "Must specify double quotes...\n";
 my $timeout = (@ARGV) ? shift @ARGV : 1000;
 my $memout = (@ARGV) ? shift @ARGV : 2000000;
 
@@ -27,7 +28,7 @@ my $mscmd = "./minisat+ -s -gs -cb -M -a $opbfile";
 system("$launcher \"$mscmd\" $timeout $memout $bench $outfile >\& $logfile");
 
 my $runtime = &match_run_time($outfile);
-#print "RUNTIME: $runtime\n";
+#print "RUNTIME: $runtime\n"; exit;
 
 my $prtstr = '';
 if (&match_usage_limit($logfile) || &match_usage_limit($outfile)) {

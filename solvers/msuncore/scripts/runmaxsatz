@@ -3,11 +3,12 @@
 use strict;
 
 use src::UTILS;
-die "Usage: $0 <bench> [<timeout>] [<memout>]\n" if ($#ARGV<=-1);
+die "Usage: $0 <bench> \"\" [<timeout>] [<memout>]\n" if ($#ARGV<=0);
 
 my $launcher = "scripts/tlaunch.bash";
-my $tool = './maxsatz';
+my $tool = 'maxsatz';
 my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
+my $noarg = (@ARGV) ? shift @ARGV : die "Must specify double quotes...\n";
 my $timeout = (@ARGV) ? shift @ARGV : 1000;
 my $memout = (@ARGV) ? shift @ARGV : 2000000;
 
@@ -20,10 +21,11 @@ my $inst = $1;
 my $ncls = &get_num_cls($bench);
 #&UTILS::report_item('INFO: Number of clauses', $ncls);
 
+#print "$launcher $tool $timeout $memout $bench $outfile $logfile\n"; #exit;
 system("$launcher $tool $timeout $memout $bench $outfile >\& $logfile");
 
 my $runtime = &match_run_time($outfile);
-#print "RUNTIME: $runtime\n";
+#print "RUNTIME: $runtime\n"; exit;
 
 my $prtstr = '';
 if (&match_usage_limit($logfile) || &match_usage_limit($outfile)) {
