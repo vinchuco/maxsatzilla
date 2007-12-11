@@ -79,8 +79,9 @@ if (${$opts}{h} || $#ARGV < 0) {
       -d       debug mode: dump run info to file
       -h       prints this help
   Notes:
-    -e: BDDs ok; Exp & Counters only for <= 1; Adders & Sorters not implemented
-    -e: Bdds in mode i are being evaluated
+    -e: BDDs ok; Exp & Counters only for <= 1; Adders not implemented
+    -e: BDDs in mode i are being evaluated
+    -e: Sorters are being evaluated
   Author(s): jpms\@soton.ac.uk \& jp3\@soton.ac.uk
 EOF
 exit(0);

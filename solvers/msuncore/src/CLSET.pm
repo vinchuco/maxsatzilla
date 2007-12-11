@@ -127,7 +127,8 @@ sub lkup_cl() {    # Check cl existence
 
 sub add_cl() {    # Add clause
     my ($self, $ncl, $nst) = @_;   # must respect signature!
-    &UTILS::vassert(!defined(${$self->{CL_SET}}{$ncl}));
+    &UTILS::vassert(!defined(${$self->{CL_SET}}{$ncl}),
+			"Already defined clause: $ncl");
     ${$self->{CL_SET}}{$ncl} = 1;
     ${$self->{CL_STAT}}{$ncl} = $nst;
     $self->{CL_NUM}++;
@@ -137,7 +138,8 @@ sub add_cl() {    # Add clause
 sub add_cl_set() {    # Add clause subset
     my ($self, $nclset, $nst) = @_;
     foreach my $ncl (@{$nclset}) {
-	&UTILS::vassert(!defined(${$self->{CL_SET}}{$ncl}));
+	&UTILS::vassert(!defined(${$self->{CL_SET}}{$ncl}),
+			"Already defined clause: $ncl");
 	$self->add_cl($ncl, $nst);
 	# IDGEN should know of the new vars...
     }
@@ -145,7 +147,8 @@ sub add_cl_set() {    # Add clause subset
 
 sub del_cl() {    # Remove clause
     my ($self, $ncl) = @_;
-    &UTILS::vassert(defined(${$self->{CL_SET}}{$ncl}));
+    &UTILS::vassert(defined(${$self->{CL_SET}}{$ncl}),
+		    "Non existing clause: $ncl");
     undef(${$self->{CL_SET}}{$ncl});
     delete(${$self->{CL_SET}}{$ncl});
     undef(${$self->{CL_STAT}}{$ncl});
@@ -156,7 +159,8 @@ sub del_cl() {    # Remove clause
 sub del_cl_set() {    # Remove clause subset
     my ($self, $nclset) = @_;
     foreach my $ncl (@{$nclset}) {
-	&UTILS::vassert(defined(${$self->{CL_SET}}{$ncl}));
+	&UTILS::vassert(defined(${$self->{CL_SET}}{$ncl}),
+			"Non existing clause: $ncl");
 	$self->del_cl($ncl);
 	# IDGEN should know of the new vars...
     }
@@ -332,6 +336,9 @@ sub parse_cnf() {  # Format is the default cnf format
 	if ($rlits[$#rlits] eq '') { pop @rlits; }
 	push @clits, @rlits;
 	if ($clits[$#clits] == 0) {
+	    my @nclits = @clits;    # clean duplicates
+	    my $litref = &CLUTILS::clclean(\@nclits);
+	    @clits = @{$litref};
 	    my $ncl = &CLUTILS::clsig(\@clits);
 	    ${$self->{CL_SET}}{$ncl} = 1;
 	    ${$self->{CL_STAT}}{$ncl} = 'INIT';  # Options: BLOCK, AUX
@@ -367,6 +374,9 @@ sub parse_pmcnf() {  # Format is the partial maxsat cnf format
 	if ($rlits[$#rlits] eq '') { pop @rlits; }
 	push @clits, @rlits;
 	if ($clits[$#clits] == 0) {
+	    my @nclits = @clits;    # clean duplicates
+	    my $litref = &CLUTILS::clclean(\@nclits);
+	    @clits = @{$litref};
 	    my $keepcl = 1;    # Used to filter trivial soft cls
 	    if ($#clits == 1) {
 		my $nncl = -1 * $clits[0];
@@ -412,6 +422,9 @@ sub parse_wmcnf() {  # Format is the weighted maxsat cnf format
 	if ($rlits[$#rlits] eq '') { pop @rlits; }
 	push @clits, @rlits;
 	if ($clits[$#clits] == 0) {
+	    my @nclits = @clits;    # clean duplicates
+	    my $litref = &CLUTILS::clclean(\@nclits);
+	    @clits = @{$litref};
 	    my $ncl = &CLUTILS::clsig(\@clits);
 	    ${$self->{CL_SET}}{$ncl} = 1;
 	    ${$self->{CL_STAT}}{$ncl} = 'INIT';  # Options: BLOCK, AUX

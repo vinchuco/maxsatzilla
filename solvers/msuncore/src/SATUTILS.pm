@@ -84,9 +84,14 @@ sub compute_and_remove_core() {
 	if (${$opts}{d}) { print $DBGF "Instance is UNSAT\n"; }
 	# 3.2.1 Get computed unsat core
 	my $coreref = &compute_unsat_core($ds);
-	if (${$opts}{d}) {$"="\n"; print $DBGF "CORE:\n@{$coreref}\n"; $"=' '; }
-	&extract_fromclset($clset, $coreref);
-	push @{$coreset}, $coreref;    # add core to set of cores
+	# Added for partial maxsat; under testing jpms:20071207
+	# 3.2.2 Identify original clauses w/o blocking vars
+	my $origcls = &MSUTILS::get_initial_clauses($opts,$clset,$coreref);
+	if (${$opts}{d}) {
+	    $"="\n"; print DBGF "INIT SOFT CLS:\n@{$origcls}\n"; $"=' ';}
+	if (${$opts}{d}) {$"="\n"; print $DBGF "CORE:\n@{$origcls}\n"; $"=' ';}
+	&extract_fromclset($clset, $origcls);
+	push @{$coreset}, $origcls;    # add core to set of cores
     }
     return $outcome;
 }

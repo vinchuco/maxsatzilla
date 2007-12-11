@@ -71,7 +71,7 @@ sub run_msu() {    # Unique interface with msuncore front-end
 	${$opts}{e} = 'e';
     } else {
 	if (${$opts}{e} ne 'c' && ${$opts}{e} ne 'e' &&
-	    ${$opts}{e} ne 'b' && ${$opts}{e} ne 'i') {
+	    ${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 's' ) {
 	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu1_algorithm($ds);
@@ -137,7 +137,10 @@ sub msu1_algorithm() {    # actual algorithm being run
 	    # 3.2.2 Identify original clauses w/o blocking vars
 	    my $origcls = &MSUTILS::get_initial_clauses($opts,$clset,$coreref);
 	    my $osize = $#{$origcls}+1;
-	    if (${$opts}{v} > 1) { print "Num orig cls in core: $osize\n"; }
+	    if (${$opts}{v} > 1) {
+		print "Num orig cls in core: $osize\n";
+		#$"="\n"; print "INIT SOFT CLS:\n@{$origcls}\n"; $"=' ';
+	    }
 	    if (${$opts}{d}) {
 		$"="\n"; print DBGF "INIT SOFT CLS:\n@{$origcls}\n"; $"=' '; }
 	    # 3.2.3 If there exist clauses w/o blocking vars in core

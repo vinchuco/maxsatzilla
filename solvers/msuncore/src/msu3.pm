@@ -73,7 +73,8 @@ sub run_msu() {    # Unique interface with msuncore front-end
     if (!defined(${$opts}{e})) {
 	${$opts}{e} = 'i';
     } else {
-	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c') {
+	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c' &&
+	    ${$opts}{e} ne 's') {
 	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu3_algorithm($ds);
@@ -176,10 +177,14 @@ sub msu3_algorithm() {    # actual algorithm being run
 	    if (${$opts}{v} > 2 || ${$opts}{d}) {
 		my $initsz = $#{$initref}+1;
 		print "Number of initial cls: $initsz\n";
-		print DBGF "Number of initial cls: $initsz\n";
 	    }
 	    if (${$opts}{d}) {
+		my $initsz = $#{$initref}+1;
+		print DBGF "Number of initial cls: $initsz\n";
 		$"="\n";print DBGF "INIT SOFT CLS:\n@{$initref}\n";$"=' '; }
+
+	    #$"="\n";print "INIT SOFT CLS:\n@{$initref}\n";$"=' ';
+
 	    &SATUTILS::extract_fromclset($clset, $initref);
 	    &MSUTILS::add_blocking_vars($opts, $initref, $blkclset, $blockvs);
 	    $cardset->erase;    # erase previous card clset

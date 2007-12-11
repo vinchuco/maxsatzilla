@@ -1,12 +1,5 @@
 
-- Bugs w/ msu2 for partial maxsat
-
-- Simplify msu2
-  * Reduce number of card constraints
-
 - Implement msu 4/3.5
-
-- Implement sorter-based encoding
 
 - Implement full SC encoding
 
@@ -21,6 +14,13 @@
   * Must ensure clause state is properly handled
 
 
+- Bugs w/ msu2 for partial maxsat					OK
+
+- Simplify msu2								OK
+  * Reduce number of card constraints
+
+- Implement sorter-based encoding					OK-
+  * It was required to only consider powers of 2
 
 - HIPP w/ partial maxsat						OK-
   * Partially working

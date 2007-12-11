@@ -53,7 +53,7 @@ sub register_dbghandle() { $DBGF = shift; }
 # Generate cardinality constraint
 #------------------------------------------------------------------------------#
 
-sub gen_card_constraint() {
+sub gen_card_constraint() {    # Generate AtMost cardinality constraint
     my ($opts, $cardset, $bvref, $tval) = @_;
     my @auxbvs = keys %{$bvref};
     if (${$opts}{d}) {
@@ -87,10 +87,8 @@ sub gen_card_constraint() {
 	    $clstr = &CARD::gen_pw_atmost1(\@auxbvs);
 	}
     } elsif (${$opts}{e} eq 's') {
-	my $msg =
-	    'Use of Sorters (-e a) for encoding cardinality constraints' .
-	    ' not yet implemented';
-	&exit_err("$msg\n");
+	&CARD::srt_set_mode(1);    # default equiv mode
+	$clstr = &CARD::gen_srt_atmostN(\@auxbvs, $tval);
     }
     my @newcls = split("\n", $clstr);
     for(my $i=0; $i<=$#newcls; $i++) {
@@ -106,7 +104,7 @@ sub gen_card_constraint() {
     return 0;
 }
 
-sub gen_extra_card_constraint() {
+sub gen_extra_card_constraint() {    # Generate AtMost cardinality constraint
     my ($opts, $cardset, $bvref, $tval) = @_;
     my @auxbvs = keys %{$bvref};
     if (${$opts}{d}) {
@@ -140,10 +138,8 @@ sub gen_extra_card_constraint() {
 	    $clstr = &CARD::gen_pw_atleast1(\@auxbvs);
 	}
     } elsif (${$opts}{e} eq 's') {
-	my $msg =
-	    'Use of Sorters (-e a) for encoding cardinality constraints' .
-	    ' not yet implemented';
-	&exit_err("$msg\n");
+	&CARD::srt_set_mode(1);    # default equiv mode
+	$clstr = &CARD::gen_srt_atleastN(\@auxbvs, $tval);
     }
     my @newcls = split("\n", $clstr);
     for(my $i=0; $i<=$#newcls; $i++) {

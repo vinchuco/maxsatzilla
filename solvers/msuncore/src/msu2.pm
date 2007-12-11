@@ -72,7 +72,8 @@ sub run_msu() {    # Unique interface with msuncore front-end
     if (!defined(${$opts}{e})) {
 	${$opts}{e} = 'i';
     } else {
-	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c') {
+	if (${$opts}{e} ne 'b' && ${$opts}{e} ne 'i' && ${$opts}{e} ne 'c' &&
+	    ${$opts}{e} ne 's') {
 	    &exit_err("Unavailable cardinality constraint encoding option\n"); }
     }
     &msu2_algorithm($ds);
@@ -94,18 +95,19 @@ sub msu2_algorithm() {    # actual algorithm being run
     $clset->parse($inpfile);
     my $nvars = $clset->numvars;
     my $ncls = $clset->numcls;
+    my $nscls = $clset->numcls_soft;
 
     if (${$opts}{d}) {
 	print DBGF "VARS: $nvars    --    CLS: $ncls\n";
 	my $nid = &IDGEN::num_id(); print DBGF "IDGEN ids: $nid\n"; }
     &UTILS::report_item("Number of clauses", $ncls);
+    &UTILS::report_item("Number of soft clauses", $nscls);
 
-    my $minbs = $ncls;  # assume no clause can be satisfied, i.e. largest UB
-    my $frstsat = 1;
+    my $minbs = $nscls;  # assume no clause can be satisfied, i.e. largest UB
     my $iternum = 0;
     my $nunsat = 0;
     my $lbv = 0;
-    my $ubv = $ncls;
+    my $ubv = $nscls;
 
     # Setup additional clause sets
     my $cardset = CLSET->new();              # where card constraints are stored
@@ -124,14 +126,15 @@ sub msu2_algorithm() {    # actual algorithm being run
 	my ($outcome, $assign) = &SATUTILS::run_sat_solver($ds);
 	# 3.2 If unsat
 	if ($outcome == 0) {
-#	    if ($frstsat) { $nunsat++; }
-$nunsat++;
+	    $nunsat++;
 	    if (${$opts}{d}) { print DBGF "Instance is UNSAT\n"; }
-print "Instance is UNSAT\n";
+            if (${$opts}{v} > 2) { print "Instance is UNSAT\n"; }
 	    # 3.2.1 Parse computed unsat core
 	    my $coreref = &SATUTILS::compute_unsat_core($ds);
 	    # 3.2.2 Identify original clauses w/o blocking vars
 	    my $origcls = &MSUTILS::get_initial_clauses($opts,$clset,$coreref);
+	    my $osize = $#{$origcls}+1;
+	    if (${$opts}{v} > 1) { print "Num orig cls in core: $osize\n"; }
 	    if (${$opts}{d}) {
 		$"="\n"; print DBGF "INIT SOFT CLS:\n@{$origcls}\n"; $"=' ';}
 	    # 3.2.3 If there exist clauses w/o blocking vars in core
@@ -145,21 +148,22 @@ print "Instance is UNSAT\n";
 		if (${$opts}{d}) {
 		    $"=' ';print DBGF "New blocking vars: @bvs\n";$"=' ';}
 		# 3.2.3.3 Add new card constraint
-# TEMP: jpms:20071128
-#		&MSUTILS::gen_card_constraint($opts,$cardset,$bvref,$#bvs);
+		# Fixed: jpms:20071128
+		#&MSUTILS::gen_card_constraint($opts,$cardset,$bvref,$#bvs);
+		&MSUTILS::gen_extra_card_constraint($opts,$cardset,$bvref,1);
 	    } else {
 		# 3.2.2 Else output max sat solution and terminate
 		&UTILS::report_item("Number of block vars", $minbs);
-		&UTILS::report_item("Computed maxsat solution", $ncls - $minbs);
+		&UTILS::report_item("Computed maxsat solution", $nscls-$minbs);
 		return 0;
 	    }
 	}
 	# 3.3 Else
 	elsif ($outcome == 1) {
 	    if (${$opts}{d}) { print DBGF "Instance is SAT\n"; }
-print "Instance is SAT\n";
+	    if (${$opts}{v} > 2) { print "Instance is SAT\n"; }
 	    if ($iternum == 1) {
-		&UTILS::report_item("Computed maxsat solution", $ncls);
+		&UTILS::report_item("Computed maxsat solution", $nscls);
 		return 0;
 	    }
 	    # Parse computed solution
@@ -172,41 +176,41 @@ print "Instance is SAT\n";
 	    if (${$opts}{d}) {
 		print DBGF "Current maxsat solution value: $minbs\n"; }
 	    if (${$opts}{v}) {
-		&UTILS::report_item("Updated lower bound",$ncls-$minbs); }
+		&UTILS::report_item("Updated lower bound",$nscls-$minbs);  }
+	    #&UTILS::report_item("Number of b vars w/ value 1",$minbs);
 	    # 3.3.1 Add new card constraint
 	    if (${$opts}{v}) {
 		my @bvars = keys %{$blockvs};
 		my $nbs = $#bvars+1;
-		my $nbb = $#{$bvref};
+		#my $nbb = $#{$bvref};
+		my $nbb = $minbs-1;
 		&UTILS::report_item('Number of blocking vars', $nbs);
 		&UTILS::report_item('Card constraint rhs', $nbb);
 	    }
 	    $cardset->erase;    # erase previous card clset
-	    &MSUTILS::gen_card_constraint($opts,$cardset,$blockvs, $#{$bvref});
-#	    if ($frstsat) {
-#		$frstsat = 0;  # found first sat instance
-		$lbv = $ncls-($#{$bvref}+1);
-		$ubv = $ncls-$nunsat;
-		&UTILS::report_item("Lower bound for maxsat solution", $lbv);
-		&UTILS::report_item("Upper bound for maxsat solution", $ubv);
-		if ($lbv == $ubv) {
-		    # If bounds are equal, can terminate...
-		    &UTILS::report_item("Number of block vars", $minbs);
-		    &UTILS::report_item("Computed maxsat solution", $lbv);
-		    return 0;
-#		}
+	    #&MSUTILS::gen_card_constraint($opts,$cardset,$blockvs, $#{$bvref}); # DATE'08
+	    &MSUTILS::gen_card_constraint($opts,$cardset,$blockvs,$minbs-1);
+	    $lbv = $nscls-$minbs;
+	    $ubv = $nscls-$nunsat;
+	    &UTILS::report_item("Lower bound for maxsat solution", $lbv);
+	    &UTILS::report_item("Upper bound for maxsat solution", $ubv);
+	    if ($lbv == $ubv) {
+		# If bounds are equal, can terminate...
+		&UTILS::report_item("Number of block vars", $minbs);
+		&UTILS::report_item("Computed maxsat solution", $lbv);
+		return 0;
 	    }
 	}
 	else {
-	    my $lbv = $ncls-$minbs;
+	    my $lbv = $nscls-$minbs;
 	    &UTILS::report_item("Current lower bound for maxsat solution",$lbv);
 	    &UTILS::report_item("Current upper bound for maxsat solution",$ubv);
 	    &exit_quit("Cputime limit exceeded\n"); last;
 	}
-
-	$ubv = $ncls-$nunsat;
+	$ubv = $nscls-$nunsat;
 	if ($lbv == $ubv) {
 	    # If bounds are equal, can terminate...
+	    print "Lower bound equals upper bound. Terminating...\n";
 	    &UTILS::report_item("Number of block vars", $minbs);
 	    &UTILS::report_item("Computed maxsat solution", $lbv);
 	    return 0;

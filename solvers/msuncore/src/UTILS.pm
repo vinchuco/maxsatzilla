@@ -85,10 +85,7 @@ my $host_time_stamp = '';
 
 sub set_host_time_stamp() {
     my $progname = &get_progname();
-    #my $hostname = $ENV{HOST};
-    #my $hostname = $ENV{HOSTNAME};
-    #my $hostname = `hostname -s`; chomp($hostname);
-    #print "|$hostname|\n"; exit;
+    my $hostname = &get_hostname();
     my @ttoks = localtime time;
     my $sec =  sprintf("%02s", $ttoks[0]);
     my $min =  sprintf("%02s", $ttoks[1]);
@@ -96,7 +93,7 @@ sub set_host_time_stamp() {
     my $day =  sprintf("%02s", $ttoks[3]);
     my $mon =  sprintf("%02s", $ttoks[4] + 1);
     my $year = sprintf("20%02s", $ttoks[5]-100);
-    $host_time_stamp = "$progname-hostname()-$year$mon$day-$hour$min$sec";
+    $host_time_stamp = "$progname-$hostname-$year$mon$day-$hour$min$sec";
     return $host_time_stamp;
 }
 
@@ -142,6 +139,17 @@ sub get_progpath() {
     return $progpath;
 }
 
+sub get_hostname() {
+    #my $hostname = $ENV{HOST};
+    #my $hostname = $ENV{HOSTNAME};
+    #my $hostname = `hostname -s`; chomp($hostname);
+    my $full_host_name = &Sys::Hostname::hostname();
+    $full_host_name =~ m/(\w+)\./;
+    my $rhname = $1;
+    #print "|$hostname|\n"; exit;
+    return $rhname;
+}
+
 sub resolve_inc() {    # Kept here as a template; need a copy in each script
     my ($cref, $pmname) = @_;
     my @progname_toks = split(/\//, $0);
@@ -159,8 +167,8 @@ sub resolve_inc() {    # Kept here as a template; need a copy in each script
 #------------------------------------------------------------------------------#
 
 sub vassert() {
-    my $cond = shift;
-    &exit_err("ASSERTION FAILED: @_\n") if !$cond;
+    my ($cond, $msg) = @_;
+    &exit_err("ASSERTION FAILED: $msg\n") if !$cond;
 }
 
 sub exit_ok() { exit 10; }    # 10 denotes ok condition
@@ -178,6 +186,17 @@ sub exit_err() {
     &{$cleanref}($msudsref); 
     exit 30;    # 30 denotes abort/error condition
 }
+
+
+#------------------------------------------------------------------------------#
+# Useful utils
+#------------------------------------------------------------------------------#
+
+sub round() {
+    my $rval = shift @_;
+    return int($rval + 0.5);
+}
+
 
 END {
 }

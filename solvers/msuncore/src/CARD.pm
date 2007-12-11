@@ -19,10 +19,14 @@
 #                cases of sequential counter (SC) and pairwise encoding (PW).
 #    20070918 -> Implemented BDD encoding with implications. Validating.
 #                Working on full encoding with sequential counter.
+#    20071202 -> Implemented Sorter encoding. Validating.
 #
 # TODO:
+#    * Implement sorters w/ polarities
+#    * Implement bitwise encoding
 #    * Implement additional SC cases
-#    * Implement sorters
+#    * Implement network simplifications
+#      + E.g. observability don't cares
 #------------------------------------------------------------------------------#
 
 package CARD;
@@ -36,17 +40,20 @@ use POSIX;
 
 use IDGEN qw( &gen_id );
 
+use UTILS;
+
+
 BEGIN {
     @CARD::ISA = ('Exporter');
-    @CARD::EXPORT_OK = qw( &num_clauses &gen_pw_equals1 &gen_pw_atmost1 &gen_pw_atleast1 &gen_sc_equals1 &gen_sc_atmost1 &gen_sc_atleast1 &bdd_set_mode &gen_bdd_equalsN &gen_bdd_atmostN &gen_bdd_atleastN );
+    @CARD::EXPORT_OK = qw( &num_clauses &gen_pw_equals1 &gen_pw_atmost1 &gen_pw_atleast1 &gen_sc_equals1 &gen_sc_atmost1 &gen_sc_atleast1 &bdd_set_mode &gen_bdd_equalsN &gen_bdd_atmostN &gen_bdd_atleastN &srt_set_mode &gen_srt_equalsN &gen_srt_atmostN &gen_srt_atleastN );
 }
-
 
 our $vhash = ( );        # Ref to var hash
 our $clcount = 0;        # Clause count
 our $nconstr = 0;        # Number of constraints generated
 our $clset = '';         # Clause set string
 our $bdd_mode = 1;       # Equivalence mode
+our $srt_mode = 1;       # Equivalence mode
 our $dbgon = 0;          # Activate debug
 
 
@@ -111,6 +118,33 @@ sub gen_bdd_atmostN() {
 
 sub gen_bdd_atleastN() {
     my ($vref, $tval) = @_; return &bdd_gen_atleastN($vref, $tval);
+}
+
+
+# Sorter encoding
+
+sub srt_set_mode() { $srt_mode = shift; }    # Set CNF generation mode
+
+sub gen_srt_equalsN() {
+    my ($vref, $tval) = @_;
+    &UTILS::vassert(0, "equalsN w/ sorters not yet implemented...");
+}
+
+sub gen_srt_atmostN() {
+    my ($vref, $tval) = @_;
+    if ($srt_mode == 1) {
+	return &srt_gen_atmostN($vref, $tval);
+    } else {
+	&UTILS::vassert(0, "atmostN w/ sorters & implic not yet implemented...");
+    }
+}
+
+sub gen_srt_atleastN() {
+    my ($vref, $tval) = @_;
+    if ($tval  == 1) { return &gen_ge1($vref); }
+    else {
+	&UTILS::vassert(0, "atleastN w/ sorters not yet implemented...");
+    }
 }
 
 
@@ -277,14 +311,15 @@ sub bdd_atmostN_implic() {    # encode <= card constr in CNF; return as string
 
 sub sc_gen_equals1() {    # Based on AtMost1 from Sinz CP05 paper (3n-4 clauses)
   my ($vref) = @_;
-  my $clset = '';
+  $clset = '';
   $clset .= &sc_gen_atmost1($vref);
   $clset .= &sc_gen_atleast1($vref);
+  return $clset;
 }
 
 sub sc_gen_atmost1() {    # Version from Sinz CP05 paper (3n-4 clauses)
   my ($vref) = @_;
-  my $clset = '';
+  $clset = '';
   my $n = $#{$vref}; # note: only $n aux vars (i.e. n-1 aux vars)
   if ($n == 0) { return ''; }  # no need to create card constraints
   #print "N: $n\n";
@@ -337,26 +372,179 @@ sub pw_gen_atleast1() {
 
 
 #------------------------------------------------------------------------------#
+# Sorter-based encoding (odd-even merging)
+#------------------------------------------------------------------------------#
+
+sub srt_gen_atmostN() {    # encode <= card constr in CNF; return as string
+    my ($xvref, $tval) = @_;
+    my $nvars = $#{$xvref}+1;    # number of vars
+
+    if ($tval >= $nvars) {
+	if($dbgon) { print "no constr required\n"; } return ''; }
+    if ($tval == $nvars-1) { return &gen_leNm1($xvref); }
+    if ($tval == 0) { return &gen_le0($xvref); }
+
+    my @auxvs = ();
+    my $nvars = $#{$xvref} + 1;
+    my $radix = int(log($nvars)/log(2)) + 1;
+    my $nnvars = int(exp(log(2)*$radix)+0.1);
+
+    #my $xnid = &IDGEN::num_id();
+    #print "Number of ids: $xnid w/ nvars:$nvars AND nnvars:$nnvars\n";
+
+    my $zvars = $nnvars - $nvars;
+    for(my $i=$nvars+1; $i<=$nnvars; ++$i)  {
+	push @auxvs, &IDGEN::gen_id();
+    }
+    my @newvref = ();
+    push @newvref, @{$xvref};
+    push @newvref, @auxvs;
+    my $tmpclset = '';
+    foreach my $vid (@auxvs) { $tmpclset .= "-$vid 0\n"; }
+
+    #my $xnid = &IDGEN::num_id();
+    #print "Number of ids: $xnid\n";
+
+    $clset = '';
+    # 1. Generate odd-even sorting network
+    my $ovref = &recur_srt_gen(\@newvref);
+    # 2. Force constraints on outputs
+    if ($dbgon) {
+	my $ninps = $#{$xvref}+1; my $nzeros = $#{$ovref}-$tval+1;
+	print "Number of inputs: $ninps   RHS: $tval\n";
+	print "Number of 0-value outputs: $nzeros\n"; }
+
+    for (my $i=0; $i<$#{$ovref}+1-$tval; ++$i) {  # -> #0 = N-RHS
+	$clset .= "-${$ovref}[$i] 0\n"; $nconstr++;    # Outputs must be 0
+    }
+    $clset .= $tmpclset;
+    return $clset;
+}
+
+sub recur_srt_gen() {
+    my $xvref = shift @_;
+    my $ovref = [];
+    my $nn = $#{$xvref}+1;
+    if ($nn == 1) {
+	${$ovref}[0] = ${$xvref}[0];
+    }
+    elsif ($nn == 2) {
+	if ($dbgon) {
+	    print "Generating SRT comparator w/ inputs ${$xvref}[0] ${$xvref}[1]\n";
+	}
+	${$ovref}[0] = &IDGEN::gen_id();
+	${$ovref}[1] = &IDGEN::gen_id();
+	&gen_comparator(${$ovref}[0], ${$ovref}[1], ${$xvref}[0], ${$xvref}[1]);
+    }
+    else {
+	if ($dbgon) { print "Number of elems to sort: $nn\n"; }
+	my $nmid = int($nn/2);
+	my @nxvecA = @{$xvref}[0 .. $nmid-1];
+	my @nxvecB = @{$xvref}[$nmid .. $nn-1];
+	if ($dbgon) {
+	    my $nl = $nmid; print "Left elems: $nl --> |@nxvecA|\n"; }
+	my $ovrefA = &recur_srt_gen(\@nxvecA);
+	if ($dbgon) {
+	    my $nr = $nn-1-$nmid+1; print "Right elems: $nr --> |@nxvecB|\n"; }
+	my $ovrefB = &recur_srt_gen(\@nxvecB);
+	$ovref = &srt_recur_odd_even_merge($ovrefA, $ovrefB);
+    }
+    return $ovref;
+}
+
+sub srt_recur_odd_even_merge() {
+    my ($xvrefA, $xvrefB) = @_; # Both A and B *must* already be sorted
+    my $ovref = [];
+    my $nnA = $#{$xvrefA}+1; my $nnB = $#{$xvrefB}+1;
+
+    if ($nnA == 1 && $nnB < 1)    { ${$ovref}[0] = ${$xvrefA}[0]; }
+    elsif ($nnA < 1 && $nnB == 1) { ${$ovref}[0] = ${$xvrefB}[0]; }
+    elsif ($nnA == 1 && $nnB == 1) {
+	if ($dbgon) {
+	    print "Generating MRG comparator w/ inputs ${$xvrefA}[0] ${$xvrefB}[0]\n"; }
+	${$ovref}[0] = &IDGEN::gen_id();
+	${$ovref}[1] = &IDGEN::gen_id();
+	&gen_comparator(${$ovref}[0], ${$ovref}[1],
+			${$xvrefA}[0], ${$xvrefB}[0]);
+    }
+    else {
+	if ($dbgon) {
+	    print "Merging: |@{$xvrefA}| with |@{$xvrefB}|\n"; }
+	# 1. Generate arrays of odd's and even's
+	my $minn = ($nnA < $nnB) ? $nnA : $nnB;
+	my $odd_xvA = []; my $odd_xvB = [];
+	my $even_xvA = []; my $even_xvB = [];
+	for (my $ridx=0, my $sidx=0; $ridx<$minn; $ridx+=2, $sidx++) {
+	    ${$odd_xvA}[$sidx] = ${$xvrefA}[$ridx];
+	    ${$odd_xvB}[$sidx] = ${$xvrefB}[$ridx];
+	}
+	for (my $ridx=1, my $sidx=0; $ridx<$minn; $ridx+=2, $sidx++) {
+	    ${$even_xvA}[$sidx] = ${$xvrefA}[$ridx];
+	    ${$even_xvB}[$sidx] = ${$xvrefB}[$ridx];
+	}
+	if ($nnA > $nnB)   {
+	    ${$even_xvA}[$#{$even_xvA}+1] = ${$xvrefA}[$nnA-1];
+	} elsif($nnA < $nnB) {
+	    ${$even_xvA}[$#{$even_xvA}+1] = ${$xvrefB}[$nnB-1];
+	}
+	if ($dbgon) {
+	    print "Going to ODD merge: |@{$odd_xvA}| and |@{$odd_xvB}|\n"; }
+	my $ovrefA = &srt_recur_odd_even_merge($odd_xvA, $odd_xvB);
+	if ($dbgon) {
+	    print "Going to EVEN merge: |@{$even_xvA}| and |@{$even_xvB}|\n"; }
+	my $ovrefB = &srt_recur_odd_even_merge($even_xvA, $even_xvB);
+	if ($dbgon) {
+	    print "Before final comparison state: |@{$ovrefA}| and |@{$ovrefB}|\n"; }
+	# 3. Final comparison stage
+	my $oidx = 0;
+	if ($#{$ovrefA} >= $#{$ovrefB}) {
+	    ${$ovref}[0] = shift @{$ovrefA}; $oidx++;
+	}
+	my $nncmp = &UTILS::round(($nnA+$nnB)/2) - 1;
+	while (@{$ovrefA} && @{$ovrefB}) {
+	    #for (my $idx=0; $idx<$nncmp; ++$idx) {
+	    my $in1 = shift @{$ovrefA};
+	    my $in2 = shift @{$ovrefB};
+	    my $o1 = &IDGEN::gen_id();
+	    my $o2 = &IDGEN::gen_id();
+	    if ($dbgon) {
+		print "Generating ALT comparator w/ inputs $in1 $in2 and OUTputs $o1 $o2\n"; }
+	    &gen_comparator($o1, $o2, $in1, $in2);
+	    ${$ovref}[$oidx++] = $o1;
+	    ${$ovref}[$oidx++] = $o2;
+	}
+	if (@{$ovrefA}) { ${$ovref}[$oidx++] = shift @{$ovrefA}; }
+	if (@{$ovrefB}) { ${$ovref}[$oidx++] = shift @{$ovrefB}; }
+	if (@{$ovrefA} || @{$ovrefB}) {
+	    print "Both lists of sorted items should be empty\n"; exit(10); }
+	if ($dbgon) {
+	    print "Done merging w/ output |@{$ovref}|...\n"; }
+    }
+    return $ovref;
+}
+
+
+#------------------------------------------------------------------------------#
 # Linear encoding used in SHIPs, case k=1
 #------------------------------------------------------------------------------#
 
 sub gen_ild_equals1() {# Updated version from AAAI06&SAT06 papers (4n+2 clauses)
-  my ($vref) = @_;     # ild: inverse ladder
-  my $clset = '';
-  my $n = $#{$vref}+1; # note: n+1 aux vars
-  #print "N: $n\n";
-  my $cid = &IDGEN::gen_id();
-  $clset .= "-$cid 0\n"; $clcount++;
-  for (my $j=0; $j<$n; $j++) {
-      $clset .= "-$cid -${$vref}[$j] 0\n"; $clcount++;
-      my $nid = &IDGEN::gen_id();
-      $clset .= "-${$vref}[$j] $nid 0\n"; $clcount++;
-      $clset .= "-$cid $nid 0\n"; $clcount++;
-      $clset .= "${$vref}[$j] $cid -$nid 0\n"; $clcount++;
-      $cid = $nid;
-  }
-  $clset .= "$cid 0\n"; $clcount++;
-  return $clset;
+    my ($vref) = @_;     # ild: inverse ladder
+    my $clset = '';
+    my $n = $#{$vref}+1; # note: n+1 aux vars
+    #print "N: $n\n";
+    my $cid = &IDGEN::gen_id();
+    $clset .= "-$cid 0\n"; $clcount++;
+    for (my $j=0; $j<$n; $j++) {
+	$clset .= "-$cid -${$vref}[$j] 0\n"; $clcount++;
+	my $nid = &IDGEN::gen_id();
+	$clset .= "-${$vref}[$j] $nid 0\n"; $clcount++;
+	$clset .= "-$cid $nid 0\n"; $clcount++;
+	$clset .= "${$vref}[$j] $cid -$nid 0\n"; $clcount++;
+	$cid = $nid;
+    }
+    $clset .= "$cid 0\n"; $clcount++;
+    return $clset;
 }
 
 
@@ -454,6 +642,12 @@ sub gen_2equiv() {    # generate CNF for equiv vars
     $clset .= "$iv $nov 0\n"; $clcount++;
 }
 
+sub gen_comparator() {    # generate CNF for comparator
+    my ($omn, $omx, $x1, $x2) = @_;
+    &gen_and($omn, $x1, $x2);
+    &gen_or($omx, $x1, $x2);
+}
+
 
 # Implicational mode
 sub gen_implic_pos_ite() {    # generate CNF for ITE (positive polarity)
@@ -476,7 +670,7 @@ sub gen_implic_pos_or() {    # generate CNF for OR (positive polarity)
     $clset .= "$x1 $x0 $nov 0\n"; $clcount++;
 }
 
-sub gen_2equiv() {    # generate CNF for equiv vars
+sub gen_implic_pos_2equiv() {    # generate CNF for equiv vars
     my ($ov, $iv) = @_;
     my $nov = -1*$ov; my $niv = -1*$iv;
     $clset .= "$niv $ov 0\n"; $clcount++;
