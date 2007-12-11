@@ -1,8 +1,10 @@
 #include <iostream>
 #include <cassert>
+#include <cmath>
 
 #include "getfeatures_wrapper.hh"
-#include "msz_model.hh"
+
+#include "mszmodelreader.hh"
 
 using std::cerr;
 using std::cout;
@@ -21,42 +23,50 @@ using std::cout;
 
 int main(int argc, char *argv[]) {
   
-  if(argc != 2) {
-    cerr << "usage: maxsatzilla <instance.cnf>\n";
+  if(argc != 3) {
+    cerr << "usage: maxsatzilla <modelfile> <instance.cnf>\n";
     exit(EXIT_FAILURE);
   }
 
-  const char *instance = argv[1];
+  const char *instance = argv[2];
+
+  MszModelReader mreader(argv[1]);
+
+  vector<string> solvers = mreader.getSolvers();
 
   // Let's compute the features
   cout << "Computing Features...";
   map<string, double> feats = getFeatures(instance);
-
   cout << " DONE\n";
+
 #ifndef NDEBUG
   for(std::map<string, double>::const_iterator it = feats.begin(); it != feats.end(); it++) 
     cout << it->first << " : " << it->second << "\n";
 #endif // NDEBUG
   
   // Let's compute the model
-  map<Solver, double> predRt;
-  for(int s = 0; s < NUMSOLVERS; s++) {
+  map<string, double> predRt;
+  for(uint s = 0; s < solvers.size(); s++) {
+    cout << "Computing runtime for " << solvers[s] << ": ";
     // Computing model for solver s.
-    double runtime = weights[s][0]; 
-    for(size_t f = 1; f < nbFeatures[s]; f++) {
-      assert(feats.find(features[s][f]) != feats.end());
-      assert(weights[f] != 0);
-      runtime += feats[features[s][f]] * weights[s][f];
+    double runtime = mreader.getModelWeight(solvers[s]);
+    cout << runtime << " ";
+    for(map<string, double>::const_iterator it = feats.begin();
+	it != feats.end();
+	it++) { 
+      runtime += it->second * mreader.getModelWeight(solvers[s], it->first);
+      cout << "(+" << it->first << ") " << runtime << " ";
     }
-    predRt[(Solver)s] = runtime;
+    cout << "\n";
+    predRt[solvers[s]] = runtime;
   }
 
   // Let's display the models, from best to worst.
   cout << "Predicted Runtimes:\n";
-  for(map<Solver, double>::const_iterator it = predRt.begin();
+  for(map<string, double>::const_iterator it = predRt.begin();
       it != predRt.end();
       it++)
-    cout << "\t" << solverNames[it->first] << ": " << it->second << "\n";
+    cout << "\t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
 
   return 0;
 }

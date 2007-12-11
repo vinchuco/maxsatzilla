@@ -7,13 +7,14 @@
 #include <fstream>
 
 #include "math/pputils.hh"
+#include "reader.hh"
 
 using std::string;
 using std::vector;
 using std::ifstream;
 using std::cout;
 
-class CoachConfigReader {
+class CoachConfigReader : public Reader {
 public:
   CoachConfigReader(const string &);
 
@@ -25,17 +26,11 @@ public:
   vector<vector<uint> > getFEPartitions() const { return fePartitions;        }
   bool   getFeatureStd()                  const { return featureStd;          }
   bool   getOutputStd ()                  const { return outputStd;           }
+  uint   getFEPartOrder()                 const { return fePartOrder;         }
 
 private:
   void parseConfig();
-  void eatSpaces();
-  void eatLine();
-  string getString();
-  double getDouble();
-  uint getUInt();
-  vector<uint> getVectorUInt();
   
-  ifstream file;                      ///< File to read the configuration
   string trainingSetFilename;         ///< Filename that will contain the training set to read from.
   string outputModelFilename;         ///< Filename that will contain the model to output.
   double fsDelta;                     ///< Forward Selection threshold (alt. to fsInsts).
@@ -44,6 +39,7 @@ private:
   vector<vector<uint> > fePartitions; ///< Partitions for function expansion.
   bool featureStd;                    ///< Flag which determines if standardization of features should be performed.
   bool outputStd;                     ///< Flag which determines if standardization of outputs should be performed.
+  uint fePartOrder;                   ///< Order of the function basis expansion.
 };
 
 #endif // COACHCONFIGREADER_HH

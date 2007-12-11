@@ -6,18 +6,9 @@
 using std::cerr;
 
 CoachConfigReader::CoachConfigReader(const string &configFile)
-  : file(configFile.c_str()) {
-
-  cout << "Parsing " << configFile << "\n";
-  
-  if(!file.is_open()) {
-    cout << "Unable to open config file.\n";
-    exit(EXIT_FAILURE);
-  }
-
+  : Reader(configFile) {
   parseConfig();
   file.close();
-
 }
 
 void CoachConfigReader::parseConfig() {
@@ -53,7 +44,9 @@ void CoachConfigReader::parseConfig() {
       else if(paramName == "rrdelta")
 	rrDelta = getDouble();
       else if(paramName == "part")
-	fePartitions.push_back(getVectorUInt());
+	fePartitions.push_back(getVector<uint>());
+      else if(paramName == "partorder")
+	fePartOrder = getUInt();
       else if(paramName == "outstd")
 	outputStd = true;
       else if(paramName == "feastd")
@@ -68,44 +61,4 @@ void CoachConfigReader::parseConfig() {
     }
   }
 
-}
-
-void CoachConfigReader::eatSpaces() {
-  while(isspace(file.peek())) file.get();
-}
-
-void CoachConfigReader::eatLine() {
-  while(file.peek() != '\n') file.get();
-  eatSpaces();
-}
-
-string CoachConfigReader::getString() {
-  string str;
-  while(!isspace(file.peek())) {
-    char c = file.get();
-    str += c;
-  }
-  return str;
-}
-
-double CoachConfigReader::getDouble() {
-  double num;
-  file >> num;
-  return num;
-}
-
-uint CoachConfigReader::getUInt() {
-  uint val;
-  file >> val;
-  return val;
-}
-
-vector<uint> CoachConfigReader::getVectorUInt() {
-  vector<uint> vec;
-  while(file.peek() != '\n') {
-    uint val;
-    file >> val;
-    vec.push_back(val);
-  }
-  return vec;
 }
