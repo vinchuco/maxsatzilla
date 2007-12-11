@@ -1,0 +1,34 @@
+feature saps_BestSolution_Mean: 306.840000
+feature saps_BestSolution_CoeffVariance: 0.005974
+feature saps_BestStep_Mean: 15.179000
+feature saps_BestStep_CoeffVariance: 0.244706
+feature saps_BestStep_Median: 15.000000
+feature saps_BestStep_Q.10: 11.000000
+feature saps_BestStep_Q.90: 20.000000
+feature saps_AvgImproveToBest_Mean: 2.176310
+feature saps_AvgImproveToBest_CoeffVariance: 0.403106
+feature saps_FirstLMRatio_Mean: 0.839375
+feature saps_FirstLMRatio_CoeffVariance: 0.138684
+feature saps_BestCV_Mean: 0.006747
+feature saps_totaltime: 0.100000
+feature gsat_BestSolution_Mean: 305.777000
+feature gsat_BestSolution_CoeffVariance: 0.004992
+feature gsat_BestStep_Mean: 19.171000
+feature gsat_BestStep_CoeffVariance: 0.432696
+feature gsat_BestStep_Median: 17.000000
+feature gsat_BestStep_Q.10: 11.000000
+feature gsat_BestStep_Q.90: 31.000000
+feature gsat_AvgImproveToBest_Mean: 1.963022
+feature gsat_AvgImproveToBest_CoeffVariance: 0.458444
+feature gsat_FirstLMRatio_Mean: 0.819540
+feature gsat_FirstLMRatio_CoeffVariance: 0.147309
+feature gsat_BestCV_Mean: 0.007635
+feature gsat_totaltime: 0.150000
+Number of Variables: 40
+Number of Clauses: 1356
+Ratio Clauses/Variables: 33.9
+Ratio Negative Clauses: 1
+Ratio Positive Clauses: 1
+Ratio Unit Clauses: 0
+Ratio Binary Clauses: 1
+Ratio Ternary Clauses: 0
