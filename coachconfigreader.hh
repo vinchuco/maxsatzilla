@@ -27,6 +27,7 @@ public:
   bool   getFeatureStd()                  const { return featureStd;          }
   bool   getOutputStd ()                  const { return outputStd;           }
   uint   getFEPartOrder()                 const { return fePartOrder;         }
+  uint   getPercentTest()                 const { return percentTest;         }
 
 private:
   void parseConfig();
@@ -40,6 +41,7 @@ private:
   bool featureStd;                    ///< Flag which determines if standardization of features should be performed.
   bool outputStd;                     ///< Flag which determines if standardization of outputs should be performed.
   uint fePartOrder;                   ///< Order of the function basis expansion.
+  uint percentTest;                   ///< Percentage of usable instances to be used for testing.
 };
 
 #endif // COACHCONFIGREADER_HH

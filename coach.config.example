@@ -11,6 +11,8 @@ p fsdelta 0.15
 c ridge regression
 p rrdelta 0.1
 
+c p pertest [0-100]
+
 c for expansion
 c p part ...
 c p part ...

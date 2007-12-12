@@ -6,7 +6,7 @@
 using std::cerr;
 
 CoachConfigReader::CoachConfigReader(const string &configFile)
-  : Reader(configFile) {
+  : Reader(configFile), percentTest(0) {
   parseConfig();
   file.close();
 }
@@ -51,6 +51,8 @@ void CoachConfigReader::parseConfig() {
 	outputStd = true;
       else if(paramName == "feastd")
 	featureStd = true;
+      else if(paramName == "pertest")
+	percentTest = getUInt();
       else { // error
 	cerr << "Error during parsing of config.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
 	exit(EXIT_FAILURE);

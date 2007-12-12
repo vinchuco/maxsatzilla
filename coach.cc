@@ -88,18 +88,16 @@ int main(int argc, char *argv[]) {
 
     // Lets do a forward selection
     for(uint s = 0; s < nbSolvers; s++) {
-      MSZDataSet solverDS = *ds;
+      MSZDataSet solverDS(*ds, s);
       solverDS.removeTimeouts(timeOut, s);
       
-      solverDS.printRawMatrix();
-
-      ForwardSelection fs(solverDS, s);
+      ForwardSelection fs(solverDS, 0);
       vector<uint> res = fs.run(creader.getFSDelta());
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
       vector<double> w;
-      w = rr.run(creader.getRRDelta(), s);
+      w = rr.run(creader.getRRDelta(), 0);
 
       mwriter.writeFreeWeight(solversNames[s], w[0]);
       for(uint i = 0; i < res.size(); i++)
