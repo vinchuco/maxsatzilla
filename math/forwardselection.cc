@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iterator>
 #include <cassert>
+#include <utility>
 #include <gsl/gsl_statistics.h>
 #include <gsl/gsl_fit.h>
 #include <gsl/gsl_multifit.h>
@@ -13,8 +14,10 @@
 
 using std::cerr;
 using std::cout;
+using std::pair;
+using std::make_pair;
 
-ForwardSelection::ForwardSelection(const MSZDataSet &ds, uint output) {
+ForwardSelection::ForwardSelection(const MSZDataSet &ds) {
 
   /// \todo No error checking is being done on GSL output
   
@@ -22,7 +25,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, uint output) {
   ovec = gsl_vector_alloc(ds.getNRows());
   
   for(uint i = 0; i < ds.getNRows(); i++)
-    gsl_vector_set(ovec, i, ds.getOutputValue(i, output));
+    gsl_vector_set(ovec, i, ds.getOutputValue(i));
 
   // Copying the matrix
   fmatrix = gsl_matrix_alloc(ds.getNRows(), ds.getNFeatures());
@@ -31,8 +34,10 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds, uint output) {
     for(uint c = 0; c < ds.getNFeatures(); c++) 
       gsl_matrix_set(fmatrix, r, c, ds.getFeatureValue(r, c));
 
-  // Printing Matris
+#ifdef FSDEBUG
+  // Printing Matrix
   gsl_matrix_fprintf(stderr, fmatrix, "%f");
+#endif // FSDEBUG
 
   // Compute initial variable index for forward selection
   initRegressor = 0;
@@ -119,7 +124,7 @@ vector<uint> ForwardSelection::run(double fin) {
 #endif //FSDEBUG
 
   while(1) { // This is broken later on...
-    vector<double> ssrvalues(fmatrix->size2, 0.0);
+    vector<pair<uint, double> > ssrvalues;
     bool foundNew = false; // Found regressor to add with fj > fin
 
     for(uint rindex = 0; rindex < isInModel.size(); rindex++) {
@@ -135,7 +140,7 @@ vector<uint> ForwardSelection::run(double fin) {
 #endif // FSDEBUG
 
 	foundNew = true;
-	ssrvalues[rindex] = newModelSSr;
+	ssrvalues.push_back(make_pair(rindex, newModelSSr));
       } 
 #ifdef FSDEBUG
       else 
@@ -144,13 +149,14 @@ vector<uint> ForwardSelection::run(double fin) {
     }
 
     if(foundNew) {
+      assert(ssrvalues.size() > 0);
       // Find regressor with maximum SSr
-      double maxSSr = 0.0;
-      uint bestIndex = 0;
-      for(uint i = 0; i < ssrvalues.size(); i++) {
-	if(ssrvalues[i] > maxSSr) {
-	  maxSSr = ssrvalues[i];
-	  bestIndex = i;
+      double maxSSr = ssrvalues[0].second;
+      uint bestIndex = ssrvalues[0].first;
+      for(uint i = 1; i < ssrvalues.size(); i++) {
+	if(ssrvalues[i].second > maxSSr) {
+	  maxSSr = ssrvalues[i].second;
+	  bestIndex = ssrvalues[i].first;
 	}
       }
       
@@ -169,6 +175,79 @@ vector<uint> ForwardSelection::run(double fin) {
 
   // Create result vector
   vector<uint> regs;
+  for(uint i = 0; i < isInModel.size(); i++) 
+    if(isInModel[i]) regs.push_back(i);
+
+  cout << "Forward Selection finished by choosing variables:\n";
+  copy(regs.begin(), regs.end(), std::ostream_iterator<uint>(cout, " "));
+  cout << std::endl;
+
+  return regs;
+}
+
+vector<uint> ForwardSelection::runForBest(uint nvars) {
+  
+  if(nvars == 0) {
+    MSZError("You are asking for the best 0 variables of forward selection. Are you sane?");
+  } else if(nvars == 1) {
+    vector<uint> regs(1, initRegressor);
+    return regs;
+  } else if(nvars > fmatrix->size2) {
+    MSZWarn("You are asking for the best %u variables of forward selection in a system with only %lu.", nvars, (unsigned long)(fmatrix->size2));
+    vector<uint> regs(fmatrix->size2, 0);
+    for(uint i = 0; i < regs.size(); i++)
+      regs.push_back(i);
+    return regs;
+  }
+
+  // It seems we want more than 1 var.
+  
+  // Current model SSr
+  double modelSSr = initSSr;
+
+  // Vector of regressors in model
+  vector<bool> isInModel(fmatrix->size2, false);
+  isInModel[initRegressor] = true;
+
+#ifdef FSDEBUG
+  cerr << "Doing FS on " << isInModel.size() << " regressors. Selecting best " << nvars << "\n";
+#endif //FSDEBUG
+
+  while(isInModel.size() < nvars) { // This is broken later on...
+    vector<pair<uint, double> > ssrvalues;
+
+    for(uint rindex = 0; rindex < isInModel.size(); rindex++) {
+      if(isInModel[rindex]) // if current regressor is in model then we continue
+	continue;
+
+      double newModelSSr;
+      computeFtest(isInModel, modelSSr, rindex, &newModelSSr);
+
+      ssrvalues.push_back(make_pair(rindex, newModelSSr));
+    }
+
+    // Find regressor with maximum SSr
+    assert(ssrvalues.size() > 0);
+    double maxSSr = ssrvalues[0].second;
+    uint bestIndex = ssrvalues[0].first;
+    for(uint i = 1; i < ssrvalues.size(); i++) {
+      if(ssrvalues[i].second > maxSSr) {
+	maxSSr = ssrvalues[i].second;
+	bestIndex = ssrvalues[i].first;
+      }
+    }
+    
+    assert(!isInModel[bestIndex]);
+    isInModel[bestIndex] = true;
+    
+#ifdef FSDEBUG
+    cerr << "*** Adding " << bestIndex << " to the model.\n"; 
+#endif //FSDEBUG
+  }
+
+  // Create result vector
+  vector<uint> regs(nvars, 0);
+  assert(nvars == isInModel.size());
   for(uint i = 0; i < isInModel.size(); i++) 
     if(isInModel[i]) regs.push_back(i);
 

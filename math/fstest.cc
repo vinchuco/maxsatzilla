@@ -54,33 +54,34 @@ int main(void) {
 
   double **stdformat = new double* [rows];
   for(uint i = 0; i < rows; i++)
-    stdformat[i] = new double [cols];
+    stdformat[i] = new double [cols-1];
 
   // fill values
+  double *ovec = new double [rows];
   for(uint r = 0; r < rows; r++)
-    stdformat[r][0] = data[r][4];
+    ovec[r] = data[r][4];
 
   for(uint r = 0; r < rows; r++)
-    for(uint c = 1; c < cols; c++)
-      stdformat[r][c] = data[r][c-1];
+    for(uint c = 0; c < cols-1; c++)
+      stdformat[r][c] = data[r][c];
+
+  string * labels = new string [6];
+  labels[0] = "Quality";
+  labels[1] = "Clarity";
+  labels[2] = "Aroma";
+  labels[3] = "Body";
+  labels[4] = "Flavor";
+  labels[5] = "Oakiness";
 
   // Call forward selection
-  MSZDataSet *ds = createDataSet(stdformat, rows, cols, 1);
-
-  vector<string> labels;
-  labels.push_back("Quality");
-  labels.push_back("Clarity");
-  labels.push_back("Aroma");
-  labels.push_back("Body");
-  labels.push_back("Flavor");
-  labels.push_back("Oakiness");
-  ds->dumpPlotFiles(labels, "./fstest");
-  
+  MSZDataSet *ds = createDataSet(stdformat, rows, cols, labels, ovec, "WineQuality");
+  ds->dumpPlotFiles("./fstest");
 
   // Lets do a forward selection
-  ForwardSelection fs(*ds, 0);
+  ForwardSelection fs(*ds);
   vector<uint> res = fs.run(0.15);
 
   // free
+  delete[] labels;
   delete ds;
 }

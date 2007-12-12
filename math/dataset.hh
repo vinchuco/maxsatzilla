@@ -11,29 +11,27 @@ using std::vector;
 
 class MSZDataSet {
 public:
-  MSZDataSet(double**, uint, uint, uint);
+  MSZDataSet(const double* const*, uint, uint, const string*, const double*, const string&);
   MSZDataSet(const MSZDataSet&);
   ~MSZDataSet();
 
   /// Given a vector of labels for matrix columns and a prefix for file names, 
   /// dumps all the files, in a readable format for GNUPlot to use.
-  void dumpPlotFiles(const vector<string> &, const string &) const;
-  void dumpPlotFiles(char **, uint, char *) const ;
+  void dumpPlotFiles(const string &) const;
 
   /// Outputs information regarding the number of timeouts
   /// segmentation faults, etc. for each solver.
   /// Shouldn't be run AFTER output standardization.
-  void printSolverStats(uint, const vector<string> &);
+  void printSolverStats(uint);
 
   /// Accessors
   double getFeatureValue(uint, uint) const; 
-  double getOutputValue(uint, uint)  const;
+  double getOutputValue(uint)        const;
 
-  inline uint getNRows()     const { return nrows;           }
-  inline uint getNCols()     const { return ncols;           }
-  inline uint getNFeatures() const { return ncols - outputs; }
-  inline uint getNRFeatures()const { return rfeatures;       }
-  inline uint getNOutputs()  const { return outputs;         }
+  uint getNRows()     const { return nrows;           }
+  uint getNCols()     const { return ncols;           }
+  uint getNFeatures() const { return ncols;           }
+  uint getNRFeatures()const { return rfeatures;       }
 
   // Dataset transformations
   /// Implement basis function expansions of any given order throughout
@@ -46,37 +44,44 @@ public:
   void standardize();
 
   /// Implements standardization of the outputs
-  void standardizeOutputs();
+  void standardizeOutput();
 
   /// Removes from current dataset the features in the vector
   void removeFeatures(const vector<uint> &);
 
   /// Removes the instances with timeouts in the given solver
-  void removeTimeouts(uint, uint);
+  void removeTimeouts(uint);
 
   /// Prints raw matrix, no strings attached. Just for debugging purposes.
   void printRawMatrix(); 
 
 private:
   double *getMColumn(uint c)           const { return matrix[c];    }
-  double getMValue(uint r, uint c)   const { return matrix[c][r]; }
-  void setMValue(uint r, uint c, double v) { matrix[c][r] = v;    }
-  void setMColumn(uint c, double *col)       { matrix[c] = col;     }
+  double  getMValue(uint r, uint c)    const { return matrix[c][r]; }
+  double *getVector()                  const { return ovec;         }
+  double  getVValue(uint i)            const { return ovec[i];      }
 
-  void expandOnPartition(uint, const vector<uint> &);
+  void    setMValue(uint r, uint c, double v){ matrix[c][r] = v;    }
+  void    setMColumn(uint c, double *col)    { matrix[c] = col;     }
+  void    setVector(double *vec)             { ovec = vec;          }
+  void    setVValue(uint i, double v)        { ovec[i] = v;         }
+
+  void   expandOnPartition(uint, const vector<uint> &);
   double computeCrossProduct(uint, uint *, uint, const vector<uint> &);
   
-  double **matrix;   ///< Matrix of doubles allocated as an array of columns
-  uint nrows;     ///< Number of rows
-  uint rfeatures; ///< Number of raw features
-  uint ncols;     ///< Number of columns (outputs + features)
-  uint outputs;   ///< Number of outputs
-  bool stdDone;     ///< Flag for feature standardization
-  bool oStdDone;    ///< Flag for output standardization
+  double **matrix;       ///< Matrix of doubles allocated as an array of columns
+  double * ovec;         ///< Vector of outputs
+  uint nrows;            ///< Number of rows
+  uint rfeatures;        ///< Number of raw features
+  uint ncols;            ///< Number of columns (outputs + features)
+  vector<string> labels; ///< Labels for each column of matrix
+  string vecLabel;       ///< Label for the vector column
+  bool stdDone;          ///< Flag for feature standardization
+  bool oStdDone;         ///< Flag for output standardization
 };
 
 /// API entrace function to create dataset to be used with other
 /// functions. This function NEVER returns a 0 pointer.
-MSZDataSet *createDataSet(double**, uint, uint, uint = 1);
+MSZDataSet *createDataSet(const double* const*, uint, uint, const string*, const double*, const string&);
 
 #endif // DATASET_HH
