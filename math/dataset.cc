@@ -221,12 +221,15 @@ void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
   // Now, we just need to delete the columns referenced in the vector
   // and resize the main column array (delete + new, no realloc!).
   double **newMatrix = new double* [ncols];
+  
+  vector<string> newLabels;
   // Note that the vector indices denote the destination column
   // in the new matrix and the vector contents the origin column on the
   // old matrix. This means that we need to copy the column v[i] of old matrix
   // to column i of the new matrix.
   for(uint c = 0; c < ncols; c++) {
     newMatrix[c] = getMColumn(vec[c]);
+    newLabels.push_back(labels[vec[c]]);
     setMColumn(vec[c], 0); // Those which are not 0 are the columns 
                            // that should be deleted afterwards
   }
@@ -235,6 +238,7 @@ void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
   
   delete[] matrix;
   matrix = newMatrix;
+  labels = newLabels;
 }
 
 void MSZDataSet::standardizeOutput() {

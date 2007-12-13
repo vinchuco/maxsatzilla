@@ -12,7 +12,7 @@ RidgeRegression::RidgeRegression(const MSZDataSet &data) :
 
 RidgeRegression::~RidgeRegression() { }
 
-vector<double> RidgeRegression::run(double delta, uint out) {
+Model RidgeRegression::run(double delta) {
 
   const uint nbParams = data.getNFeatures()+1;
 
@@ -56,7 +56,7 @@ vector<double> RidgeRegression::run(double delta, uint out) {
   // initialize y vector as matrix
   gsl_matrix *y = gsl_matrix_alloc(data.getNRows(), 1);
   for(uint r = 0; r < data.getNRows(); r++)
-    gsl_matrix_set(y, r, 0, data.getOutputValue(r, out));
+    gsl_matrix_set(y, r, 0, data.getOutputValue(r));
 
 #ifdef RRDEBUG
   cerr << "Y (" << y->size1 << ", " << y->size2 << "):\n";
@@ -130,12 +130,13 @@ vector<double> RidgeRegression::run(double delta, uint out) {
   assert(final->size1 == nbParams);
   assert(final->size2 == 1);
 
-  vector<double> w;
-  for(uint i = 0; i < final->size1; i++) 
-    w.push_back(gsl_matrix_get(final, i, 0));
+  Model m;
+  m.addRegressor(gsl_matrix_get(final, 0, 0));
+  for(uint i = 1; i < final->size1; i++) 
+    m.addRegressor(gsl_matrix_get(final, i, 0), data.getColLabel(i-1));
 
   gsl_matrix_free(final);
-  return w;
+  return m;
 }
 
 gsl_matrix *RidgeRegression::matrix_mult(const gsl_matrix *m1, const gsl_matrix *m2) const {

@@ -1,5 +1,5 @@
-#ifndef MSZMODEL_HH
-#define MSZMODEL_HH
+#ifndef MODEL_HH
+#define MODEL_HH
 
 #include <vector>
 #include <string>
@@ -20,14 +20,15 @@ using std::pair;
  *  where b_i are the coefficients of the model, or regressors (the important stuff) 
  *  and x_i are the variables of the model, the variables with which the model was trained.
  */
-class MSZModel {
+class Model {
 public:
-  MSZModel();
+  Model();
 
   void addRegressor(double, string);
   void addRegressor(double);
   void remRegressor(const string&);
   double getRegressor(const string&) const;
+  const map<string, double> &getAllRegressors() const { return regressorMap; }
 
   double getRegressor() const { return freeRegressor;           }  
   void   delRegressor()       { freeRegressor = 0.0;            }
@@ -40,4 +41,4 @@ protected:
   map<string, double> regressorMap; ///< Map where regressor values are kept by id, which is a string.
 };
 
-#endif // MSZMODEL_HH
+#endif // MODEL_HH

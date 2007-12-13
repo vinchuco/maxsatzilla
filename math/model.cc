@@ -1,11 +1,11 @@
-#include "mszmodel.hh"
+#include "model.hh"
 
-#include "math/pputils.hh"
+#include "pputils.hh"
 
-MSZModel::MSZModel() 
+Model::Model() 
   : freeRegressor(0) { }
 
-void MSZModel::addRegressor(double val, string id) {
+void Model::addRegressor(double val, string id) {
   map<string, double>::iterator it = regressorMap.find(id);
   
   if(it != regressorMap.end()) {
@@ -16,7 +16,7 @@ void MSZModel::addRegressor(double val, string id) {
   regressorMap[id] = val;
 }
 
-void MSZModel::addRegressor(double val) {
+void Model::addRegressor(double val) {
   if(freeRegressor != 0) {
     MSZWarn("You're trying to add a regressor already set to %f. Delete it first if you really want to add it to the model. For now I'm ignoring your request.", freeRegressor);
     return;
@@ -24,7 +24,7 @@ void MSZModel::addRegressor(double val) {
   freeRegressor = val;	    
 }
 
-void MSZModel::remRegressor(const string& id) {
+void Model::remRegressor(const string& id) {
   map<string, double>::iterator it = regressorMap.find(id);
 
   if(it == regressorMap.end()) {
@@ -35,7 +35,7 @@ void MSZModel::remRegressor(const string& id) {
   regressorMap.erase(it);
 }
 
-double MSZModel::getRegressor(const string& id) const {
+double Model::getRegressor(const string& id) const {
   map<string, double>::const_iterator it = regressorMap.find(id);
 
   if(it == regressorMap.end()) {
@@ -46,7 +46,7 @@ double MSZModel::getRegressor(const string& id) const {
   return it->second;
 }
 
-double MSZModel::computeModelOutput(const vector<pair<string, double> >& features) {
+double Model::computeModelOutput(const vector<pair<string, double> >& features) {
   double y = freeRegressor;
   for(vector<pair<string, double> >::const_iterator it = features.begin();
       it != features.end();

@@ -55,11 +55,17 @@ int main(int argc, char *argv[]) {
   parse_DIMACS(in, nbSolvers, nbFeatures, nbInstances, timeOut, solversNames, featuresNames, instancesNames, data);
   in.close();
 
+  // Spliting data into solver data and feature data.
+  
+
   try {
     CoachModelWriter mwriter(creader.getOutputModelFilename());
     mwriter.writeTrainingSetFilename(creader.getTrainingSetFilename());
 
-    MSZDataSet *ds = createDataSet(data, nbInstances, nbFeatures+nbSolvers, nbSolvers);
+    // Creating a vector of datasets, one for each solver.
+    vector<MSZDataSet *> dss(nbSolvers, 0);
+    for(uint s = 0; s < nbSolvers; s++)
+      dss[s] = createDataSet(fdata, nbInstances, nbFeatures, featuresNames, sdata, solversNames[s]);
     
     vector<string> snames;
     for(uint s = 0; s < nbSolvers; s++) snames.push_back(solversNames[s]);
@@ -96,12 +102,14 @@ int main(int argc, char *argv[]) {
       solverDS.removeFeatures(res);
       
       RidgeRegression rr(solverDS);
-      vector<double> w;
-      w = rr.run(creader.getRRDelta(), 0);
-
-      mwriter.writeFreeWeight(solversNames[s], w[0]);
-      for(uint i = 0; i < res.size(); i++)
-	mwriter.writeWeight(solversNames[s], featuresNames[res[i]], w[i+1]);
+      Model m = rr.run(creader.getRRDelta(), 0);
+      
+      mwriter.writeFreeWeight(solversNames[s], m.getRegressor());
+      const map<string, double> &rmap = m.getAllRegressors();
+      for(map<string, double>::const_iterator it = rmap.begin();
+	  it != rmap.end();
+	  it++)
+	mwriter.writeWeight(solversNames[s], it->first, it->second);
     }
 
     mwriter.endWrite();

@@ -4,9 +4,10 @@
 #include <string>
 #include <vector>
 
-#include<gsl/gsl_matrix.h>
+#include <gsl/gsl_matrix.h>
 
 #include "dataset.hh"
+#include "model.hh"
 
 #define RRDEBUG 1
 
@@ -27,7 +28,7 @@ public:
   // Runs ridge regression algorithm and outputs 
   // header file with static definition of model
   // for a given output.
-  vector<double> run(double, uint);
+  Model run(double);
 
 private:
   gsl_matrix *matrix_mult(const gsl_matrix *, const gsl_matrix *) const;

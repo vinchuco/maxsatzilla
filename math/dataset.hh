@@ -32,6 +32,8 @@ public:
   uint getNCols()     const { return ncols;           }
   uint getNFeatures() const { return ncols;           }
   uint getNRFeatures()const { return rfeatures;       }
+  string getColLabel(uint i) const { return labels[i]; }
+  string getOutputName() const { return vecLabel;      }
 
   // Dataset transformations
   /// Implement basis function expansions of any given order throughout
@@ -82,6 +84,11 @@ private:
 
 /// API entrace function to create dataset to be used with other
 /// functions. This function NEVER returns a 0 pointer.
-MSZDataSet *createDataSet(const double* const*, uint, uint, const string*, const double*, const string&);
+MSZDataSet *createDataSet(const double* const*, 
+			  uint, 
+			  uint, 
+			  const string*, 
+			  const double*, 
+			  const string&);
 
 #endif // DATASET_HH

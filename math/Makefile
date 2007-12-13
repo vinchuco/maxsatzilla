@@ -3,7 +3,7 @@
 
 LDFLAGS = -lgsl -lgslcblas -lz
 CXXFLAGS = -Wall -std=c++98 -ggdb
-LIB_FILES = dataset.cc forwardselection.cc ridgeregression.cc
+LIB_FILES = dataset.cc forwardselection.cc ridgeregression.cc model.cc
 HEADERS = $(LIB_FILES:%.cc=%.hh)
 
 ifeq ($(shell uname),Darwin)
