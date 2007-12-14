@@ -1,7 +1,5 @@
-#include "coachtestmanager.hh"
+#include "modeltesting.hh"
 
-CoachTestManager::CoachTestManager(const MszModel &model, const MszDataSet &dataset) {
-
-  
+void ModelTesting::test(const MszModel &, const MszDataSet &) {
 
 }

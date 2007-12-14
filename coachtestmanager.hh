@@ -1,15 +1,9 @@
-#ifndef COACHTESTMANAGER_HH
-#define COACHTESTMANAGER_HH
+#ifndef MODELTESTING_HH
+#define MODELTESTING_HH
 
-class CoachTestManager {
-public:
-  CoachTestManager(const MszModel &, const MszDataSet &);
+namespace ModelTesting {
 
-  void test();
-
-
-private:
+  void test(const MszModel &, const MszDataSet &);
 
 };
-
-#endif // COACHTESTMANAGER_HH
+#endif // MODELTESTING_HH
