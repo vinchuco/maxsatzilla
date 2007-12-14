@@ -3,11 +3,13 @@
 
 #include <string>
 #include <vector>
+#include <utility>
 
 #include "pputils.hh"
 
 using std::string;
 using std::vector;
+using std::pair;
 
 class MSZDataSet {
 public:
@@ -90,5 +92,14 @@ MSZDataSet *createDataSet(const double* const*,
 			  const string*, 
 			  const double*, 
 			  const string&);
+
+pair<MSZDataSet *, MSZDataSet *> createDataSets(double**, 
+						uint, 
+						uint, 
+						const string*, 
+						const double*, 
+						const string&,
+						uint,
+						uint);
 
 #endif // DATASET_HH

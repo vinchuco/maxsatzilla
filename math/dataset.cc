@@ -371,7 +371,7 @@ double MSZDataSet::computeCrossProduct(uint r, uint *ind, uint k, const vector<u
 void MSZDataSet::removeTimeouts(uint timeout) {
 
   if(oStdDone) {
-    cerr << "Output standardization already performed. Cannot remove timeouts.\n";
+    cout << "Output standardization already performed. Cannot remove timeouts.\n";
     return;
   }
 
@@ -442,4 +442,72 @@ MSZDataSet *createDataSet(const double* const* matrix,
   MSZDataSet *ds = new MSZDataSet(matrix, nrows, ncols, labels, ovec, ovecLabel);
   
   return ds;
+}
+
+
+/** This function creates two datasets:
+ * a training data set and a test data set, both of which without timeouts
+ * and split according to the percentTest value.
+ * @returns a pair with the training dataset in car and test dataset in cdr.
+ */
+pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix, 
+						uint nrows, 
+						uint ncols, 
+						const string* labels, 
+						const double* ovec, 
+						const string& ovecLabel,
+						uint timeOut,
+						uint percentTest) {
+
+  // Create new matrix without timeouts
+  uint nbTimeouts = 0;
+  for(uint i = 0; i < nrows; i++)
+    if(ovec[i] == timeOut) nbTimeouts++;
+
+  const uint nbUsableRows = nrows - nbTimeouts;
+  const uint nbTestRows = (percentTest == 0) ? 0 : (uint) floor((double)nbUsableRows * (double)percentTest / 100.0);
+  const uint nbTrainingRows = nbUsableRows - nbTestRows;
+  
+  cout << "[" << ovecLabel << "]" << "After partitioning into training and test set:\n"
+       << "\tTotal number of rows: " << nrows << "\n"
+       << "\tTotal number of usable rows (without timeouts): " << nbUsableRows << "\n"
+       << "\tTotal number of training rows: " << nbTrainingRows << "\n"
+       << "\tTotal number of test rows: " << nbTestRows << "\n";
+
+  double **trainingMatrix = new double* [nbTrainingRows];
+  double *trainingOVec = new double [nbTrainingRows];
+
+  uint trainingRow = 0;
+  uint currentRow = 0;
+  while(trainingRow != nbTrainingRows) {
+    if(ovec[currentRow] != timeOut) {
+      trainingMatrix[trainingRow] = matrix[currentRow];
+      trainingOVec[trainingRow] = ovec[currentRow];
+      trainingRow++;
+    }
+    currentRow++;
+  }
+
+  double **testMatrix = new double* [nbTestRows];
+  double *testOVec = new double [nbTestRows]; 
+
+  uint testRow = 0;
+  while(testRow != nbTestRows) {
+    if(ovec[currentRow] != timeOut) {
+      testMatrix[testRow] = matrix[currentRow];
+      testOVec[testRow] = ovec[testRow];
+      testRow++;
+    }
+    currentRow++;
+  }
+
+  MSZDataSet *trainingDataSet = new MSZDataSet(trainingMatrix, nbTrainingRows, ncols, labels, trainingOVec, ovecLabel);
+  MSZDataSet *testDataSet = new MSZDataSet(testMatrix, nbTestRows, ncols, labels, testOVec, ovecLabel);
+
+  delete[] trainingMatrix;
+  delete[] trainingOVec;
+  delete[] testMatrix;
+  delete[] testOVec;
+  
+  return std::make_pair(trainingDataSet, testDataSet);
 }

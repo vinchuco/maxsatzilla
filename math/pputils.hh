@@ -9,11 +9,19 @@
   fprintf(stderr, msg, ##__VA_ARGS__);                          \
   fprintf(stderr, "\n");
 
-#define MSZError(msg, ...)						      \
+#define MSZError(msg, ...)				              \
   fprintf(stderr, "ERROR (%s:%d) ", __FILE__, __LINE__);              \
   fprintf(stderr, msg, ##__VA_ARGS__);                                \
   fprintf(stderr, "\n");                                              \
   exit(EXIT_FAILURE);
+
+#define MSZAssert(cond, msg, ...)                                       \
+  if(!(cond)) {                                                         \
+    fprintf(stderr, "ASSERT (%s:%d) ", __FILE__, __LINE__);             \
+    fprintf(stderr, msg, ##__VA_ARGS__);                                \
+    fprintf(stderr, "\n");                                              \
+    exit(EXIT_FAILURE);                                                 \
+  }
 
 #define MSZMemOut(msg) "ERROR"
 

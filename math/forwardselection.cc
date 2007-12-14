@@ -67,7 +67,7 @@ ForwardSelection::ForwardSelection(const MSZDataSet &ds) {
   }
   
 #ifdef FSDEBUG
-  cerr << "Best initial feature (highest correlation) is: " << initRegressor << "\n"
+  cerr << "\nBest initial feature (highest correlation) is: " << initRegressor << "\n"
        << "Its correlation is " << bestCorrelation << "\n\n";
 #endif // FSDEBUG
   
@@ -201,6 +201,7 @@ vector<uint> ForwardSelection::runForBest(uint nvars) {
   }
 
   // It seems we want more than 1 var.
+  uint nvarsInModel = 1;
   
   // Current model SSr
   double modelSSr = initSSr;
@@ -213,7 +214,7 @@ vector<uint> ForwardSelection::runForBest(uint nvars) {
   cerr << "Doing FS on " << isInModel.size() << " regressors. Selecting best " << nvars << "\n";
 #endif //FSDEBUG
 
-  while(isInModel.size() < nvars) { // This is broken later on...
+  while(nvarsInModel < nvars) { // This is broken later on...
     vector<pair<uint, double> > ssrvalues;
 
     for(uint rindex = 0; rindex < isInModel.size(); rindex++) {
@@ -239,6 +240,7 @@ vector<uint> ForwardSelection::runForBest(uint nvars) {
     
     assert(!isInModel[bestIndex]);
     isInModel[bestIndex] = true;
+    nvarsInModel++;
     
 #ifdef FSDEBUG
     cerr << "*** Adding " << bestIndex << " to the model.\n"; 
@@ -246,12 +248,11 @@ vector<uint> ForwardSelection::runForBest(uint nvars) {
   }
 
   // Create result vector
-  vector<uint> regs(nvars, 0);
-  assert(nvars == isInModel.size());
+  vector<uint> regs;
   for(uint i = 0; i < isInModel.size(); i++) 
     if(isInModel[i]) regs.push_back(i);
 
-  cout << "Forward Selection finished by choosing variables:\n";
+  cout << "Forward Selection finished by choosing variables: ";
   copy(regs.begin(), regs.end(), std::ostream_iterator<uint>(cout, " "));
   cout << std::endl;
 
