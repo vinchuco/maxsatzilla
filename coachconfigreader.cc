@@ -6,7 +6,7 @@
 using std::cerr;
 
 CoachConfigReader::CoachConfigReader(const string &configFile)
-  : Reader(configFile), percentTest(0) {
+  : Reader(configFile), percentTest(0), fsopt(NONE) {
   parseConfig();
   file.close();
 }
@@ -37,10 +37,22 @@ void CoachConfigReader::parseConfig() {
 	trainingSetFilename = getString();
       else if(paramName == "model")
 	outputModelFilename = getString();
-      else if(paramName == "fsdelta")
-	fsDelta = getDouble();
-      else if(paramName == "fsinst")
-	fsInsts = getUInt();
+      else if(paramName == "fsdelta") {
+	if(fsopt == NONE) {
+	  fsDelta = getDouble();
+	  fsopt = DELTA;
+	} else {
+	  MSZError("In your coach config file you have set fsinst to %u and you're now trying to set the delta. Only one is possible.", fsInsts);
+	}
+      }
+      else if(paramName == "fsinst") {
+	if(fsopt == NONE) {
+	  fsInsts = getUInt();
+	  fsopt = INSTS;
+	} else {
+	  MSZError("In your coach config file you have set delta to %f and you're now trying to set the instances. Only one is possible.", fsDelta);
+	}
+      }
       else if(paramName == "rrdelta")
 	rrDelta = getDouble();
       else if(paramName == "part")
