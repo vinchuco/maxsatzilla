@@ -3,7 +3,7 @@
 nbParameters=$#
 if [ $nbParameters -eq 0 ] ; then
     echo "Usage: $0
-       \"<Solver 1 [arguments 1]>\" [\"<Solver 2 [arguments 2]>\" [... \"<Solver n [arguments n]>\"]]
+       <Solver 1 [arguments 1]> [<Solver 2 [arguments 2]> [... <Solver n [arguments n]>]]
        -instances <CNF file 1> [<CNF File 2> [... <CNF File i>]]"
     exit
 fi
@@ -11,9 +11,10 @@ fi
 # echo "Settings"
 source settings.sh
 ulimit -t $cpuTimeOut
-ulimit -v $cpuTimeOut
+ulimit -v $memOut
 
 # echo "Inits"
+arguments="$@"
 readingInstances=0
 nbSolvers=0
 nbInstances=0
@@ -54,10 +55,10 @@ for argument in "$@" ; do
 	    fi
 	fi
 	if [ `echo $featuringLineFirst | wc -c` -eq 1 ] || [ `echo $featuringLineLast | wc -c` -eq 1 ] ; then
-	    ../getfeatures $adimacsInstance | sed -f ../filter.sed > $featuresFile
+	    $featuresExec $adimacsInstance > $featuresFile
 	    i=0
 	    while [ $i -lt $nbFeatures ] ; do
-		value=`grep ${features[$i]} $featuresFile | cut -d':' -f2`
+		value=`grep ${features[$i]} $featuresFile | tail -c +4`
 		echo -n "$value"
 		echo "$instanceName $value" >> ${features[$i]}.ftr
 		i=$(($i+1))

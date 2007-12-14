@@ -58,12 +58,13 @@ time="/usr/bin/time -p"
 # Solvers/Features commands
 solversFile="solversFile$HOSTNAME.txt"
 featuresFile="featuresFile$HOSTNAME.txt"
+featuresExec="../features.rb ../getfeatures"
 
 # Timeouts/Memory limits
-cpuTimeOut=3
+cpuTimeOut=1000
 source setCPULimit.sh
 #echo "exitcode=$cpuTimeOutReturnCode"
-memOut=4000000
+memOut=2000000
 
 # Log file for trace
 logFile="logFile$HOSTNAME.log"
