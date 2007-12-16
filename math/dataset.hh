@@ -35,7 +35,7 @@ public:
   uint getNFeatures() const { return ncols;           }
   uint getNRFeatures()const { return rfeatures;       }
   string getColLabel(uint i) const { return labels[i]; }
-  string getOutputName() const { return vecLabel;      }
+  string getOutputLabel() const { return vecLabel;      }
 
   // Dataset transformations
   /// Implement basis function expansions of any given order throughout

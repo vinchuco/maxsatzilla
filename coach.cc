@@ -10,6 +10,7 @@
 #include "mszreader.hh"
 #include "coachconfigreader.hh"
 #include "coachmodelwriter.hh"
+#include "modeltesting.hh"
 
 #include "math/dataset.hh"
 #include "math/forwardselection.hh"
@@ -61,13 +62,33 @@ int main(int argc, char *argv[]) {
 
     // Creating a vector of pairs of datasets, one for each solver.
     // If there is a test set, we create the test set, otherwise we create a dataset and the test position is 0.
-    vector<pair<MSZDataSet *, MSZDataSet *> > dss(nbSolvers, make_pair(0, 0));
+    vector<pair<MSZDataSet *, MSZDataSet *> > dss(nbSolvers, make_pair((MSZDataSet*)0, (MSZDataSet*)0));
+
+    double **fdata = new double* [nbFeatures];
+    for(uint f = 0; f < nbFeatures; f++)
+      fdata[f] = new double [nbInstances];
+    
+    for(uint r = 0; r < nbInstances; r++)
+      for(uint c = 0; c < nbFeatures; c++)
+	fdata[c][r] = data[r][c+nbSolvers];
+    
     for(uint s = 0; s < nbSolvers; s++) {
+
+      double *outputs = new double [nbInstances];
+      for(uint i = 0; i < nbInstances; i++)
+	outputs[i] = data[i][s];
+
       if(percentTest > 0)
-	dss[s] = createDataSets(fdata, nbTrainingInstances, nbFeatures, featuresNames, outputs[s], solversNames[s], timeOut, percentTest);
+	dss[s] = createDataSets(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s], timeOut, percentTest);
       else
-	dss[s] = std::make_pair(createDataSet(fdata, nbTrainingInstances, nbFeatures, featuresNames, outputs[s], solversNames[s]), 0);
+	dss[s] = std::make_pair(createDataSet(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s]), (MSZDataSet*)0);
+
+      delete[] outputs;
     }
+
+    for(uint i = 0; i < nbInstances; i++)
+      delete[] fdata[i];
+    delete[] fdata;
 
     vector<string> snames;
     for(uint s = 0; s < nbSolvers; s++) snames.push_back(solversNames[s]);
@@ -135,29 +156,22 @@ int main(int argc, char *argv[]) {
 	mwriter.writeWeight(solversNames[s], it->first, it->second);
 
       // Testing model against a test dataset
-      CoachTestManager testMgm(m, dss[s].second);
-      
-
+      ModelTesting::test(m, *(dss[s].second));
     }
 
     mwriter.endWrite();
 
     // Let's not forget to delete the datasets
-    for(uint s = 0; s < nbSolvers; s++)
-      delete dss[s];
+    for(uint s = 0; s < nbSolvers; s++) {
+      delete dss[s].first;
+      delete dss[s].second;
+    }
     
   } catch(std::bad_alloc) {
     cerr << "Coach: Bad memory allocation or not enough memory on the system\n."
 	 << "Exiting peacefully...\n";
     exit(EXIT_FAILURE);
   }
-
-  for(uint s = 0; s < nbSolvers; s++)
-    delete[] outputs[s];
-
-  for(uint i = 0; i < nbTrainingInstances; i++)
-    delete[] fdata[i];
-  delete[] fdata;
 
   delete[] solversNames;
   delete[] featuresNames;
