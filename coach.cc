@@ -64,13 +64,13 @@ int main(int argc, char *argv[]) {
     // If there is a test set, we create the test set, otherwise we create a dataset and the test position is 0.
     vector<pair<MSZDataSet *, MSZDataSet *> > dss(nbSolvers, make_pair((MSZDataSet*)0, (MSZDataSet*)0));
 
-    double **fdata = new double* [nbFeatures];
-    for(uint f = 0; f < nbFeatures; f++)
-      fdata[f] = new double [nbInstances];
+    double **fdata = new double* [nbInstances];
+    for(uint f = 0; f < nbInstances; f++)
+      fdata[f] = new double [nbFeatures];
     
     for(uint r = 0; r < nbInstances; r++)
       for(uint c = 0; c < nbFeatures; c++)
-	fdata[c][r] = data[r][c+nbSolvers];
+	fdata[r][c] = data[r][c+nbSolvers];
     
     for(uint s = 0; s < nbSolvers; s++) {
 

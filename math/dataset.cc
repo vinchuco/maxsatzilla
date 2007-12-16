@@ -480,6 +480,9 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
   uint trainingRow = 0;
   uint currentRow = 0;
   while(trainingRow != nbTrainingRows) {
+    assert(currentRow >= trainingRow);
+    assert(currentRow < nrows);
+    assert(trainingRow < nbTrainingRows);
     if(ovec[currentRow] != timeOut) {
       trainingMatrix[trainingRow] = matrix[currentRow];
       trainingOVec[trainingRow] = ovec[currentRow];
