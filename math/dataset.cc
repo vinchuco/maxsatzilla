@@ -187,7 +187,7 @@ void MSZDataSet::standardize() {
 void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
   // We need to remove the feature indexes in vec from the current data.
   
-  cout << "Keeping features in dataset: ";
+  cout << "[" << getOutputLabel() << "] Keeping features in dataset: ";
 
   // Create the indices to keep
   // by: 
@@ -200,7 +200,10 @@ void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
     cout << "ALL\n";
     return;
   } else {
-    copy(vec.begin(), vec.end(), std::ostream_iterator<uint>(cout, " "));
+    for(vector<uint>::const_iterator it = keepVec.begin();
+	it != keepVec.end();
+	it++)
+      cout << getColLabel(*it) << "(" << *it << ") ";
     cout << std::endl;
   }
 

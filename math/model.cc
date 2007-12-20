@@ -39,7 +39,7 @@ double Model::getRegressor(const string& id) const {
   map<string, double>::const_iterator it = regressorMap.find(id);
 
   if(it == regressorMap.end()) {
-    MSZWarn("You're trying to get a regressor with id %s that is not set. Returning 0.0.", id.c_str());
+    // MSZWarn("You're trying to get a regressor with id %s that is not set. Returning 0.0.", id.c_str());
     return 0.0;
   }
 

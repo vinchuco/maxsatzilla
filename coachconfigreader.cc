@@ -20,6 +20,7 @@ void CoachConfigReader::parseConfig() {
     // If it is a comment we read everything up to the end of file.
     char c;
     c = file.get();
+    
     if(c == 'c') {
       eatLine();
     }
@@ -69,7 +70,9 @@ void CoachConfigReader::parseConfig() {
 	cerr << "Error during parsing of config.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
 	exit(EXIT_FAILURE);
       }
-    } else { // error
+    } else if(c == EOF) 
+      break;
+    else { // error
       cerr << "Error during parsing of config.\nExpected comment of parameter declaration, got character: " << c << "\n";
       exit(EXIT_FAILURE);
     }

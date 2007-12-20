@@ -7,7 +7,7 @@ using std::cout;
 void ModelTesting::test(const Model &m, const MSZDataSet &testDS) {
 
   cout << "Testing for output: " << testDS.getOutputLabel() << "\n";
-  cout << "Testing " << testDS.getNRows() << "instances\n";
+  cout << "Testing " << testDS.getNRows() << " instances\n";
 
   vector<double> predRuntimes(testDS.getNRows(), m.getRegressor());
   

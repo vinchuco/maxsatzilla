@@ -9,8 +9,6 @@
 #include "dataset.hh"
 #include "model.hh"
 
-#define RRDEBUG 1
-
 using std::string;
 using std::vector;
 

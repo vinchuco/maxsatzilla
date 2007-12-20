@@ -1,0 +1,27 @@
+c file with training set
+p training coaching/industrial.msz
+
+c ridge regression
+p rrdelta 0.1
+
+p pertest 30
+
+c for expansion
+c p part ...
+c p part ...
+
+c for standardization
+c do output std
+p outstd
+
+c do feat std
+p feastd
+
+c can also be:
+c p fsinst <numfeatures>
+c p fsdelta 0.15
+
+c file to output
+
+p fsinst 4
+p model msz.model.fsinst-4
