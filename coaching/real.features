@@ -10,7 +10,7 @@ feature saps_AvgImproveToBest_CoeffVariance
 feature saps_FirstLMRatio_Mean
 feature saps_FirstLMRatio_CoeffVariance
 feature saps_BestCV_Mean
-feature saps_totaltime
+#feature saps_totaltime
 feature gsat_BestSolution_Mean
 feature gsat_BestSolution_CoeffVariance
 feature gsat_BestStep_Mean
@@ -23,7 +23,7 @@ feature gsat_AvgImproveToBest_CoeffVariance
 feature gsat_FirstLMRatio_Mean
 feature gsat_FirstLMRatio_CoeffVariance
 feature gsat_BestCV_Mean
-feature gsat_totaltime
+#feature gsat_totaltime
 Number of Variables
 Number of Clauses
 Ratio Clauses/Variables
