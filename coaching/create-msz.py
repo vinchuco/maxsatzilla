@@ -88,12 +88,19 @@ for line in open( instance_set_list ):
         feature_values = []
         solution = -1
         try:
-            for solver in solvers:
-                solver_sol, time = get_instance_time( solver, set_name, instance_basename )
-                check_solution( solution, solver_sol )
-                solvers_times.append ( time )
-            for feature in features:
-                feature_values.append( get_feature_value( instance, feature ) )
+            try:
+                for solver in solvers:
+                    solver_sol, time = get_instance_time( solver, set_name, instance_basename )
+                    check_solution( solution, solver_sol )
+                    solvers_times.append ( time )
+            except Exception:
+                print >> sys.stderr, 'Error in solvers'
+                raise
+            try:
+                for feature in features:
+                    feature_values.append( get_feature_value( instance, feature ) )
+            except Exception:
+                print >> sys.stderr, 'Error in features'
             print >> msz_file, ' '.join( solvers_times )
             print >> msz_file, ' '.join( feature_values )
         except Exception:
