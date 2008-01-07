@@ -6,5 +6,5 @@ AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
 BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
 SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
 PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
-#SATPLAN /benchmark/cnf/satplan/unsat/*.cnf 9
+SATPLAN /benchmark/cnf/satplan/unsat/*.cnf 9
 UCLID /benchmark/cnf/uclid/SAT_BENCH/*.cnf 31

@@ -1,0 +1,9 @@
+logistics.c.cnf	9506	0.0504
+logistics.a.cnf	5783	0.218
+logistics.b.cnf	6428	0.290
+rocket_ext.a.cnf	1691	0.179
+rocket_ext.b.cnf	1843	0.273
+bw_large.a.cnf	3290	89.855
+bw_large.b.cnf	--	1000.0
+bw_large.c.cnf  --	1000.0
+bw_large.d.cnf  --	1000.0
