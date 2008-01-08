@@ -3,7 +3,7 @@
 import sys, signal
 
 if len( sys.argv ) < 3:
-    print "usage " + sys.argv[0] + " <instance list file> <directory>"
+    print "usage " + sys.argv[0] + " <instance list> <target directory>"
     sys.exit(0)
 
 import glob, os
