@@ -118,7 +118,7 @@ int main(int argc, char *argv[]) {
 
       if(creader.getFeatureStd()) {
 	dss[s].first->standardize();
-	dss[s].second->standardize();	
+	dss[s].second->standardize();
       }
     }
 

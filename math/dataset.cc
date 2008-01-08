@@ -494,14 +494,18 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
   uint testRow = 0;
   uint trainingRow = 0;
   uint currentRow = 0;
+  
+  cout << "[" << ovecLabel << "]" << "Rows going to test set: ";
+
   while(currentRow != nrows) {
     assert(currentRow < nrows);
     if(ovec[currentRow] != timeOut) {
       // Will this be a training or a test row?
       if(currentRow % testValue == 0) { // test row
 	assert(testRow < nbTestRows);
+	cout << currentRow << " ";
 	testMatrix[testRow] = matrix[currentRow];
-	testOVec[testRow] = ovec[testRow];
+	testOVec[testRow] = ovec[currentRow];
 	testRow++;
       } else { // training row
 	assert(trainingRow < nbTrainingRows);
@@ -512,6 +516,8 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
     }
     currentRow++;
   }
+
+  cout << "\n";
 
   assert(trainingRow == nbTrainingRows);
   assert(testRow == nbTestRows);

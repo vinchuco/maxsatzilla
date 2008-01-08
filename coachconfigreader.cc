@@ -6,7 +6,7 @@
 using std::cerr;
 
 CoachConfigReader::CoachConfigReader(const string &configFile)
-  : Reader(configFile), percentTest(0), fsopt(NONE) {
+  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false) {
   parseConfig();
   file.close();
 }
