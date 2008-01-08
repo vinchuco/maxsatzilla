@@ -2,8 +2,8 @@
 #include <fstream>
 #include <vector>
 
-#define MAX_LINE_LENGTH 1024
-#define MAX_NUM_LITERALS 10000
+#define MAX_LINE_LENGTH 2048
+#define MAX_NUM_LITERALS 1000000
 
 // UBCSAT parameters
 #define UBCSAT_TIME_LIMIT 1
@@ -14,12 +14,12 @@ using namespace std;
 
 class MaxSatInstance {
   char* inputFileName;
-  enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   int numVars, numClauses;
   int *negClausesWithVar, *posClausesWithVar;
   int unitClauses, binaryClauses, ternaryClauses;
   bool isTautologicalClause(int[MAX_NUM_LITERALS], int&, const int);
  public:
+  enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   MaxSatInstance( const char* filename );
   ~MaxSatInstance();
 

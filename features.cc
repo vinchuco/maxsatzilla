@@ -11,7 +11,7 @@ int main( int argc, char* argv[] ) {
   }
 
   MaxSatInstance msi( argv[1] );
-  if ( msi.format == CNF )
+  if ( msi.format == MaxSatInstance::CNF )
     msi.computeLocalSearchProperties();
   msi.printInfo( cout );
 
