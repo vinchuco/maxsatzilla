@@ -468,44 +468,53 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
     if(ovec[i] == timeOut) nbTimeouts++;
 
   const uint nbUsableRows = nrows - nbTimeouts;
-  const uint nbTestRows = (percentTest == 0) ? 0 : (uint) floor((double)nbUsableRows * (double)percentTest / 100.0);
+
+  const uint testValue = (uint) floor((double)100.0 / (double)percentTest);
+  uint nbTestRows = 0;
+
+  for(uint row = 0; row < nrows; row++)
+    if(ovec[row] != timeOut && row % testValue == 0) 
+      nbTestRows++;
+
   const uint nbTrainingRows = nbUsableRows - nbTestRows;
   
   cout << "[" << ovecLabel << "]" << "After partitioning into training and test set:\n"
        << "\tTotal number of rows: " << nrows << "\n"
        << "\tTotal number of usable rows (without timeouts): " << nbUsableRows << "\n"
+       << "\tTotal number of timeout/error rows: " << nrows - nbUsableRows << "\n"
        << "\tTotal number of training rows: " << nbTrainingRows << "\n"
        << "\tTotal number of test rows: " << nbTestRows << "\n";
 
   double **trainingMatrix = new double* [nbTrainingRows];
   double *trainingOVec = new double [nbTrainingRows];
 
-  uint trainingRow = 0;
-  uint currentRow = 0;
-  while(trainingRow != nbTrainingRows) {
-    assert(currentRow >= trainingRow);
-    assert(currentRow < nrows);
-    assert(trainingRow < nbTrainingRows);
-    if(ovec[currentRow] != timeOut) {
-      trainingMatrix[trainingRow] = matrix[currentRow];
-      trainingOVec[trainingRow] = ovec[currentRow];
-      trainingRow++;
-    }
-    currentRow++;
-  }
-
   double **testMatrix = new double* [nbTestRows];
   double *testOVec = new double [nbTestRows]; 
 
   uint testRow = 0;
-  while(testRow != nbTestRows) {
+  uint trainingRow = 0;
+  uint currentRow = 0;
+  while(currentRow != nrows) {
+    assert(currentRow < nrows);
     if(ovec[currentRow] != timeOut) {
-      testMatrix[testRow] = matrix[currentRow];
-      testOVec[testRow] = ovec[testRow];
-      testRow++;
+      // Will this be a training or a test row?
+      if(currentRow % testValue == 0) { // test row
+	assert(testRow < nbTestRows);
+	testMatrix[testRow] = matrix[currentRow];
+	testOVec[testRow] = ovec[testRow];
+	testRow++;
+      } else { // training row
+	assert(trainingRow < nbTrainingRows);
+	trainingMatrix[trainingRow] = matrix[currentRow];
+	trainingOVec[trainingRow] = ovec[currentRow];
+	trainingRow++;
+      }
     }
     currentRow++;
   }
+
+  assert(trainingRow == nbTrainingRows);
+  assert(testRow == nbTestRows);
 
   MSZDataSet *trainingDataSet = new MSZDataSet(trainingMatrix, nbTrainingRows, ncols, labels, trainingOVec, ovecLabel);
   MSZDataSet *testDataSet = new MSZDataSet(testMatrix, nbTestRows, ncols, labels, testOVec, ovecLabel);
