@@ -6,7 +6,7 @@ use src::UTILS;
 die "Usage: $0 <bench> \"\" [<timeout>] [<memout>]\n" if ($#ARGV<=0);
 
 my $launcher = "scripts/tlaunch.bash";
-my $tool = 'maxsatz';
+my $tool = './maxsatz';
 my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
 my $noarg = (@ARGV) ? shift @ARGV : die "Must specify double quotes...\n";
 my $timeout = (@ARGV) ? shift @ARGV : 1000;
