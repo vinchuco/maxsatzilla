@@ -21,8 +21,8 @@ def get_instance_time( solver, name, instance ):
         name, solution, time = line.split()
         if name == instance:
             return solution, time
-    print >> sys.stderr, "Instance " + instance
-    raise Exception('Instance not found' )
+    #print >> sys.stderr, "Instance " + instance
+    raise Exception('Instance not found ' + instance )
 
 def get_feature_value( instance, feature ):
     output = StringIO.StringIO()
@@ -80,7 +80,7 @@ for line in open( instance_set_list ):
     instance_counter = 0
     set_name, path, number = line.split()
     print >> msz_file, 'c Set name ' + set_name
-    for instance in glob.glob( features_directory + set_name + '*.features' ):
+    for instance in glob.glob( features_directory + set_name + '.*.features' ):
         instance_counter += 1
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
         print >> msz_file, 'i ' + instance_basename
