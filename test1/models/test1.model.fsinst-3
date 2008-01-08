@@ -1,0 +1,17 @@
+p training ../coaching/test1.msz
+p solvers maxsatz-a-e mspbo-a-e msuncore-a1-ei
+
+p outstd
+p feastd
+p freeweight maxsatz-a-e -1.84724
+p weight maxsatz-a-e Ratio_Ternary_Clauses 2.23644
+p weight maxsatz-a-e feature_saps_BestStep_CoeffVariance 0.721131
+p weight maxsatz-a-e feature_saps_BestStep_Q_10 0.775689
+p freeweight mspbo-a-e 0.342377
+p weight mspbo-a-e Ratio_Clauses/Variables 0.416045
+p weight mspbo-a-e feature_gsat_BestStep_Q_10 0.130045
+p weight mspbo-a-e feature_saps_BestStep_Mean 1.07666
+p freeweight msuncore-a1-ei -1.01362
+p weight msuncore-a1-ei feature_saps_BestCV_Mean -1.29455
+p weight msuncore-a1-ei feature_saps_BestStep_Median 0.611964
+p weight msuncore-a1-ei feature_saps_FirstLMRatio_Mean 0.492555

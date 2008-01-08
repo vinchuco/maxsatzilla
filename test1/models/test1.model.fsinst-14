@@ -1,0 +1,50 @@
+p training ../coaching/test1.msz
+p solvers maxsatz-a-e mspbo-a-e msuncore-a1-ei
+
+p outstd
+p feastd
+p freeweight maxsatz-a-e -1.84724
+p weight maxsatz-a-e Ratio_Clauses/Variables 0.128594
+p weight maxsatz-a-e Ratio_Negative_Clauses 1.712
+p weight maxsatz-a-e Ratio_Positive_Clauses -1.00279
+p weight maxsatz-a-e Ratio_Ternary_Clauses 0.72394
+p weight maxsatz-a-e Ratio_Unit_Clauses 1.82503
+p weight maxsatz-a-e feature_gsat_BestCV_Mean -0.419214
+p weight maxsatz-a-e feature_gsat_BestSolution_Mean 2.03562
+p weight maxsatz-a-e feature_gsat_BestStep_Mean 6.98676
+p weight maxsatz-a-e feature_gsat_BestStep_Median -3.12392
+p weight maxsatz-a-e feature_gsat_BestStep_Q_10 2.58373
+p weight maxsatz-a-e feature_saps_AvgImproveToBest_Mean 2.644
+p weight maxsatz-a-e feature_saps_BestStep_CoeffVariance 1.43384
+p weight maxsatz-a-e feature_saps_BestStep_Q_10 -6.86534
+p weight maxsatz-a-e feature_saps_FirstLMRatio_Mean -2.3786
+p freeweight mspbo-a-e 0.342377
+p weight mspbo-a-e Number_of_Clauses 1.37584
+p weight mspbo-a-e Number_of_Variables -0.668318
+p weight mspbo-a-e Ratio_Clauses/Variables 0.454396
+p weight mspbo-a-e Ratio_Negative_Clauses 0.0149111
+p weight mspbo-a-e Ratio_Unit_Clauses 0.407079
+p weight mspbo-a-e feature_gsat_BestStep_Q_10 -0.813483
+p weight mspbo-a-e feature_gsat_BestStep_Q_90 0.787303
+p weight mspbo-a-e feature_gsat_FirstLMRatio_CoeffVariance -0.199239
+p weight mspbo-a-e feature_saps_AvgImproveToBest_CoeffVariance 0.0643825
+p weight mspbo-a-e feature_saps_AvgImproveToBest_Mean -0.526426
+p weight mspbo-a-e feature_saps_BestStep_Mean 0.0295224
+p weight mspbo-a-e feature_saps_BestStep_Median 0.381149
+p weight mspbo-a-e feature_saps_BestStep_Q_90 0.188593
+p weight mspbo-a-e feature_saps_FirstLMRatio_Mean -0.0960423
+p freeweight msuncore-a1-ei -1.01362
+p weight msuncore-a1-ei Number_of_Clauses 3.82661
+p weight msuncore-a1-ei Number_of_Variables 3.17621
+p weight msuncore-a1-ei Ratio_Negative_Clauses 0.159008
+p weight msuncore-a1-ei feature_gsat_BestCV_Mean 0.264833
+p weight msuncore-a1-ei feature_gsat_BestSolution_Mean -5.80682
+p weight msuncore-a1-ei feature_gsat_BestStep_Q_90 -0.217141
+p weight msuncore-a1-ei feature_saps_AvgImproveToBest_Mean -0.488545
+p weight msuncore-a1-ei feature_saps_BestCV_Mean -0.501206
+p weight msuncore-a1-ei feature_saps_BestStep_CoeffVariance -0.015014
+p weight msuncore-a1-ei feature_saps_BestStep_Mean 0.52039
+p weight msuncore-a1-ei feature_saps_BestStep_Median 0.0995171
+p weight msuncore-a1-ei feature_saps_BestStep_Q_10 0.231627
+p weight msuncore-a1-ei feature_saps_BestStep_Q_90 -0.256175
+p weight msuncore-a1-ei feature_saps_FirstLMRatio_Mean 0.137836

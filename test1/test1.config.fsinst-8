@@ -1,0 +1,21 @@
+c file with training set
+p training ../coaching/test1.msz
+
+c ridge regression
+p rrdelta 0.1
+
+p pertest 30
+
+c for expansion
+c p part ...
+c p part ...
+
+c for standardization
+c do output std
+p outstd
+
+c do feat std
+p feastd
+
+p fsinst  8
+p model test1.model.fsinst-8
