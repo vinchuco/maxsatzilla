@@ -17,31 +17,31 @@ c literal -792 is redundant in clause 4710
 c literal -1966 is redundant in clause 4713
 c literal -1966 is redundant in clause 4716
 c literal -166 is redundant in clause 5933
-feature saps_BestSolution_Mean: 551.295455
-feature saps_BestSolution_CoeffVariance: 0.461313
-feature saps_BestStep_Mean: 568.386364
-feature saps_BestStep_CoeffVariance: 0.602460
-feature saps_BestStep_Median: 497.500000
-feature saps_BestStep_Q.10: 243.000000
-feature saps_BestStep_Q.90: 875.000000
-feature saps_AvgImproveToBest_Mean: 2.152326
-feature saps_AvgImproveToBest_CoeffVariance: 0.245907
-feature saps_FirstLMRatio_Mean: 0.960908
-feature saps_FirstLMRatio_CoeffVariance: 0.102562
-feature saps_BestCV_Mean: 0.039222
+feature saps_BestSolution_Mean: 533.000000
+feature saps_BestSolution_CoeffVariance: 0.498266
+feature saps_BestStep_Mean: 604.000000
+feature saps_BestStep_CoeffVariance: 0.629507
+feature saps_BestStep_Median: 510.500000
+feature saps_BestStep_Q.10: 248.000000
+feature saps_BestStep_Q.90: 900.000000
+feature saps_AvgImproveToBest_Mean: 2.104867
+feature saps_AvgImproveToBest_CoeffVariance: 0.267596
+feature saps_FirstLMRatio_Mean: 0.950634
+feature saps_FirstLMRatio_CoeffVariance: 0.118780
+feature saps_BestCV_Mean: 0.049137
 feature saps_totaltime: 1.010000
-feature gsat_BestSolution_Mean: 566.960000
-feature gsat_BestSolution_CoeffVariance: 0.570100
-feature gsat_BestStep_Mean: 704.506667
-feature gsat_BestStep_CoeffVariance: 1.287291
-feature gsat_BestStep_Median: 550.000000
+feature gsat_BestSolution_Mean: 589.166667
+feature gsat_BestSolution_CoeffVariance: 0.543774
+feature gsat_BestStep_Mean: 595.924242
+feature gsat_BestStep_CoeffVariance: 0.815583
+feature gsat_BestStep_Median: 512.500000
 feature gsat_BestStep_Q.10: 130.000000
-feature gsat_BestStep_Q.90: 1017.000000
-feature gsat_AvgImproveToBest_Mean: 2.127471
-feature gsat_AvgImproveToBest_CoeffVariance: 0.340680
-feature gsat_FirstLMRatio_Mean: 0.961401
-feature gsat_FirstLMRatio_CoeffVariance: 0.084131
-feature gsat_BestCV_Mean: 0.046918
+feature gsat_BestStep_Q.90: 964.000000
+feature gsat_AvgImproveToBest_Mean: 2.182494
+feature gsat_AvgImproveToBest_CoeffVariance: 0.312070
+feature gsat_FirstLMRatio_Mean: 0.962623
+feature gsat_FirstLMRatio_CoeffVariance: 0.085416
+feature gsat_BestCV_Mean: 0.042657
 feature gsat_totaltime: 1.010000
 Number of Variables: 2640
 Number of Clauses: 7008
