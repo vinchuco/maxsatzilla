@@ -69,11 +69,11 @@ int main(int argc, char *argv[]) {
 	factors = mreader.getStdFactors(solvers[s], it->first);
       else
 	factors = make_pair(0.0, 1.0);
+      const double stdf = (it->second - factors.first)/factors.second ; // Standardizing feature value
       const double w = mreader.getModelWeight(solvers[s], it->first);
       if(w != 0) {
-	double stdw = (w - factors.first)/factors.second ;
-	runtime += it->second * stdw;
-	cout << "(+" << it->first << "[" << it->second << "] * " << stdw << ") " << runtime << "\n";
+	runtime += stdf * w;
+	cout << "(+" << it->first << "[" << stdf << "] * " << w << ") " << runtime << "\n";
       }
     }
     cout << "\n";
