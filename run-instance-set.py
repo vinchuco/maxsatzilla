@@ -23,11 +23,11 @@ for set in open( set_list ):
     total_instances_run += times
     print 'Running ' + solver + ' with ' + name + ' ' + str( times ) + '/' + number
     outfile = os.path.basename( solver ) + '.' + name + '.out'
-    os.system( 'touch ' + outfile )
+    os.system( 'cp /dev/null ' + outfile )
     for file in glob.glob( path ):
         if counter < times:
             counter += 1
-            print solver + ' with ' + file 
-            os.system( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + '&> ' + outfile +'2>&1')
+            print 'Executing ' + solver + ' with ' + file 
+            os.system( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2>&1')
 
 print 'Total instances run ' + str( total_instances_run )
