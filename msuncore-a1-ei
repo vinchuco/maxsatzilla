@@ -1,7 +1,7 @@
 #! /bin/bash
-MSUNCORE_DIR="solvers/msuncore"
+MSUNCORE_DIR="./solvers/msuncore"
 INIT_DIR=`pwd`
 
 cd $MSUNCORE_DIR
-$MSUNCORE_DIR/runmsuncore $@
+./scripts/runmsuncore $@
 cd $INIT_DIR

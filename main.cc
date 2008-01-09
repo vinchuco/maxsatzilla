@@ -54,16 +54,18 @@ int main(int argc, char *argv[]) {
   // Let's compute the model
   map<string, double> predRt;
   for(uint s = 0; s < solvers.size(); s++) {
-    cout << "Computing runtime for " << solvers[s] << ": ";
+    cout << "Computing runtime for " << solvers[s] << ":\n";
     // Computing model for solver s.
     double runtime = mreader.getModelWeight(solvers[s]);
-    cout << runtime << " ";
+    cout << runtime << "\n";
     for(map<string, double>::const_iterator it = feats.begin();
 	it != feats.end();
 	it++) { 
       double w = mreader.getModelWeight(solvers[s], it->first);
-      runtime += it->second * w;
-      cout << "(+" << it->first << "[" << it->second << "] * " << w << ") " << runtime << "\n";
+      if(w != 0) {
+	runtime += it->second * w;
+	cout << "(+" << it->first << "[" << it->second << "] * " << w << ") " << runtime << "\n";
+      }
     }
     cout << "\n";
     predRt[solvers[s]] = runtime;
@@ -86,24 +88,27 @@ int main(int argc, char *argv[]) {
     const string filename = filename_prefix + it->first;
 
     pid_t pid;
-    if((pid = fork()) == 0) 
+    pid = fork();
+    if(pid == 0) {
       execl(filename.c_str(), it->first.c_str(), instance, "1000", "1000000");
-        
-    int status;
-    waitpid(pid, &status, 0);
+      exit(EXIT_SUCCESS);
+    } else {
+      int status;
+      wait(&status);
     
-    if(WIFEXITED(status)) 
-      cout << "** Process returned normally ";
-    else
-      cout << "** Process returned abnormally ";
+      if(WIFEXITED(status)) 
+	cout << "** Process returned normally ";
+      else
+	cout << "** Process returned abnormally ";
 
-    cout << " with exit code " << WEXITSTATUS(status) << "\n";
+      cout << " with exit code " << WEXITSTATUS(status) << "\n";
 
-    if(WIFSIGNALED(status))
-      cout << "** Process returned by signal " << WTERMSIG(status) << "\n";
-
-    if(WIFEXITED(status)) 
-      break;
+      if(WIFSIGNALED(status))
+	cout << "** Process returned by signal " << WTERMSIG(status) << "\n";
+      
+      if(WIFEXITED(status)) 
+	break;
+    }
   }
 
   return 0;

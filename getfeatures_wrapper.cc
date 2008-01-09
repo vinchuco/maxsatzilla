@@ -5,10 +5,12 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <cassert>
+#include <iostream>
 
 #include "getfeatures_wrapper.hh"
 
 using std::ifstream;
+using std::cerr;
 
 #define GETFEATURE_PATH "./getfeaturestofile.sh"
 #define TMPFEATURESFILE "/tmp/features.tmp"
@@ -36,9 +38,9 @@ namespace WrapperUtils {
 	string featurename(line, 0, possplit);
 	const string featurevalue(line, possplit+1);
 
-	// replace spaces in feature name by _
+	// replace spaces and dots in feature name by _
 	for(size_t i = 0; i < featurename.size(); i++)
-	  if(featurename[i] == ' ') featurename[i] = '_';
+	  if(featurename[i] == ' ' || featurename[i] == '.') featurename[i] = '_';
 	
 	const double feat = atof(featurevalue.c_str());
 
@@ -46,7 +48,8 @@ namespace WrapperUtils {
       }
       ffile.close();
     } else {
-      assert(false);
+      cerr << "Couldn't open file for reading : " << TMPFEATURESFILE << "\n";
+      exit(EXIT_FAILURE);
     }
 
 
@@ -58,12 +61,17 @@ namespace WrapperUtils {
 map<string, double> getFeatures(const string &inst) {
 
   pid_t pid;
+  pid = fork();
 
-  if((pid = fork()) == 0)
+  if(pid == 0) {
     WrapperUtils::runExec(inst);
+    exit(EXIT_SUCCESS);
+  }
+  else {
+    // In Parent process, we need to wait for the child to finish
+    int status;
+    wait(&status);
+  }
 
-  // In Parent process, we need to wait for the child to finish
-  int status;
-  waitpid(pid, &status, 0);
   return WrapperUtils::parseFeaturesFromFile();
 }

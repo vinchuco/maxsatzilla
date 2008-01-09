@@ -6,7 +6,7 @@
 using std::cerr;
 
 MszModelReader::MszModelReader(const string &configFile)
-  : Reader(configFile) {
+  : Reader(configFile), featureStd(false), outputStd(false) {
   parseConfig();
   file.close();
 }
@@ -49,11 +49,13 @@ void MszModelReader::parseConfig() {
 	const string featureName = getString();
 	const double value = getDouble();
 	weights[solverName][featureName] = value;
+	cout << "Weight " << solverName << " " << featureName << " " << value << "\n";
       }
       else if(paramName == "freeweight") {
 	const string solverName = getString();
 	const double value = getDouble();
 	freeWeights[solverName] = value;
+	cout << "FreeWeight " << solverName << " " << value << "\n";
       }
       else { // error
 	cerr << "Error during parsing of model.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
