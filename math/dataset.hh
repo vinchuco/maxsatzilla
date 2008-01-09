@@ -45,8 +45,9 @@ public:
   void expand(uint, const vector<vector<uint> > &);
   
   /// Implements standardization of the feature set
-  void standardize();
-
+  vector<pair<double, double> > standardize();
+  void standardize(const vector<pair<double, double> > &);
+  
   /// Implements standardization of the outputs
   void standardizeOutput();
 
@@ -72,7 +73,8 @@ private:
 
   void   expandOnPartition(uint, const vector<uint> &);
   double computeCrossProduct(uint, uint *, uint, const vector<uint> &);
-  
+  pair<double, double> computeStdFactors(uint);
+
   double **matrix;       ///< Matrix of doubles allocated as an array of columns
   double * ovec;         ///< Vector of outputs
   uint nrows;            ///< Number of rows

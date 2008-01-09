@@ -117,13 +117,15 @@ int main(int argc, char *argv[]) {
       }
 
       if(creader.getFeatureStd()) {
-	dss[s].first->standardize();
-	dss[s].second->standardize();
+	map<string, pair<double, double> > factors = dss[s].first->standardize();
+	dss[s].second->standardize(factors);
+
+	// Output standardization factors
+	mwriter.writeStdFactors(factors);
       }
     }
 
     // Write standardization options to file
-    if(creader.getOutputStd())  mwriter.writeOutputStd();
     if(creader.getFeatureStd()) mwriter.writeFeatureStd();
 
     for(uint s = 0; s < nbSolvers; s++) {

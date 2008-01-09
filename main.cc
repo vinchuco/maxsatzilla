@@ -61,7 +61,8 @@ int main(int argc, char *argv[]) {
     for(map<string, double>::const_iterator it = feats.begin();
 	it != feats.end();
 	it++) { 
-      double w = mreader.getModelWeight(solvers[s], it->first);
+      pair<double, double> factors = getStdFactors(solvers[s], it->first);
+      double w = (mreader.getModelWeight(solvers[s], it->first) - factors.first)/factors.second ;
       if(w != 0) {
 	runtime += it->second * w;
 	cout << "(+" << it->first << "[" << it->second << "] * " << w << ") " << runtime << "\n";

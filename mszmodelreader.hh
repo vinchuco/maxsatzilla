@@ -21,6 +21,7 @@ public:
   uint   getFEOrder()                     const { return feOrder;             }
   double getModelWeight(const string&, const string&);
   double getModelWeight(const string&);
+  pair<double, double> getFeatureFactors(const string&, const string&);
   vector<string> getSolvers()             const { return solvers;             }
 
 private:
@@ -35,6 +36,7 @@ private:
   vector<vector<uint> > fePartitions;
   map<string, map<string, double> > weights; ///< Mapping from solver to map to features and coefficient values
   map<string, double> freeWeights; ///< Mapping solvers to free weights
+  map<string, map<string, pair<double, double> > factors; ///< Mapping solvers to maps of features to factors
 };
 
 #endif // MSZMODELREADER_HH

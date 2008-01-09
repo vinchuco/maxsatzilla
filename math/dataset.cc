@@ -148,29 +148,34 @@ double MSZDataSet::getFeatureValue(uint row, uint col) const {
   return getMValue(row, col);
 }
 
-void MSZDataSet::standardize() {
+map<string, pair<double, double> > MSZDataSet::standardize() {
+
+  vector<pair<double, double> > factors;
+  map<string, pair<double, double> > mfactors;
+
+  for(uint c = 0; c < ncols; c++) {
+    pair<double, double> f = computeStdFactors(c);
+    factors.push_back(f);
+    mfactors[getColLabel(c)] = f;
+  }
+
+  standardize(factors);
+
+  return mfactors;
+}
+
+void MSZDataSet::standardize(const vector<pair<double, double> > &factors) {
   
   cout << "Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...\n";
 
   if(!stdDone) {
     for(uint c = 0; c < ncols; c++) {
+      const double mean = factors[c].first;
+      const sdv = factors[c].second;
 
-      // Compute column mean and compute column variance.
-      double mean = 0.0;
-      for(uint r = 0; r < nrows; r++) 
-	mean += getMValue(r, c);
-      mean /= nrows;
-
-      cout << "[Feature " << labels[c] << "] Centering = " << mean << "; ";
-
-      // Compute column standard deviation. 
-      double sdv = 0.0;
-      for(uint r = 0; r < nrows; r++) 
-	sdv += gsl_pow_2(getMValue(r, c) - mean);
-      sdv /= nrows;
-      sdv = sqrt(sdv);
-
-      cout << "Scaling = " << sdv << "\n";
+      cout << "[Feature " << labels[c] 
+	   << "] Centering = " << mean << "; "
+	   << "Scaling = " << sdv << "\n";
 
       for(uint r = 0; r < nrows; r++) 
 	setMValue(r, c, (getMValue(r, c) - mean) / sdv);
@@ -182,6 +187,27 @@ void MSZDataSet::standardize() {
 
   cout << "DONE\n";
 
+}
+
+/** Computes features standardization factors for a column
+ *  @returns a pair with the centering factor (mean) and the
+ *  @returns scaling factor (std deviation).
+ */
+pair<double, double> MSZDataSet::computeStdFactors(uint c) {
+  
+  // Compute column mean and compute column standard deviation.
+  double mean = 0.0;
+  for(uint r = 0; r < nrows; r++) 
+    mean += getMValue(r, c);
+  mean /= nrows;
+  
+  double sdv = 0.0;
+  for(uint r = 0; r < nrows; r++) 
+    sdv += gsl_pow_2(getMValue(r, c) - mean);
+  sdv /= nrows;
+  sdv = sqrt(sdv); 
+
+  return make_pair(mean, sdv);
 }
 
 void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {

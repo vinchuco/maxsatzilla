@@ -57,6 +57,13 @@ void MszModelReader::parseConfig() {
 	freeWeights[solverName] = value;
 	cout << "FreeWeight " << solverName << " " << value << "\n";
       }
+      else if(paramName == "stdfactormean") {
+	const string solverName = getString();
+	const string featureName = getString();
+	const double mean = getDouble();
+	const double sdv = getDouble();
+	factors[solverName][featureName] = make_pair(mean, sdv);
+      }
       else { // error
 	cerr << "Error during parsing of model.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
 	exit(EXIT_FAILURE);
@@ -75,4 +82,8 @@ double MszModelReader::getModelWeight(const string& solver, const string& featur
 
 double MszModelReader::getModelWeight(const string& solver) {
   return freeWeights[solver];
+}
+
+pair<double, double> MszModelReader::getFeatureFactors(const string& sname, const string& feature) {
+  return factors[sname][feature];
 }
