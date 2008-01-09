@@ -13,8 +13,8 @@ ifeq ($(shell uname),Darwin)
 endif
 
 MAXSATZILLA_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas $(LDFLAGS)
-COACH_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas -lz $(LDFLAGS)
-MSZPARSE_LDFLAGS = -lz $(LDFLAGS)
+COACH_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas $(LDFLAGS)
+MSZPARSE_LDFLAGS = $(LDFLAGS)
 
 .PHONY : all clean run subdirs $(SUBDIRS)
 
