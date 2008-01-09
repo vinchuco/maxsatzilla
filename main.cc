@@ -56,8 +56,9 @@ int main(int argc, char *argv[]) {
     for(map<string, double>::const_iterator it = feats.begin();
 	it != feats.end();
 	it++) { 
-      runtime += it->second * mreader.getModelWeight(solvers[s], it->first);
-      cout << "(+" << it->first << ") " << runtime << " ";
+      double w = mreader.getModelWeight(solvers[s], it->first);
+      runtime += it->second * w;
+      cout << "(+" << it->first << "[" << it->second << "] * " << w << ") " << runtime << "\n";
     }
     cout << "\n";
     predRt[solvers[s]] = runtime;
