@@ -13,7 +13,7 @@ using std::ifstream;
 using std::cerr;
 
 #define GETFEATURE_PATH "./getfeaturestofile.sh"
-#define TMPFEATURESFILE "/tmp/features.tmp"
+#define TMPFEATURESFILE "./features.tmp"
 
 namespace WrapperUtils {
 
