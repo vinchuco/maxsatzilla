@@ -1,6 +1,8 @@
 #include <iostream>
 #include <cassert>
 #include <cmath>
+#include <unistd.h>
+#include <sys/wait.h>
 
 #include "getfeatures_wrapper.hh"
 
@@ -67,6 +69,37 @@ int main(int argc, char *argv[]) {
       it != predRt.end();
       it++)
     cout << "\t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
+  
+  // Forking to run the best solver
+  for(map<string, double>::const_iterator it = predRt.begin();
+      it != predRt.end();
+      it++) {
+    cout << "** Runnning " << it->first << "\n";
+
+    const string filename_prefix = "./";
+    const string filename = filename_prefix + it->first;
+
+    pid_t pid;
+    if((pid = fork()) == 0) 
+      execl(filename.c_str(), it->first.c_str(), instance, "1000", "1000000");
+        
+    int status;
+    waitpid(pid, &status, 0);
+    
+    
+    if(WIFEXITED(status)) 
+      cout << "** Process returned normally ";
+    else
+      cout << "** Process returned abnormally ";
+
+    cout << " with exit code " << WEXITSTATUS(status) << "\n";
+
+    if(WIFSIGNALED(status))
+      cout << "** Process returned by signal " << WTERMSIG(status) << "\n";
+
+    if(WIFEXITED(status)) 
+      break;
+  }
 
   return 0;
 }

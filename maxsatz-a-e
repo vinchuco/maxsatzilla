@@ -1,0 +1,7 @@
+#! /bin/bash
+MSUNCORE_DIR="solvers/msuncore"
+INIT_DIR=`pwd`
+
+cd $MSUNCORE_DIR
+$MSUNCORE_DIR/runmaxsatz $@
+cd $INIT_DIR
