@@ -18,7 +18,7 @@ using std::cerr;
 namespace WrapperUtils {
 
   void runExec(const string &inst) {
-    execl(GETFEATURE_PATH, "getfeaturestofile.sh", inst.c_str(), TMPFEATURESFILE);
+    execl(GETFEATURE_PATH, "getfeaturestofile.sh", inst.c_str(), TMPFEATURESFILE, (char *)NULL);
   }
   
   map<string, double> parseFeaturesFromFile() {
