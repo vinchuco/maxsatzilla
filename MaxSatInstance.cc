@@ -49,12 +49,12 @@ MaxSatInstance::MaxSatInstance( const char* filename )
     format = CNF;
   } else if( strcmp(strbuf, "wcnf")==0 ) {
     format = WEIGHTED;
-  } else if( strcmp(strbuf, "pcnf")==0 ) {
+  } else if( strcmp(strbuf, "pmcnf")==0 ) {
     format = PARTIAL;
-  } else if( strcmp(strbuf, "wpcnf")==0 ) {
+  } else if( strcmp(strbuf, "wpmcnf")==0 ) {
     format = WEIGHTED_PARTIAL;
   } else {
-    fprintf(stderr, "c Error: Can only understand cnf format!\n");
+    fprintf(stderr, "c Error: Format %s not recognized.\n", strbuf);
     exit(1);
   }
 
