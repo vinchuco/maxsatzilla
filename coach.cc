@@ -121,12 +121,13 @@ int main(int argc, char *argv[]) {
 	dss[s].second->standardize(factors);
 
 	// Output standardization factors
-	mwriter.writeStdFactors(factors);
+	mwriter.writeStdFactors(solversNames[s], factors);
       }
     }
 
     // Write standardization options to file
     if(creader.getFeatureStd()) mwriter.writeFeatureStd();
+    if(creader.getOutputStd()) mwriter.writeOutputStd();
 
     for(uint s = 0; s < nbSolvers; s++) {
 

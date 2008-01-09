@@ -4,6 +4,7 @@
 #include <iterator>
 
 using std::cerr;
+using std::make_pair;
 
 MszModelReader::MszModelReader(const string &configFile)
   : Reader(configFile), featureStd(false), outputStd(false) {
@@ -57,7 +58,7 @@ void MszModelReader::parseConfig() {
 	freeWeights[solverName] = value;
 	cout << "FreeWeight " << solverName << " " << value << "\n";
       }
-      else if(paramName == "stdfactormean") {
+      else if(paramName == "stdfactor") {
 	const string solverName = getString();
 	const string featureName = getString();
 	const double mean = getDouble();
@@ -84,6 +85,6 @@ double MszModelReader::getModelWeight(const string& solver) {
   return freeWeights[solver];
 }
 
-pair<double, double> MszModelReader::getFeatureFactors(const string& sname, const string& feature) {
+pair<double, double> MszModelReader::getStdFactors(const string& sname, const string& feature) {
   return factors[sname][feature];
 }

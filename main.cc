@@ -3,6 +3,7 @@
 #include <cmath>
 #include <unistd.h>
 #include <sys/wait.h>
+#include <utility>
 
 #include "getfeatures_wrapper.hh"
 
@@ -10,6 +11,8 @@
 
 using std::cerr;
 using std::cout;
+using std::pair;
+using std::make_pair;
 
 /**
  * Welcome, this  is the main maxsatzilla source file.
@@ -61,15 +64,21 @@ int main(int argc, char *argv[]) {
     for(map<string, double>::const_iterator it = feats.begin();
 	it != feats.end();
 	it++) { 
-      pair<double, double> factors = getStdFactors(solvers[s], it->first);
-      double w = (mreader.getModelWeight(solvers[s], it->first) - factors.first)/factors.second ;
+      pair<double, double> factors;
+      if(mreader.getFeatureStd())
+	factors = mreader.getStdFactors(solvers[s], it->first);
+      else
+	factors = make_pair(0.0, 1.0);
+      const double w = mreader.getModelWeight(solvers[s], it->first);
       if(w != 0) {
-	runtime += it->second * w;
-	cout << "(+" << it->first << "[" << it->second << "] * " << w << ") " << runtime << "\n";
+	double stdw = (w - factors.first)/factors.second ;
+	runtime += it->second * stdw;
+	cout << "(+" << it->first << "[" << it->second << "] * " << stdw << ") " << runtime << "\n";
       }
     }
     cout << "\n";
     predRt[solvers[s]] = runtime;
+    cout << " Model output for " << solvers[s] << " is " << runtime << "\n";
   }
 
   // Let's display the models, from best to worst.

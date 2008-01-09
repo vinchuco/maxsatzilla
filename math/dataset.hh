@@ -4,12 +4,14 @@
 #include <string>
 #include <vector>
 #include <utility>
+#include <map>
 
 #include "pputils.hh"
 
 using std::string;
 using std::vector;
 using std::pair;
+using std::map;
 
 class MSZDataSet {
 public:
@@ -45,8 +47,8 @@ public:
   void expand(uint, const vector<vector<uint> > &);
   
   /// Implements standardization of the feature set
-  vector<pair<double, double> > standardize();
-  void standardize(const vector<pair<double, double> > &);
+  map<string, pair<double, double> > standardize();
+  void standardize(const map<string, pair<double, double> > &);
   
   /// Implements standardization of the outputs
   void standardizeOutput();

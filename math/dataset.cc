@@ -6,6 +6,8 @@
 #include <cstdlib>
 #include <cassert>
 #include <cmath>
+#include <utility>
+#include <map>
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_combination.h>
@@ -15,6 +17,9 @@
 using std::cout;
 using std::cerr;
 using std::ofstream;
+using std::pair;
+using std::make_pair;
+using std::map;
 
 MSZDataSet::MSZDataSet(const double* const* m, uint nrows, uint ncols, const string* mlabels, const double* ov, const string& olabel)
   : nrows(nrows), rfeatures(ncols), ncols(ncols), stdDone(false), oStdDone(false) {
@@ -150,28 +155,27 @@ double MSZDataSet::getFeatureValue(uint row, uint col) const {
 
 map<string, pair<double, double> > MSZDataSet::standardize() {
 
-  vector<pair<double, double> > factors;
   map<string, pair<double, double> > mfactors;
 
   for(uint c = 0; c < ncols; c++) {
-    pair<double, double> f = computeStdFactors(c);
-    factors.push_back(f);
+    const pair<double, double> f = computeStdFactors(c);
     mfactors[getColLabel(c)] = f;
   }
 
-  standardize(factors);
+  standardize(mfactors);
 
   return mfactors;
 }
 
-void MSZDataSet::standardize(const vector<pair<double, double> > &factors) {
+void MSZDataSet::standardize(const map<string, pair<double, double> > &factors) {
   
   cout << "Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...\n";
 
   if(!stdDone) {
     for(uint c = 0; c < ncols; c++) {
-      const double mean = factors[c].first;
-      const sdv = factors[c].second;
+      const pair<double, double> factorp = factors.find(getColLabel(c))->second;
+      const double mean = factorp.first;
+      const double sdv = factorp.second;
 
       cout << "[Feature " << labels[c] 
 	   << "] Centering = " << mean << "; "

@@ -3,11 +3,13 @@
 
 #include <string>
 #include <map>
+#include <utility>
 
 #include "reader.hh"
 
 using std::string;
 using std::map; 
+using std::pair;
 
 class MszModelReader : public Reader {
 public:
@@ -21,7 +23,7 @@ public:
   uint   getFEOrder()                     const { return feOrder;             }
   double getModelWeight(const string&, const string&);
   double getModelWeight(const string&);
-  pair<double, double> getFeatureFactors(const string&, const string&);
+  pair<double, double> getStdFactors(const string&, const string&);
   vector<string> getSolvers()             const { return solvers;             }
 
 private:
@@ -36,7 +38,7 @@ private:
   vector<vector<uint> > fePartitions;
   map<string, map<string, double> > weights; ///< Mapping from solver to map to features and coefficient values
   map<string, double> freeWeights; ///< Mapping solvers to free weights
-  map<string, map<string, pair<double, double> > factors; ///< Mapping solvers to maps of features to factors
+  map<string, map<string, pair<double, double> > > factors; ///< Mapping solvers to maps of features to factors
 };
 
 #endif // MSZMODELREADER_HH

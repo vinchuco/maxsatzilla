@@ -6,9 +6,13 @@
 #include <iostream>
 #include <fstream>
 #include <iterator>
+#include <map>
+#include <utility>
 
 #include "reader.hh"
 
+using std::pair;
+using std::map;
 using std::string;
 using std::vector;
 using std::ofstream;
@@ -27,6 +31,7 @@ public:
   void writeOutputStd();
   void writeFExpansion(const vector<uint>&);
   void writeFEOrder(uint);
+  void writeStdFactors(const string&, const map<string, pair<double, double> >&);
   void endWrite();
 
 private:

@@ -72,7 +72,7 @@ void CoachModelWriter::writeStdFactors(const string &sname, const map<string, pa
   for(map<string, pair<double, double> >::const_iterator it = factors.begin();
       it != factors.end();
       it++) 
-    file << "p stdfactor " << sname << " " << it->first << " " it ->second.first << it ->second.second << "\n";
+    file << "p stdfactor " << sname << " " << it->first << " " << it ->second.first << " " << it ->second.second << "\n";
 }
 
 void CoachModelWriter::writeFEOrder(uint feorder) {
