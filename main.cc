@@ -41,6 +41,11 @@ int main(int argc, char *argv[]) {
   map<string, double> feats = getFeatures(instance);
   cout << " DONE\n";
 
+  if(feats.size() == 0) {
+    cout << "Error: Feature computation returned no features.\n";
+    exit(EXIT_FAILURE);
+  }
+
 #ifndef NDEBUG
   for(std::map<string, double>::const_iterator it = feats.begin(); it != feats.end(); it++) 
     cout << it->first << " : " << it->second << "\n";
