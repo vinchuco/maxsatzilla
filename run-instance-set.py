@@ -28,7 +28,7 @@ for set in open( set_list ):
         times = int( number ) * percentatge / 100
         total_instances_run += times
         print '# Running ' + solver + ' with ' + name + ' ' + str( times ) + '/' + number
-        outfile = os.path.basename( solver ) + '.' + name + '.out'
+        outfile = os.path.basename( solver.split()[0] ) + '.' + name + '.out'
         os.system( 'cp /dev/null ' + outfile )
         for file in glob.glob( path ):
             if counter < times:
