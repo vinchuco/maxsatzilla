@@ -6,6 +6,7 @@ opts, args = getopt.getopt( sys.argv, 'p:' )
 
 solver = args[0]
 set_list = args[1]
+percentatge = int( opts[ 'p' ] )
 
 print solver
 print set_list
@@ -19,8 +20,12 @@ for set in open( set_list ):
         continue
     name, path, number = set.split()
     print 'Running ' + solver + ' with ' + name
+    counter = 0
+    times = number * percentatge / 100
     outfile = solver + '.' + name + '.out'
     os.system( 'touch ' + outfile )
     for file in glob.glob( path ):
-        print solver + ' with ' + file 
-        os.system( solver + ' ' + file + '>> ' + outfile )
+        if counter < times:
+            counter += 1
+            print solver + ' with ' + file 
+            os.system( solver + ' ' + file + '>> ' + outfile )
