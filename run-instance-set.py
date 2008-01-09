@@ -28,6 +28,6 @@ for set in open( set_list ):
         if counter < times:
             counter += 1
             print solver + ' with ' + file 
-            os.system( sys_limits + 'time -p ' + solver + ' ' + file + '&> ' + outfile +'2>&1')
+            os.system( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + '&> ' + outfile +'2>&1')
 
 print 'Total instances run ' + str( total_instances_run )
