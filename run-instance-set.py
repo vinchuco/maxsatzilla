@@ -6,7 +6,7 @@ opts, args = getopt.getopt( sys.argv, 'p:' )
 
 solver = args[0]
 set_list = args[1]
-percentatge = int( opts[ 'p' ] )
+percentatge = int( opts[0][1] )
 
 print solver
 print set_list
