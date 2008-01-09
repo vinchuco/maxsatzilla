@@ -2,16 +2,16 @@
 
 import sys, os, getopt, glob, os.path
 
-#opts, args = getopt.getopt( sys.argv, 'p:' )
+opts, args = getopt.getopt( sys.argv[1:], 'p:' )
 
-solver = sys.argv[1]
-set_list = sys.argv[2]
-solver_time_path = sys.argv[3]
-percentatge = 40 #int( opts[0][1] )
-timeout = '1000'
-memout = '2000000'
-
-sys_limits = 'ulimit -t ' + timeout + '; ulimit -m ' + memout + '; ulimit -d ' + memout + '; ulimit -v ' + memout + ';'
+solver = args[0]
+set_list = args[1]
+solver_time_path = args[2]
+if len( opts ) == 1:
+    print '# Percentatge = ' + opts[0][1]
+    percentatge = int( opts[0][1] )
+else:
+    percentatge = 40
 
 total_instances_run = 0
 
