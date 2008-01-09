@@ -64,6 +64,6 @@ map<string, double> getFeatures(const string &inst) {
 
   // In Parent process, we need to wait for the child to finish
   int status;
-  wait(&status);
+  waitpid(pid, &status, 0);
   return WrapperUtils::parseFeaturesFromFile();
 }
