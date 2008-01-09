@@ -27,7 +27,7 @@ for set in open( set_list ):
     for file in glob.glob( path ):
         if counter < times:
             counter += 1
-            print 'Executing ' + solver + ' with ' + file 
+            print 'Executing ' + solver + ' ' + file 
             os.system( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2>&1')
 
 print 'Total instances run ' + str( total_instances_run )

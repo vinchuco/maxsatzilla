@@ -1519,7 +1519,7 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"), exit(0); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], 5, 100, 12345 );
+    if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;//localSearch(argv[1], 5, 100, 12345 );
     init();
     dpl();
     break;
