@@ -40,6 +40,6 @@ for set in open( set_list ):
                 counter += 1
                 timefile = tempfile.NamedTemporaryFile()
                 os.popen( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
-                print 'o ' + os.path.basename( file.split()[0] ) + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c5-' ).read()[:-1]
+                print os.path.basename( file.split()[0] ) + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c5-' ).read()[:-1]
 
 print '# Total instances run ' + str( total_instances_run )
