@@ -19,11 +19,10 @@ sys_limits = 'ulimit -t ' + timeout + '; ulimit -m ' + memout + '; ulimit -d ' +
 
 total_instances_run = 0
 
-def handler( signal, frame ):
-    print "Script interrupted"
-    sys.exit(0)
-
-signal.signal( signal.SIGINT, handler )
+#def handler( signal, frame ):
+#    print "Script interrupted"
+#    sys.exit(0)
+#signal.signal( signal.SIGINT, handler )
 
 for set in open( set_list ):
     if set[0] == '#':
@@ -40,6 +39,6 @@ for set in open( set_list ):
             if counter < times:
                 counter += 1
                 print '# Executing ' + solver + ' ' + file 
-                os.system( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2>&1')
+                os.popen( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2>&1')
 
 print '# Total instances run ' + str( total_instances_run )
