@@ -11,7 +11,7 @@ if len( opts ) == 1:
     print '# Percentatge = ' + opts[0][1]
     percentatge = int( opts[0][1] )
 else:
-    percentatge = 40
+    percentatge = 100
 timeout = '1000'
 memout = '2000000'
 
