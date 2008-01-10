@@ -8,3 +8,4 @@ SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
 PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
 SATPLAN /benchmark/cnf/satplan/unsat/*.cnf 9
 UCLID /benchmark/cnf/uclid/SAT_BENCH/*.cnf 31
+FPGA /benchmark/cnf/sat2002/sat-2002-beta/submitted/goldberg/fpga_routing/*.cnf 32
