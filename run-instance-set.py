@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, os, getopt, glob, os.path, signal
+import sys, os, getopt, glob, os.path, signal, tempfile
 
 opts, args = getopt.getopt( sys.argv[1:], 'p:' )
 
@@ -38,7 +38,8 @@ for set in open( set_list ):
         for file in glob.glob( path ):
             if counter < times:
                 counter += 1
-                print '# Executing ' + solver + ' ' + file 
-                os.popen( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2>&1')
+                timefile = tempfile.NamedTemporaryFile()
+                os.popen( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
+                print 'o ' + file + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c-5' ) 
 
 print '# Total instances run ' + str( total_instances_run )
