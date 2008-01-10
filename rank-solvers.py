@@ -10,7 +10,8 @@ times = { 'maxsatz-a-e' : 0.0, 'mspbo-a-e' : 0.0, 'msuncore-a1-ei' : 0.0 }
 
 def sort_solvers( times ):
     from operator import itemgetter
-    return sorted(times.items(), key=itemgetter(1))
+    sorted(times.items(), key=itemgetter(1))
+    return [ solver for solver,value in times.items() ]
 
 for set in set_list:
     for solver in solvers:        
@@ -19,4 +20,4 @@ for set in set_list:
             instance, solution, time = line.split()
             times[ solver ] += float( time )
         print 'Total time for solver ' + solver + ' in ' + set + ' ' + str( times[ solver ] )
-    print sort_solvers( times )
+    print 'Ranking for ' + set + ' = ' + str( sort_solvers( times ) )
