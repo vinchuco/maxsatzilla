@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
   cout << " DONE\n";
 
   if(feats.size() == 0) {
-    cout << "Error: Feature computation returned no features.\n";
+    cerr << "Error: Feature computation returned no features.\n";
     exit(EXIT_FAILURE);
   }
 
@@ -57,10 +57,14 @@ int main(int argc, char *argv[]) {
   // Let's compute the model
   map<string, double> predRt;
   for(uint s = 0; s < solvers.size(); s++) {
+#ifndef NDEBUG
     cout << "Computing runtime for " << solvers[s] << ":\n";
+#endif // NDEBUG
     // Computing model for solver s.
     double runtime = mreader.getModelWeight(solvers[s]);
+#ifndef NDEBUG
     cout << runtime << "\n";
+#endif // NDEBUG
     for(map<string, double>::const_iterator it = feats.begin();
 	it != feats.end();
 	it++) { 
@@ -73,12 +77,19 @@ int main(int argc, char *argv[]) {
       const double w = mreader.getModelWeight(solvers[s], it->first);
       if(w != 0) {
 	runtime += stdf * w;
+#ifndef NDEBUG
 	cout << "(+" << it->first << "[" << stdf << "] * " << w << ") " << runtime << "\n";
+#endif // NDEBUG
       }
     }
+
+#ifndef NDEBUG
     cout << "\n";
+#endif // NDEBUG
     predRt[solvers[s]] = runtime;
+#ifndef NDEBUG
     cout << " Model output for " << solvers[s] << " is " << runtime << "\n";
+#endif // NDEBUG
   }
 
   // Let's display the models, from best to worst.
@@ -95,7 +106,9 @@ int main(int argc, char *argv[]) {
   for(map<double, string>::const_iterator it = invPredRt.begin();
       it != invPredRt.end();
       it++) {
+#ifndef NDEBUG
     cout << "** Runnning " << it->second << "\n";
+#endif // NDEBUG
 
     const string filename_prefix = "./";
     const string filename = filename_prefix + it->second;
@@ -109,6 +122,7 @@ int main(int argc, char *argv[]) {
       int status;
       wait(&status);
     
+#ifndef NDEBUG
       if(WIFEXITED(status)) 
 	cout << "** Process returned normally ";
       else
@@ -118,7 +132,8 @@ int main(int argc, char *argv[]) {
 
       if(WIFSIGNALED(status))
 	cout << "** Process returned by signal " << WTERMSIG(status) << "\n";
-      
+#endif // NDEBUG
+
       if(WIFEXITED(status)) 
 	break;
     }
