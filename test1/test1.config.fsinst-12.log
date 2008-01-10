@@ -4,40 +4,40 @@ c Number of features:   32
 c Number of instances:  536
 c Timeout:              1000
 c Solvers: maxsatz-a-e mspbo-a-e msuncore-a1-ei
-WARNING (dataset.cc:46) Output 2 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 3 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 5 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 6 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 10 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 12 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 14 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 16 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 19 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 22 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 23 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 25 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 26 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 28 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 30 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 31 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 33 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 38 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 43 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 45 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 48 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 49 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 51 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 52 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 54 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 0 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 2 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 7 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 8 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 9 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 16 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 19 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 25 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
-WARNING (dataset.cc:46) Output 47 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 2 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 3 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 5 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 6 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 10 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 12 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 14 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 16 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 19 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 22 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 23 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 25 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 26 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 28 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 30 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 31 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 33 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 38 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 43 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 45 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 48 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 49 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 51 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 52 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 54 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 0 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 2 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 7 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 8 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 9 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 16 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 19 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 25 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
+WARNING (math/dataset.cc:51) Output 47 of maxsatz-a-e is less than 0.01. Resizing to 0.01.
 -0.629092
 0.237436
 -0.068461
@@ -6879,38 +6879,38 @@ Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
 [Feature Ratio_Ternary_Clauses] Centering = 0.157972; Scaling = 0.126553
 DONE
 Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
-[Feature feature_saps_BestSolution_Mean] Centering = 21.753; Scaling = 69.5185
-[Feature feature_saps_BestSolution_CoeffVariance] Centering = 5.05718; Scaling = 4.74226
-[Feature feature_saps_BestStep_Mean] Centering = 868.437; Scaling = 861.496
-[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.143288; Scaling = 0.0953662
-[Feature feature_saps_BestStep_Median] Centering = 878.716; Scaling = 915.804
-[Feature feature_saps_BestStep_Q_10] Centering = 668.804; Scaling = 396.593
-[Feature feature_saps_BestStep_Q_90] Centering = 1017.41; Scaling = 1065
-[Feature feature_saps_AvgImproveToBest_Mean] Centering = 1.77315; Scaling = 0.871425
-[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.507782; Scaling = 0.918848
-[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.933665; Scaling = 0.0814098
-[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0178244; Scaling = 0.0258304
-[Feature feature_saps_BestCV_Mean] Centering = 0.506765; Scaling = 0.104557
-[Feature feature_gsat_BestSolution_Mean] Centering = 31.3576; Scaling = 81.5691
-[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 1.10209; Scaling = 1.66084
-[Feature feature_gsat_BestStep_Mean] Centering = 1614.92; Scaling = 1493.92
-[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.335138; Scaling = 0.0638422
-[Feature feature_gsat_BestStep_Median] Centering = 1607.3; Scaling = 1740.32
-[Feature feature_gsat_BestStep_Q_10] Centering = 949.51; Scaling = 813.526
-[Feature feature_gsat_BestStep_Q_90] Centering = 2191.8; Scaling = 1830.78
-[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 1.08228; Scaling = 0.581353
-[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.3805; Scaling = 0.185865
-[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.941218; Scaling = 0.0727716
-[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.0176237; Scaling = 0.0354708
-[Feature feature_gsat_BestCV_Mean] Centering = 0.358306; Scaling = 0.0848151
-[Feature Number_of_Variables] Centering = 1556.9; Scaling = 830.002
-[Feature Number_of_Clauses] Centering = 5445.73; Scaling = 2884.15
-[Feature Ratio_Clauses/Variables] Centering = 3.53401; Scaling = 1.24607
-[Feature Ratio_Negative_Clauses] Centering = 1.56268; Scaling = 0.348769
-[Feature Ratio_Positive_Clauses] Centering = 1.64967; Scaling = 2.02924
-[Feature Ratio_Unit_Clauses] Centering = 0.100885; Scaling = 0.0917462
-[Feature Ratio_Binary_Clauses] Centering = 0.593012; Scaling = 0.0932598
-[Feature Ratio_Ternary_Clauses] Centering = 0.175532; Scaling = 0.131355
+[Feature feature_saps_BestSolution_Mean] Centering = 9.65418; Scaling = 12.2465
+[Feature feature_saps_BestSolution_CoeffVariance] Centering = 4.98028; Scaling = 4.6361
+[Feature feature_saps_BestStep_Mean] Centering = 788.684; Scaling = 556.647
+[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.128214; Scaling = 0.0793142
+[Feature feature_saps_BestStep_Median] Centering = 788.142; Scaling = 578.677
+[Feature feature_saps_BestStep_Q_10] Centering = 667.6; Scaling = 382.312
+[Feature feature_saps_BestStep_Q_90] Centering = 918.495; Scaling = 731.842
+[Feature feature_saps_AvgImproveToBest_Mean] Centering = 1.70833; Scaling = 0.790803
+[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.346705; Scaling = 0.420002
+[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.93901; Scaling = 0.0770455
+[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0133151; Scaling = 0.0164537
+[Feature feature_saps_BestCV_Mean] Centering = 0.515833; Scaling = 0.0757366
+[Feature feature_gsat_BestSolution_Mean] Centering = 15.7237; Scaling = 22.325
+[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 1.43608; Scaling = 2.10154
+[Feature feature_gsat_BestStep_Mean] Centering = 1481.49; Scaling = 1145.08
+[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.323406; Scaling = 0.0448925
+[Feature feature_gsat_BestStep_Median] Centering = 1417.29; Scaling = 1137.9
+[Feature feature_gsat_BestStep_Q_10] Centering = 974.032; Scaling = 889.672
+[Feature feature_gsat_BestStep_Q_90] Centering = 2034.73; Scaling = 1357.26
+[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 1.08861; Scaling = 0.608326
+[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.397382; Scaling = 0.390799
+[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.946846; Scaling = 0.0707513
+[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.0110225; Scaling = 0.0145911
+[Feature feature_gsat_BestCV_Mean] Centering = 0.360427; Scaling = 0.0661383
+[Feature Number_of_Variables] Centering = 1471.81; Scaling = 568.692
+[Feature Number_of_Clauses] Centering = 5254.08; Scaling = 2599.87
+[Feature Ratio_Clauses/Variables] Centering = 3.47519; Scaling = 1.26193
+[Feature Ratio_Negative_Clauses] Centering = 1.63965; Scaling = 0.590069
+[Feature Ratio_Positive_Clauses] Centering = 2.15182; Scaling = 4.95771
+[Feature Ratio_Unit_Clauses] Centering = 0.109911; Scaling = 0.0939702
+[Feature Ratio_Binary_Clauses] Centering = 0.59279; Scaling = 0.0941251
+[Feature Ratio_Ternary_Clauses] Centering = 0.157972; Scaling = 0.126553
 DONE
 Standardizing outputs... DONE
 Standardizing outputs... DONE
@@ -6949,38 +6949,38 @@ Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
 [Feature Ratio_Ternary_Clauses] Centering = 0.264152; Scaling = 0.121586
 DONE
 Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
-[Feature feature_saps_BestSolution_Mean] Centering = 105.47; Scaling = 398.37
-[Feature feature_saps_BestSolution_CoeffVariance] Centering = 2.63297; Scaling = 3.21687
-[Feature feature_saps_BestStep_Mean] Centering = 2207.96; Scaling = 2284.24
-[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.236788; Scaling = 0.154443
-[Feature feature_saps_BestStep_Median] Centering = 2295.04; Scaling = 2464.67
-[Feature feature_saps_BestStep_Q_10] Centering = 1363.53; Scaling = 1564.13
-[Feature feature_saps_BestStep_Q_90] Centering = 2614.78; Scaling = 2436.34
-[Feature feature_saps_AvgImproveToBest_Mean] Centering = 1.00675; Scaling = 0.749252
-[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.489736; Scaling = 0.565729
-[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.879759; Scaling = 0.0608293
-[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0285493; Scaling = 0.0256655
-[Feature feature_saps_BestCV_Mean] Centering = 0.469945; Scaling = 0.0837883
-[Feature feature_gsat_BestSolution_Mean] Centering = 86.5344; Scaling = 109.898
-[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 0.54567; Scaling = 1.04549
-[Feature feature_gsat_BestStep_Mean] Centering = 4584.08; Scaling = 5851.06
-[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.300625; Scaling = 0.127596
-[Feature feature_gsat_BestStep_Median] Centering = 4614.22; Scaling = 5967.84
-[Feature feature_gsat_BestStep_Q_10] Centering = 3265.09; Scaling = 5667.27
-[Feature feature_gsat_BestStep_Q_90] Centering = 5571.28; Scaling = 5960.77
-[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 0.58014; Scaling = 0.502116
-[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.45304; Scaling = 0.351139
-[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.904343; Scaling = 0.0516528
-[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.0187188; Scaling = 0.0233815
-[Feature feature_gsat_BestCV_Mean] Centering = 0.298691; Scaling = 0.0775282
-[Feature Number_of_Variables] Centering = 2593.16; Scaling = 3136.62
-[Feature Number_of_Clauses] Centering = 7854.95; Scaling = 9259.04
-[Feature Ratio_Clauses/Variables] Centering = 3.0593; Scaling = 0.834699
-[Feature Ratio_Negative_Clauses] Centering = 1.38497; Scaling = 0.26074
-[Feature Ratio_Positive_Clauses] Centering = 1.2898; Scaling = 1.17225
-[Feature Ratio_Unit_Clauses] Centering = 0.0329862; Scaling = 0.0696585
-[Feature Ratio_Binary_Clauses] Centering = 0.619362; Scaling = 0.0964042
-[Feature Ratio_Ternary_Clauses] Centering = 0.272373; Scaling = 0.119767
+[Feature feature_saps_BestSolution_Mean] Centering = 118.132; Scaling = 448.475
+[Feature feature_saps_BestSolution_CoeffVariance] Centering = 2.41801; Scaling = 3.12868
+[Feature feature_saps_BestStep_Mean] Centering = 2119.03; Scaling = 2288.25
+[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.230665; Scaling = 0.162421
+[Feature feature_saps_BestStep_Median] Centering = 2217.81; Scaling = 2574.45
+[Feature feature_saps_BestStep_Q_10] Centering = 1259.69; Scaling = 1054.61
+[Feature feature_saps_BestStep_Q_90] Centering = 2441.9; Scaling = 2414.47
+[Feature feature_saps_AvgImproveToBest_Mean] Centering = 0.990257; Scaling = 0.677557
+[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.408939; Scaling = 0.324977
+[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.880645; Scaling = 0.0598089
+[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0274343; Scaling = 0.0261425
+[Feature feature_saps_BestCV_Mean] Centering = 0.46605; Scaling = 0.0733057
+[Feature feature_gsat_BestSolution_Mean] Centering = 88.4697; Scaling = 229.633
+[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 0.616523; Scaling = 1.30292
+[Feature feature_gsat_BestStep_Mean] Centering = 4563.06; Scaling = 6209.33
+[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.291454; Scaling = 0.120733
+[Feature feature_gsat_BestStep_Median] Centering = 4543.59; Scaling = 6243.2
+[Feature feature_gsat_BestStep_Q_10] Centering = 3419.01; Scaling = 6137.02
+[Feature feature_gsat_BestStep_Q_90] Centering = 5329.78; Scaling = 6027.25
+[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 0.598926; Scaling = 0.641686
+[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.450056; Scaling = 0.421742
+[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.902581; Scaling = 0.0536406
+[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.0165826; Scaling = 0.0154536
+[Feature feature_gsat_BestCV_Mean] Centering = 0.305041; Scaling = 0.0732002
+[Feature Number_of_Variables] Centering = 2570.74; Scaling = 3187.27
+[Feature Number_of_Clauses] Centering = 7690.12; Scaling = 8981.91
+[Feature Ratio_Clauses/Variables] Centering = 3.04162; Scaling = 0.828623
+[Feature Ratio_Negative_Clauses] Centering = 1.40078; Scaling = 0.385822
+[Feature Ratio_Positive_Clauses] Centering = 1.43327; Scaling = 2.77243
+[Feature Ratio_Unit_Clauses] Centering = 0.0343648; Scaling = 0.0720133
+[Feature Ratio_Binary_Clauses] Centering = 0.624706; Scaling = 0.0993454
+[Feature Ratio_Ternary_Clauses] Centering = 0.264152; Scaling = 0.121586
 DONE
 Standardizing outputs... DONE
 Standardizing outputs... DONE
@@ -7019,38 +7019,38 @@ Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
 [Feature Ratio_Ternary_Clauses] Centering = 0.267739; Scaling = 0.116987
 DONE
 Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...
-[Feature feature_saps_BestSolution_Mean] Centering = 5363.76; Scaling = 37795.3
-[Feature feature_saps_BestSolution_CoeffVariance] Centering = 2.36671; Scaling = 3.1515
-[Feature feature_saps_BestStep_Mean] Centering = 2372.46; Scaling = 2354.44
-[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.212843; Scaling = 0.162902
-[Feature feature_saps_BestStep_Median] Centering = 2450.74; Scaling = 2507.69
-[Feature feature_saps_BestStep_Q_10] Centering = 1613.43; Scaling = 1834.92
-[Feature feature_saps_BestStep_Q_90] Centering = 2738.14; Scaling = 2466.47
-[Feature feature_saps_AvgImproveToBest_Mean] Centering = 1.36093; Scaling = 1.77131
-[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.440212; Scaling = 0.556314
-[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.891103; Scaling = 0.0672007
-[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0256623; Scaling = 0.0258107
-[Feature feature_saps_BestCV_Mean] Centering = 0.423419; Scaling = 0.160092
-[Feature feature_gsat_BestSolution_Mean] Centering = 4795.35; Scaling = 37161.3
-[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 0.49049; Scaling = 1.00478
-[Feature feature_gsat_BestStep_Mean] Centering = 4994.25; Scaling = 5831
-[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.270225; Scaling = 0.15116
-[Feature feature_gsat_BestStep_Median] Centering = 5021.34; Scaling = 5934.57
-[Feature feature_gsat_BestStep_Q_10] Centering = 3808.65; Scaling = 5764.41
-[Feature feature_gsat_BestStep_Q_90] Centering = 5881.62; Scaling = 5875.89
-[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 0.791514; Scaling = 1.03227
-[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.407227; Scaling = 0.359842
-[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.90941; Scaling = 0.0540218
-[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.0168259; Scaling = 0.0228749
-[Feature feature_gsat_BestCV_Mean] Centering = 0.275578; Scaling = 0.104533
-[Feature Number_of_Variables] Centering = 12801.9; Scaling = 63841.1
-[Feature Number_of_Clauses] Centering = 34930.4; Scaling = 162477
-[Feature Ratio_Clauses/Variables] Centering = 3.03579; Scaling = 0.795927
-[Feature Ratio_Negative_Clauses] Centering = 1.36704; Scaling = 0.253456
-[Feature Ratio_Positive_Clauses] Centering = 1.27069; Scaling = 1.11287
-[Feature Ratio_Unit_Clauses] Centering = 0.0308902; Scaling = 0.0668189
-[Feature Ratio_Binary_Clauses] Centering = 0.624477; Scaling = 0.0928843
-[Feature Ratio_Ternary_Clauses] Centering = 0.276695; Scaling = 0.114798
+[Feature feature_saps_BestSolution_Mean] Centering = 5279.76; Scaling = 27446.9
+[Feature feature_saps_BestSolution_CoeffVariance] Centering = 2.16858; Scaling = 3.05284
+[Feature feature_saps_BestStep_Mean] Centering = 2282.16; Scaling = 2387.46
+[Feature feature_saps_BestStep_CoeffVariance] Centering = 0.206872; Scaling = 0.169061
+[Feature feature_saps_BestStep_Median] Centering = 2370.75; Scaling = 2630.61
+[Feature feature_saps_BestStep_Q_10] Centering = 1511.47; Scaling = 1523.57
+[Feature feature_saps_BestStep_Q_90] Centering = 2571.73; Scaling = 2479.42
+[Feature feature_saps_AvgImproveToBest_Mean] Centering = 1.45445; Scaling = 2.33934
+[Feature feature_saps_AvgImproveToBest_CoeffVariance] Centering = 0.366757; Scaling = 0.331945
+[Feature feature_saps_FirstLMRatio_Mean] Centering = 0.891787; Scaling = 0.0661385
+[Feature feature_saps_FirstLMRatio_CoeffVariance] Centering = 0.0246044; Scaling = 0.0261259
+[Feature feature_saps_BestCV_Mean] Centering = 0.419725; Scaling = 0.153919
+[Feature feature_gsat_BestSolution_Mean] Centering = 4664.51; Scaling = 26422.6
+[Feature feature_gsat_BestSolution_CoeffVariance] Centering = 0.552927; Scaling = 1.24806
+[Feature feature_gsat_BestStep_Mean] Centering = 4939.54; Scaling = 6163.9
+[Feature feature_gsat_BestStep_CoeffVariance] Centering = 0.26139; Scaling = 0.144676
+[Feature feature_gsat_BestStep_Median] Centering = 4922.07; Scaling = 6195.58
+[Feature feature_gsat_BestStep_Q_10] Centering = 3913.5; Scaling = 6171.45
+[Feature feature_gsat_BestStep_Q_90] Centering = 5627.16; Scaling = 5960.89
+[Feature feature_gsat_AvgImproveToBest_Mean] Centering = 0.852078; Scaling = 1.22287
+[Feature feature_gsat_AvgImproveToBest_CoeffVariance] Centering = 0.403632; Scaling = 0.422205
+[Feature feature_gsat_FirstLMRatio_Mean] Centering = 0.9087; Scaling = 0.0564497
+[Feature feature_gsat_FirstLMRatio_CoeffVariance] Centering = 0.014872; Scaling = 0.0154796
+[Feature feature_gsat_BestCV_Mean] Centering = 0.280333; Scaling = 0.105391
+[Feature Number_of_Variables] Centering = 12701.5; Scaling = 48325.8
+[Feature Number_of_Clauses] Centering = 35168.7; Scaling = 127794
+[Feature Ratio_Clauses/Variables] Centering = 3.0208; Scaling = 0.789122
+[Feature Ratio_Negative_Clauses] Centering = 1.37978; Scaling = 0.371093
+[Feature Ratio_Positive_Clauses] Centering = 1.39964; Scaling = 2.62746
+[Feature Ratio_Unit_Clauses] Centering = 0.0316224; Scaling = 0.0688885
+[Feature Ratio_Binary_Clauses] Centering = 0.631193; Scaling = 0.0969631
+[Feature Ratio_Ternary_Clauses] Centering = 0.267739; Scaling = 0.116987
 DONE
 Forward Selection finished by choosing variables: 3 5 7 9 12 14 17 26 27 28 29 31 
 [maxsatz-a-e] Keeping features in dataset: feature_saps_BestStep_CoeffVariance(3) feature_saps_BestStep_Q_10(5) feature_saps_AvgImproveToBest_Mean(7) feature_saps_FirstLMRatio_Mean(9) feature_gsat_BestSolution_Mean(12) feature_gsat_BestStep_Mean(14) feature_gsat_BestStep_Q_10(17) Ratio_Clauses/Variables(26) Ratio_Negative_Clauses(27) Ratio_Positive_Clauses(28) Ratio_Unit_Clauses(29) Ratio_Ternary_Clauses(31) 
@@ -25313,58 +25313,58 @@ FTest value = 1953.68
 *** Adding 7 to the model.
 Testing for output: maxsatz-a-e
 Testing 51 instances
-Real: -4.60517	Predicted: -5.75656	Error: -1.15139
-Real: -2.65926	Predicted: -1.81266	Error: 0.846602
-Real: -4.60517	Predicted: -3.57785	Error: 1.02732
-Real: -4.60517	Predicted: -4.28171	Error: 0.323464
-Real: -4.60517	Predicted: -3.71022	Error: 0.894947
-Real: -4.60517	Predicted: -4.21085	Error: 0.39432
-Real: -1.17118	Predicted: -4.57185	Error: -3.40067
-Real: -4.60517	Predicted: -2.90343	Error: 1.70174
-Real: -4.60517	Predicted: -1.57909	Error: 3.02608
-Real: -4.60517	Predicted: -3.89066	Error: 0.714508
-Real: -4.60517	Predicted: -3.64632	Error: 0.958853
-Real: -2.12026	Predicted: -3.11628	Error: -0.996016
-Real: -2.40795	Predicted: -2.25845	Error: 0.149499
-Real: -4.60517	Predicted: -0.131476	Error: 4.47369
-Real: -3.91202	Predicted: -3.1684	Error: 0.743621
-Real: -4.60517	Predicted: -4.1627	Error: 0.442471
-Real: -4.60517	Predicted: -3.94968	Error: 0.65549
-Real: -3.50656	Predicted: -2.0903	Error: 1.41626
-Real: -1.51413	Predicted: -3.69713	Error: -2.183
-Real: -4.60517	Predicted: -3.77768	Error: 0.827491
-Real: -3.50656	Predicted: -2.79677	Error: 0.70979
-Real: -4.60517	Predicted: -3.67993	Error: 0.925245
-Real: -2.40795	Predicted: -2.19114	Error: 0.216808
-Real: -4.60517	Predicted: -3.72764	Error: 0.877533
-Real: -4.60517	Predicted: -3.9331	Error: 0.672073
-Real: -4.60517	Predicted: -3.52503	Error: 1.08014
-Real: -4.60517	Predicted: -3.57426	Error: 1.03091
-Real: -4.60517	Predicted: -3.3388	Error: 1.26637
-Real: 1.90211	Predicted: 13.1551	Error: 11.253
-Real: 5.13273	Predicted: 14.3128	Error: 9.18011
-Real: -2.04022	Predicted: -1.68212	Error: 0.358099
-Real: -3.50656	Predicted: -4.63088	Error: -1.12432
-Real: 6.80745	Predicted: 1.49832	Error: -5.30913
-Real: 5.77972	Predicted: -0.428664	Error: -6.20839
-Real: -2.81341	Predicted: -4.08975	Error: -1.27634
-Real: 4.62986	Predicted: 1.39451	Error: -3.23535
-Real: -3.50656	Predicted: -4.02326	Error: -0.516704
-Real: 6.66975	Predicted: -0.749521	Error: -7.41927
-Real: 4.65814	Predicted: 1.80669	Error: -2.85146
-Real: 4.37172	Predicted: -1.35446	Error: -5.72619
-Real: -0.71335	Predicted: -2.24727	Error: -1.53392
-Real: -1.34707	Predicted: -2.16978	Error: -0.822708
-Real: -0.430783	Predicted: -2.09475	Error: -1.66397
-Real: -1.77196	Predicted: -1.83839	Error: -0.066435
-Real: -0.994252	Predicted: 3.9446	Error: 4.93885
-Real: -1.7148	Predicted: 5.00156	Error: 6.71636
-Real: -0.994252	Predicted: -1.21269	Error: -0.218442
-Real: -4.60517	Predicted: 0.445615	Error: 5.05078
-Real: -3.91202	Predicted: -2.90699	Error: 1.00503
-Real: 5.87305	Predicted: -8.50445	Error: -14.3775
-Real: 3.03255	Predicted: -4.7754	Error: -7.80794
-Squared Sum of Errors for the model on the test data: 822.236
+Real: -4.60517	Predicted: -6.71249	Error: -2.10732
+Real: -2.65926	Predicted: -0.954023	Error: 1.70524
+Real: -4.60517	Predicted: -4.69444	Error: -0.0892659
+Real: -4.60517	Predicted: -4.99556	Error: -0.390389
+Real: -4.60517	Predicted: -4.03872	Error: 0.566449
+Real: -4.60517	Predicted: -4.18934	Error: 0.415834
+Real: -1.17118	Predicted: -5.49242	Error: -4.32123
+Real: -4.60517	Predicted: -4.03068	Error: 0.57449
+Real: -4.60517	Predicted: -1.26886	Error: 3.33631
+Real: -4.60517	Predicted: -4.25228	Error: 0.352891
+Real: -4.60517	Predicted: -3.25135	Error: 1.35382
+Real: -2.12026	Predicted: -3.31923	Error: -1.19897
+Real: -2.40795	Predicted: -2.40435	Error: 0.00359528
+Real: -4.60517	Predicted: 0.256774	Error: 4.86194
+Real: -3.91202	Predicted: -3.41892	Error: 0.493099
+Real: -4.60517	Predicted: -4.00367	Error: 0.6015
+Real: -4.60517	Predicted: -4.47313	Error: 0.132036
+Real: -3.50656	Predicted: -3.13193	Error: 0.374627
+Real: -1.51413	Predicted: -4.47465	Error: -2.96053
+Real: -4.60517	Predicted: -4.13104	Error: 0.474133
+Real: -3.50656	Predicted: -2.2675	Error: 1.23906
+Real: -4.60517	Predicted: -4.08729	Error: 0.517883
+Real: -2.40795	Predicted: -1.50438	Error: 0.903562
+Real: -4.60517	Predicted: -3.9933	Error: 0.611869
+Real: -4.60517	Predicted: -4.27855	Error: 0.326619
+Real: -4.60517	Predicted: -3.9082	Error: 0.696966
+Real: -4.60517	Predicted: -3.31524	Error: 1.28993
+Real: -4.60517	Predicted: -4.04967	Error: 0.555502
+Real: 1.90211	Predicted: 46.1718	Error: 44.2696
+Real: 5.13273	Predicted: 47.1469	Error: 42.0141
+Real: -2.04022	Predicted: 0.35532	Error: 2.39554
+Real: -3.50656	Predicted: -2.84872	Error: 0.657843
+Real: 6.80745	Predicted: 3.97254	Error: -2.8349
+Real: 5.77972	Predicted: 7.84312	Error: 2.06339
+Real: -2.81341	Predicted: -2.27079	Error: 0.542617
+Real: 4.62986	Predicted: 3.57061	Error: -1.05925
+Real: -3.50656	Predicted: -2.12823	Error: 1.37833
+Real: 6.66975	Predicted: 9.01761	Error: 2.34785
+Real: 4.65814	Predicted: 3.77372	Error: -0.884424
+Real: 4.37172	Predicted: 7.93416	Error: 3.56243
+Real: -0.71335	Predicted: -1.00517	Error: -0.29182
+Real: -1.34707	Predicted: -0.943641	Error: 0.403433
+Real: -0.430783	Predicted: 0.330833	Error: 0.761616
+Real: -1.77196	Predicted: 0.571357	Error: 2.34331
+Real: -0.994252	Predicted: 3.96074	Error: 4.95499
+Real: -1.7148	Predicted: 5.11701	Error: 6.8318
+Real: -0.994252	Predicted: 1.19313	Error: 2.18739
+Real: -4.60517	Predicted: 1.0318	Error: 5.63697
+Real: -3.91202	Predicted: -2.53939	Error: 1.37264
+Real: 5.87305	Predicted: -2.07116	Error: -7.94421
+Real: 3.03255	Predicted: -2.65364	Error: -5.68619
+Squared Sum of Errors for the model on the test data: 4057.67
 Forward Selection finished by choosing variables: 2 4 6 7 9 17 18 22 25 26 27 29 
 [mspbo-a-e] Keeping features in dataset: feature_saps_BestStep_Mean(2) feature_saps_BestStep_Median(4) feature_saps_BestStep_Q_90(6) feature_saps_AvgImproveToBest_Mean(7) feature_saps_FirstLMRatio_Mean(9) feature_gsat_BestStep_Q_10(17) feature_gsat_BestStep_Q_90(18) feature_gsat_FirstLMRatio_CoeffVariance(22) Number_of_Clauses(25) Ratio_Clauses/Variables(26) Ratio_Negative_Clauses(27) Ratio_Unit_Clauses(29) 
 PHI (313, 13):
@@ -53498,167 +53498,167 @@ FTest value = 2213.92
 *** Adding 24 to the model.
 Testing for output: mspbo-a-e
 Testing 160 instances
-Real: 0.215111	Predicted: 0.0477539	Error: -0.167357
-Real: 0.542324	Predicted: 0.0133954	Error: -0.528929
-Real: -0.223144	Predicted: -0.0975149	Error: 0.125629
-Real: -0.0725707	Predicted: -0.00281696	Error: 0.0697537
-Real: 0.182322	Predicted: 0.0239849	Error: -0.158337
-Real: 0.113329	Predicted: 0.212105	Error: 0.098776
-Real: -0.150823	Predicted: -0.0739927	Error: 0.0768302
-Real: -0.235722	Predicted: -0.0584258	Error: 0.177296
-Real: -0.127833	Predicted: -0.520242	Error: -0.392409
-Real: -0.116534	Predicted: -0.0411586	Error: 0.0753752
-Real: 0.157004	Predicted: 0.0777701	Error: -0.0792336
-Real: 0.131028	Predicted: 0.0369815	Error: -0.0940468
-Real: 0.113329	Predicted: -0.0322423	Error: -0.145571
-Real: 0.565314	Predicted: -0.318036	Error: -0.88335
-Real: 0.559616	Predicted: 0.379895	Error: -0.179721
-Real: 0.182322	Predicted: 0.11856	Error: -0.0637612
-Real: -0.301105	Predicted: -0.0425768	Error: 0.258528
-Real: -0.287682	Predicted: -0.174401	Error: 0.113281
-Real: 0.0392207	Predicted: -0.0368757	Error: -0.0760964
-Real: -0.328504	Predicted: 0.0195539	Error: 0.348058
-Real: 0.625938	Predicted: 0.45574	Error: -0.170199
-Real: 0.500775	Predicted: 0.377239	Error: -0.123536
-Real: 0.741937	Predicted: 0.847943	Error: 0.106006
-Real: 0.157004	Predicted: 0.0145506	Error: -0.142453
-Real: 0.131028	Predicted: 0.0489882	Error: -0.08204
-Real: -0.356675	Predicted: -0.0434751	Error: 0.3132
-Real: 0.41211	Predicted: 0.0839825	Error: -0.328127
-Real: 0.00995033	Predicted: -0.140441	Error: -0.150391
-Real: 4.00951	Predicted: -1.95706	Error: -5.96657
-Real: 0.951658	Predicted: 1.7411	Error: 0.789441
-Real: 1.15373	Predicted: -2.37231	Error: -3.52604
-Real: 0.482426	Predicted: 0.504164	Error: 0.0217377
-Real: 1.1474	Predicted: 0.832336	Error: -0.315066
-Real: -1.30933	Predicted: -1.1398	Error: 0.169528
-Real: -1.7148	Predicted: -1.42659	Error: 0.288213
-Real: 0.963174	Predicted: 0.540993	Error: -0.422181
-Real: -0.653926	Predicted: -0.141557	Error: 0.51237
-Real: 0.34359	Predicted: 0.794532	Error: 0.450942
-Real: 0.215111	Predicted: 0.368687	Error: 0.153575
-Real: 0.262364	Predicted: 0.534904	Error: 0.27254
-Real: 0.530628	Predicted: 0.920507	Error: 0.389879
-Real: 0.524729	Predicted: 0.708179	Error: 0.18345
-Real: 0.940007	Predicted: -0.604975	Error: -1.54498
-Real: 0.652325	Predicted: 0.953801	Error: 0.301475
-Real: 0.883768	Predicted: 0.941571	Error: 0.0578035
-Real: 0.371564	Predicted: 0.734912	Error: 0.363348
-Real: 0.797507	Predicted: -0.676793	Error: -1.4743
-Real: 0.978326	Predicted: 0.612597	Error: -0.365729
-Real: -0.127833	Predicted: -0.339918	Error: -0.212085
-Real: 0.41211	Predicted: 0.770662	Error: 0.358553
-Real: 2.48407	Predicted: 0.951498	Error: -1.53257
-Real: 0.81093	Predicted: 0.811755	Error: 0.000824804
-Real: 1.33237	Predicted: 0.946188	Error: -0.386178
-Real: 0.858662	Predicted: 1.06705	Error: 0.208387
-Real: 0.157004	Predicted: 0.879202	Error: 0.722198
-Real: 1.87641	Predicted: 0.716014	Error: -1.16039
-Real: 0.652325	Predicted: 0.81823	Error: 0.165905
-Real: -1.83258	Predicted: -1.3914	Error: 0.441184
-Real: 2.27727	Predicted: -0.0837144	Error: -2.36098
-Real: 0.357674	Predicted: 0.895095	Error: 0.537421
-Real: 0.936093	Predicted: 0.935935	Error: -0.000157962
-Real: 0.122218	Predicted: -0.127149	Error: -0.249367
-Real: 0.662688	Predicted: 0.873721	Error: 0.211033
-Real: 0.0953102	Predicted: 0.875819	Error: 0.780509
-Real: 0.947789	Predicted: 0.636036	Error: -0.311753
-Real: 0.916291	Predicted: 0.764504	Error: -0.151787
-Real: 1.09527	Predicted: 0.91973	Error: -0.175544
-Real: 1.05082	Predicted: 0.83368	Error: -0.217141
-Real: 0.746688	Predicted: 0.869625	Error: 0.122937
-Real: 0.86289	Predicted: 0.936873	Error: 0.0739828
-Real: 0.604316	Predicted: -0.605514	Error: -1.20983
-Real: 1.0043	Predicted: 0.878579	Error: -0.125723
-Real: -1.77196	Predicted: -1.43884	Error: 0.33312
-Real: 0.24686	Predicted: -0.0450555	Error: -0.291916
-Real: 1.09861	Predicted: 0.664052	Error: -0.43456
-Real: 0.157004	Predicted: 0.602269	Error: 0.445265
-Real: -0.693147	Predicted: -0.731433	Error: -0.0382855
-Real: -0.510826	Predicted: -0.581357	Error: -0.0705312
-Real: 0.978326	Predicted: 0.458888	Error: -0.519438
-Real: 0.636577	Predicted: 0.778915	Error: 0.142338
-Real: 0.48858	Predicted: 0.602204	Error: 0.113624
-Real: -0.755023	Predicted: -0.596103	Error: 0.15892
-Real: 1.7544	Predicted: 0.725123	Error: -1.02928
-Real: -0.653926	Predicted: -0.529204	Error: 0.124723
-Real: 0.593327	Predicted: 0.731644	Error: 0.138317
-Real: 1.27536	Predicted: 0.964725	Error: -0.310637
-Real: 1.53039	Predicted: 0.809021	Error: -0.721374
-Real: 1.0116	Predicted: 0.812913	Error: -0.198688
-Real: 0.431782	Predicted: 0.608779	Error: 0.176996
-Real: 0.24686	Predicted: 0.771476	Error: 0.524616
-Real: 1.28923	Predicted: 0.843937	Error: -0.445296
-Real: 0.951658	Predicted: 0.834443	Error: -0.117215
-Real: 0.912283	Predicted: 0.659663	Error: -0.25262
-Real: 0.565314	Predicted: 0.96153	Error: 0.396216
-Real: 1.49065	Predicted: 0.819695	Error: -0.67096
-Real: 1.9125	Predicted: 0.782548	Error: -1.12995
-Real: -0.776529	Predicted: -0.624161	Error: 0.152368
-Real: -0.446287	Predicted: -0.468097	Error: -0.02181
-Real: 0.598837	Predicted: 0.782496	Error: 0.183659
-Real: 0.928219	Predicted: 0.612331	Error: -0.315888
-Real: 1.50185	Predicted: 0.897956	Error: -0.603897
-Real: 1.06471	Predicted: 0.897685	Error: -0.167026
-Real: 0.841567	Predicted: 0.988178	Error: 0.146611
-Real: 0.955511	Predicted: 0.829312	Error: -0.1262
-Real: 0.307485	Predicted: 0.586054	Error: 0.278569
-Real: -0.527633	Predicted: -0.644943	Error: -0.11731
-Real: -0.301105	Predicted: -0.627683	Error: -0.326578
-Real: 0.837248	Predicted: -0.644665	Error: -1.48191
-Real: -0.84397	Predicted: -0.653491	Error: 0.190479
-Real: -0.84397	Predicted: -0.669849	Error: 0.174121
-Real: -0.733969	Predicted: -0.644968	Error: 0.0890011
-Real: -0.733969	Predicted: -0.750334	Error: -0.0163645
-Real: -0.510826	Predicted: -0.67042	Error: -0.159595
-Real: -0.248461	Predicted: -0.366694	Error: -0.118232
-Real: -0.105361	Predicted: -0.604124	Error: -0.498763
-Real: 5.4569	Predicted: 4.30708	Error: -1.14982
-Real: -0.210721	Predicted: -0.657517	Error: -0.446796
-Real: -0.693147	Predicted: -0.593947	Error: 0.0991999
-Real: -2.40795	Predicted: -1.48592	Error: 0.92203
-Real: 0.0953102	Predicted: -0.574487	Error: -0.669798
-Real: -2.40795	Predicted: -1.47566	Error: 0.93229
-Real: -0.71335	Predicted: -0.710238	Error: 0.00311151
-Real: -0.544727	Predicted: -0.716433	Error: -0.171706
-Real: -0.798508	Predicted: -0.500478	Error: 0.29803
-Real: -0.371064	Predicted: -0.626453	Error: -0.255389
-Real: -0.634878	Predicted: -0.733818	Error: -0.0989401
-Real: -0.84397	Predicted: -0.670657	Error: 0.173313
-Real: -0.820981	Predicted: -0.582131	Error: 0.23885
-Real: -0.223144	Predicted: -0.661456	Error: -0.438312
-Real: -0.867501	Predicted: -0.64731	Error: 0.22019
-Real: -0.579818	Predicted: -0.70443	Error: -0.124611
-Real: -0.71335	Predicted: -0.767156	Error: -0.0538065
-Real: -0.287682	Predicted: -0.609492	Error: -0.32181
-Real: -0.820981	Predicted: -0.76839	Error: 0.0525904
-Real: -0.673345	Predicted: -0.938337	Error: -0.264992
-Real: -0.693147	Predicted: -0.730293	Error: -0.0371458
-Real: -0.673345	Predicted: -0.765949	Error: -0.092604
-Real: -0.867501	Predicted: -0.792659	Error: 0.0748414
-Real: -0.776529	Predicted: -0.740638	Error: 0.0358904
-Real: 1.24415	Predicted: 3.10159	Error: 1.85743
-Real: 4.82935	Predicted: 4.58273	Error: -0.246619
-Real: 0.756122	Predicted: 1.94232	Error: 1.1862
-Real: 2.32337	Predicted: 3.26938	Error: 0.946017
-Real: -0.967584	Predicted: -0.567717	Error: 0.399867
-Real: -0.673345	Predicted: -0.581312	Error: 0.0920327
-Real: 4.24549	Predicted: 6.06247	Error: 1.81698
-Real: 1.54543	Predicted: 3.02908	Error: 1.48365
-Real: 5.16009	Predicted: 6.83227	Error: 1.67218
-Real: 4.79703	Predicted: 4.65067	Error: -0.146363
-Real: 4.82775	Predicted: 3.95075	Error: -0.877006
-Real: 1.87026	Predicted: 0.229513	Error: -1.64075
-Real: 4.83063	Predicted: 1.64566	Error: -3.18497
-Real: 2.76695	Predicted: 3.09746	Error: 0.330517
-Real: 3.11795	Predicted: 3.75877	Error: 0.640821
-Real: -1.17118	Predicted: -0.760063	Error: 0.41112
-Real: 3.30285	Predicted: 2.93933	Error: -0.363515
-Real: -4.60517	Predicted: -2.21263	Error: 2.39254
-Real: -2.12026	Predicted: -1.40484	Error: 0.71542
-Real: 1.11514	Predicted: 0.433472	Error: -0.68167
-Real: -0.634878	Predicted: -0.684258	Error: -0.0493797
-Squared Sum of Errors for the model on the test data: 118.071
+Real: 0.215111	Predicted: 0.0619147	Error: -0.153197
+Real: 0.542324	Predicted: -0.0770451	Error: -0.619369
+Real: -0.223144	Predicted: -0.102283	Error: 0.12086
+Real: -0.0725707	Predicted: -0.000444726	Error: 0.072126
+Real: 0.182322	Predicted: 0.0311066	Error: -0.151215
+Real: 0.113329	Predicted: 0.22765	Error: 0.114321
+Real: -0.150823	Predicted: -0.0630146	Error: 0.0878083
+Real: -0.235722	Predicted: -0.0663637	Error: 0.169359
+Real: -0.127833	Predicted: -0.560183	Error: -0.43235
+Real: -0.116534	Predicted: -0.0322554	Error: 0.0842784
+Real: 0.157004	Predicted: 0.0869241	Error: -0.0700797
+Real: 0.131028	Predicted: 0.0356909	Error: -0.0953374
+Real: 0.113329	Predicted: -0.0362041	Error: -0.149533
+Real: 0.565314	Predicted: -0.394377	Error: -0.959691
+Real: 0.559616	Predicted: 0.359993	Error: -0.199623
+Real: 0.182322	Predicted: 0.132277	Error: -0.0500445
+Real: -0.301105	Predicted: -0.0291089	Error: 0.271996
+Real: -0.287682	Predicted: -0.191072	Error: 0.0966096
+Real: 0.0392207	Predicted: -0.0363101	Error: -0.0755308
+Real: -0.328504	Predicted: 0.029948	Error: 0.358452
+Real: 0.625938	Predicted: 0.464317	Error: -0.161621
+Real: 0.500775	Predicted: 0.374654	Error: -0.126122
+Real: 0.741937	Predicted: 0.851846	Error: 0.109908
+Real: 0.157004	Predicted: 0.0201355	Error: -0.136868
+Real: 0.131028	Predicted: 0.0585827	Error: -0.0724455
+Real: -0.356675	Predicted: -0.0368329	Error: 0.319842
+Real: 0.41211	Predicted: 0.0906902	Error: -0.321419
+Real: 0.00995033	Predicted: -0.156944	Error: -0.166894
+Real: 4.00951	Predicted: -2.25134	Error: -6.26085
+Real: 0.951658	Predicted: 0.875867	Error: -0.0757908
+Real: 1.15373	Predicted: -2.73591	Error: -3.88964
+Real: 0.482426	Predicted: 0.535203	Error: 0.0527771
+Real: 1.1474	Predicted: 0.897907	Error: -0.249495
+Real: -1.30933	Predicted: -1.09325	Error: 0.216087
+Real: -1.7148	Predicted: -1.38352	Error: 0.331282
+Real: 0.963174	Predicted: 0.594104	Error: -0.36907
+Real: -0.653926	Predicted: -0.0872869	Error: 0.56664
+Real: 0.34359	Predicted: 0.836229	Error: 0.49264
+Real: 0.215111	Predicted: 0.466968	Error: 0.251857
+Real: 0.262364	Predicted: 0.660631	Error: 0.398267
+Real: 0.530628	Predicted: 1.01652	Error: 0.485887
+Real: 0.524729	Predicted: 0.742561	Error: 0.217833
+Real: 0.940007	Predicted: -0.529639	Error: -1.46965
+Real: 0.652325	Predicted: 1.05946	Error: 0.407133
+Real: 0.883768	Predicted: 0.886954	Error: 0.00318668
+Real: 0.371564	Predicted: 0.849792	Error: 0.478229
+Real: 0.797507	Predicted: -0.595579	Error: -1.39309
+Real: 0.978326	Predicted: 0.735509	Error: -0.242817
+Real: -0.127833	Predicted: -0.264778	Error: -0.136945
+Real: 0.41211	Predicted: 0.878087	Error: 0.465977
+Real: 2.48407	Predicted: 1.07305	Error: -1.41102
+Real: 0.81093	Predicted: 0.924534	Error: 0.113604
+Real: 1.33237	Predicted: 1.05674	Error: -0.275629
+Real: 0.858662	Predicted: 1.01398	Error: 0.155321
+Real: 0.157004	Predicted: 1.00087	Error: 0.843865
+Real: 1.87641	Predicted: 0.833466	Error: -1.04294
+Real: 0.652325	Predicted: 0.886898	Error: 0.234573
+Real: -1.83258	Predicted: -1.34187	Error: 0.490712
+Real: 2.27727	Predicted: -0.00312984	Error: -2.2804
+Real: 0.357674	Predicted: 1.00386	Error: 0.646191
+Real: 0.936093	Predicted: 1.02899	Error: 0.0928919
+Real: 0.122218	Predicted: -0.0384102	Error: -0.160628
+Real: 0.662688	Predicted: 0.979613	Error: 0.316925
+Real: 0.0953102	Predicted: 0.982356	Error: 0.887046
+Real: 0.947789	Predicted: 0.686083	Error: -0.261707
+Real: 0.916291	Predicted: 0.870832	Error: -0.045459
+Real: 1.09527	Predicted: 1.04812	Error: -0.0471507
+Real: 1.05082	Predicted: 0.876686	Error: -0.174136
+Real: 0.746688	Predicted: 0.978583	Error: 0.231895
+Real: 0.86289	Predicted: 1.04663	Error: 0.183735
+Real: 0.604316	Predicted: -0.582373	Error: -1.18669
+Real: 1.0043	Predicted: 0.917921	Error: -0.0863807
+Real: -1.77196	Predicted: -1.39781	Error: 0.374149
+Real: 0.24686	Predicted: 0.0423406	Error: -0.204519
+Real: 1.09861	Predicted: 0.772502	Error: -0.32611
+Real: 0.157004	Predicted: 0.715	Error: 0.557996
+Real: -0.693147	Predicted: -0.674952	Error: 0.0181948
+Real: -0.510826	Predicted: -0.508852	Error: 0.00197405
+Real: 0.978326	Predicted: 0.490868	Error: -0.487458
+Real: 0.636577	Predicted: 0.888913	Error: 0.252336
+Real: 0.48858	Predicted: 0.70561	Error: 0.21703
+Real: -0.755023	Predicted: -0.56117	Error: 0.193852
+Real: 1.7544	Predicted: 0.828279	Error: -0.926125
+Real: -0.653926	Predicted: -0.442811	Error: 0.211116
+Real: 0.593327	Predicted: 0.778055	Error: 0.184728
+Real: 1.27536	Predicted: 1.07112	Error: -0.204242
+Real: 1.53039	Predicted: 0.855653	Error: -0.674742
+Real: 1.0116	Predicted: 0.921592	Error: -0.0900092
+Real: 0.431782	Predicted: 0.653721	Error: 0.221938
+Real: 0.24686	Predicted: 0.858317	Error: 0.611457
+Real: 1.28923	Predicted: 0.972067	Error: -0.317166
+Real: 0.951658	Predicted: 0.95841	Error: 0.00675254
+Real: 0.912283	Predicted: 0.753694	Error: -0.158589
+Real: 0.565314	Predicted: 1.07427	Error: 0.508958
+Real: 1.49065	Predicted: 0.926189	Error: -0.564466
+Real: 1.9125	Predicted: 0.887715	Error: -1.02479
+Real: -0.776529	Predicted: -0.554661	Error: 0.221868
+Real: -0.446287	Predicted: -0.386286	Error: 0.0600015
+Real: 0.598837	Predicted: 0.89076	Error: 0.291924
+Real: 0.928219	Predicted: 0.730568	Error: -0.197651
+Real: 1.50185	Predicted: 1.03397	Error: -0.46788
+Real: 1.06471	Predicted: 1.02455	Error: -0.0401646
+Real: 0.841567	Predicted: 1.09176	Error: 0.25019
+Real: 0.955511	Predicted: 0.917653	Error: -0.0378583
+Real: 0.307485	Predicted: 0.695365	Error: 0.387881
+Real: -0.527633	Predicted: -0.547977	Error: -0.0203441
+Real: -0.301105	Predicted: -0.533967	Error: -0.232862
+Real: 0.837248	Predicted: -0.571919	Error: -1.40917
+Real: -0.84397	Predicted: -0.563321	Error: 0.28065
+Real: -0.84397	Predicted: -0.603138	Error: 0.240832
+Real: -0.733969	Predicted: -0.563731	Error: 0.170238
+Real: -0.733969	Predicted: -0.668685	Error: 0.065284
+Real: -0.510826	Predicted: -0.615566	Error: -0.104741
+Real: -0.248461	Predicted: -0.48822	Error: -0.239758
+Real: -0.105361	Predicted: -0.531701	Error: -0.426341
+Real: 5.4569	Predicted: 4.74989	Error: -0.707006
+Real: -0.210721	Predicted: -0.580746	Error: -0.370025
+Real: -0.693147	Predicted: -0.495019	Error: 0.198128
+Real: -2.40795	Predicted: -1.49329	Error: 0.914653
+Real: 0.0953102	Predicted: -0.470663	Error: -0.565973
+Real: -2.40795	Predicted: -1.48014	Error: 0.927808
+Real: -0.71335	Predicted: -0.632482	Error: 0.0808674
+Real: -0.544727	Predicted: -0.628925	Error: -0.0841976
+Real: -0.798508	Predicted: -0.399121	Error: 0.399386
+Real: -0.371064	Predicted: -0.539636	Error: -0.168572
+Real: -0.634878	Predicted: -0.655995	Error: -0.0211171
+Real: -0.84397	Predicted: -0.576791	Error: 0.267179
+Real: -0.820981	Predicted: -0.484981	Error: 0.335999
+Real: -0.223144	Predicted: -0.560506	Error: -0.337362
+Real: -0.867501	Predicted: -0.549768	Error: 0.317733
+Real: -0.579818	Predicted: -0.613121	Error: -0.0333026
+Real: -0.71335	Predicted: -0.67472	Error: 0.0386302
+Real: -0.287682	Predicted: -0.521176	Error: -0.233494
+Real: -0.820981	Predicted: -0.680179	Error: 0.140802
+Real: -0.673345	Predicted: -0.969304	Error: -0.29596
+Real: -0.693147	Predicted: -0.645309	Error: 0.0478387
+Real: -0.673345	Predicted: -0.680568	Error: -0.0072239
+Real: -0.867501	Predicted: -0.697826	Error: 0.169675
+Real: -0.776529	Predicted: -0.653242	Error: 0.123287
+Real: 1.24415	Predicted: 3.02429	Error: 1.78014
+Real: 4.82935	Predicted: 4.97263	Error: 0.143277
+Real: 0.756122	Predicted: 2.01174	Error: 1.25562
+Real: 2.32337	Predicted: 2.98209	Error: 0.658718
+Real: -0.967584	Predicted: -0.500967	Error: 0.466617
+Real: -0.673345	Predicted: -0.512041	Error: 0.161303
+Real: 4.24549	Predicted: 6.37783	Error: 2.13233
+Real: 1.54543	Predicted: 3.28589	Error: 1.74046
+Real: 5.16009	Predicted: 7.14965	Error: 1.98956
+Real: 4.79703	Predicted: 5.07506	Error: 0.278034
+Real: 4.82775	Predicted: 4.28975	Error: -0.538003
+Real: 1.87026	Predicted: 0.227747	Error: -1.64252
+Real: 4.83063	Predicted: 1.60148	Error: -3.22915
+Real: 2.76695	Predicted: 3.45985	Error: 0.692904
+Real: 3.11795	Predicted: 3.59497	Error: 0.477025
+Real: -1.17118	Predicted: -0.723714	Error: 0.447469
+Real: 3.30285	Predicted: 3.27058	Error: -0.0322703
+Real: -4.60517	Predicted: -2.41654	Error: 2.18863
+Real: -2.12026	Predicted: -1.40284	Error: 0.717425
+Real: 1.11514	Predicted: 0.545122	Error: -0.57002
+Real: -0.634878	Predicted: -0.616609	Error: 0.0182693
+Squared Sum of Errors for the model on the test data: 123.309
 Forward Selection finished by choosing variables: 2 3 4 5 6 7 9 11 12 24 25 27 
 [msuncore-a1-ei] Keeping features in dataset: feature_saps_BestStep_Mean(2) feature_saps_BestStep_CoeffVariance(3) feature_saps_BestStep_Median(4) feature_saps_BestStep_Q_10(5) feature_saps_BestStep_Q_90(6) feature_saps_AvgImproveToBest_Mean(7) feature_saps_FirstLMRatio_Mean(9) feature_saps_BestCV_Mean(11) feature_gsat_BestSolution_Mean(12) Number_of_Variables(24) Number_of_Clauses(25) Ratio_Negative_Clauses(27) 
 PHI (349, 13):
@@ -68321,182 +68321,182 @@ DELTAM + PHI^t * PHI (13, 13):
 0.142939
 Testing for output: msuncore-a1-ei
 Testing 178 instances
-Real: -1.83258	Predicted: -1.71944	Error: 0.113143
-Real: -1.04982	Predicted: -1.23759	Error: -0.187771
-Real: -1.96611	Predicted: -1.70872	Error: 0.257388
-Real: -1.77196	Predicted: -1.71556	Error: 0.0563986
-Real: -1.60944	Predicted: -1.67105	Error: -0.0616082
-Real: -1.66073	Predicted: -1.8737	Error: -0.212967
-Real: -1.83258	Predicted: -1.64548	Error: 0.187106
-Real: -1.96611	Predicted: -1.70909	Error: 0.257027
-Real: -1.83258	Predicted: -2.00641	Error: -0.173828
-Real: -1.89712	Predicted: -1.86941	Error: 0.0277093
-Real: -1.66073	Predicted: -1.66259	Error: -0.00186328
-Real: -1.7148	Predicted: -1.65941	Error: 0.055389
-Real: -1.66073	Predicted: -1.68986	Error: -0.0291299
-Real: -1.60944	Predicted: -2.12364	Error: -0.514199
-Real: -1.30933	Predicted: -1.63215	Error: -0.322817
-Real: -1.66073	Predicted: -1.8265	Error: -0.165764
-Real: -2.12026	Predicted: -1.81766	Error: 0.302605
-Real: -1.89712	Predicted: -1.68929	Error: 0.207832
-Real: -1.7148	Predicted: -1.71543	Error: -0.000634971
-Real: -1.96611	Predicted: -1.79879	Error: 0.167325
-Real: -1.46968	Predicted: -1.76981	Error: -0.300131
-Real: -1.60944	Predicted: -1.80138	Error: -0.191943
-Real: -1.34707	Predicted: -1.66137	Error: -0.314296
-Real: -1.66073	Predicted: -1.69732	Error: -0.0365845
-Real: -1.66073	Predicted: -1.70562	Error: -0.0448877
-Real: -2.04022	Predicted: -1.56404	Error: 0.476177
-Real: -1.7148	Predicted: -1.70722	Error: 0.00757574
-Real: -1.56065	Predicted: -1.61496	Error: -0.0543111
-Real: 1.74397	Predicted: 2.87288	Error: 1.12891
-Real: 0.378436	Predicted: 2.91603	Error: 2.5376
-Real: 2.03078	Predicted: 2.27494	Error: 0.244164
-Real: -1.56065	Predicted: -1.69263	Error: -0.131978
-Real: 3.50616	Predicted: 2.5967	Error: -0.909456
-Real: 2.86903	Predicted: 1.91662	Error: -0.952418
-Real: -1.23787	Predicted: -1.59031	Error: -0.352432
-Real: 0.943906	Predicted: 2.74221	Error: 1.7983
-Real: -1.96611	Predicted: -1.67448	Error: 0.291638
-Real: 4.91794	Predicted: 8.09783	Error: 3.1799
-Real: -1.56065	Predicted: -1.46507	Error: 0.095576
-Real: -1.66073	Predicted: -1.40606	Error: 0.254675
-Real: -2.40795	Predicted: -1.95482	Error: 0.453127
-Real: -2.52573	Predicted: -2.08876	Error: 0.436964
-Real: -1.66073	Predicted: -1.49233	Error: 0.168397
-Real: -0.967584	Predicted: -1.76955	Error: -0.801961
-Real: -1.66073	Predicted: -1.52356	Error: 0.137175
-Real: -1.7148	Predicted: -1.61819	Error: 0.0966042
-Real: -1.60944	Predicted: -1.25679	Error: 0.352646
-Real: -1.66073	Predicted: -1.3654	Error: 0.295329
-Real: -1.60944	Predicted: -1.47206	Error: 0.137382
-Real: -1.38629	Predicted: -1.98774	Error: -0.601449
-Real: -1.60944	Predicted: -1.55675	Error: 0.0526879
-Real: -1.56065	Predicted: -1.60649	Error: -0.0458417
-Real: -1.60944	Predicted: -1.46507	Error: 0.144365
-Real: -1.89712	Predicted: -1.92519	Error: -0.0280658
-Real: -1.60944	Predicted: -1.54054	Error: 0.0689002
-Real: -2.04022	Predicted: -1.82903	Error: 0.21119
-Real: -1.66073	Predicted: -1.4238	Error: 0.236936
-Real: -1.56065	Predicted: -1.39178	Error: 0.168863
-Real: -1.66073	Predicted: -1.46106	Error: 0.199666
-Real: -1.56065	Predicted: -1.47034	Error: 0.09031
-Real: -1.66073	Predicted: -1.49761	Error: 0.163123
-Real: -1.60944	Predicted: -1.47365	Error: 0.135792
-Real: -1.66073	Predicted: -1.45424	Error: 0.206495
-Real: -1.56065	Predicted: -1.4885	Error: 0.0721525
-Real: -2.65926	Predicted: -2.07802	Error: 0.581241
-Real: -1.96611	Predicted: -1.75943	Error: 0.206686
-Real: -1.60944	Predicted: -1.44559	Error: 0.163851
-Real: -1.66073	Predicted: -1.42125	Error: 0.23948
-Real: -1.23787	Predicted: -1.78216	Error: -0.544287
-Real: -1.60944	Predicted: -1.41963	Error: 0.189809
-Real: -1.66073	Predicted: -1.49223	Error: 0.168502
-Real: -1.60944	Predicted: -1.50856	Error: 0.100877
-Real: -1.60944	Predicted: -1.55237	Error: 0.057071
-Real: -1.66073	Predicted: -1.39205	Error: 0.268683
-Real: -1.66073	Predicted: -1.43417	Error: 0.226556
-Real: -1.56065	Predicted: -1.40904	Error: 0.151604
-Real: -1.66073	Predicted: -1.43387	Error: 0.226866
-Real: -1.56065	Predicted: -1.78232	Error: -0.221674
-Real: -1.60944	Predicted: -1.43607	Error: 0.173372
-Real: -2.65926	Predicted: -2.10329	Error: 0.555969
-Real: -1.20397	Predicted: -1.74763	Error: -0.543654
-Real: -1.66073	Predicted: -1.19479	Error: 0.465939
-Real: -1.66073	Predicted: -1.30198	Error: 0.358755
-Real: -1.20397	Predicted: -1.97591	Error: -0.771938
-Real: -2.04022	Predicted: -1.96542	Error: 0.0748027
-Real: -1.66073	Predicted: -1.29276	Error: 0.367971
-Real: -1.60944	Predicted: -1.51025	Error: 0.0991882
-Real: -1.60944	Predicted: -1.50635	Error: 0.10309
-Real: -1.51413	Predicted: -1.84092	Error: -0.326796
-Real: -1.60944	Predicted: -1.24757	Error: 0.361866
-Real: -1.56065	Predicted: -1.83764	Error: -0.27699
-Real: -1.60944	Predicted: -1.4659	Error: 0.143533
-Real: -1.56065	Predicted: -1.43435	Error: 0.126302
-Real: -1.66073	Predicted: -1.43829	Error: 0.222441
-Real: -1.60944	Predicted: -1.49302	Error: 0.11642
-Real: -1.7148	Predicted: -1.52628	Error: 0.188521
-Real: -1.60944	Predicted: -1.47778	Error: 0.131659
-Real: -1.66073	Predicted: -1.4525	Error: 0.208233
-Real: -1.60944	Predicted: -1.45749	Error: 0.151949
-Real: -1.66073	Predicted: -1.51664	Error: 0.144094
-Real: -1.60944	Predicted: -1.589	Error: 0.0204389
-Real: -1.56065	Predicted: -1.43084	Error: 0.129807
-Real: -1.66073	Predicted: -1.53146	Error: 0.129272
-Real: -1.51413	Predicted: -1.94634	Error: -0.432215
-Real: -1.46968	Predicted: -1.82907	Error: -0.35939
-Real: -1.7148	Predicted: -1.26125	Error: 0.453552
-Real: -1.60944	Predicted: -1.29484	Error: 0.314602
-Real: -1.60944	Predicted: -1.43213	Error: 0.177309
-Real: -1.66073	Predicted: -1.19636	Error: 0.46437
-Real: -1.66073	Predicted: -1.46474	Error: 0.195988
-Real: -1.66073	Predicted: -1.44226	Error: 0.218471
-Real: -1.66073	Predicted: -1.56063	Error: 0.100102
-Real: -2.30259	Predicted: -1.90032	Error: 0.402266
-Real: -2.20727	Predicted: -1.83137	Error: 0.375907
-Real: -2.30259	Predicted: -1.78498	Error: 0.517602
-Real: -2.30259	Predicted: -1.84162	Error: 0.460961
-Real: -2.30259	Predicted: -1.86163	Error: 0.440953
-Real: -1.30933	Predicted: -1.99393	Error: -0.684597
-Real: -2.30259	Predicted: -1.85802	Error: 0.444562
-Real: -1.23787	Predicted: -2.00255	Error: -0.764678
-Real: -2.12026	Predicted: -1.74834	Error: 0.371928
-Real: -2.30259	Predicted: -1.8563	Error: 0.446282
-Real: -0.34249	Predicted: 0.845259	Error: 1.18775
-Real: -2.30259	Predicted: -1.90811	Error: 0.394474
-Real: -2.20727	Predicted: -1.87404	Error: 0.333235
-Real: -2.12026	Predicted: -2.14525	Error: -0.0249828
-Real: -2.30259	Predicted: -1.871	Error: 0.431581
-Real: -2.12026	Predicted: -2.12704	Error: -0.00677392
-Real: -2.30259	Predicted: -1.90393	Error: 0.398654
-Real: -2.30259	Predicted: -1.89417	Error: 0.40841
-Real: -2.30259	Predicted: -1.81684	Error: 0.485741
-Real: -2.30259	Predicted: -1.8723	Error: 0.430283
-Real: -2.20727	Predicted: -1.73754	Error: 0.469738
-Real: -2.30259	Predicted: -1.85432	Error: 0.448267
-Real: -2.20727	Predicted: -1.83852	Error: 0.368756
-Real: -2.30259	Predicted: -1.82436	Error: 0.478225
-Real: -2.30259	Predicted: -1.85458	Error: 0.448003
-Real: -2.30259	Predicted: -1.74063	Error: 0.561952
-Real: -2.20727	Predicted: -1.87352	Error: 0.333751
-Real: -2.30259	Predicted: -1.8795	Error: 0.423087
-Real: -2.30259	Predicted: -1.88545	Error: 0.41713
-Real: -2.30259	Predicted: -1.96913	Error: 0.333457
-Real: -2.30259	Predicted: -1.80962	Error: 0.492961
-Real: -2.30259	Predicted: -1.84587	Error: 0.456714
-Real: -2.40795	Predicted: -1.81721	Error: 0.59074
-Real: -2.30259	Predicted: -1.84346	Error: 0.459122
-Real: -0.891598	Predicted: -0.894467	Error: -0.00286933
-Real: 3.6579	Predicted: 3.10673	Error: -0.551179
-Real: 5.293	Predicted: 3.2729	Error: -2.02011
-Real: 3.50646	Predicted: 0.501167	Error: -3.00529
-Real: -1.07881	Predicted: -1.20751	Error: -0.128695
-Real: 4.11464	Predicted: 3.15267	Error: -0.961967
-Real: -0.693147	Predicted: -0.718921	Error: -0.0257738
-Real: 2.89536	Predicted: 3.1718	Error: 0.276445
-Real: -2.04022	Predicted: -1.95738	Error: 0.0828411
-Real: 5.76563	Predicted: 3.28747	Error: -2.47816
-Real: -2.04022	Predicted: -1.91483	Error: 0.125394
-Real: 4.44571	Predicted: 3.37872	Error: -1.06698
-Real: -0.544727	Predicted: -0.877051	Error: -0.332324
-Real: 6.28238	Predicted: 3.94975	Error: -2.33263
-Real: 4.30649	Predicted: 0.800232	Error: -3.50626
-Real: 4.81543	Predicted: 3.20003	Error: -1.6154
-Real: 3.31926	Predicted: 2.79228	Error: -0.526982
-Real: 6.42274	Predicted: 3.03678	Error: -3.38596
-Real: 4.37134	Predicted: 3.09886	Error: -1.27249
-Real: 4.58782	Predicted: 3.14366	Error: -1.44416
-Real: -1.72037	Predicted: -1.46454	Error: 0.25583
-Real: 4.4982	Predicted: -1.85551	Error: -6.35371
-Real: 0.57098	Predicted: -0.131546	Error: -0.702526
-Real: -0.0304592	Predicted: -0.347272	Error: -0.316812
-Real: -1.7148	Predicted: -2.01766	Error: -0.302865
-Real: 1.2499	Predicted: 2.89814	Error: 1.64823
-Real: 2.68034	Predicted: 2.56277	Error: -0.117571
-Real: 0.14842	Predicted: 1.61086	Error: 1.46244
-Real: -2.65926	Predicted: -2.10744	Error: 0.551817
-Real: -2.40795	Predicted: -2.29756	Error: 0.110389
-Real: -1.10866	Predicted: -1.55507	Error: -0.446404
-Real: -1.89712	Predicted: -2.09231	Error: -0.195192
-Squared Sum of Errors for the model on the test data: 143.091
+Real: -1.83258	Predicted: -1.84497	Error: -0.0123853
+Real: -1.04982	Predicted: -1.52388	Error: -0.474056
+Real: -1.96611	Predicted: -1.82139	Error: 0.144724
+Real: -1.77196	Predicted: -1.83632	Error: -0.0643661
+Real: -1.60944	Predicted: -1.76188	Error: -0.152437
+Real: -1.66073	Predicted: -1.95594	Error: -0.295212
+Real: -1.83258	Predicted: -1.75942	Error: 0.0731598
+Real: -1.96611	Predicted: -1.84074	Error: 0.125372
+Real: -1.83258	Predicted: -2.07083	Error: -0.238252
+Real: -1.89712	Predicted: -1.97494	Error: -0.0778161
+Real: -1.66073	Predicted: -1.75683	Error: -0.0960942
+Real: -1.7148	Predicted: -1.75404	Error: -0.0392457
+Real: -1.66073	Predicted: -1.78055	Error: -0.119815
+Real: -1.60944	Predicted: -2.13546	Error: -0.526021
+Real: -1.30933	Predicted: -1.76695	Error: -0.457622
+Real: -1.66073	Predicted: -1.90644	Error: -0.245706
+Real: -2.12026	Predicted: -1.93443	Error: 0.185833
+Real: -1.89712	Predicted: -1.81062	Error: 0.0864976
+Real: -1.7148	Predicted: -1.8267	Error: -0.1119
+Real: -1.96611	Predicted: -1.91256	Error: 0.0535536
+Real: -1.46968	Predicted: -1.82567	Error: -0.355994
+Real: -1.60944	Predicted: -1.87896	Error: -0.269527
+Real: -1.34707	Predicted: -1.71506	Error: -0.36799
+Real: -1.66073	Predicted: -1.78789	Error: -0.127155
+Real: -1.66073	Predicted: -1.80105	Error: -0.140323
+Real: -2.04022	Predicted: -1.66374	Error: 0.376478
+Real: -1.7148	Predicted: -1.80074	Error: -0.085938
+Real: -1.56065	Predicted: -1.76917	Error: -0.208518
+Real: 1.74397	Predicted: 3.6021	Error: 1.85813
+Real: 0.378436	Predicted: 3.56068	Error: 3.18224
+Real: 2.03078	Predicted: 2.52582	Error: 0.49504
+Real: -1.56065	Predicted: -1.63913	Error: -0.0784792
+Real: 3.50616	Predicted: 3.50375	Error: -0.00240417
+Real: 2.86903	Predicted: 2.55428	Error: -0.314757
+Real: -1.23787	Predicted: -1.59338	Error: -0.355506
+Real: 0.943906	Predicted: 3.62848	Error: 2.68458
+Real: -1.96611	Predicted: -1.62522	Error: 0.340897
+Real: 4.91794	Predicted: 4.37049	Error: -0.547447
+Real: -1.56065	Predicted: -1.58194	Error: -0.0212905
+Real: -1.66073	Predicted: -1.53349	Error: 0.127239
+Real: -2.40795	Predicted: -2.07764	Error: 0.33031
+Real: -2.52573	Predicted: -2.18335	Error: 0.342376
+Real: -1.66073	Predicted: -1.62135	Error: 0.0393791
+Real: -0.967584	Predicted: -1.94718	Error: -0.979599
+Real: -1.66073	Predicted: -1.64588	Error: 0.0148504
+Real: -1.7148	Predicted: -1.7356	Error: -0.0208045
+Real: -1.60944	Predicted: -1.36697	Error: 0.242467
+Real: -1.66073	Predicted: -1.492	Error: 0.168728
+Real: -1.60944	Predicted: -1.59923	Error: 0.0102101
+Real: -1.38629	Predicted: -2.08379	Error: -0.697498
+Real: -1.60944	Predicted: -1.67804	Error: -0.0686034
+Real: -1.56065	Predicted: -1.73033	Error: -0.16968
+Real: -1.60944	Predicted: -1.5815	Error: 0.0279408
+Real: -1.89712	Predicted: -2.01985	Error: -0.122734
+Real: -1.60944	Predicted: -1.66486	Error: -0.0554228
+Real: -2.04022	Predicted: -1.92844	Error: 0.111778
+Real: -1.66073	Predicted: -1.54904	Error: 0.111689
+Real: -1.56065	Predicted: -1.51792	Error: 0.042729
+Real: -1.66073	Predicted: -1.58587	Error: 0.0748565
+Real: -1.56065	Predicted: -1.59638	Error: -0.0357314
+Real: -1.66073	Predicted: -1.61992	Error: 0.040809
+Real: -1.60944	Predicted: -1.59684	Error: 0.0126006
+Real: -1.66073	Predicted: -1.57722	Error: 0.083511
+Real: -1.56065	Predicted: -1.61521	Error: -0.0545663
+Real: -2.65926	Predicted: -2.1728	Error: 0.486456
+Real: -1.96611	Predicted: -1.85853	Error: 0.107585
+Real: -1.60944	Predicted: -1.56861	Error: 0.0408262
+Real: -1.66073	Predicted: -1.54608	Error: 0.114653
+Real: -1.23787	Predicted: -1.88928	Error: -0.651409
+Real: -1.60944	Predicted: -1.54789	Error: 0.0615449
+Real: -1.66073	Predicted: -1.61742	Error: 0.0433068
+Real: -1.60944	Predicted: -1.62935	Error: -0.019915
+Real: -1.60944	Predicted: -1.67445	Error: -0.0650153
+Real: -1.66073	Predicted: -1.52218	Error: 0.138552
+Real: -1.66073	Predicted: -1.55908	Error: 0.10165
+Real: -1.56065	Predicted: -1.5371	Error: 0.023547
+Real: -1.66073	Predicted: -1.5622	Error: 0.0985321
+Real: -1.56065	Predicted: -1.95438	Error: -0.393735
+Real: -1.60944	Predicted: -1.5608	Error: 0.0486344
+Real: -2.65926	Predicted: -2.19514	Error: 0.464122
+Real: -1.20397	Predicted: -1.8566	Error: -0.65263
+Real: -1.66073	Predicted: -1.31229	Error: 0.348446
+Real: -1.66073	Predicted: -1.41495	Error: 0.245784
+Real: -1.20397	Predicted: -2.06999	Error: -0.866019
+Real: -2.04022	Predicted: -2.0611	Error: -0.020881
+Real: -1.66073	Predicted: -1.40098	Error: 0.259755
+Real: -1.60944	Predicted: -1.63078	Error: -0.0213437
+Real: -1.60944	Predicted: -1.63483	Error: -0.0253936
+Real: -1.51413	Predicted: -2.01219	Error: -0.49806
+Real: -1.60944	Predicted: -1.36029	Error: 0.249151
+Real: -1.56065	Predicted: -1.93618	Error: -0.375531
+Real: -1.60944	Predicted: -1.5886	Error: 0.0208394
+Real: -1.56065	Predicted: -1.56137	Error: -0.000725206
+Real: -1.66073	Predicted: -1.5647	Error: 0.0960334
+Real: -1.60944	Predicted: -1.61675	Error: -0.00730874
+Real: -1.7148	Predicted: -1.65047	Error: 0.0643286
+Real: -1.60944	Predicted: -1.59923	Error: 0.0102087
+Real: -1.66073	Predicted: -1.57616	Error: 0.0845707
+Real: -1.60944	Predicted: -1.58382	Error: 0.0256162
+Real: -1.66073	Predicted: -1.6448	Error: 0.0159276
+Real: -1.60944	Predicted: -1.71045	Error: -0.101009
+Real: -1.56065	Predicted: -1.55501	Error: 0.00563316
+Real: -1.66073	Predicted: -1.65837	Error: 0.00236111
+Real: -1.51413	Predicted: -2.04327	Error: -0.529144
+Real: -1.46968	Predicted: -1.92918	Error: -0.459508
+Real: -1.7148	Predicted: -1.37958	Error: 0.335221
+Real: -1.60944	Predicted: -1.40686	Error: 0.202582
+Real: -1.60944	Predicted: -1.55585	Error: 0.0535842
+Real: -1.66073	Predicted: -1.31005	Error: 0.350684
+Real: -1.66073	Predicted: -1.58437	Error: 0.0763641
+Real: -1.66073	Predicted: -1.56489	Error: 0.0958385
+Real: -1.66073	Predicted: -1.67739	Error: -0.0166544
+Real: -2.30259	Predicted: -2.00008	Error: 0.302506
+Real: -2.20727	Predicted: -1.93165	Error: 0.275626
+Real: -2.30259	Predicted: -1.88433	Error: 0.418256
+Real: -2.30259	Predicted: -1.94097	Error: 0.361612
+Real: -2.30259	Predicted: -1.96706	Error: 0.335528
+Real: -1.30933	Predicted: -2.08766	Error: -0.778332
+Real: -2.30259	Predicted: -1.95675	Error: 0.345838
+Real: -1.23787	Predicted: -2.09769	Error: -0.859818
+Real: -2.12026	Predicted: -1.83923	Error: 0.281029
+Real: -2.30259	Predicted: -1.96414	Error: 0.338441
+Real: -0.34249	Predicted: 0.94095	Error: 1.28344
+Real: -2.30259	Predicted: -2.01099	Error: 0.291599
+Real: -2.20727	Predicted: -1.97952	Error: 0.227757
+Real: -2.12026	Predicted: -2.27092	Error: -0.15066
+Real: -2.30259	Predicted: -1.98061	Error: 0.32198
+Real: -2.12026	Predicted: -2.254	Error: -0.133741
+Real: -2.30259	Predicted: -2.0018	Error: 0.300782
+Real: -2.30259	Predicted: -1.99312	Error: 0.30946
+Real: -2.30259	Predicted: -1.91876	Error: 0.383825
+Real: -2.30259	Predicted: -1.97736	Error: 0.325228
+Real: -2.20727	Predicted: -1.82767	Error: 0.379605
+Real: -2.30259	Predicted: -1.95569	Error: 0.346898
+Real: -2.20727	Predicted: -1.94214	Error: 0.265135
+Real: -2.30259	Predicted: -1.93215	Error: 0.370431
+Real: -2.30259	Predicted: -1.95487	Error: 0.347712
+Real: -2.30259	Predicted: -1.83192	Error: 0.470662
+Real: -2.20727	Predicted: -1.97122	Error: 0.236059
+Real: -2.30259	Predicted: -1.98053	Error: 0.32205
+Real: -2.30259	Predicted: -1.98497	Error: 0.317619
+Real: -2.30259	Predicted: -2.05551	Error: 0.247073
+Real: -2.30259	Predicted: -1.90705	Error: 0.395535
+Real: -2.30259	Predicted: -1.94263	Error: 0.359955
+Real: -2.40795	Predicted: -1.91562	Error: 0.492327
+Real: -2.30259	Predicted: -1.93938	Error: 0.363202
+Real: -0.891598	Predicted: -0.882379	Error: 0.00921945
+Real: 3.6579	Predicted: 4.05155	Error: 0.393644
+Real: 5.293	Predicted: 4.28314	Error: -1.00987
+Real: 3.50646	Predicted: 0.700843	Error: -2.80561
+Real: -1.07881	Predicted: -1.22891	Error: -0.150099
+Real: 4.11464	Predicted: 3.88439	Error: -0.230245
+Real: -0.693147	Predicted: -0.698828	Error: -0.00568039
+Real: 2.89536	Predicted: 3.95725	Error: 1.06189
+Real: -2.04022	Predicted: -2.07591	Error: -0.0356898
+Real: 5.76563	Predicted: 4.29887	Error: -1.46676
+Real: -2.04022	Predicted: -2.03276	Error: 0.00746492
+Real: 4.44571	Predicted: 3.91341	Error: -0.532298
+Real: -0.544727	Predicted: -0.841104	Error: -0.296377
+Real: 6.28238	Predicted: 4.58267	Error: -1.69971
+Real: 4.30649	Predicted: 0.992616	Error: -3.31388
+Real: 4.81543	Predicted: 3.87758	Error: -0.937855
+Real: 3.31926	Predicted: 3.178	Error: -0.141263
+Real: 6.42274	Predicted: 3.78208	Error: -2.64066
+Real: 4.37134	Predicted: 3.98709	Error: -0.384252
+Real: 4.58782	Predicted: 3.94357	Error: -0.644251
+Real: -1.72037	Predicted: -1.61812	Error: 0.102246
+Real: 4.4982	Predicted: -1.94609	Error: -6.44429
+Real: 0.57098	Predicted: 0.0427283	Error: -0.528251
+Real: -0.0304592	Predicted: -0.262692	Error: -0.232232
+Real: -1.7148	Predicted: -2.14555	Error: -0.430749
+Real: 1.2499	Predicted: 3.68909	Error: 2.43918
+Real: 2.68034	Predicted: 3.34375	Error: 0.663409
+Real: 0.14842	Predicted: 2.10314	Error: 1.95472
+Real: -2.65926	Predicted: -2.22209	Error: 0.437169
+Real: -2.40795	Predicted: -2.44214	Error: -0.0341956
+Real: -1.10866	Predicted: -1.60285	Error: -0.494186
+Real: -1.89712	Predicted: -2.22014	Error: -0.323016
+Squared Sum of Errors for the model on the test data: 123.295
