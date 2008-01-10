@@ -103,7 +103,7 @@ int main(int argc, char *argv[]) {
     pid_t pid;
     pid = fork();
     if(pid == 0) {
-      execl(filename.c_str(), it->second.c_str(), instance, "1000", "1000000", (char *)NULL);
+      execl(filename.c_str(), it->second.c_str(), instance, (char *)NULL);
       exit(EXIT_SUCCESS);
     } else {
       int status;
