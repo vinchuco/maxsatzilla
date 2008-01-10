@@ -1,6 +1,6 @@
 # set-name path
 AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
-#DEBUG /benchmark/cnf/design-debugging/*.seq 30
-#BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
-#SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
-#PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
+DEBUG /benchmark/cnf/design-debugging/*.seq 30
+BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
+SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
+PIMAG /benchmark/cnf/pimag/selected/*.cnf 58

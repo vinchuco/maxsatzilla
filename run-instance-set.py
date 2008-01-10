@@ -12,7 +12,7 @@ if len( opts ) == 1:
     percentatge = int( opts[0][1] )
 else:
     percentatge = 100
-timeout = '1000'
+timeout = '10'
 memout = '2000000'
 
 sys_limits = 'ulimit -t ' + timeout + '; ulimit -m ' + memout + '; ulimit -d ' + memout + '; ulimit -v ' + memout + ';'
@@ -34,12 +34,13 @@ for set in open( set_list ):
         total_instances_run += times
         print '# Running ' + solver + ' with ' + name + ' ' + str( times ) + '/' + number
         outfile = os.path.basename( solver.split()[0] ) + '.' + name + '.out'
+        logfile = open( os.path.basename( solver.split()[0] ) + '.' + name + '.log', 'w' )
         os.system( 'cp /dev/null ' + outfile )
         for file in glob.glob( path ):
             if counter < times:
                 counter += 1
                 timefile = tempfile.NamedTemporaryFile()
-                os.popen( sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
-                print os.path.basename( file.split()[0] ) + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c5-' ).read()[:-1]
+                os.popen( 'echo ' + file + ' >> ' + outfile + ' ;' + sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
+                print >> logfile, os.path.basename( file.split()[0] ) + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c5-' ).read()[:-1]
 
 print '# Total instances run ' + str( total_instances_run )
