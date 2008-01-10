@@ -19,10 +19,10 @@ sys_limits = 'ulimit -t ' + timeout + '; ulimit -m ' + memout + '; ulimit -d ' +
 
 total_instances_run = 0
 
-#def handler( signal, frame ):
-#    print "Script interrupted"
-#    sys.exit(0)
-#signal.signal( signal.SIGINT, handler )
+def handler( signal, frame ):
+    print "Script interrupted"
+    sys.exit(0)
+signal.signal( signal.SIGINT, handler )
 
 for set in open( set_list ):
     if set[0] == '#':
