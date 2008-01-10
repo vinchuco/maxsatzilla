@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-import sys, os, getopt, glob, os.path
+import sys, os, getopt, glob, os.path, signal
 
 opts, args = getopt.getopt( sys.argv[1:], 'p:' )
 
