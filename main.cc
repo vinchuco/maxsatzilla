@@ -83,24 +83,27 @@ int main(int argc, char *argv[]) {
 
   // Let's display the models, from best to worst.
   cout << "Predicted Runtimes:\n";
-  for(map<string, double>::const_iterator it = predRt.begin();
-      it != predRt.end();
-      it++)
-    cout << "\t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
-  
-  // Forking to run the best solver
+  map<double, string> invPredRt;
   for(map<string, double>::const_iterator it = predRt.begin();
       it != predRt.end();
       it++) {
-    cout << "** Runnning " << it->first << "\n";
+    cout << "\t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
+    invPredRt[it->second] = it->first;
+  }
+  
+  // Forking to run the best solver
+  for(map<double, string>::const_iterator it = invPredRt.begin();
+      it != invPredRt.end();
+      it++) {
+    cout << "** Runnning " << it->second << "\n";
 
     const string filename_prefix = "./";
-    const string filename = filename_prefix + it->first;
+    const string filename = filename_prefix + it->second;
 
     pid_t pid;
     pid = fork();
     if(pid == 0) {
-      execl(filename.c_str(), it->first.c_str(), instance, "1000", "1000000", (char *)NULL);
+      execl(filename.c_str(), it->second.c_str(), instance, "1000", "1000000", (char *)NULL);
       exit(EXIT_SUCCESS);
     } else {
       int status;
