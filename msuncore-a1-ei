@@ -3,5 +3,5 @@ MSUNCORE_DIR="./solvers/msuncore"
 INIT_DIR=`pwd`
 
 cd $MSUNCORE_DIR
-./scripts/runmsuncore $@
+./src/msuncore -a 1 -e i $@
 cd $INIT_DIR
