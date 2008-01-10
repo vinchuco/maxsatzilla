@@ -18,9 +18,9 @@ MSZPARSE_LDFLAGS = $(LDFLAGS)
 
 .PHONY : all clean run subdirs $(SUBDIRS)
 
-all: getfeatures maxsatzilla mszparse coach
+all: getfeatures maxsatzilla.bin mszparse coach
 
-maxsatzilla : $(MAXSATZILLA_OBJECT_FILES)
+maxsatzilla.bin : $(MAXSATZILLA_OBJECT_FILES)
 	g++ ${MAXSATZILLA_LDFLAGS} -o $@ $+ 
 
 ./math/libmath.a: 
@@ -46,4 +46,4 @@ mszparse: mszparse.o
 mszparse.o: mszparse.cc mszreader.hh
 
 clean:
-	rm -f *~ *.o getfeatures maxsatzilla mszparse coach ./ubcsat/libubcsat.a ./math/libmath.a
+	rm -f *~ *.o getfeatures maxsatzilla.bin mszparse coach ./ubcsat/libubcsat.a ./math/libmath.a
