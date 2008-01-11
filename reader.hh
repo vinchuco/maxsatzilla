@@ -6,7 +6,6 @@
 #include <iostream>
 #include <fstream>
 
-#include "math/pputils.hh"
 #include "reader.hh"
 
 using std::string;
