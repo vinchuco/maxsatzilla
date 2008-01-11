@@ -1,3 +1,11 @@
+/**
+ **
+ ** DO NOT CHANGE OR DELETE THIS FILE. 
+ ** THIS FILE BELONGS TO THE ZILLA-COMMON PROJECT, BUT FOR PRACTICAL
+ ** REASONS A COPY NEEDS TO LIVE IN THIS FOLDER.
+ **
+ **/
+
 #include "reader.hh"
 
 #include <iostream>
