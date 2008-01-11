@@ -1,6 +1,0 @@
-- Forward Selection Algorithm relies on GSL >= 1.10 (http://www.gnu.org/software/gsl/)
-  for algorithms and data structures.
-  * There's a work around on the 1.9 versus 1.10 issue.
-    To compile with 1.9 use make like this:
-    $ OLDGSL=1 make
-    in Bash, basically you have to define OLDGSL before running make.
