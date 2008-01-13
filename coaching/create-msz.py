@@ -87,19 +87,6 @@ for line in open( instance_set_list ):
         solvers_times = []
         feature_values = []
         solution = -1
-<<<<<<< .mine
-        #try:
-        for solver in solvers:
-            solver_sol, time = get_instance_time( solver, set_name, instance_basename )
-            check_solution( solution, solver_sol )
-            solvers_times.append ( time )
-        for feature in features:
-            feature_values.append( get_feature_value( instance, feature ) )
-        print >> msz_file, ' '.join( solvers_times )
-        print >> msz_file, ' '.join( feature_values )
-        #except Exception:
-        #    print >> sys.stderr, "Error instance " + instance
-=======
         try:
             for solver in solvers:
                 try:
@@ -119,7 +106,6 @@ for line in open( instance_set_list ):
             print >> msz_file, ' '.join( feature_values )
         except Exception:
             print >> sys.stderr, "Error instance " + instance
->>>>>>> .r351
     if instance_counter != int( number ):
         print 'Values for ' + set_name + ' : ' + str( instance_counter) + ' ' + number
         raise( Exception( 'Incorrect number of instances' ) )
