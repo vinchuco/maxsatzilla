@@ -1,0 +1,3 @@
+RAMSEY  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RAMSEY/*.cnf 48
+SPINGLASS /benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/*.cnf 20
+DIMACS-MOD /benchmark/cnf/maxsat/evaluation/ms/ToolbarTeam/MAXCUT/DIMACS_MOD/*.cnf 62
