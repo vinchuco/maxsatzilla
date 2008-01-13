@@ -16,10 +16,12 @@ features_directory = './features/'
 times_directory = './solver-times/'
 timeout = '1000'
 
-def get_instance_time( solver, name, instance ):
-    for line in open( times_directory + solver + '-' + name + '.log' ):
+def get_instance_time( solver, set_name, instance ):
+    for line in open( times_directory + solver + '-' + set_name + '.log' ):
         name, solution, time = line.split()
         if name == instance:
+            if not solution.isdigit():
+               solution = 0
             return solution, time
     #print >> sys.stderr, "Instance " + instance
     raise Exception('Instance not found ' + instance )
