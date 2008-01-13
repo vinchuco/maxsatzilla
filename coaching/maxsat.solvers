@@ -1,9 +1,4 @@
 # Solvers solving MaxSat
-<<<<<<< .mine
-maxsatz-a-e
-mspbo-a-e
-=======
 maxsatz-a-e
 mspbo-a-e
 msuncore-a1-ei
->>>>>>> .r326

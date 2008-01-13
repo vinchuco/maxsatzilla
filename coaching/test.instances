@@ -1,21 +1,6 @@
 # set-name path
-<<<<<<< .mine
 AUTO /home/pmatos/benchmarks/benchmark/cnf/automotive/unsat/*.cnf 84
 DEBUG /home/pmatos/benchmarks/benchmark/cnf/design-debugging/*.seq 28
 #BF /home/pmatos/benchmarks/benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
 #SSA /home/pmatos/benchmarks/benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
 #PIMAG /home/pmatos/benchmarks/benchmark/cnf/pimag/selected/*.cnf 58
-=======
-AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
-<<<<<<< .mine
-#DEBUG /benchmark/cnf/design-debugging/*.seq 30
-#BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
-#SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
-#PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
->>>>>>> .r383
-=======
-DEBUG /benchmark/cnf/design-debugging/*.seq 30
-BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
-SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
-PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
->>>>>>> .r423
