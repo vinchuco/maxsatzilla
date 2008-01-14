@@ -1,6 +1,6 @@
 # set-name path
 AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
-#IBM /benchmark/cnf/ibm/new/TAR/selected/*.cnf 341
+IBM /benchmark/cnf/ibm/new/TAR/selected/*.cnf 341
 DEBUG /benchmark/cnf/design-debugging/*.seq 29
 #DEBUG2 /benchmark/cnf/design-debugging-v2/*.dimacs 36
 BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
