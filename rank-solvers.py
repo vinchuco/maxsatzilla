@@ -30,6 +30,11 @@ for solver in open( solver_list_file ):
         continue
     times[ solver[0:-1] ] = 0.0
 
+def sorted( list, comparison ):
+    list2 = list
+    list2.sort( comparison )
+    return list2
+
 def sort_solvers( times ):    
     return [ solver for solver,value in sorted( times.items(), lambda (x1,x2), (y1,y2) : cmp(x2, y2)) ]
 
