@@ -12,7 +12,7 @@ for option in opts:
     if option[0] == '-v':
         verbose = True
 
-times = { 'maxsatz-a-e' : 0.0, 'mspbo-a-e' : 0.0, 'msuncore-a1-ei' : 0.0 }
+times = { 'maxsatz-a-e' : 0.0, 'mspbo-a-e' : 0.0, 'msuncore-a1-ei' : 0.0, 'maxsatzilla' : 0.0 }
 
 def sort_solvers( times ):
     from operator import itemgetter
@@ -21,7 +21,7 @@ def sort_solvers( times ):
 for set in set_list:
     for solver in times.keys():        
         times[ solver ] = 0
-        for line in open( solver_times_path + '/' + solver + '-' + set + '.log' ):
+        for line in open( solver_times_path + '/' + solver + '.' + set + '.log' ):
             instance, solution, time = line.split()
             times[ solver ] += float( time )
         if verbose:
