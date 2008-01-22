@@ -2,13 +2,13 @@
 AUTO /benchmark/cnf/automotive/unsat/*.cnf 84
 IBM /benchmark/cnf/ibm/new/TAR/selected/*.cnf 341
 DEBUG /benchmark/cnf/design-debugging/*.seq 29
-#DEBUG2 /benchmark/cnf/design-debugging-v2/*.dimacs 36
+DEBUG2 /benchmark/cnf/design-debugging-v2/*.dimacs 36
 BF /benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
 SSA /benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
 PIMAG /benchmark/cnf/pimag/selected/*.cnf 58
 SATPLAN /benchmark/cnf/satplan/unsat/*.cnf 9
 UCLID /benchmark/cnf/uclid/SAT_BENCH/*.cnf 31
-#FPGA /benchmark/cnf/sat2002/sat-2002-beta/submitted/goldberg/fpga_routing/*.cnf 32
+FPGA /benchmark/cnf/sat2002/sat-2002-beta/submitted/goldberg/fpga_routing/*.cnf 32
 RAMSEY  /benchmark/cnf/maxsat/evaluation/ms/MaxSAT06/RAMSEY/*.cnf 48
 SPINGLASS /benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/*.cnf 20
 DIMACS-MOD /benchmark/cnf/maxsat/evaluation/ms/ToolbarTeam/MAXCUT/DIMACS_MOD/*.cnf 62
