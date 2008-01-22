@@ -21,7 +21,7 @@ def get_instance_time( solver, set_name, instance ):
         name, solution, time = line.split()
         if name == instance:
             if not solution.isdigit():
-               solution = 0
+               return '0', time
             return solution, time
     print >> sys.stderr, "Instance " + instance
     raise Exception('Instance not found ' + instance )
@@ -92,7 +92,6 @@ for line in open( instance_set_list ):
             for solver in solvers:
                 try:
                     solver_sol, time = get_instance_time( solver, set_name, instance_basename )
-                    print '# Current ' + solver_sol + ' ' + time
                     check_solution( solution, solver_sol )
                     solvers_times.append ( time )
                 except Exception:
