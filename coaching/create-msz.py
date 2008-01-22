@@ -2,16 +2,16 @@
 
 import sys
 
-if len( sys.argv ) < 5:
-    print "usage " + sys.argv[0] + " solver-list feature-list instance-set-list msz-file"
+if len( sys.argv ) < 4:
+    print "usage " + sys.argv[0] + " solver-list instance-set-list msz-file"
     sys.exit(0)
 
 import glob, StringIO
 
 solver_list = sys.argv[1]
-feature_list = sys.argv[2]
-instance_set_list = sys.argv[3]
-msz_file_name = sys.argv[4]
+feature_list = './features.list'
+instance_set_list = sys.argv[2]
+msz_file_name = sys.argv[3]
 features_directory = './features/'
 times_directory = './solver-times/'
 timeout = '1000'
@@ -23,7 +23,7 @@ def get_instance_time( solver, set_name, instance ):
             if not solution.isdigit():
                solution = 0
             return solution, time
-    #print >> sys.stderr, "Instance " + instance
+    print >> sys.stderr, "Instance " + instance
     raise Exception('Instance not found ' + instance )
 
 def get_feature_value( instance, feature ):
@@ -48,13 +48,12 @@ def get_number_of_instances():
     return str( total_number )
 
 def check_solution( solution, solver_solution ):
-    if solver_solution != '--':
+    if solver_solution != '--' and solver_solution != 'xxx':
         if solution == -1:
             solution = int( solver_solution )
         else:
             if solution != int( solver_solution ):
                 raise( Exception( 'Solution mistmatch' ) ) 
-
 
 solvers = []
 for solver in open( solver_list ):
@@ -93,6 +92,7 @@ for line in open( instance_set_list ):
             for solver in solvers:
                 try:
                     solver_sol, time = get_instance_time( solver, set_name, instance_basename )
+                    print '# Current ' + solver_sol + ' ' + time
                     check_solution( solution, solver_sol )
                     solvers_times.append ( time )
                 except Exception:

@@ -25,7 +25,7 @@ for set in open( set_list ):
         continue
     name, path, number = set.split()
     print 'Running ' + solver + ' with ' + name
-    outfile = solver + '.' + name + '.out'
+    outfile = solver + '-' + name + '.out'
     os.chdir( "../solvers/msuncore" )
     os.system( command + ' ' + path.split('*')[0] + ' ' + name + '> ' + outfile )
 

@@ -1,6 +1,2 @@
 # set-name path
-AUTO /home/pmatos/benchmarks/benchmark/cnf/automotive/unsat/*.cnf 84
-DEBUG /home/pmatos/benchmarks/benchmark/cnf/design-debugging/*.seq 28
-#BF /home/pmatos/benchmarks/benchmark/cnf/dimacs/contributed/UCSC/cnf-bf/*.cnf 223
-#SSA /home/pmatos/benchmarks/benchmark/cnf/dimacs/contributed/UCSC/cnf-ssa/*.cnf 102
-#PIMAG /home/pmatos/benchmarks/benchmark/cnf/pimag/selected/*.cnf 58
+DIMACS-MOD /benchmark/cnf/maxsat/evaluation/ms/ToolbarTeam/MAXCUT/DIMACS_MOD/*.cnf 62
