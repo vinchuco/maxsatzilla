@@ -138,7 +138,7 @@ char* MaxSatInstance::getFileName() {
     char command[ MAX_LINE_LENGTH ];
     newName = new char[ MAX_LINE_LENGTH ];
     sprintf(newName, "%s", P_tmpdir);
-    strcat(newName, "pmcnf2wcnfXXXXXX");
+    strcat(newName, "/pmcnf2wcnfXXXXXX");
     newName = mktemp(newName);
     sprintf( command, "./scripts/pmcnf2wcnf %s > %s", inputFileName, newName );
     //printf( "Command : %s\n", command );
@@ -189,7 +189,7 @@ void MaxSatInstance::computeLocalSearchProperties() {
   
   if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
   
-  // -- do gwsat
+  // -- do gsat
   argv[2]="gwsat";
   argv[4]="0.5";
 
