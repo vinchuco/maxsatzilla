@@ -1,8 +1,46 @@
+c literal 929 is redundant in clause 3743
+c literal 929 is redundant in clause 3744
+c literal -930 is redundant in clause 3750
+c literal -930 is redundant in clause 3751
+c literal 102 is redundant in clause 3755
+c literal 2745 is redundant in clause 11875
+c literal -2746 is redundant in clause 11891
+feature novelty+_BestSolution_Mean: 84.344262
+feature novelty+_BestSolution_CoeffVariance: 1.392961
+feature novelty+_BestStep_Mean: 4421.950820
+feature novelty+_BestStep_CoeffVariance: 0.202201
+feature novelty+_BestStep_Median: 4380.000000
+feature novelty+_BestStep_Q.10: 3593.000000
+feature novelty+_BestStep_Q.90: 5600.000000
+feature novelty+_AvgImproveToBest_Mean: 0.615743
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.268020
+feature novelty+_FirstLMRatio_Mean: 26010.092877
+feature novelty+_FirstLMRatio_CoeffVariance: 7.810247
+feature novelty+_BestCV_Mean: 0.743601
+feature novelty+_totaltime: 1.010000
+feature gwsat_BestSolution_Mean: 208.500000
+feature gwsat_BestSolution_CoeffVariance: 1.156916
+feature gwsat_BestStep_Mean: 11143.750000
+feature gwsat_BestStep_CoeffVariance: 0.703076
+feature gwsat_BestStep_Median: 12255.000000
+feature gwsat_BestStep_Q.10: 1737.000000
+feature gwsat_BestStep_Q.90: 16815.000000
+feature gwsat_AvgImproveToBest_Mean: 0.450575
+feature gwsat_AvgImproveToBest_CoeffVariance: 1.071600
+feature gwsat_FirstLMRatio_Mean: 0.009804
+feature gwsat_FirstLMRatio_CoeffVariance: 1.423780
+feature gwsat_BestCV_Mean: 0.702916
+feature gwsat_totaltime: 1.010000
 Number of Variables: 3292
 Number of Clauses: 15969
 Ratio Clauses/Variables: 4.85085
-Ratio Negative Clauses: 0
-Ratio Positive Clauses: 0
-Ratio Unit Clauses: 0
-Ratio Binary Clauses: 0
-Ratio Ternary Clauses: 0
+Number of Hard Clauses: 15969
+Ratio Hard Clauses/Total Clauses: 1
+Ratio Negative Clauses: 1.53097
+Ratio Positive Clauses: 1.22988
+Ratio Unit Clauses: nan
+Ratio Binary Clauses: nan
+Ratio Ternary Clauses: nan
+Ratio Hard Unit Clauses: 0.0124616
+Ratio Hard Binary Clauses: 0.347235
+Ratio Hard Ternary Clauses: 0.571294

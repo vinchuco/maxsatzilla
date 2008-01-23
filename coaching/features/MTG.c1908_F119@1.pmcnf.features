@@ -1,8 +1,46 @@
+c literal 925 is redundant in clause 3743
+c literal 925 is redundant in clause 3744
+c literal -926 is redundant in clause 3750
+c literal -926 is redundant in clause 3751
+c literal 106 is redundant in clause 3755
+c literal 2741 is redundant in clause 11875
+c literal -2742 is redundant in clause 11891
+feature novelty+_BestSolution_Mean: 73.389831
+feature novelty+_BestSolution_CoeffVariance: 0.867470
+feature novelty+_BestStep_Mean: 4503.949153
+feature novelty+_BestStep_CoeffVariance: 0.170503
+feature novelty+_BestStep_Median: 4459.000000
+feature novelty+_BestStep_Q.10: 3670.000000
+feature novelty+_BestStep_Q.90: 5422.000000
+feature novelty+_AvgImproveToBest_Mean: 0.595221
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.203097
+feature novelty+_FirstLMRatio_Mean: 0.008194
+feature novelty+_FirstLMRatio_CoeffVariance: 0.902339
+feature novelty+_BestCV_Mean: 0.750251
+feature novelty+_totaltime: 1.010000
+feature gwsat_BestSolution_Mean: 272.800000
+feature gwsat_BestSolution_CoeffVariance: 0.835944
+feature gwsat_BestStep_Mean: 8934.400000
+feature gwsat_BestStep_CoeffVariance: 0.962109
+feature gwsat_BestStep_Median: 5026.000000
+feature gwsat_BestStep_Q.10: 1704.000000
+feature gwsat_BestStep_Q.90: 15097.000000
+feature gwsat_AvgImproveToBest_Mean: 0.625803
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.811793
+feature gwsat_FirstLMRatio_Mean: 0.014378
+feature gwsat_FirstLMRatio_CoeffVariance: 0.622158
+feature gwsat_BestCV_Mean: 0.634881
+feature gwsat_totaltime: 1.010000
 Number of Variables: 3280
 Number of Clauses: 15873
 Ratio Clauses/Variables: 4.83933
-Ratio Negative Clauses: 0
-Ratio Positive Clauses: 0
-Ratio Unit Clauses: 0
-Ratio Binary Clauses: 0
-Ratio Ternary Clauses: 0
+Number of Hard Clauses: 15873
+Ratio Hard Clauses/Total Clauses: 1
+Ratio Negative Clauses: 1.52989
+Ratio Positive Clauses: 1.22875
+Ratio Unit Clauses: nan
+Ratio Binary Clauses: nan
+Ratio Ternary Clauses: nan
+Ratio Hard Unit Clauses: 0.012537
+Ratio Hard Binary Clauses: 0.349083
+Ratio Hard Ternary Clauses: 0.569962

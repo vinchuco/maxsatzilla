@@ -1,8 +1,46 @@
+c literal 752 is redundant in clause 2896
+c literal 752 is redundant in clause 2897
+c literal -753 is redundant in clause 2903
+c literal -753 is redundant in clause 2904
+c literal 100 is redundant in clause 2908
+c literal 2560 is redundant in clause 10835
+c literal -2561 is redundant in clause 10851
+feature novelty+_BestSolution_Mean: 57.134146
+feature novelty+_BestSolution_CoeffVariance: 0.485810
+feature novelty+_BestStep_Mean: 3710.170732
+feature novelty+_BestStep_CoeffVariance: 0.163131
+feature novelty+_BestStep_Median: 3652.500000
+feature novelty+_BestStep_Q.10: 2982.000000
+feature novelty+_BestStep_Q.90: 4548.000000
+feature novelty+_AvgImproveToBest_Mean: 0.605712
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.152323
+feature novelty+_FirstLMRatio_Mean: 47237.604462
+feature novelty+_FirstLMRatio_CoeffVariance: 6.366228
+feature novelty+_BestCV_Mean: 0.760669
+feature novelty+_totaltime: 1.010000
+feature gwsat_BestSolution_Mean: 151.142857
+feature gwsat_BestSolution_CoeffVariance: 0.886187
+feature gwsat_BestStep_Mean: 7147.285714
+feature gwsat_BestStep_CoeffVariance: 0.625609
+feature gwsat_BestStep_Median: 8438.000000
+feature gwsat_BestStep_Q.10: 1783.000000
+feature gwsat_BestStep_Q.90: 10553.000000
+feature gwsat_AvgImproveToBest_Mean: 0.477365
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.779405
+feature gwsat_FirstLMRatio_Mean: 0.022374
+feature gwsat_FirstLMRatio_CoeffVariance: 1.164246
+feature gwsat_BestCV_Mean: 0.710930
+feature gwsat_totaltime: 1.010000
 Number of Variables: 2824
 Number of Clauses: 12801
 Ratio Clauses/Variables: 4.53293
-Ratio Negative Clauses: 0
-Ratio Positive Clauses: 0
-Ratio Unit Clauses: 0
-Ratio Binary Clauses: 0
-Ratio Ternary Clauses: 0
+Number of Hard Clauses: 12801
+Ratio Hard Clauses/Total Clauses: 1
+Ratio Negative Clauses: 1.50129
+Ratio Positive Clauses: 1.19897
+Ratio Unit Clauses: nan
+Ratio Binary Clauses: nan
+Ratio Ternary Clauses: nan
+Ratio Hard Unit Clauses: 0.0132802
+Ratio Hard Binary Clauses: 0.415671
+Ratio Hard Ternary Clauses: 0.508398
