@@ -4,15 +4,16 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <utility>
-
-#include "getfeatures_wrapper.hh"
+#include <sstream>
 
 #include "mszmodelreader.hh"
+#include "MaxSatInstance.hh"
 
 using std::cerr;
 using std::cout;
 using std::pair;
 using std::make_pair;
+using std::stringstream;
 
 /**
  * Welcome, this  is the main maxsatzilla source file.
@@ -25,6 +26,39 @@ using std::make_pair;
  * run the models over the feature set,
  * and compute the expected runtime.
  */
+
+map<string, double> getFeatures(const string &inst) {
+
+  stringstream oss;
+  map<string, double> features;
+ 
+  MaxSatInstance msi(inst.c_str());
+  msi.computeLocalSearchProperties();
+  msi.printInfo(oss);
+
+  string line;
+
+  while (!oss.eof()) {
+    getline(oss,line);
+    
+    if(line.empty())
+      continue;
+    
+    // split at :
+    size_t possplit = line.find(":");
+    string featurename(line, 0, possplit);
+    const string featurevalue(line, possplit+1);
+    
+    // replace spaces and dots in feature name by _
+    for(size_t i = 0; i < featurename.size(); i++)
+      if(featurename[i] == ' ' || featurename[i] == '.') featurename[i] = '_';
+    
+    const double feat = atof(featurevalue.c_str());
+    
+    features[featurename] = feat;
+  }
+  return features;
+}
 
 int main(int argc, char *argv[]) {
   

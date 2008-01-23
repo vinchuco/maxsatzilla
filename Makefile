@@ -1,6 +1,6 @@
 CXXFLAGS = -Wall -std=c++98 -ggdb
 
-MAXSATZILLA_OBJECT_FILES = main.o reader.cc mszmodelreader.o getfeatures_wrapper.o
+MAXSATZILLA_OBJECT_FILES = main.o reader.cc mszmodelreader.o MaxSatInstance.o ./ubcsat/libubcsat.a
 FEATURES_OBJECT_FILES = features.o MaxSatInstance.o ./ubcsat/libubcsat.a
 
 ifeq ($(shell uname),Darwin)
@@ -12,7 +12,7 @@ MAXSATZILLA_LDFLAGS = -lgsl -lgslcblas -lcblas -lblas $(LDFLAGS)
 
 .PHONY : all clean run subdirs $(SUBDIRS)
 
-all: getfeatures maxsatzilla.bin mszparse coach
+all: getfeatures maxsatzilla.bin
 
 maxsatzilla.bin : $(MAXSATZILLA_OBJECT_FILES)
 	g++ ${MAXSATZILLA_LDFLAGS} -o $@ $+ 
