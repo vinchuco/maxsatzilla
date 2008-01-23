@@ -14,15 +14,17 @@ using namespace std;
 
 class MaxSatInstance {
   char* inputFileName;
-  int numVars, numClauses;
+  int numVars, numClauses, hNumClauses, sNumClauses;
   int *negClausesWithVar, *posClausesWithVar;
-  int unitClauses, binaryClauses, ternaryClauses;
+  int sUnitClauses, sBinaryClauses, sTernaryClauses;
+  int hUnitClauses, hBinaryClauses, hTernaryClauses;
   bool isTautologicalClause(int[MAX_NUM_LITERALS], int&, const int);
  public:
   enum {CNF, PARTIAL, WEIGHTED, WEIGHTED_PARTIAL} format;
   MaxSatInstance( const char* filename );
   ~MaxSatInstance();
 
+  char* getFileName();
   void computeLocalSearchProperties();
   void printInfo( ostream& os );
 };

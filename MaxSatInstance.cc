@@ -1,5 +1,5 @@
 /*******************************************************************************[MaxSatInstance.cc]
-Magpie -- Florian Letombe, Joao Marques-Silva, Paulo Matos, Jordi Planes (2007)
+Magpie -- Florian Letombe, Joao Marques-Silva, Paulo Matos, Jordi Planes - 2008
 
 Parts of the code in this file have been extracted from SATzilla.
 **************************************************************************************************/
@@ -65,22 +65,52 @@ MaxSatInstance::MaxSatInstance( const char* filename )
   fill( negClausesWithVar, &negClausesWithVar[numVars+1], 0 );
   fill( posClausesWithVar, &posClausesWithVar[numVars+1], 0 );
 
-  unitClauses = binaryClauses = ternaryClauses = 0;
+  sUnitClauses = sBinaryClauses = sTernaryClauses = 0;
+  hUnitClauses = hBinaryClauses = hTernaryClauses = 0;
+  hNumClauses = sNumClauses = 0;
 
   int lits[ MAX_NUM_LITERALS ];
+  int numLits = 0;
+  bool hardClauses = format == PARTIAL ? true : false;
   for (int clauseNum=0; clauseNum<numClauses; clauseNum++) {
-    
-    int numLits = 0;
+
+    infile.get(); // newline
+    if ( format == PARTIAL ) {      
+      if ( infile.peek() == 'p' ) {
+	infile >> strbuf;
+	if ( strcmp( strbuf, "hard" ) == 0 ) printf("Hard\n");
+	else if ( strcmp( strbuf, "soft" ) == 0 ) {
+	  printf("Soft\n");
+	  hardClauses = false;
+	}
+	infile.ignore( MAX_LINE_LENGTH, '\n' );
+      }
+    }
+
+    numLits = 0;
     
     infile >> lits[numLits];
-    while (lits[numLits] != 0) 
+    while (lits[numLits] != 0) {
       infile >> lits[++numLits];
+#ifndef NDEBUG
+      if ( numLits >= MAX_NUM_LITERALS ) throw "literals = MAX_NUM_LITERALS";
+#endif
+    }
 
     if ( numLits == 1 or !isTautologicalClause( lits, numLits, clauseNum )) {
-      switch( numLits ) {
-      case 1: unitClauses++; break;
-      case 2: binaryClauses++; break;
-      case 3: ternaryClauses++; break;
+      if ( hardClauses ) {
+	hNumClauses++;
+	switch( numLits ) {
+	case 1: hUnitClauses++; break;
+	case 2: hBinaryClauses++; break;
+	case 3: hTernaryClauses++; break;
+	}
+      } else {
+	switch( numLits ) {
+	case 1: sUnitClauses++; break;
+	case 2: sBinaryClauses++; break;
+	case 3: sTernaryClauses++; break;
+	}
       }
  
       for (int litNum = 0; litNum < numLits; litNum++) 
@@ -94,11 +124,29 @@ MaxSatInstance::MaxSatInstance( const char* filename )
       numClauses--;
     }
   }
+  sNumClauses = numClauses - hNumClauses;
 }
 
 MaxSatInstance::~MaxSatInstance() {
   delete negClausesWithVar;
   delete posClausesWithVar;
+}
+
+char* MaxSatInstance::getFileName() {
+  char *newName;
+  if ( format == PARTIAL ) {
+    char command[ MAX_LINE_LENGTH ];
+    newName = new char[ MAX_LINE_LENGTH ];
+    sprintf(newName, "%s", P_tmpdir);
+    strcat(newName, "pmcnf2wcnfXXXXXX");
+    newName = mktemp(newName);
+    sprintf( command, "./scripts/pmcnf2wcnf %s > %s", inputFileName, newName );
+    //printf( "Command : %s\n", command );
+    system( command );
+  } else {
+    newName = new char[ strlen( inputFileName ) ];
+  }
+  return newName;
 }
 
 namespace ubcsat { int main(int, char**); }
@@ -107,6 +155,7 @@ void MaxSatInstance::computeLocalSearchProperties() {
 
   char sTimeout[64];
   char sRuns[64];
+  char *fileName = getFileName();
 
   sprintf(sTimeout, "%d", UBCSAT_TIME_LIMIT);
   sprintf(sRuns, "%d", UBCSAT_NUM_RUNS);
@@ -122,33 +171,42 @@ void MaxSatInstance::computeLocalSearchProperties() {
   sprintf(strseed, "%d", UBCSAT_SEED );
 
   char* argv[] = {"ubcsat", 
-		  "-alg", NULL, "-noimprove", NULL,  "-i", inputFileName, 
+		  "-alg", NULL, "-noimprove", NULL,  "-i", fileName, 
 		  "-runs", sRuns, "-timeout", sTimeout,
 		  "-r", "satcomp", vlineFilename,
 		  "-seed", strseed,
-		  "-satzilla", "-solve"};
+		  "-satzilla", "-w" };
   
   int argc = 17;
+
+  if ( format == PARTIAL ) {
+    argc++;
+  }
   
   // -- do saps
-  argv[2]="saps";
+  argv[2]="novelty+";
   argv[4]="0.1";
   
   if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
   
-  // -- do gsat
-  argv[2]="gsat";
+  // -- do gwsat
+  argv[2]="gwsat";
   argv[4]="0.5";
 
   if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
 
   delete[] vlineFilename;
+  delete[] fileName;
 }
 
 void MaxSatInstance::printInfo(ostream& os) {
   os << "Number of Variables: " << numVars << endl;
   os << "Number of Clauses: " <<  numClauses << endl;
   os << "Ratio Clauses/Variables: " << (float)numClauses/numVars << endl;
+  if ( format == PARTIAL ) {
+    os << "Number of Hard Clauses: " << hNumClauses << endl;
+    os << "Ratio Hard Clauses/Total Clauses: " << (float)hNumClauses/numClauses << endl;
+  }
   int negClauses = 0, posClauses = 0;
   for (int varNum=1; varNum<=numVars; varNum++) {
     negClauses += negClausesWithVar[ varNum ];
@@ -156,7 +214,12 @@ void MaxSatInstance::printInfo(ostream& os) {
   }
   os << "Ratio Negative Clauses: " << (float)negClauses/numClauses << endl;
   os << "Ratio Positive Clauses: " << (float)posClauses/numClauses << endl;
-  os << "Ratio Unit Clauses: " << (float)unitClauses/numClauses << endl;
-  os << "Ratio Binary Clauses: " << (float)binaryClauses/numClauses << endl;
-  os << "Ratio Ternary Clauses: " << (float)ternaryClauses/numClauses << endl;
+  os << "Ratio Unit Clauses: " << (float)sUnitClauses/sNumClauses << endl;
+  os << "Ratio Binary Clauses: " << (float)sBinaryClauses/sNumClauses << endl;
+  os << "Ratio Ternary Clauses: " << (float)sTernaryClauses/sNumClauses << endl;
+  if ( format == PARTIAL ) {
+    os << "Ratio Hard Unit Clauses: " << (float)hUnitClauses/hNumClauses << endl;
+    os << "Ratio Hard Binary Clauses: " << (float)hBinaryClauses/hNumClauses << endl;
+    os << "Ratio Hard Ternary Clauses: " << (float)hTernaryClauses/hNumClauses << endl;
+  }
 }
