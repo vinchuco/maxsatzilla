@@ -9,7 +9,7 @@ if len( sys.argv ) < 4:
 import glob, StringIO
 
 solver_list = sys.argv[1]
-feature_list = './features.list'
+feature_list = './maxsat.features'
 instance_set_list = sys.argv[2]
 msz_file_name = sys.argv[3]
 features_directory = './features/'
