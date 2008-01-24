@@ -1,0 +1,106 @@
+Parsing ./test1.best.model
+FreeWeight maxsatz-a-e -1.84724
+Weight maxsatz-a-e Ratio_Clauses/Variables 0.470672
+Weight maxsatz-a-e Ratio_Negative_Clauses 0.465625
+Weight maxsatz-a-e Ratio_Ternary_Clauses 1.92406
+Weight maxsatz-a-e feature_saps_BestStep_CoeffVariance 1.33611
+Weight maxsatz-a-e feature_saps_BestStep_Q_10 0.745918
+FreeWeight mspbo-a-e 0.342377
+Weight mspbo-a-e Ratio_Clauses/Variables 0.416045
+Weight mspbo-a-e feature_gsat_BestStep_Q_10 0.130045
+Weight mspbo-a-e feature_saps_BestStep_Mean 1.07666
+FreeWeight msuncore-a1-ei -1.01362
+Weight msuncore-a1-ei Number_of_Clauses 3.24702
+Weight msuncore-a1-ei Number_of_Variables 2.92197
+Weight msuncore-a1-ei Ratio_Clauses/Variables 0.0892358
+Weight msuncore-a1-ei Ratio_Negative_Clauses 0.128024
+Weight msuncore-a1-ei feature_gsat_BestCV_Mean 0.303032
+Weight msuncore-a1-ei feature_gsat_BestSolution_Mean -7.36029
+Weight msuncore-a1-ei feature_gsat_BestStep_Q_90 -0.240173
+Weight msuncore-a1-ei feature_saps_AvgImproveToBest_Mean -0.458498
+Weight msuncore-a1-ei feature_saps_BestCV_Mean -0.493695
+Weight msuncore-a1-ei feature_saps_BestSolution_Mean 2.39675
+Weight msuncore-a1-ei feature_saps_BestStep_CoeffVariance 0.00133499
+Weight msuncore-a1-ei feature_saps_BestStep_Mean 0.565336
+Weight msuncore-a1-ei feature_saps_BestStep_Median 0.0373227
+Weight msuncore-a1-ei feature_saps_BestStep_Q_10 0.282501
+Weight msuncore-a1-ei feature_saps_BestStep_Q_90 -0.215315
+Weight msuncore-a1-ei feature_saps_FirstLMRatio_Mean 0.107949
+Computing Features... DONE
+Number_of_Clauses : 11491
+Number_of_Variables : 920
+Ratio_Binary_Clauses : 0.714037
+Ratio_Clauses/Variables : 12.4902
+Ratio_Negative_Clauses : 1.8451
+Ratio_Positive_Clauses : 0.454791
+Ratio_Ternary_Clauses : 0.283961
+Ratio_Unit_Clauses : 0
+feature_gsat_AvgImproveToBest_CoeffVariance : 0.273283
+feature_gsat_AvgImproveToBest_Mean : 2.50514
+feature_gsat_BestCV_Mean : 0.386356
+feature_gsat_BestSolution_CoeffVariance : 0.236452
+feature_gsat_BestSolution_Mean : 17.754
+feature_gsat_BestStep_CoeffVariance : 0.290851
+feature_gsat_BestStep_Mean : 1052.01
+feature_gsat_BestStep_Median : 993.5
+feature_gsat_BestStep_Q_10 : 700
+feature_gsat_BestStep_Q_90 : 1471
+feature_gsat_FirstLMRatio_CoeffVariance : 0.003782
+feature_gsat_FirstLMRatio_Mean : 0.978473
+feature_gsat_totaltime : 1.01
+feature_saps_AvgImproveToBest_CoeffVariance : 0.172522
+feature_saps_AvgImproveToBest_Mean : 3.69744
+feature_saps_BestCV_Mean : 0.429747
+feature_saps_BestSolution_CoeffVariance : 3.23825
+feature_saps_BestSolution_Mean : 16.1935
+feature_saps_BestStep_CoeffVariance : 0.152652
+feature_saps_BestStep_Mean : 675.481
+feature_saps_BestStep_Median : 666
+feature_saps_BestStep_Q_10 : 554
+feature_saps_BestStep_Q_90 : 822
+feature_saps_FirstLMRatio_CoeffVariance : 0.004322
+feature_saps_FirstLMRatio_Mean : 0.976747
+feature_saps_totaltime : 1.01
+Computing runtime for maxsatz-a-e:
+-1.84724
+(+Ratio_Clauses/Variables[7.14383] * 0.470672) 1.51516
+(+Ratio_Negative_Clauses[0.34818] * 0.465625) 1.67728
+(+Ratio_Ternary_Clauses[0.995543] * 1.92406) 3.59277
+(+feature_saps_BestStep_CoeffVariance[0.308116] * 1.33611) 4.00444
+(+feature_saps_BestStep_Q_10[-0.29714] * 0.745918) 3.7828
+
+ Model output for maxsatz-a-e is 3.7828
+Computing runtime for mspbo-a-e:
+0.342377
+(+Ratio_Clauses/Variables[11.4027] * 0.416045) 5.08643
+(+feature_gsat_BestStep_Q_10[-0.443051] * 0.130045) 5.02882
+(+feature_saps_BestStep_Mean[-0.630853] * 1.07666) 4.3496
+
+ Model output for mspbo-a-e is 4.3496
+Computing runtime for msuncore-a1-ei:
+-1.01362
+(+Number_of_Clauses[-0.18528] * 3.24702) -1.61523
+(+Number_of_Variables[-0.243793] * 2.92197) -2.32758
+(+Ratio_Clauses/Variables[11.9999] * 0.0892358) -1.25676
+(+Ratio_Negative_Clauses[1.25392] * 0.128024) -1.09623
+(+feature_gsat_BestCV_Mean[1.006] * 0.303032) -0.791382
+(+feature_gsat_BestSolution_Mean[-0.175863] * -7.36029) 0.50302
+(+feature_gsat_BestStep_Q_90[-0.697238] * -0.240173) 0.670478
+(+feature_saps_AvgImproveToBest_Mean[0.958814] * -0.458498) 0.230864
+(+feature_saps_BestCV_Mean[0.0651122] * -0.493695) 0.198719
+(+feature_saps_BestSolution_Mean[-0.191773] * 2.39675) -0.260913
+(+feature_saps_BestStep_CoeffVariance[-0.320713] * 0.00133499) -0.261341
+(+feature_saps_BestStep_Mean[-0.672966] * 0.565336) -0.641793
+(+feature_saps_BestStep_Median[-0.648044] * 0.0373227) -0.665979
+(+feature_saps_BestStep_Q_10[-0.628438] * 0.282501) -0.843514
+(+feature_saps_BestStep_Q_90[-0.705701] * -0.215315) -0.691566
+(+feature_saps_FirstLMRatio_Mean[1.28458] * 0.107949) -0.552897
+
+ Model output for msuncore-a1-ei is -0.552897
+Predicted Runtimes:
+	maxsatz-a-e: 43.939
+	mspbo-a-e: 77.4477
+	msuncore-a1-ei: 0.57Number of clauses:                   11491
+Number of soft clauses:              11491
+Cleaning up...
+Terminating...

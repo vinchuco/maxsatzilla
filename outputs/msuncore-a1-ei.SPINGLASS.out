@@ -1,0 +1,98 @@
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_4.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_8.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_9.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_1.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+Computed maxsat solution:            348
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_7.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_10.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_8.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_3.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+Computed maxsat solution:            350
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_2.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_3.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_6.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_9.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_2.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_5.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_5.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_4.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass5_1.pm3.cnf
+Number of clauses:                   750
+Number of soft clauses:              750
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_7.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_6.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+
+/benchmark/cnf/maxsat/evaluation/ms/HanLin/SPINGLASS/spinglass4_10.pm3.cnf
+Number of clauses:                   384
+Number of soft clauses:              384
+ERROR: Invalid SAT solver outcome??
+

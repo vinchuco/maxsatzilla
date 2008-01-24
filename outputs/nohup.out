@@ -1,0 +1,15 @@
+# Running ./maxsatz-a-e with RAMSEY 48/48
+# Running ./maxsatz-a-e with SPINGLASS 20/20
+# Running ./maxsatz-a-e with DIMACS-MOD 62/62
+# Total instances run 130
+# Running ./msuncore-a1-ei with RAMSEY 48/48
+# Running ./msuncore-a1-ei with SPINGLASS 20/20
+# Running ./msuncore-a1-ei with DIMACS-MOD 62/62
+# Total instances run 130
+# Running ./maxsatzilla ./real+structured.best.model with AUTO 84/84
+# Running ./maxsatzilla ./real+structured.best.model with DEBUG 29/29
+# Running ./maxsatzilla ./real+structured.best.model with BF 223/223
+# Running ./maxsatzilla ./real+structured.best.model with PIMAG 58/58
+# Running ./maxsatzilla ./real+structured.best.model with RAMSEY 48/48
+# Running ./maxsatzilla ./real+structured.best.model with SPINGLASS 20/20
+# Total instances run 462
