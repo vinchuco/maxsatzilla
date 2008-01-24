@@ -12,7 +12,7 @@ if len( opts ) == 1:
     percentatge = int( opts[0][1] )
 else:
     percentatge = 100
-timeout = '10'
+timeout = '1000'
 memout = '2000000'
 
 sys_limits = 'ulimit -t ' + timeout + '; ulimit -m ' + memout + '; ulimit -d ' + memout + '; ulimit -v ' + memout + ';'
