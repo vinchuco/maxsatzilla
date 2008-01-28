@@ -1,5 +1,5 @@
 # set-name path number-of-instances
 FIR /benchmark/maxsat/industrial/pms/bcp-fir/*.pmcnf 59
-MTG /benchmark/maxsat/industrial/pms/bcp-mtg/*.pmcnf 215
+#MTG /benchmark/maxsat/industrial/pms/bcp-mtg/*.pmcnf 215
 SYN /benchmark/maxsat/industrial/pms/bcp-syn/*.pmcnf 74
 #MSP /benchmark/maxsat/industrial/pms/bcp-msp/*.pmcnf 156
