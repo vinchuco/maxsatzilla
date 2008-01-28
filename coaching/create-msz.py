@@ -3,15 +3,15 @@
 import sys
 
 if len( sys.argv ) < 4:
-    print "usage " + sys.argv[0] + " solver-list instance-set-list msz-file"
+    print "usage " + sys.argv[0] + " solver-list features-list instance-set-list msz-file"
     sys.exit(0)
 
 import glob, StringIO
 
 solver_list = sys.argv[1]
-feature_list = './maxsat.features'
-instance_set_list = sys.argv[2]
-msz_file_name = sys.argv[3]
+feature_list = sys.argv[2]
+instance_set_list = sys.argv[3]
+msz_file_name = sys.argv[4]
 features_directory = './features/'
 times_directory = './solver-times/'
 timeout = '1000'
