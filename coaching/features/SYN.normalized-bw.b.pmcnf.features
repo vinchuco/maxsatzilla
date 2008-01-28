@@ -1,21 +1,21 @@
-feature novelty+_BestSolution_Mean: 39.942149
-feature novelty+_BestSolution_CoeffVariance: 0.557642
-feature novelty+_BestStep_Mean: 2465.305785
-feature novelty+_BestStep_CoeffVariance: 0.095987
-feature novelty+_BestStep_Median: 2435.000000
-feature novelty+_BestStep_Q.10: 2235.000000
-feature novelty+_BestStep_Q.90: 2749.000000
-feature novelty+_AvgImproveToBest_Mean: 0.378317
-feature novelty+_AvgImproveToBest_CoeffVariance: 0.083312
-feature novelty+_FirstLMRatio_Mean: 0.003981
-feature novelty+_FirstLMRatio_CoeffVariance: 1.671696
-feature novelty+_BestCV_Mean: 0.570072
+feature novelty+_BestSolution_Mean: 37.925926
+feature novelty+_BestSolution_CoeffVariance: 0.052104
+feature novelty+_BestStep_Mean: 2466.770370
+feature novelty+_BestStep_CoeffVariance: 0.086328
+feature novelty+_BestStep_Median: 2434.000000
+feature novelty+_BestStep_Q.10: 2234.000000
+feature novelty+_BestStep_Q.90: 2709.000000
+feature novelty+_AvgImproveToBest_Mean: 0.378229
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.079172
+feature novelty+_FirstLMRatio_Mean: 0.003919
+feature novelty+_FirstLMRatio_CoeffVariance: 1.682358
+feature novelty+_BestCV_Mean: 0.572097
 feature novelty+_totaltime: 1.010000
 feature gwsat_BestSolution_Mean: 31.923077
 feature gwsat_BestSolution_CoeffVariance: 0.027012
 feature gwsat_BestStep_Mean: 1790.000000
 feature gwsat_BestStep_CoeffVariance: 0.263501
-feature gwsat_BestStep_Median: 1616.000000
+feature gwsat_BestStep_Median: 1838.000000
 feature gwsat_BestStep_Q.10: 1215.000000
 feature gwsat_BestStep_Q.90: 2103.000000
 feature gwsat_AvgImproveToBest_Mean: 0.553887
@@ -27,13 +27,13 @@ feature gwsat_totaltime: 1.010000
 Number of Variables: 2843
 Number of Clauses: 4898
 Ratio Clauses/Variables: 1.72283
-Number of Hard Clauses: 4898
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 2984
+Ratio Hard Clauses/Total Clauses: 0.609228
 Ratio Negative Clauses: 0.993263
 Ratio Positive Clauses: 27.0155
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.391997
-Ratio Hard Binary Clauses: 0.00040833
-Ratio Hard Ternary Clauses: 0.00632911
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.00201072
+Ratio Hard Binary Clauses: 0.000670241
+Ratio Hard Ternary Clauses: 0.0103887

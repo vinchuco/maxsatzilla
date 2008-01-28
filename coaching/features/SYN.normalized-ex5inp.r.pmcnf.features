@@ -27,13 +27,13 @@ feature gwsat_totaltime: 0.050000
 Number of Variables: 34
 Number of Clauses: 60
 Ratio Clauses/Variables: 1.76471
-Number of Hard Clauses: 60
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 26
+Ratio Hard Clauses/Total Clauses: 0.433333
 Ratio Negative Clauses: 0.566667
 Ratio Positive Clauses: 6.25
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.566667
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0
 Ratio Hard Binary Clauses: 0
 Ratio Hard Ternary Clauses: 0

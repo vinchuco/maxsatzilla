@@ -10,7 +10,7 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.126044
 feature novelty+_FirstLMRatio_Mean: 0.047415
 feature novelty+_FirstLMRatio_CoeffVariance: 1.246602
 feature novelty+_BestCV_Mean: 0.568224
-feature novelty+_totaltime: 0.090000
+feature novelty+_totaltime: 0.110000
 feature gwsat_BestSolution_Mean: 2.000000
 feature gwsat_BestSolution_CoeffVariance: 0.000000
 feature gwsat_BestStep_Mean: 36.049000
@@ -27,13 +27,13 @@ feature gwsat_totaltime: 0.340000
 Number of Variables: 100
 Number of Clauses: 125
 Ratio Clauses/Variables: 1.25
-Number of Hard Clauses: 125
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 50
+Ratio Hard Clauses/Total Clauses: 0.4
 Ratio Negative Clauses: 0.6
 Ratio Positive Clauses: 27.136
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.6
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0
 Ratio Hard Binary Clauses: 0
 Ratio Hard Ternary Clauses: 0

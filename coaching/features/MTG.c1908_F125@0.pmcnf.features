@@ -5,42 +5,42 @@ c literal -883 is redundant in clause 3493
 c literal 99 is redundant in clause 3497
 c literal 2700 is redundant in clause 11561
 c literal -2701 is redundant in clause 11577
-feature novelty+_BestSolution_Mean: 104.672131
-feature novelty+_BestSolution_CoeffVariance: 2.407807
-feature novelty+_BestStep_Mean: 4410.950820
-feature novelty+_BestStep_CoeffVariance: 0.210519
+feature novelty+_BestSolution_Mean: 73.360656
+feature novelty+_BestSolution_CoeffVariance: 0.562032
+feature novelty+_BestStep_Mean: 4473.557377
+feature novelty+_BestStep_CoeffVariance: 0.170046
 feature novelty+_BestStep_Median: 4534.000000
-feature novelty+_BestStep_Q.10: 3474.000000
+feature novelty+_BestStep_Q.10: 3485.000000
 feature novelty+_BestStep_Q.90: 5196.000000
-feature novelty+_AvgImproveToBest_Mean: 0.618831
-feature novelty+_AvgImproveToBest_CoeffVariance: 0.370924
-feature novelty+_FirstLMRatio_Mean: 27851.788959
+feature novelty+_AvgImproveToBest_Mean: 0.593423
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.182549
+feature novelty+_FirstLMRatio_Mean: 27851.788555
 feature novelty+_FirstLMRatio_CoeffVariance: 7.810247
-feature novelty+_BestCV_Mean: 0.735606
+feature novelty+_BestCV_Mean: 0.746081
 feature novelty+_totaltime: 1.010000
-feature gwsat_BestSolution_Mean: 286.500000
-feature gwsat_BestSolution_CoeffVariance: 0.750060
-feature gwsat_BestStep_Mean: 6766.833333
-feature gwsat_BestStep_CoeffVariance: 0.977969
+feature gwsat_BestSolution_Mean: 281.833333
+feature gwsat_BestSolution_CoeffVariance: 0.766645
+feature gwsat_BestStep_Mean: 6838.666667
+feature gwsat_BestStep_CoeffVariance: 0.961595
 feature gwsat_BestStep_Median: 2652.000000
 feature gwsat_BestStep_Q.10: 1451.000000
 feature gwsat_BestStep_Q.90: 14206.000000
-feature gwsat_AvgImproveToBest_Mean: 0.680138
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.666661
-feature gwsat_FirstLMRatio_Mean: 287827.867915
+feature gwsat_AvgImproveToBest_Mean: 0.668256
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.679087
+feature gwsat_FirstLMRatio_Mean: 287827.867900
 feature gwsat_FirstLMRatio_CoeffVariance: 2.449490
-feature gwsat_BestCV_Mean: 0.606672
+feature gwsat_BestCV_Mean: 0.611351
 feature gwsat_totaltime: 1.010000
 Number of Variables: 3268
 Number of Clauses: 15814
 Ratio Clauses/Variables: 4.83905
-Number of Hard Clauses: 15814
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 15748
+Ratio Hard Clauses/Total Clauses: 0.995826
 Ratio Negative Clauses: 1.52997
 Ratio Positive Clauses: 1.22878
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.0124573
-Ratio Hard Binary Clauses: 0.34988
-Ratio Hard Ternary Clauses: 0.568737
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.00831852
+Ratio Hard Binary Clauses: 0.351346
+Ratio Hard Ternary Clauses: 0.57112

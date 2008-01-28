@@ -1,15 +1,15 @@
-feature novelty+_BestSolution_Mean: 42.215517
-feature novelty+_BestSolution_CoeffVariance: 1.194947
-feature novelty+_BestStep_Mean: 2768.931034
-feature novelty+_BestStep_CoeffVariance: 0.173809
-feature novelty+_BestStep_Median: 2752.000000
-feature novelty+_BestStep_Q.10: 2205.000000
+feature novelty+_BestSolution_Mean: 37.991379
+feature novelty+_BestSolution_CoeffVariance: 0.690348
+feature novelty+_BestStep_Mean: 2791.068966
+feature novelty+_BestStep_CoeffVariance: 0.161795
+feature novelty+_BestStep_Median: 2764.000000
+feature novelty+_BestStep_Q.10: 2236.000000
 feature novelty+_BestStep_Q.90: 3363.000000
-feature novelty+_AvgImproveToBest_Mean: 0.641435
-feature novelty+_AvgImproveToBest_CoeffVariance: 0.193694
-feature novelty+_FirstLMRatio_Mean: 130521.585940
+feature novelty+_AvgImproveToBest_Mean: 0.633320
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.156196
+feature novelty+_FirstLMRatio_Mean: 130521.585880
 feature novelty+_FirstLMRatio_CoeffVariance: 4.301573
-feature novelty+_BestCV_Mean: 0.748505
+feature novelty+_BestCV_Mean: 0.752336
 feature novelty+_totaltime: 1.010000
 feature gwsat_BestSolution_Mean: 48.666667
 feature gwsat_BestSolution_CoeffVariance: 0.457747
@@ -27,13 +27,13 @@ feature gwsat_totaltime: 1.010000
 Number of Variables: 2166
 Number of Clauses: 10719
 Ratio Clauses/Variables: 4.94875
-Number of Hard Clauses: 10719
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 10687
+Ratio Hard Clauses/Total Clauses: 0.997015
 Ratio Negative Clauses: 1.5341
 Ratio Positive Clauses: 1.24163
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.015953
-Ratio Hard Binary Clauses: 0.314488
-Ratio Hard Ternary Clauses: 0.587275
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.0130065
+Ratio Hard Binary Clauses: 0.31543
+Ratio Hard Ternary Clauses: 0.589033

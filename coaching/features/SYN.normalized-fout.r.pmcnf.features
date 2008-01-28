@@ -10,30 +10,30 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.201991
 feature novelty+_FirstLMRatio_Mean: 72796.069297
 feature novelty+_FirstLMRatio_CoeffVariance: 31.622771
 feature novelty+_BestCV_Mean: 0.190849
-feature novelty+_totaltime: 0.320000
-feature gwsat_BestSolution_Mean: 42.640000
-feature gwsat_BestSolution_CoeffVariance: 0.036265
-feature gwsat_BestStep_Mean: 368.804000
-feature gwsat_BestStep_CoeffVariance: 0.379588
-feature gwsat_BestStep_Median: 347.000000
-feature gwsat_BestStep_Q.10: 200.000000
+feature novelty+_totaltime: 0.310000
+feature gwsat_BestSolution_Mean: 42.652525
+feature gwsat_BestSolution_CoeffVariance: 0.036606
+feature gwsat_BestStep_Mean: 368.111111
+feature gwsat_BestStep_CoeffVariance: 0.382578
+feature gwsat_BestStep_Median: 346.000000
+feature gwsat_BestStep_Q.10: 199.000000
 feature gwsat_BestStep_Q.90: 548.000000
-feature gwsat_AvgImproveToBest_Mean: 0.216737
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.389764
-feature gwsat_FirstLMRatio_Mean: 0.030568
-feature gwsat_FirstLMRatio_CoeffVariance: 0.860460
-feature gwsat_BestCV_Mean: 0.303234
+feature gwsat_AvgImproveToBest_Mean: 0.217538
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.390940
+feature gwsat_FirstLMRatio_Mean: 0.030494
+feature gwsat_FirstLMRatio_CoeffVariance: 0.866071
+feature gwsat_BestCV_Mean: 0.303160
 feature gwsat_totaltime: 1.010000
 Number of Variables: 424
 Number of Clauses: 344
 Ratio Clauses/Variables: 0.811321
-Number of Hard Clauses: 344
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 135
+Ratio Hard Clauses/Total Clauses: 0.392442
 Ratio Negative Clauses: 0.607558
 Ratio Positive Clauses: 2.43895
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.610465
-Ratio Hard Binary Clauses: 0.0436046
-Ratio Hard Ternary Clauses: 0.0436046
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.00740741
+Ratio Hard Binary Clauses: 0.111111
+Ratio Hard Ternary Clauses: 0.111111

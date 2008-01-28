@@ -10,30 +10,30 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.216442
 feature novelty+_FirstLMRatio_Mean: 0.188096
 feature novelty+_FirstLMRatio_CoeffVariance: 0.666781
 feature novelty+_BestCV_Mean: 0.578588
-feature novelty+_totaltime: 0.960000
-feature gwsat_BestSolution_Mean: 59.512397
-feature gwsat_BestSolution_CoeffVariance: 0.203649
-feature gwsat_BestStep_Mean: 1803.545455
-feature gwsat_BestStep_CoeffVariance: 0.394668
-feature gwsat_BestStep_Median: 1704.000000
-feature gwsat_BestStep_Q.10: 1201.000000
+feature novelty+_totaltime: 0.950000
+feature gwsat_BestSolution_Mean: 61.714286
+feature gwsat_BestSolution_CoeffVariance: 0.480458
+feature gwsat_BestStep_Mean: 1806.025210
+feature gwsat_BestStep_CoeffVariance: 0.403038
+feature gwsat_BestStep_Median: 1707.000000
+feature gwsat_BestStep_Q.10: 923.000000
 feature gwsat_BestStep_Q.90: 2817.000000
-feature gwsat_AvgImproveToBest_Mean: 0.260945
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.403258
-feature gwsat_FirstLMRatio_Mean: 83323.158374
-feature gwsat_FirstLMRatio_CoeffVariance: 10.999979
-feature gwsat_BestCV_Mean: 0.537313
+feature gwsat_AvgImproveToBest_Mean: 0.325348
+feature gwsat_AvgImproveToBest_CoeffVariance: 2.279229
+feature gwsat_FirstLMRatio_Mean: 84723.547716
+feature gwsat_FirstLMRatio_CoeffVariance: 10.908691
+feature gwsat_BestCV_Mean: 0.534216
 feature gwsat_totaltime: 1.010000
 Number of Variables: 556
 Number of Clauses: 1779
 Ratio Clauses/Variables: 3.19964
-Number of Hard Clauses: 1779
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 1561
+Ratio Hard Clauses/Total Clauses: 0.877459
 Ratio Negative Clauses: 1.15627
 Ratio Positive Clauses: 1.24902
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.142215
-Ratio Hard Binary Clauses: 0.667229
-Ratio Hard Ternary Clauses: 0.177066
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.0224215
+Ratio Hard Binary Clauses: 0.76041
+Ratio Hard Ternary Clauses: 0.201794

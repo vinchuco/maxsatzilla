@@ -19,18 +19,18 @@ c literal 3783 is redundant in clause 18717
 c literal -3784 is redundant in clause 18723
 c literal -3784 is redundant in clause 18724
 c literal 3785 is redundant in clause 18737
-feature novelty+_BestSolution_Mean: 183.350000
-feature novelty+_BestSolution_CoeffVariance: 0.320286
-feature novelty+_BestStep_Mean: 8136.150000
-feature novelty+_BestStep_CoeffVariance: 0.202789
-feature novelty+_BestStep_Median: 8092.000000
-feature novelty+_BestStep_Q.10: 5916.000000
+feature novelty+_BestSolution_Mean: 354.285714
+feature novelty+_BestSolution_CoeffVariance: 2.268474
+feature novelty+_BestStep_Mean: 7878.904762
+feature novelty+_BestStep_CoeffVariance: 0.290324
+feature novelty+_BestStep_Median: 8224.000000
+feature novelty+_BestStep_Q.10: 6056.000000
 feature novelty+_BestStep_Q.90: 9696.000000
-feature novelty+_AvgImproveToBest_Mean: 0.591354
-feature novelty+_AvgImproveToBest_CoeffVariance: 0.177824
-feature novelty+_FirstLMRatio_Mean: 45430.163128
-feature novelty+_FirstLMRatio_CoeffVariance: 4.472136
-feature novelty+_BestCV_Mean: 0.692475
+feature novelty+_AvgImproveToBest_Mean: 0.654616
+feature novelty+_AvgImproveToBest_CoeffVariance: 0.531368
+feature novelty+_FirstLMRatio_Mean: 43266.822594
+feature novelty+_FirstLMRatio_CoeffVariance: 4.582575
+feature novelty+_BestCV_Mean: 0.664509
 feature novelty+_totaltime: 1.010000
 feature gwsat_BestSolution_Mean: 922.250000
 feature gwsat_BestSolution_CoeffVariance: 0.712912
@@ -48,13 +48,13 @@ feature gwsat_totaltime: 1.010000
 Number of Variables: 5998
 Number of Clauses: 29176
 Ratio Clauses/Variables: 4.86429
-Number of Hard Clauses: 29176
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 29076
+Ratio Hard Clauses/Total Clauses: 0.996573
 Ratio Negative Clauses: 1.52917
 Ratio Positive Clauses: 1.2186
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.00891143
-Ratio Hard Binary Clauses: 0.341685
-Ratio Hard Ternary Clauses: 0.570366
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.00550282
+Ratio Hard Binary Clauses: 0.34286
+Ratio Hard Ternary Clauses: 0.572328

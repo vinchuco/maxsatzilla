@@ -10,30 +10,30 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.167225
 feature novelty+_FirstLMRatio_Mean: 255621.269263
 feature novelty+_FirstLMRatio_CoeffVariance: 8.743107
 feature novelty+_BestCV_Mean: 0.705975
-feature novelty+_totaltime: 0.460000
-feature gwsat_BestSolution_Mean: 7.469828
-feature gwsat_BestSolution_CoeffVariance: 0.512045
-feature gwsat_BestStep_Mean: 571.340517
-feature gwsat_BestStep_CoeffVariance: 0.303436
-feature gwsat_BestStep_Median: 549.000000
+feature novelty+_totaltime: 0.440000
+feature gwsat_BestSolution_Mean: 7.490196
+feature gwsat_BestSolution_CoeffVariance: 0.512413
+feature gwsat_BestStep_Mean: 570.921569
+feature gwsat_BestStep_CoeffVariance: 0.304670
+feature gwsat_BestStep_Median: 548.000000
 feature gwsat_BestStep_Q.10: 370.000000
-feature gwsat_BestStep_Q.90: 790.000000
-feature gwsat_AvgImproveToBest_Mean: 0.431755
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.294818
-feature gwsat_FirstLMRatio_Mean: 576344.492482
-feature gwsat_FirstLMRatio_CoeffVariance: 5.700637
-feature gwsat_BestCV_Mean: 0.791136
+feature gwsat_BestStep_Q.90: 791.000000
+feature gwsat_AvgImproveToBest_Mean: 0.432285
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.295973
+feature gwsat_FirstLMRatio_Mean: 582622.754120
+feature gwsat_FirstLMRatio_CoeffVariance: 5.668954
+feature gwsat_BestCV_Mean: 0.791006
 feature gwsat_totaltime: 1.010000
 Number of Variables: 320
 Number of Clauses: 1248
 Ratio Clauses/Variables: 3.9
-Number of Hard Clauses: 1248
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 1216
+Ratio Hard Clauses/Total Clauses: 0.974359
 Ratio Negative Clauses: 1.49599
 Ratio Positive Clauses: 1.17788
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.0769231
-Ratio Hard Binary Clauses: 0.311699
-Ratio Hard Ternary Clauses: 0.550481
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.0526316
+Ratio Hard Binary Clauses: 0.319901
+Ratio Hard Ternary Clauses: 0.564967

@@ -10,30 +10,30 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.341565
 feature novelty+_FirstLMRatio_Mean: 0.034930
 feature novelty+_FirstLMRatio_CoeffVariance: 1.318528
 feature novelty+_BestCV_Mean: 0.073993
-feature novelty+_totaltime: 0.520000
-feature gwsat_BestSolution_Mean: 121.705645
-feature gwsat_BestSolution_CoeffVariance: 0.022178
-feature gwsat_BestStep_Mean: 773.927419
-feature gwsat_BestStep_CoeffVariance: 0.337683
-feature gwsat_BestStep_Median: 759.500000
-feature gwsat_BestStep_Q.10: 469.000000
-feature gwsat_BestStep_Q.90: 1129.000000
-feature gwsat_AvgImproveToBest_Mean: 0.126084
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.360968
-feature gwsat_FirstLMRatio_Mean: 208655.670537
-feature gwsat_FirstLMRatio_CoeffVariance: 15.748012
-feature gwsat_BestCV_Mean: 0.152646
+feature novelty+_totaltime: 0.600000
+feature gwsat_BestSolution_Mean: 121.536842
+feature gwsat_BestSolution_CoeffVariance: 0.021573
+feature gwsat_BestStep_Mean: 784.315789
+feature gwsat_BestStep_CoeffVariance: 0.353169
+feature gwsat_BestStep_Median: 756.500000
+feature gwsat_BestStep_Q.10: 467.000000
+feature gwsat_BestStep_Q.90: 1165.000000
+feature gwsat_AvgImproveToBest_Mean: 0.126297
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.379269
+feature gwsat_FirstLMRatio_Mean: 272350.544199
+feature gwsat_FirstLMRatio_CoeffVariance: 13.784046
+feature gwsat_BestCV_Mean: 0.153314
 feature gwsat_totaltime: 1.010000
 Number of Variables: 533
 Number of Clauses: 648
 Ratio Clauses/Variables: 1.21576
-Number of Hard Clauses: 648
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 321
+Ratio Hard Clauses/Total Clauses: 0.49537
 Ratio Negative Clauses: 0.50463
 Ratio Positive Clauses: 2.00926
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.54784
-Ratio Hard Binary Clauses: 0.111111
-Ratio Hard Ternary Clauses: 0.0941358
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.0872274
+Ratio Hard Binary Clauses: 0.224299
+Ratio Hard Ternary Clauses: 0.190031

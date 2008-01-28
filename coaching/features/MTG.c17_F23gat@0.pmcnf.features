@@ -23,17 +23,17 @@ feature gwsat_AvgImproveToBest_CoeffVariance: 0.403146
 feature gwsat_FirstLMRatio_Mean: 7573217.629641
 feature gwsat_FirstLMRatio_CoeffVariance: 6.255874
 feature gwsat_BestCV_Mean: 0.639959
-feature gwsat_totaltime: 0.050000
+feature gwsat_totaltime: 0.040000
 Number of Variables: 27
 Number of Clauses: 83
 Ratio Clauses/Variables: 3.07407
-Number of Hard Clauses: 83
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 73
+Ratio Hard Clauses/Total Clauses: 0.879518
 Ratio Negative Clauses: 1.27711
 Ratio Positive Clauses: 0.891566
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.216867
-Ratio Hard Binary Clauses: 0.39759
-Ratio Hard Ternary Clauses: 0.385542
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.109589
+Ratio Hard Binary Clauses: 0.452055
+Ratio Hard Ternary Clauses: 0.438356

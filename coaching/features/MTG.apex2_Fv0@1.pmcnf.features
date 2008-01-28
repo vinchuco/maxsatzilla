@@ -10,30 +10,30 @@ feature novelty+_AvgImproveToBest_CoeffVariance: 0.164367
 feature novelty+_FirstLMRatio_Mean: 167845.756066
 feature novelty+_FirstLMRatio_CoeffVariance: 8.119653
 feature novelty+_BestCV_Mean: 0.713683
-feature novelty+_totaltime: 0.790000
-feature gwsat_BestSolution_Mean: 16.162651
-feature gwsat_BestSolution_CoeffVariance: 0.381052
-feature gwsat_BestStep_Mean: 1224.819277
-feature gwsat_BestStep_CoeffVariance: 0.343922
-feature gwsat_BestStep_Median: 1172.000000
-feature gwsat_BestStep_Q.10: 708.000000
+feature novelty+_totaltime: 0.760000
+feature gwsat_BestSolution_Mean: 16.176471
+feature gwsat_BestSolution_CoeffVariance: 0.381568
+feature gwsat_BestStep_Mean: 1221.411765
+feature gwsat_BestStep_CoeffVariance: 0.345805
+feature gwsat_BestStep_Median: 1167.000000
+feature gwsat_BestStep_Q.10: 692.000000
 feature gwsat_BestStep_Q.90: 1806.000000
-feature gwsat_AvgImproveToBest_Mean: 0.352328
-feature gwsat_AvgImproveToBest_CoeffVariance: 0.337818
-feature gwsat_FirstLMRatio_Mean: 397676.970141
-feature gwsat_FirstLMRatio_CoeffVariance: 5.196572
-feature gwsat_BestCV_Mean: 0.791582
+feature gwsat_AvgImproveToBest_Mean: 0.353596
+feature gwsat_AvgImproveToBest_CoeffVariance: 0.340284
+feature gwsat_FirstLMRatio_Mean: 456418.284862
+feature gwsat_FirstLMRatio_CoeffVariance: 4.854075
+feature gwsat_BestCV_Mean: 0.791610
 feature gwsat_totaltime: 1.010000
 Number of Variables: 536
 Number of Clauses: 2032
 Ratio Clauses/Variables: 3.79104
-Number of Hard Clauses: 2032
-Ratio Hard Clauses/Total Clauses: 1
+Number of Hard Clauses: 1956
+Ratio Hard Clauses/Total Clauses: 0.962598
 Ratio Negative Clauses: 1.42175
 Ratio Positive Clauses: 1.10285
-Ratio Unit Clauses: nan
-Ratio Binary Clauses: nan
-Ratio Ternary Clauses: nan
-Ratio Hard Unit Clauses: 0.0531496
-Ratio Hard Binary Clauses: 0.466043
-Ratio Hard Ternary Clauses: 0.409941
+Ratio Unit Clauses: 1
+Ratio Binary Clauses: 0
+Ratio Ternary Clauses: 0
+Ratio Hard Unit Clauses: 0.0163599
+Ratio Hard Binary Clauses: 0.484151
+Ratio Hard Ternary Clauses: 0.425869
