@@ -88,3 +88,16 @@ double MszModelReader::getModelWeight(const string& solver) {
 pair<double, double> MszModelReader::getStdFactors(const string& sname, const string& feature) {
   return factors[sname][feature];
 }
+
+FeatureLabel MszModelReader::parseFeatureLabel() {
+  uint nbSubLabels = getInteger();
+  FeatureLabel fl;
+
+  for(uint i = 0; i < nbSubLabels; ++i) {
+    const string name = getString();
+    const uint mult = getInteger();
+    fl.insert(name, mult);
+  }
+  
+  return fl;
+}

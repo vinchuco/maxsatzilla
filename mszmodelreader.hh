@@ -28,6 +28,7 @@ public:
 
 private:
   void parseConfig();
+  FeatureLabel parseFeatureLabel();
 
   string trainingSetFilename;
   string outputModelFilename;
