@@ -1,5 +1,10 @@
 #!/usr/bin/env python
 
+""" Examples:
+./scripts/analize-maxsatzilla.py coaching/maxsat.solvers ./coaching/real+structured.instances
+./scripts/analize-maxsatzilla.py coaching/partial.solvers ./coaching/cpaior.instances
+"""
+
 import sys, os
 
 solvers_file = sys.argv[1]
