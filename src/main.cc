@@ -6,8 +6,18 @@
 #include <utility>
 #include <sstream>
 
-#include "mszmodelreader.hh"
+#include "config.h"
+
+#include "modelreader.hh"
 #include "MaxSatInstance.hh"
+#include "arguments.hh"
+#include "argumentsparser.hh"
+
+extern "C" {
+#include <argp.h>
+}
+const char *argp_program_version = PACKAGE_STRING;
+const char *argp_program_bug_address = PACKAGE_BUGREPORT;
 
 using std::cerr;
 using std::cout;
@@ -62,14 +72,12 @@ map<string, double> getFeatures(const string &inst) {
 
 int main(int argc, char *argv[]) {
   
-  if(argc != 3) {
-    cerr << "usage: maxsatzilla <modelfile> <instance.cnf>\n";
-    exit(EXIT_FAILURE);
-  }
-
+  Arguments args;
+  ArgumentsParser::parse(argc, argv, args); // Parse Arguments
+  
   const char *instance = argv[2];
 
-  MszModelReader mreader(argv[1]);
+  ModelReader mreader(argv[1]);
 
   vector<string> solvers = mreader.getSolvers();
 
@@ -143,6 +151,10 @@ int main(int argc, char *argv[]) {
 #ifndef NDEBUG
     cout << "** Runnning " << it->second << "\n";
 #endif // NDEBUG
+
+    // If we only pretend then return
+    if(args.pretend)
+      return 0;
 
     const string filename_prefix = "./";
     const string filename = filename_prefix + it->second;

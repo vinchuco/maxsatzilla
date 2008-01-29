@@ -1,31 +1,30 @@
 lib_LTLIBRARIES = libubcsat.la
 
 libubcsat_la_SOURCES = \
-ubcsat.o               \
-algorithms.o           \
-gsat.o                 \
-ubcsat-alg.o           \
-ubcsat-parms.o         \
-novelty.o              \
-walksat.o              \
-weighted.o             \
-reports.o              \
-gwsat.o                \
-ubcsat-cnf.o           \
-ubcsat-reports.o       \
-rnovelty.o             \
-ubcsat-defaults.o      \
-hsat.o                 \
-ubcsat-help.o          \
-ubcsat-time.o          \
-saps.o                 \
-gsat-tabu.o            \
-hwsat.o                \
-ubcsat-mem.o           \
-ubcsat.o               \
-walksat-tabu.o         \
-ubcsat-io.o            \
-mylocal.o              \
-mt19937ar.o
+ubcsat.cc               \
+algorithms.cc           \
+gsat.cc                 \
+ubcsat-alg.cc           \
+ubcsat-parms.cc         \
+novelty.cc              \
+walksat.cc              \
+weighted.cc             \
+reports.cc              \
+gwsat.cc                \
+ubcsat-cnf.cc           \
+ubcsat-reports.cc       \
+rnovelty.cc             \
+ubcsat-defaults.cc      \
+hsat.cc                 \
+ubcsat-help.cc          \
+ubcsat-time.cc          \
+saps.cc                 \
+gsat-tabu.cc            \
+hwsat.cc                \
+ubcsat-mem.cc           \
+walksat-tabu.cc         \
+ubcsat-io.cc            \
+mylocal.cc              \
+mt19937ar.cc
 
 libubcsat_la_CXXFLAGS = -Wall -O3
