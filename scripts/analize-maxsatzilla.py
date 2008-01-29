@@ -41,7 +41,7 @@ for line in open( sets_file ):
             instance_time[ solver ][ name ] = float( time )
 
     if not os.path.exists( 'outputs/maxsatzilla.' + set_name + '.out' ):
-        print 'No experiments with ' + set_name
+        #print 'No experiments with ' + set_name
         continue
 
     failures = 0
@@ -51,8 +51,8 @@ for line in open( sets_file ):
             instance_name = os.path.basename( line[0:-1] )
         #print instance_name
             best_solver = find_best_solver( instance_name )
-            if checking_state != 0:
-                print 'Error : no solver run'
+            #if checking_state != 0:
+            #    print 'Error : no solver run'
             checking_state = 1
         if line.startswith( '** Runnning' ):
             if checking_state != 1:
