@@ -132,20 +132,18 @@ MaxSatInstance::~MaxSatInstance() {
   delete posClausesWithVar;
 }
 
-char* MaxSatInstance::getFileName() {
+char* MaxSatInstance::getPartialFileName() {
   char *newName;
-  if ( format == PARTIAL ) {
-    char command[ MAX_LINE_LENGTH ];
-    newName = new char[ MAX_LINE_LENGTH ];
-    sprintf(newName, "%s", P_tmpdir);
-    strcat(newName, "/pmcnf2wcnfXXXXXX");
-    newName = mktemp(newName);
-    sprintf( command, "./scripts/pmcnf2wcnf %s > %s", inputFileName, newName );
-    //printf( "Command : %s\n", command );
-    system( command );
-  } else {
-    newName = new char[ strlen( inputFileName ) ];
-  }
+  char command[ MAX_LINE_LENGTH ];
+
+  newName = new char[ MAX_LINE_LENGTH ];
+  sprintf(newName, "%s", P_tmpdir);
+  strcat(newName, "/pmcnf2wcnfXXXXXX");
+  newName = mktemp(newName);
+  sprintf( command, "./scripts/pmcnf2wcnf %s > %s", inputFileName, newName );
+  //printf( "Command : %s\n", command );
+  system( command );
+
   return newName;
 }
 
@@ -155,7 +153,13 @@ void MaxSatInstance::computeLocalSearchProperties() {
 
   char sTimeout[64];
   char sRuns[64];
-  char *fileName = getFileName();
+  char *fileName;
+
+  if ( format == PARTIAL ) {
+    fileName = getPartialFileName();
+  } else {
+    fileName = inputFileName;
+  }
 
   sprintf(sTimeout, "%d", UBCSAT_TIME_LIMIT);
   sprintf(sRuns, "%d", UBCSAT_NUM_RUNS);
@@ -181,20 +185,31 @@ void MaxSatInstance::computeLocalSearchProperties() {
 
   if ( format == PARTIAL ) {
     argc++;
+    // -- do saps
+    argv[2]="novelty+";
+    argv[4]="0.1";
+    
+    if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+    
+    // -- do gsat
+    argv[2]="gwsat";
+    argv[4]="0.5";
+    
+    if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+  } else {
+    // -- do saps
+    argv[2]="saps";
+    argv[4]="0.1";
+    
+    if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+    
+    // -- do gsat
+    argv[2]="gsat";
+    argv[4]="0.5";
+    
+    if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
   }
   
-  // -- do saps
-  argv[2]="novelty+";
-  argv[4]="0.1";
-  
-  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
-  
-  // -- do gsat
-  argv[2]="gwsat";
-  argv[4]="0.5";
-
-  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
-
   delete[] vlineFilename;
   delete[] fileName;
 }
