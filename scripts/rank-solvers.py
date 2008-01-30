@@ -24,7 +24,7 @@ for option in opts:
     if option[0] == '-s':
         solver_list_file = option[1]
 
-times = {} 
+times = { 'maxsatzilla' : 0.0 } 
 for solver in open( solver_list_file ):
     if solver[0] == '#':
         continue
@@ -41,7 +41,7 @@ def sort_solvers( times ):
 for set in set_list:
     for solver in times.keys():        
         times[ solver ] = 0
-        for line in open( solver_times_path + '/' + solver + '.' + set + '.log' ):
+        for line in open( solver_times_path + '/' + solver + '-' + set + '.log' ):
             instance, solution, time = line.split()
             times[ solver ] += float( time )
         if verbose:
