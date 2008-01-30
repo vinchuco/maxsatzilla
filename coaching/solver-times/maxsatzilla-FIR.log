@@ -1,59 +1,59 @@
-normalized-fir03_area_partials.pmcnf  7.89
-normalized-f20c10b_021_area_delay.pmcnf  15.41
-normalized-f20c10b_012_area_delay.pmcnf  1002.73
-normalized-f20c10b_026_area_delay.pmcnf  1011.42
-normalized-f20c10b_025_area_delay.pmcnf  23.56
-normalized-f20c10b_014_area_delay.pmcnf  1271.06
-normalized-fir02_area_partials.pmcnf  0.12
-normalized-f20c10b_018_area_delay.pmcnf  81.57
-normalized-f20c10b_002_area_delay.pmcnf  4.89
-normalized-fir05_area_opers.pmcnf  1001.88
-normalized-fir02_area_delay.pmcnf  1.50
-normalized-f20c10b_022_area_delay.pmcnf  9.60
-normalized-fir08_area_opers.pmcnf  55.51
-normalized-fir07_area_delay.pmcnf  1002.78
-normalized-f20c10b_017_area_delay.pmcnf  1002.28
-normalized-fir05_area_delay.pmcnf  1001.83
-normalized-f20c10b_024_area_delay.pmcnf  841.54
-normalized-f20c10b_005_area_delay.pmcnf  25.73
-normalized-f20c10b_001_area_delay.pmcnf  1193.64
-normalized-f20c10b_030_area_delay.pmcnf  7.62
-normalized-f20c10b_019_area_delay.pmcnf  15.40
-normalized-fir07_area_partials.pmcnf  0.33
-normalized-fir06_area_partials.pmcnf  9.26
-normalized-fir06_area_delay.pmcnf  1001.95
-normalized-fir10_area_delay.pmcnf  2.20
-normalized-f20c10b_029_area_delay.pmcnf  25.98
-normalized-f20c10b_007_area_delay.pmcnf  17.84
-normalized-f20c10b_011_area_delay.pmcnf  1002.53
-normalized-fir10_area_partials.pmcnf  1001.58
-normalized-f20c10b_008_area_delay.pmcnf  15.38
-normalized-f20c10b_015_area_delay.pmcnf  155.73
-normalized-f20c10b_003_area_delay.pmcnf  5.50
-normalized-fir10_area_opers.pmcnf  29.05
-normalized-f20c10b_006_area_delay.pmcnf  1001.72
-normalized-fir08_area_partials.pmcnf  26.58
-normalized-fir09_area_delay.pmcnf  1002.95
-normalized-fir03_area_opers.pmcnf  1001.96
-normalized-fir04_area_delay.pmcnf  1.49
-normalized-fir08_area_delay.pmcnf  56.95
-normalized-f20c10b_004_area_delay.pmcnf  262.18
-normalized-f20c10b_016_area_delay.pmcnf  1002.32
-normalized-f20c10b_013_area_delay.pmcnf  25.35
-normalized-f20c10b_028_area_delay.pmcnf  23.84
-normalized-f20c10b_009_area_delay.pmcnf  4.15
-normalized-fir05_area_partials.pmcnf  1.68
-normalized-fir09_area_partials.pmcnf  1002.11
-normalized-f20c10b_020_area_delay.pmcnf  3.71
-normalized-fir01_area_opers.pmcnf  0.36
-normalized-f20c10b_010_area_delay.pmcnf  1002.49
-normalized-fir02_area_opers.pmcnf  1001.35
-normalized-fir04_area_opers.pmcnf  1001.44
-normalized-fir06_area_opers.pmcnf  1002.06
-normalized-fir01_area_delay.pmcnf  0.14
-normalized-fir04_area_partials.pmcnf  0.05
-normalized-fir07_area_opers.pmcnf  1002.84
-normalized-fir09_area_opers.pmcnf  16.71
-normalized-f20c10b_023_area_delay.pmcnf  24.35
-normalized-f20c10b_027_area_delay.pmcnf  6.98
-normalized-fir03_area_delay.pmcnf  1001.85
+normalized-fir03_area_partials.pmcnf xxx 7.89
+normalized-f20c10b_021_area_delay.pmcnf xxx 15.41
+normalized-f20c10b_012_area_delay.pmcnf xxx 1002.73
+normalized-f20c10b_026_area_delay.pmcnf xxx 1011.42
+normalized-f20c10b_025_area_delay.pmcnf xxx 23.56
+normalized-f20c10b_014_area_delay.pmcnf xxx 1271.06
+normalized-fir02_area_partials.pmcnf xxx 0.12
+normalized-f20c10b_018_area_delay.pmcnf xxx 81.57
+normalized-f20c10b_002_area_delay.pmcnf xxx 4.89
+normalized-fir05_area_opers.pmcnf xxx 1001.88
+normalized-fir02_area_delay.pmcnf xxx 1.50
+normalized-f20c10b_022_area_delay.pmcnf xxx 9.60
+normalized-fir08_area_opers.pmcnf xxx 55.51
+normalized-fir07_area_delay.pmcnf xxx 1002.78
+normalized-f20c10b_017_area_delay.pmcnf xxx 1002.28
+normalized-fir05_area_delay.pmcnf xxx 1001.83
+normalized-f20c10b_024_area_delay.pmcnf xxx 841.54
+normalized-f20c10b_005_area_delay.pmcnf xxx 25.73
+normalized-f20c10b_001_area_delay.pmcnf xxx 1193.64
+normalized-f20c10b_030_area_delay.pmcnf xxx 7.62
+normalized-f20c10b_019_area_delay.pmcnf xxx 15.40
+normalized-fir07_area_partials.pmcnf xxx 0.33
+normalized-fir06_area_partials.pmcnf xxx 9.26
+normalized-fir06_area_delay.pmcnf xxx 1001.95
+normalized-fir10_area_delay.pmcnf xxx 2.20
+normalized-f20c10b_029_area_delay.pmcnf xxx 25.98
+normalized-f20c10b_007_area_delay.pmcnf xxx 17.84
+normalized-f20c10b_011_area_delay.pmcnf xxx 1002.53
+normalized-fir10_area_partials.pmcnf xxx 1001.58
+normalized-f20c10b_008_area_delay.pmcnf xxx 15.38
+normalized-f20c10b_015_area_delay.pmcnf xxx 155.73
+normalized-f20c10b_003_area_delay.pmcnf xxx 5.50
+normalized-fir10_area_opers.pmcnf xxx 29.05
+normalized-f20c10b_006_area_delay.pmcnf xxx 1001.72
+normalized-fir08_area_partials.pmcnf xxx 26.58
+normalized-fir09_area_delay.pmcnf xxx 1002.95
+normalized-fir03_area_opers.pmcnf xxx 1001.96
+normalized-fir04_area_delay.pmcnf xxx 1.49
+normalized-fir08_area_delay.pmcnf xxx 56.95
+normalized-f20c10b_004_area_delay.pmcnf xxx 262.18
+normalized-f20c10b_016_area_delay.pmcnf xxx 1002.32
+normalized-f20c10b_013_area_delay.pmcnf xxx 25.35
+normalized-f20c10b_028_area_delay.pmcnf xxx 23.84
+normalized-f20c10b_009_area_delay.pmcnf xxx 4.15
+normalized-fir05_area_partials.pmcnf xxx 1.68
+normalized-fir09_area_partials.pmcnf xxx 1002.11
+normalized-f20c10b_020_area_delay.pmcnf xxx 3.71
+normalized-fir01_area_opers.pmcnf xxx 0.36
+normalized-f20c10b_010_area_delay.pmcnf xxx 1002.49
+normalized-fir02_area_opers.pmcnf xxx 1001.35
+normalized-fir04_area_opers.pmcnf xxx 1001.44
+normalized-fir06_area_opers.pmcnf xxx 1002.06
+normalized-fir01_area_delay.pmcnf xxx 0.14
+normalized-fir04_area_partials.pmcnf xxx 0.05
+normalized-fir07_area_opers.pmcnf xxx 1002.84
+normalized-fir09_area_opers.pmcnf xxx 16.71
+normalized-f20c10b_023_area_delay.pmcnf xxx 24.35
+normalized-f20c10b_027_area_delay.pmcnf xxx 6.98
+normalized-fir03_area_delay.pmcnf xxx 1001.85
