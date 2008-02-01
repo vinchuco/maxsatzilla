@@ -75,9 +75,9 @@ int main(int argc, char *argv[]) {
   Arguments args;
   ArgumentsParser::parse(argc, argv, args); // Parse Arguments
   
-  const char *instance = argv[2];
+  const string &instance = args.cnffile;
 
-  ModelReader mreader(argv[1]);
+  ModelReader mreader(args.model);
 
   vector<string> solvers = mreader.getSolvers();
 

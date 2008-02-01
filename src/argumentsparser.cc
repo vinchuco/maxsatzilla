@@ -6,7 +6,7 @@ void ArgumentsParser::parse(int argc, char *argv[], Arguments &args) {
   static char doc[] = 
     "MaxSatZilla is a portfolio solver able to solve MaxSat and Partial MaxSat Problems.";
   
-  static char args_doc[] = "<MODEL_FILE>";
+  static char args_doc[] = "<MODEL_FILE> <CNF_FILE>";
   
   /* The options we understand. */
   static struct argp_option options[] = {
@@ -31,21 +31,23 @@ ArgumentsParser::parseOption (int key, char *arg, struct argp_state *state) {
     arguments->pretend = true;
     break;
   case ARGP_KEY_ARG:
-    // Number of key args already parsed... 
-    if (state->arg_num >= 1)
-      /* Too many arguments. */
-      argp_usage (state);
-    
-    arguments->model = string(arg);
+    if(arguments->model == "")
+      arguments->model = string(arg);
+    else if(arguments->cnffile == "")
+      arguments->cnffile = string(arg);
+    else 
+      argp_usage(state);
     break;
   case ARGP_KEY_END:
     // There is at least one obligatory argument
-    if (state->arg_num < 1) // Read from stdin
+    if (state->arg_num < 2) 
       argp_usage (state);
     break;
   case ARGP_KEY_INIT:
    // Initialize all arguments
     arguments->pretend = false;
+    arguments->model = "";
+    arguments->cnffile = "";
     break;
     
   default:
