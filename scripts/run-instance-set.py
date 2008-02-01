@@ -40,7 +40,8 @@ for set in open( set_list ):
             if counter < times:
                 counter += 1
                 timefile = tempfile.NamedTemporaryFile()
-                os.popen( 'echo ' + file + ' >> ' + outfile + ' ;' + sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
+                os.popen( 'echo # Experiment with ' + file + ' >> ' + outfile + ' ;' + sys_limits + '/usr/bin/time -p ' + solver + ' ' + file + ' >> ' + outfile +' 2> ' + timefile.name )
                 print >> logfile, os.path.basename( file.split()[0] ) + ' ' + os.popen( 'grep user ' + timefile.name + ' | cut -c5-' ).read()[:-1]
+                logfile.flush()
 
 print '# Total instances run ' + str( total_instances_run )
