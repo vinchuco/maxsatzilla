@@ -26,6 +26,22 @@ def get_instance_time( solver, set_name, instance ):
     print >> sys.stderr, "Instance " + instance
     raise Exception('Instance not found ' + instance )
 
+def get_times( solvers, set_name ):
+    times = {}
+    solutions = {}
+    for solver in solvers:
+        times[ solver ] = {}
+        for line in open( times_directory + solver + '-' + set_name + '.log' ):
+            instance, solution, time = line.split()
+            if instance not in solutions:
+                solutions[ instance ] = {}
+            if solution.isdigit():
+                solutions[ instance ][ solver ] = solution
+            times[ solver ][ instance ] = time
+        if len( set( solutions[ instance ].values() ) ) > 1:
+            print >> sys.stderr, "Solution does not match " + instance
+    return times
+
 def get_feature_value( instance, feature ):
     output = StringIO.StringIO()
     for line in open( instance ):
@@ -81,6 +97,7 @@ for line in open( instance_set_list ):
     instance_counter = 0
     set_name, path, number = line.split()
     print >> msz_file, 'c Set name ' + set_name
+    times = get_times( solvers, set_name )
     for instance in glob.glob( features_directory + set_name + '.*.features' ):
         instance_counter += 1
         instance_basename = instance[ len( features_directory + set_name + '.' ) : -9 ] 
@@ -91,9 +108,10 @@ for line in open( instance_set_list ):
         try:
             for solver in solvers:
                 try:
-                    solver_sol, time = get_instance_time( solver, set_name, instance_basename )
-                    check_solution( solution, solver_sol )
-                    solvers_times.append ( time )
+                    #solver_sol, time = get_instance_time( solver, set_name, instance_basename )
+                    #check_solution( solution, solver_sol )
+                    #solvers_times.append( time )
+                    solvers_times.append ( times[ solver ][ instance_basename ] )
                 except Exception:
                     print >> sys.stderr, 'Error with solver ' + solver
                     raise
