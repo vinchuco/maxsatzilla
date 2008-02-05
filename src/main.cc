@@ -79,7 +79,7 @@ int main(int argc, char *argv[]) {
 
   ModelReader mreader(args.model);
 
-  vector<string> solvers = mreader.getSolvers();
+  vector<string> solvers = mreader.getOutputLabels();
 
   // Let's compute the features
   cout << "Computing Features...";
