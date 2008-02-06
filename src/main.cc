@@ -95,40 +95,29 @@ int main(int argc, char *argv[]) {
   for(std::map<string, double>::const_iterator it = feats.begin(); it != feats.end(); it++) 
     cout << it->first << " : " << it->second << "\n";
 #endif // NDEBUG
-  
+
   // Let's compute the model
   map<string, double> predRt;
   for(uint s = 0; s < solvers.size(); s++) {
-#ifndef NDEBUG
-    cout << "Computing runtime for " << solvers[s] << ":\n";
-#endif // NDEBUG
-    // Computing model for solver s.
-    double runtime = mreader.getModelWeight(solvers[s]);
-#ifndef NDEBUG
-    cout << runtime << "\n";
-#endif // NDEBUG
-    for(map<string, double>::const_iterator it = feats.begin();
-	it != feats.end();
-	it++) { 
-      pair<double, double> factors;
-      if(mreader.getFeatureStd())
-	factors = mreader.getStdFactors(solvers[s], it->first);
-      else
-	factors = make_pair(0.0, 1.0);
-      const double stdf = (it->second - factors.first)/factors.second ; // Standardizing feature value
-      const double w = mreader.getModelWeight(solvers[s], it->first);
-      if(w != 0) {
-	runtime += stdf * w;
-#ifndef NDEBUG
-	cout << "(+" << it->first << "[" << stdf << "] * " << w << ") " << runtime << "\n";
-#endif // NDEBUG
+
+    // Standardizing computed features
+    map<string, double> solverFeatures;
+    if(mreader.getFeatureStd()) {
+      for(std::map<string, double>::const_iterator it = feats.begin(); it != feats.end(); ++it) {
+	pair<double, double> factors = mreader.getStdFactors(solvers[s], it->first);
+	solverFeatures[it->first] = (it->second - factors.first) / factors.second; 
       }
+    } else {
+      solverFeatures = feats;
     }
 
 #ifndef NDEBUG
-    cout << "\n";
+    cout << "Computing runtime for " << solvers[s] << ":\n";
 #endif // NDEBUG
+    const Model &m = mreader.getModel(solvers[s]);
+    const double runtime = m.computeModelOutput(solverFeatures);
     predRt[solvers[s]] = runtime;
+
 #ifndef NDEBUG
     cout << " Model output for " << solvers[s] << " is " << runtime << "\n";
 #endif // NDEBUG
@@ -162,7 +151,7 @@ int main(int argc, char *argv[]) {
     pid_t pid;
     pid = fork();
     if(pid == 0) {
-      execl(filename.c_str(), it->second.c_str(), instance, (char *)NULL);
+      execl(filename.c_str(), it->second.c_str(), instance.c_str(), (char *)NULL);
       exit(EXIT_SUCCESS);
     } else {
       int status;
