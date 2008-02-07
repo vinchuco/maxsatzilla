@@ -252,6 +252,11 @@ my_type build_simple_sat_instance(char *input_file) {
   fscanf(fp_in, "%s%d%d", word2, &NB_VAR, &NB_CLAUSE);
   INIT_NB_CLAUSE = NB_CLAUSE;
 
+  if ( NB_CLAUSE >  tab_clause_size || NB_VAR > tab_variable_size ) {
+    printf("The formula is too big\n");
+    exit( 20 );
+  }
+
   lire_clauses(fp_in);
   fclose(fp_in);
   build_structure();
