@@ -25,6 +25,6 @@ class MaxSatInstance {
   ~MaxSatInstance();
 
   char* getPartialFileName();
-  void computeLocalSearchProperties();
+  void computeLocalSearchProperties(ostream &);
   void printInfo( ostream& os );
 };

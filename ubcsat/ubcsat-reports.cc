@@ -19,6 +19,7 @@
 */
 
 #include "ubcsat.h"
+#include "interface.hh"
 
 namespace ubcsat {
 
@@ -764,7 +765,7 @@ void PrintStats() {
 }
 
 void writeFeature(char* name, FLOAT value) {
-  printf("feature %s: %f\n", name, value);
+  *(Interface::Instance()) << "feature " << name << ": " << value << "\n";
 }
 
 void PrintSatzillaStat(REPORTSTAT *pStat, const char *sStatID, char *sPrintID, FLOAT fValue) {

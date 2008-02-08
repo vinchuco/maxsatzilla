@@ -12,6 +12,7 @@ void ArgumentsParser::parse(int argc, char *argv[], Arguments &args) {
   static struct argp_option options[] = {
     /* Name    short  args   flags,  doc,                                   group*/
     {"pretend",     'p', 0,      0,  "Only output name of solver that would solve it, but do not execute it." },
+    {"solverscfg",  's', 0,      0,  "Filename of the file with the solvers path. (default = solvers.cfg)"},
     { 0 }
   };
 
@@ -27,8 +28,11 @@ ArgumentsParser::parseOption (int key, char *arg, struct argp_state *state) {
   Arguments *arguments = static_cast<Arguments*>(state->input);
 
   switch (key) {
-  case 'v':
+  case 'p':
     arguments->pretend = true;
+    break;
+  case 's':
+    arguments->solverscfg = string(arg);
     break;
   case ARGP_KEY_ARG:
     if(arguments->model == "")
@@ -45,6 +49,7 @@ ArgumentsParser::parseOption (int key, char *arg, struct argp_state *state) {
     break;
   case ARGP_KEY_INIT:
    // Initialize all arguments
+    arguments->solverscfg = "solvers.cfg";
     arguments->pretend = false;
     arguments->model = "";
     arguments->cnffile = "";

@@ -5,6 +5,10 @@
 #include <sys/wait.h>
 #include <utility>
 #include <sstream>
+#include <vector>
+#include <fstream>
+
+#include <cstdlib>
 
 #include "config.h"
 
@@ -23,6 +27,8 @@ using std::cerr;
 using std::cout;
 using std::pair;
 using std::make_pair;
+using std::vector;
+using std::ifstream;
 using std::stringstream;
 
 /**
@@ -43,7 +49,7 @@ map<string, double> getFeatures(const string &inst) {
   map<string, double> features;
  
   MaxSatInstance msi(inst.c_str());
-  msi.computeLocalSearchProperties();
+  msi.computeLocalSearchProperties(oss);
   msi.printInfo(oss);
 
   string line;
@@ -70,6 +76,49 @@ map<string, double> getFeatures(const string &inst) {
   return features;
 }
 
+map<string, vector<string> > readSolversCfg(const string& path) {
+  
+  map<string, vector<string> > solversPath;
+
+  ifstream file(path.c_str());
+  
+  if(!file.is_open()) {
+    cerr << "Couldn't read solvers config file at " << path << "\n"
+	 << "Exiting...\n";
+    exit(EXIT_FAILURE);
+  }
+
+  string line;
+  while(!getline(file, line).eof()) {
+    // Parse the line we got.
+    string::size_type found = line.find(' ');
+    if(found == string::npos) {
+      cerr << "Can't parse line in " << path << "\n"
+	   << "Exiting...\n";
+      exit(EXIT_FAILURE);
+    }
+    
+    const string name = line.substr(0, found);
+    string rest = line.substr(found+1);
+
+    vector<string> argv;
+    while(1) {
+      string::size_type next = rest.find(' ');
+      if(next == string::npos) {
+	argv.push_back(rest);
+	break;
+      }
+
+      argv.push_back(rest.substr(0, next));
+      rest.erase(0, next+1);
+    } 
+
+    solversPath[name] = argv;
+  }
+
+  return solversPath;
+}
+
 int main(int argc, char *argv[]) {
   
   Arguments args;
@@ -80,6 +129,7 @@ int main(int argc, char *argv[]) {
   ModelReader mreader(args.model);
 
   vector<string> solvers = mreader.getOutputLabels();
+  map<string, vector<string> > solversPath= readSolversCfg(args.solverscfg);
 
   // Let's compute the features
   cout << "Computing Features...";
@@ -145,13 +195,25 @@ int main(int argc, char *argv[]) {
     if(args.pretend)
       return 0;
 
-    const string filename_prefix = "./";
-    const string filename = filename_prefix + it->second;
+    char ** argv = NULL;
+    const map<string, vector<string> >::const_iterator argvit = solversPath.find(it->second);
+    if(argvit == solversPath.end()) {
+      cerr << "No path set for " << it->second << "\n"
+	   << "Exiting...\n";
+      exit(EXIT_FAILURE);
+    }
 
     pid_t pid;
     pid = fork();
     if(pid == 0) {
-      execl(filename.c_str(), it->second.c_str(), instance.c_str(), (char *)NULL);
+      const int argc = argvit->second.size() + 2;
+      argv = new char* [argvit->second.size() + 2];
+      for(int i = 0; i < argc-2; ++i)
+	argv[i] = strdup((argvit->second)[i].c_str());
+      argv[argc-2] = strdup(instance.c_str());
+      argv[argc-1] = (char*) NULL;
+
+      execv(argv[0], argv);
       exit(EXIT_SUCCESS);
     } else {
       int status;

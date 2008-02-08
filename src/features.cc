@@ -11,8 +11,8 @@ int main( int argc, char* argv[] ) {
   }
 
   MaxSatInstance msi( argv[1] );
-  msi.computeLocalSearchProperties();
-  msi.printInfo( cout );
+  msi.computeLocalSearchProperties(cout);
+  msi.printInfo(cout);
 
   return 0;
 }

@@ -7,6 +7,7 @@ Parts of the code in this file have been extracted from SATzilla.
 #include <algorithm>
 
 #include "MaxSatInstance.hh"
+#include "ubcsat/interface.hh"
 #include "ubcsat/ubcsat.h"
 
 bool MaxSatInstance::isTautologicalClause( int lits[ MAX_NUM_LITERALS ], int& numLits, const int clauseNum ) {
@@ -149,7 +150,7 @@ char* MaxSatInstance::getPartialFileName() {
 
 namespace ubcsat { int main(int, char**); }
 
-void MaxSatInstance::computeLocalSearchProperties() {
+void MaxSatInstance::computeLocalSearchProperties(ostream &oss) {
 
   char sTimeout[64];
   char sRuns[64];
@@ -181,6 +182,9 @@ void MaxSatInstance::computeLocalSearchProperties() {
 		  "-seed", strseed,
 		  "-satzilla", "-w" };
   
+  // Setting stream for output
+  Interface::Instance()->setStream(oss);
+
   int argc = 17;
 
   if ( format == PARTIAL ) {

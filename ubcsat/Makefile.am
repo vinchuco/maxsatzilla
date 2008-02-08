@@ -25,6 +25,7 @@ ubcsat-mem.cc           \
 walksat-tabu.cc         \
 ubcsat-io.cc            \
 mylocal.cc              \
-mt19937ar.cc
+mt19937ar.cc            \
+interface.cc
 
 libubcsat_la_CXXFLAGS = -Wall -O3
