@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([MaxSatZilla], [0.2.3_Beauty], [jp3@ecs.soton.ac.uk])
+AC_INIT([MaxSatZilla], [0.2.4_Beauty], [jp3@ecs.soton.ac.uk])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/main.cc])
 AC_CONFIG_HEADER([config.h])
@@ -38,13 +38,9 @@ AC_CHECK_HEADERS([fcntl.h limits.h stdint.h stdlib.h string.h sys/time.h sys/tim
 AC_HEADER_STDBOOL
 AC_C_CONST
 AC_C_INLINE
-AC_TYPE_INT32_T
-AC_TYPE_INT64_T
 AC_TYPE_PID_T
 AC_TYPE_SIZE_T
 AC_HEADER_TIME
-AC_TYPE_UINT32_T
-AC_TYPE_UINT64_T
 
 # Checks for library functions.
 AC_FUNC_FORK
