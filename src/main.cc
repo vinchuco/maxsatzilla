@@ -132,12 +132,12 @@ int main(int argc, char *argv[]) {
   map<string, vector<string> > solversPath= readSolversCfg(args.solverscfg);
 
   // Let's compute the features
-  cout << "Computing Features...";
+  cout << "c Computing Features...";
   map<string, double> feats = getFeatures(instance);
   cout << " DONE\n";
 
   if(feats.size() == 0) {
-    cerr << "Error: Feature computation returned no features.\n";
+    cerr << "c Error: Feature computation returned no features.\n";
     exit(EXIT_FAILURE);
   }
 
@@ -174,12 +174,12 @@ int main(int argc, char *argv[]) {
   }
 
   // Let's display the models, from best to worst.
-  cout << "Predicted Runtimes:\n";
+  cout << "c Predicted Runtimes:\n";
   map<double, string> invPredRt;
   for(map<string, double>::const_iterator it = predRt.begin();
       it != predRt.end();
       it++) {
-    cout << "\t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
+    cout << "c \t" << it->first << ": " << (mreader.getOutputStd() ? exp(it->second) : it->second) << "\n";
     invPredRt[it->second] = it->first;
   }
   
