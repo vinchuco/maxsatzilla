@@ -4,6 +4,8 @@
 in maxsatz5.c
 */
 
+#define CLK_TCK      CLOCKS_PER_SEC
+
 /*based on maxsatz8.c, integrating resolution rule:
 
 if x or y and x or ¬y are clauses, then remove these two binary clauses
