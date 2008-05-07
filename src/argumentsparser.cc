@@ -12,7 +12,7 @@ void ArgumentsParser::parse(int argc, char *argv[], Arguments &args) {
   static struct argp_option options[] = {
     /* Name    short  args   flags,  doc,                                   group*/
     {"pretend",     'p', 0,      0,  "Only output name of solver that would solve it, but do not execute it." },
-    {"solverscfg",  's', 0,      0,  "Filename of the file with the solvers path. (default = solvers.cfg)"},
+    {"solverscfg",  's', "CFG_FILE",      0,  "Filename of the file with the solvers path. (default = solvers.cfg)"},
     { 0 }
   };
 
