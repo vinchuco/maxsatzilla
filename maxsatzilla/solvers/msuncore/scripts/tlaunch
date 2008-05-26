@@ -1,0 +1,12 @@
+#!/bin/csh
+
+set tool = $argv[1]
+set inst = $argv[2]
+set tlim = $argv[3]
+set tmpf = $argv[4]
+
+limit cputime $tlim
+limit datasize 1000000000
+./$tool $inst >& $tmpf
+
+# jpms

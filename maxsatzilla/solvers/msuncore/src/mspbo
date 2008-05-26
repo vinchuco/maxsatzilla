@@ -1,0 +1,15 @@
+#!/usr/bin/perl
+
+use strict;
+
+use src::UTILS;
+die "Usage: $0 <bench>\n" if ($#ARGV<0);
+
+my $bench = (@ARGV) ? shift @ARGV : die "Must specify file name\n";
+
+my $opbfile = '__msp__xyzOPByxz__';
+system("./src/genmsopb $bench $opbfile");
+
+system("./minisat+ -s -gs -cb -M -a $opbfile");
+
+1;

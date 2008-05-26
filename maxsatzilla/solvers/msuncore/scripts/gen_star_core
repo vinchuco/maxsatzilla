@@ -1,0 +1,75 @@
+#!/usr/bin/perl
+
+my $ntriples = shift @ARGV;
+
+my $tnvar = 16;
+my $cnvar = 2;
+my $tncl = 19;
+
+my $tot_nvars = $ntriples * 16 + 2;
+my $tot_ncls = $ntriples * 19 + 2;
+
+print "c Shared cores organized in star or order $ntriples\n";
+print "c \n";
+print "p cnf $tot_nvars $tot_ncls\n";
+
+
+my $refv = 1;
+&prt_multi_shared_clset($refv);
+my $basev = 3;
+for(my $tcnt=1; $tcnt<=$ntriples; ++$tcnt) {
+    &prt_colrow_core($basev);
+    #&prt_diag_core($basev+1, $basev+8, $basev-2);
+    #&prt_diag_core($basev+2, $basev+12, $basev-2);
+    &prt_diag_core($basev+1, $basev+8, $refv);
+    &prt_diag_core($basev+2, $basev+12, $refv);
+    $basev += $tnvar;
+}
+
+1;
+
+sub prt_colrow_core() {
+    my $vr = shift;
+    my $v2 = $vr+1;
+    print "$vr $v2 0\n";
+    print "-$vr $v2 0\n";
+    $vr += 2;
+    $v2 = $vr+1;
+    print "$vr $v2 0\n";
+    print "$vr -$v2 0\n";
+    $vr += 2;
+    $vs = $vr - 3;
+    print "-$vs $vr 0\n";
+    $v2 = $vr+1;
+    print "-$vr $v2 0\n";
+    ++$vr;
+    $v2 = $vr+1;
+    print "-$vr $v2 0\n";
+    $v3 = $v2+1;
+    print "-$vr $v3 0\n";
+    $vr -= 3;
+    print "-$v2 -$v3 -$vr 0\n";
+}
+
+sub prt_diag_core() {
+    my ($vi, $vr, $vf) = @_;
+    print "-$vi $vr 0\n";
+    my $v2 = $vr+1;
+    print "-$vr $v2 0\n";
+    ++$vr;
+    $v2 = $vr+1;
+    print "-$vr $v2 0\n";
+    $v3 = $v2+1;
+    print "-$vr $v3 0\n";
+    $vr -= 2;
+    print "-$v2 -$v3 -$vf 0\n";
+}
+
+sub prt_multi_shared_clset() {
+    my $v1 = shift;
+    my $v2 = $v1+1;
+    print "$v1 $v2 0\n";
+    print "$v1 -$v2 0\n";
+}
+
+# jpms

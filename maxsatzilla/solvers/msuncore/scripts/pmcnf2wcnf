@@ -1,0 +1,98 @@
+#!/usr/bin/perl
+# Copyright (c) 2006 Joao Marques-Silva. All rights reserved.
+
+use strict;
+use Data::Dumper;
+use POSIX;
+use Getopt::Std;
+
+my $progname = &get_progname();
+
+my %opts = ();
+getopts('hd', \%opts);
+# d: Debug mode
+# h: print Help
+
+if ($opts{h} || $#ARGV < 0) {
+    print <<EOF;
+  $progname: PMCNF to WCNF converter
+  Usage:
+    $progname [-h] [-d] <pmcnf file>
+     -d    debug mode
+     -h    prints this help
+  Author: jpms\@soton.ac.uk
+EOF
+exit(0);
+}
+
+my $debug = ($opts{d}) ? 1 : 0;
+
+my $ncls;
+my $nvars;
+
+my @hclset = ();
+my @sclset = ();
+
+my $clits = [];
+my $hardcl = -1;  # At start, either hard or soft cls need to be specified
+my $readfmt = 1;
+my $nsoft = 0;
+while(<>) {
+    chomp;
+    next if (m/^c\s*/);
+    if ($readfmt) {
+	if (m/^p pmcnf\s+(\d+)\s+(\d+)/) {
+	    $nvars = $1;
+	    $ncls = $2;
+	    $readfmt = 0;
+	}
+    } else {
+	if (m/^p\s+hard.*$/) {
+	    $hardcl = 1; next;
+	} elsif (m/^p\s+soft.*$/) {
+	    $hardcl = 0; next;
+	}
+	my @rlits = split(/\s+/,$_);
+	if ($rlits[0] eq '') { shift @rlits; }
+	if ($rlits[$#rlits] eq '') { pop @rlits; }
+	push @{$clits}, @rlits;
+	if (${$clits}[$#{$clits}] == 0) {
+	    my $clref = $clits;
+	    if (!$hardcl) { push @sclset, $clref; $nsoft++; }
+	    else          { push @hclset, $clref; }
+	    if ($debug) { print STDERR "@{$clref}\n"; }
+	    $clits = [];
+	}
+    }
+}
+
+print "c Output of wcnf2pmcnf by jpms\@ecs.soton.ac.uk\n";
+print "c \n";
+
+# print wcnf
+my $swght = $nsoft+1;
+print "p wcnf $nvars $ncls $swght\n";
+
+foreach my $clref (@sclset) {
+    print "1 @{$clref}\n";
+}
+foreach my $clref (@hclset) {
+    print "$swght @{$clref}\n";
+}
+
+1;
+
+sub xabort() {
+    my $msg = shift;
+    print "ERROR: $msg\n";
+    exit(2);
+}
+
+sub get_progname() {
+    my @progname_toks = split(/\//, $0);
+    my $progname = $progname_toks[$#progname_toks];
+    #print "$progname\n";
+    return $progname;
+}
+
+# jpms

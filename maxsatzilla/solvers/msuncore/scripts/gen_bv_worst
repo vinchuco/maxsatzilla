@@ -1,0 +1,51 @@
+#!/usr/bin/perl
+
+my $n = shift @ARGV || die "Usage: $0 <order>; multiple of 6\n";
+
+my $vidx = 1;
+
+my $nvz = $n/2;       # number of z vars
+my $nu = $n/8;        # number of two core units
+my $ncls = 3/2*$n;    # number of cls
+my $zv = $n/2+1;     # first idx of z vars
+print "c Example of order $n to exercise worst case number of blocking vars\n";
+print "p cnf $n $ncls\n";
+
+&print_large_core_unit($zv, $nvz);
+
+for(my $i=0; $i<$nu; ++$i) {
+    my $xv = 1 + 4*$i;
+    &print_two_core_unit($xv, $zv);
+}
+
+1;
+
+sub print_two_core_unit() {
+    my $x = shift;
+    my $z = shift;
+    my $y = $x+1;
+    my $t = $y+1;
+    my $u = $t+1;
+    print "$x 0\n";
+    print "-$x $t 0\n";
+    print "-$x -$t 0\n";
+    print "-$x -$y 0\n";
+    print "$y 0\n";
+    print "-$y $t 0\n";
+    print "-$y -$t 0\n";
+    print "-$x -$z 0\n";
+}
+
+sub print_large_core_unit() {
+    my $z = shift;
+    my $nvz = shift;
+    for(my $i=0; $i<$nvz; ++$i) {
+	my $zi = $z+$i;
+	print "$zi ";
+    }
+    print "0\n";
+    for(my $i=1; $i<$nvz; ++$i) {
+	my $zi = $z+$i;
+	print "-$zi 0\n";
+    }
+}

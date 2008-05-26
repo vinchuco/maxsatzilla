@@ -1,0 +1,31 @@
+
+CONTENTS
+The four Max-SAT solvers used for the article in JAIR, and one common file:
+* maxsat0.c: does not apply any inference rule;
+* maxsat12.c: applies rules 1 and 2, but not rules 3, 4, 5 and 6;
+* maxsat1234.c: applies rules 1, 2, 3 and 4, but not rules 5 and 6;
+* maxsatz.c: applies all the rules;
+* input.c: reads the CNF instance.
+
+INSTALLATION
+Unzip jair-solvers.zip
+
+COMPILATION
+Just type make in the directory jair-solvers.
+
+EXECUTION
+Every solver needs two parameters: the CNF instance and the initial  upper bound. The default upper bound is the number of clauses in the CNF instance.
+
+So type for example
+
+maxsatz cnfFormula
+or
+maxsatz cnfFormula UB
+
+In the first case, the upper bound is the number of clauses in  cnfFormula. In the second case the upper bound is UB. In the jair paper, all solvers use the same initial upper bound obtained by a local search. 
+
+AUTHORS
+Chu Min Li - Universite de Picardie
+Felip Manya - IIIA (CSIC)
+Jordi Planes - Universitat de Lleida
+
