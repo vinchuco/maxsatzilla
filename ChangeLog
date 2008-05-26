@@ -1,3 +1,0 @@
-Jan 23, 2008
-	* Improve getfeatures interface. Write features to string stream
-          instead of to file.
