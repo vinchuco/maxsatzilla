@@ -7,7 +7,8 @@ argumentsparser.cc
 
 maxsatzilla_bin_CPPFLAGS =
 maxsatzilla_bin_CXXFLAGS = -Wall -std=c++98 -ggdb
-maxsatzilla_bin_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lfileio -lgsl
+#maxsatzilla_bin_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lfileio -lgsl
+maxsatzilla_bin_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lfileio /usr/lib/libgslcblas.a /usr/lib/libgsl.a /usr/lib/libblas.a /usr/lib/libgmp.a
 
 getfeatures_SOURCES = \
 features.cc           \

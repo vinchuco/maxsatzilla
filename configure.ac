@@ -15,19 +15,19 @@ AC_PROG_LIBTOOL
 
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lblas':
-AC_CHECK_LIB([blas], [main])
+#AC_CHECK_LIB([blas], [main])
 # FIXME: Replace `main' with a function in `-lcblas':
-AC_CHECK_LIB([cblas], [main])
+#AC_CHECK_LIB([cblas], [main])
 # FIXME: Replace `main' with a function in `-lgmp':
-AC_CHECK_LIB([gmp], [main])
+#AC_CHECK_LIB([gmp], [main])
 # FIXME: Replace `main' with a function in `-lgsl':
-AC_CHECK_LIB([gsl], [main])
+#AC_CHECK_LIB([gsl], [main])
 # FIXME: Replace `main' with a function in `-lgslcblas':
-AC_CHECK_LIB([gslcblas], [main])
+#AC_CHECK_LIB([gslcblas], [main])
 # FIXME: Replace `main' with a function in `-lm':
-AC_CHECK_LIB([m], [main])
+#AC_CHECK_LIB([m], [main])
 # FIXME: Replace `main' with a function in `-lz':
-AC_CHECK_LIB([z], [main])
+#AC_CHECK_LIB([z], [main])
 
 # Checks for header files.
 AC_HEADER_STDC
