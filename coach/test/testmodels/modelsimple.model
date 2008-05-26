@@ -1,0 +1,18 @@
+p training "none"
+p solvers y1 y2 y3
+
+p freeweight y1 3.0
+p weight y1 1 x1 1 0.5
+p weight y1 1 x2 1 1.6
+p weight y1 1 x1 2 0.98
+
+p freeweight y2 10.0
+p weight y2 1 x1 1 0.8
+p weight y2 1 x2 1 5.6
+p weight y2 2 x1 1 x2 1 0.9
+
+p freeweight y3 0.7
+p weight y3 1 x1 1 0.15
+p weight y3 1 x2 1 15.6
+
+
