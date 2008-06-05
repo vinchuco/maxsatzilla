@@ -1,12 +1,7 @@
 CFLAGS=-O3
 LDFLAGS=-lm
 
-all: maxsatz+fl
-
-maxsatz+fl: maxsatz+fl.c libubcsat/libubcsat.a
-
-libubcsat/libubcsat.a:
-	(cd libubcsat; make)
+all: maxsatzJ9
 
 clean:
-	rm -f maxsatz+fl
+	rm -f maxsatzJ9
