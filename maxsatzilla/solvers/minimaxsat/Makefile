@@ -13,11 +13,14 @@ R64COBJS  = $(addsuffix x,  $(COBJS))
 R32COBJS  = $(addsuffix i,  $(COBJS))
 
 EXEC      = minimaxsat
+MAXSATZILLA_DIR = $(HOME)/Research/maxsatzilla/
 
 CXX       = g++
 #CXX      = icpc
 CFLAGS    = -Wall -ffloat-store 
-CFLAGS   += -O3 -I/sw/include -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
+CFLAGS   += -O3 -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
+CFLAGS   += -I$(MAXSATZILLA_DIR)/extlib/gmp-4.2.2/include/
+LDFLAGS  += -L$(MAXSATZILLA_DIR)/extlib/gmp-4.2.2/lib/ -lz -lgmp
 COPTIMIZE = #-fomit-frame-pointer # -falign-loops=4 -falign-functions=16 -foptimize-sibling-calls -finline-functions -fcse-follow-jumps -fcse-skip-blocks -frerun-cse-after-loop -frerun-loop-opt -fgcse
 
 
@@ -62,31 +65,31 @@ clean:
 ## Linking rules (standard/profile/debug/release)
 $(EXEC): $(COBJS)
 	@echo Linking $(EXEC)
-	@$(CXX) $(COBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@ 
+	@$(CXX) $(COBJS) $(LDFLAGS) -ggdb -Wall -o $@ 
 
 $(EXEC)_profile: $(PCOBJS)
 	@echo Linking $@
-	@$(CXX) $(PCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -pg -o $@
+	@$(CXX) $(PCOBJS) $(LDFLAGS) -ggdb -Wall -pg -o $@
 
 $(EXEC)_debug:	$(DCOBJS)
 	@echo Linking $@
-	@$(CXX) $(DCOBJS) -L/sw/lib -lz -lgmp -ggdb -Wall -o $@
+	@$(CXX) $(DCOBJS) $(LDFLAGS) -ggdb -Wall -o $@
 
 $(EXEC)_release: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) $(RCOBJS) $(LDFLAGS) -Wall -o $@
 
 $(EXEC)_bignum_static: $(RCOBJS)
 	@echo Linking $@
-	@$(CXX) --static $(RCOBJS) -L/sw/lib -lz -lgmp -Wall -o $@
+	@$(CXX) --static $(RCOBJS) $(LDFLAGS) -Wall -o $@
 
 $(EXEC)_64-bit_static: $(R64COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R64COBJS) -lz -Wall -o $@
+	@$(CXX) --static $(R64COBJS) $(LDFLAGS) -Wall -o $@
 
 $(EXEC)_32-bit_static: $(R32COBJS)
 	@echo Linking $@
-	@$(CXX) --static $(R32COBJS) -lz -Wall -o $@
+	@$(CXX) --static $(R32COBJS) $(LDFLAGS) -Wall -o $@
 
 libubcsat/libubcsat.a:
 	@echo Building UBCSAT

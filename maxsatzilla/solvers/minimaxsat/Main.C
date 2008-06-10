@@ -348,6 +348,7 @@ PbSolver::solve_Command convert(Command cmd) {
     case cmd_FirstSolution: return PbSolver::sc_FirstSolution;
     case cmd_AllSolutions:  return PbSolver::sc_AllSolutions;
     default: assert(false); }
+    return (PbSolver::solve_Command)NULL;
 }
 
 
