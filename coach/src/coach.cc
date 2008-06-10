@@ -175,7 +175,7 @@ int main(int argc, char *argv[]) {
       lm->endCategory();
 
       // Performing function expansion
-      if(creader.getFExpansion()) { // Let's do function expansion
+      if(creader.getLearningAlg() == RR && creader.getFExpansion()) { // Let's do function expansion if learning alg is ridgeregression
 	if(creader.completeFE()) { // Expand on the complete set of variables
 	  dss[s].first->expand(creader.getFEPartOrder());
 	  dss[s].second->expand(creader.getFEPartOrder());
@@ -211,8 +211,19 @@ int main(int argc, char *argv[]) {
 
       // Computing the model with ridge regression
       lm->setCategory(LogMgm::RIDREG);
-      RidgeRegression rr(*(dss[s].first));
-      Model m = rr.run(creader.getRRDelta());
+      LearningAlgorithm *la(*(dss[s].first));
+      switch(creader.getLearningAlg()) {
+      case RR:
+	la = new RidgeRegression(*(dss[s].first), creader.getRRDelta());
+	break;
+      case SVM:
+	la = new SVMachine(*(dss[s].first));
+	break;
+      case NN:
+	la = new NNetworks(*(dss[s].first));
+	break;
+      }
+      Model m = la.run();
       lm->endCategory();
 
       // Outputting the model to file
