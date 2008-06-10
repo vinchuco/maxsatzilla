@@ -34,8 +34,12 @@ public:
   bool   getOutputStd ()                  const { return outputStd;                }
   uint   getFEPartOrder()                 const { return fePartOrder;              }
   uint   getPercentTest()                 const { return percentTest;              }
-  
+  LearningAlg getLearningAlg()            const { return la;                       }
 private:
+  struct tolower_op : public unary_function<char, char> {
+    char operator()(char x) { return tolower(x); }
+  };
+
   void parseConfig();
   
   string trainingSetFilename;         ///< Filename that will contain the training set to read from.
@@ -51,6 +55,7 @@ private:
   bool featureStd;                    ///< Flag which determines if standardization of features should be performed.
   bool outputStd;                     ///< Flag which determines if standardization of outputs should be performed.
   uint fePartOrder;                   ///< Order of the function basis expansion.
+  LearningAlg la;                     ///< Learning algorithm selected
 };
 
 #endif // CONFIGREADER_HH

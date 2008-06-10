@@ -7,8 +7,8 @@
 
 using std::cerr;
 
-Model::Model() 
-  : freeRegressor(0) { }
+Model::Model(LearningAlg la) 
+  : la(la), freeRegressor(0) { }
 
 void Model::addRegressor(double val, const FeatureLabel& id) {
   const_iterator it = regressorMap.find(id);

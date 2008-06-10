@@ -6,7 +6,7 @@
 using std::cerr;
 
 ConfigReader::ConfigReader(const string &configFile)
-  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0) {
+  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NONE) {
   parseConfig();
   file.close();
 }
@@ -66,6 +66,19 @@ void ConfigReader::parseConfig() {
 	featureStd = true;
       else if(paramName == "pertest")
 	percentTest = getUInt();
+      else if(paramName == "learning")  {
+	string lAlg = getString();
+	std::transform(lAlg.begin(), lAlg.end(), lAlg.begin(), tolower_op());
+	if(lAlg == "rr")
+	  la = RR;
+	//else if(lAlg == "svm")
+	//  la = SVM;
+	//else if(lAlg == "nn")
+	//  la = NN;
+	else {
+	  MSZError("In your coach config file you have not set the learning algorithm to a known value.");
+	}
+      }
       else { // error
 	cerr << "Error during parsing of config.\nExpecting one of params: training, model, fsdelta, fsinst, rrdelta, part, outstd, feastd. Got: " << paramName << "\n";
 	exit(EXIT_FAILURE);
