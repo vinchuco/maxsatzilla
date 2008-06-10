@@ -21,6 +21,10 @@ typedef long long int lli_type;
 #define FALSE 0
 #define NONE -1
 
+#define SAT_OK 10
+#define SAT_OOR 20 /* Out of resources */
+#define SAT_ERROR 30
+
 #define WEIGHT 4
 #define WEIGHT1 25
 #define WEIGHT2 5
@@ -390,6 +394,7 @@ void build_structure() {
 	for(clause = BASE_NB_CLAUSE; clause < NB_CLAUSE; clause++) { // Build [clause][var, sign] structure
 		length = clause_length[clause];
 		var_sign[clause] = (int *)malloc((2*length+1)*sizeof(int));
+		if (var_sign[clause] == NULL ) exit( SAT_OOR );
 		lits1 = sat[clause]; vars_signs = var_sign[clause];
 		for(lit=*lits1; lit!=NONE; lit=*(++lits1),(vars_signs+=2)) {
 			if (negative(lit)) {
@@ -813,6 +818,7 @@ int verify_binary_clauses(int *varssigns, int var1, int sign1, int var2, int sig
     if ((*(varssigns+1)!=1-sign1) || (var2!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign2)) {
       printf("VBC problem..");
+      exit( SAT_ERROR );
       return FALSE;
     }
   }
@@ -820,6 +826,7 @@ int verify_binary_clauses(int *varssigns, int var1, int sign1, int var2, int sig
     if ((var2 != *varssigns) || (*(varssigns+1)!=1-sign2) || (var1!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign1)) {
       printf("VBC problem..");
+      exit( SAT_ERROR );
       return FALSE;
     }
   }
@@ -973,8 +980,9 @@ int create_complementary_binclause(int clause, int clause1, int clause2, lli_typ
 		varssigns[1]=sign;
 	}
 	#ifdef DEBUG
-		if ((i!=4) || (check_reason(varssigns, clause, clause1, clause2)==FALSE))
-			printf("CCB problem...");
+	if ((i!=4) || (check_reason(varssigns, clause, clause1, clause2)==FALSE)) {
+	  printf("CCB problem..."); exit( SAT_ERROR );
+	}
 	#endif
 	create_binaryclause(varssigns[0], 1-varssigns[1], varssigns[2], 1-varssigns[3], min_weight);
 	return TRUE;
@@ -1912,6 +1920,7 @@ void add_clause_to_DB() {
 	}
 	BASE_NB_CLAUSE--;
 	var_sign[BASE_NB_CLAUSE] = (int *) malloc ((NEW_CLAUSE_LITS_fill_pointer + 1) * sizeof(int));
+	if (var_sign[BASE_NB_CLAUSE] == NULL ) exit( SAT_OOR );
 	vars_signs = var_sign[BASE_NB_CLAUSE];
 	vars = NEW_CLAUSE_LITS;
 	for (var = *vars; var != NONE; var = *(vars += 2), vars_signs += 2) {
@@ -2328,5 +2337,6 @@ int main(int argc, char *argv[]) {
 //	 NB_BRANCHE, NB_BACK,
 //	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE);
  // fclose(fp_time);
-	return TRUE;
+	//return TRUE;
+	exit( SAT_OK );
 }
