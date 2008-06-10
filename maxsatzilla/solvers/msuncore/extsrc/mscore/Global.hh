@@ -27,6 +27,7 @@ OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWA
 #include <climits>
 #include <cfloat>
 #include <new>
+#include <sys/types.h>
 
 #include "globals.hh"
 
@@ -50,7 +51,6 @@ typedef unsigned __PTRDIFF_TYPE__ uintp;
 #endif
 typedef unsigned char uchar;
 typedef const char    cchar;
-typedef unsigned int  uint;
 
 
 template<class T> static inline T minT(T x, T y) { return (x < y) ? x : y; }
