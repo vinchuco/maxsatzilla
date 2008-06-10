@@ -4,4 +4,5 @@ LDFLAGS=
 all: maxsatzJ9
 
 clean:
-	rm -f maxsatzJ9
+	@echo Cleaning maxsatz
+	@rm -f maxsatzJ9

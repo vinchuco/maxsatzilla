@@ -97,6 +97,11 @@ typedef unsigned int my_unsigned_type;
 #define FALSE 0
 #define NONE -1
 
+/* SAT Competiton conventions */
+#define SAT_OK 10 
+#define SAT_OOR 20 /* Out of resources: memory or time */
+#define SAT_ERROR 30
+
 #define WEIGHT 4
 #define WEIGHT1 25
 #define WEIGHT2 5
@@ -422,8 +427,10 @@ int replace_clause(int newclause, int clause_to_replace, int *clauses) {
         break;
       }
     }
-    if (flag==FALSE) 
+    if (flag==FALSE) {
        printf("c problem\n");
+       exit( SAT_ERROR );
+    }
     return flag;
   }
 }
@@ -460,6 +467,7 @@ int verify_binary_clauses(int *varssigns, int var1, int sign1, int var2, int sig
     if ((*(varssigns+1)!=1-sign1) || (var2!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign2)) {
       printf("c problem..\n");
+      exit( SAT_ERROR );
       return FALSE;
     }
   }
@@ -467,6 +475,7 @@ int verify_binary_clauses(int *varssigns, int var1, int sign1, int var2, int sig
     if ((var2 != *varssigns) || (*(varssigns+1)!=1-sign2) || (var1!=*(varssigns+2)) ||
 	(*(varssigns+3)!=1-sign1)) {
       printf("c problem..\n");
+      exit( SAT_ERROR );
       return FALSE;
     }
   }
@@ -601,8 +610,10 @@ int create_complementary_binclause(int clause, int clause1, int clause2) {
     varssigns[2]=varssigns[0]; varssigns[3]=varssigns[1];
     varssigns[0]=var; varssigns[1]=sign;
   }
-  if ((i!=4) || (check_reason(varssigns, clause, clause1, clause2)==FALSE))
+  if ((i!=4) || (check_reason(varssigns, clause, clause1, clause2)==FALSE)) {
     printf("c problem...\n");
+    exit( SAT_ERROR );
+  }
   create_binaryclause(varssigns[0], 1-varssigns[1],
 		      varssigns[2], 1-varssigns[3], clause1, clause2);
   return TRUE;
@@ -2138,8 +2149,10 @@ int dpl() {
     if (VARIABLE_STACK_fill_pointer==NB_VAR) {
       UB=NB_EMPTY; 
       nb=verify_solution();
-      if (nb!=NB_EMPTY)
+      if (nb!=NB_EMPTY) {
       	printf("c problem nb...\n");
+	exit( SAT_ERROR );
+      }
       while (backtracking()==NONE);
       if (VARIABLE_STACK_fill_pointer==0)
 	break;
@@ -2189,7 +2202,7 @@ main(int argc, char *argv[]) {
 
   if (argc<2) {
     printf("c Using format: maxsatz input_instance [upper_bound]\n");
-    return FALSE;
+    return SAT_ERROR;
   }
   for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
 
@@ -2197,7 +2210,7 @@ main(int argc, char *argv[]) {
   mess=times(a_tms); begintime = a_tms->tms_utime;
 
   switch (build_simple_sat_instance(argv[1])) {
-  case FALSE: printf("c Input file error\n"); return FALSE;
+  case FALSE: printf("c Input file error\n"); return SAT_ERROR;
   case TRUE:
     if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
     init();
@@ -2233,5 +2246,5 @@ main(int argc, char *argv[]) {
 	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE, CMTR[0]+CMTR[1]);
   fclose(fp_time);
 */
-  return TRUE;
+  return SAT_OK;
 }
