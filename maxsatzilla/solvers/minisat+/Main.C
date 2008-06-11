@@ -303,8 +303,8 @@ int main(int argc, char** argv)
         reportf("_______________________________________________________________________________\n");
     }
 
-    exit(0);  // jpms:20070928 -> need to avoid error codes
-    //exit(pb_solver->best_goalvalue == Int_MAX ? 20 : (pb_solver->goal == NULL || opt_command == cmd_FirstSolution) ? 10 : 30);    // (faster than "return", which will invoke the destructor for 'PbSolver')
+    //exit(0);  // jpms:20070928 -> need to avoid error codes
+    exit(pb_solver->best_goalvalue == Int_MAX ? 20 : (pb_solver->goal == NULL || opt_command == cmd_FirstSolution) ? 10 : 30);    // (faster than "return", which will invoke the destructor for 'PbSolver')
 }
 
 
