@@ -1,22 +1,26 @@
 #ifndef SVMREGRESSION_HH
 #define SVMREGRESSION_HH
 
-enum SVMKernel {DOT, POLYNOMIAL, GAUSSIAN};
+#include "dataset.hh"
 
-class SVMRegression {
+class SVMRegression : public LearningAlgorithm {
 public:
+  enum SVMKernel {DOT, POLYNOMIAL, GAUSSIAN};
+
   SVMRegression(const MSZDataSet &);
   SVMRegression(SVMKernel, const MSZDataSet &);
   ~SVMRegression();
+  
+  void setParams(const real p[]) { for(int i = 0; i < 3; ++i) params[i] = p[i]; }
 
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model
   // for a given output
-  Model run(const real *params);
+  virtual Model run();
 
 private:
-  const MSZDataSet &data; ///< Reference to data is kept
-  SVMKernel kernelType; ///< Kernel to be used on regression
+  SVMKernel kernelType;   ///< Kernel to be used on regression
+  real params[3];         ///< Parameters
 };
 
 #endif // SVMREGRESSION_HH

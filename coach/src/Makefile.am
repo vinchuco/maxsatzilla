@@ -7,7 +7,9 @@ modeltesting.cc        \
 ridgeregression.cc     \
 mszreader.hpp          \
 logmgm.cc              \
-gsladdon.cc
+gsladdon.cc            \
+svmregression.cc       \
+learningalgorithm.cc
 
 coach_CPPFLAGS = 
 coach_CXXFLAGS = -std=c++98 -g -Wall #-Weffc++

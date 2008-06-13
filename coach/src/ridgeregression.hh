@@ -18,18 +18,20 @@ using std::vector;
  *  I'm still pondering if there's any logic at all of this being a class.
  *  I don't think there is but I'll leave it like this for now!
  */
-class RidgeRegression {
+class RidgeRegression : public LearningAlgorithm {
 public:
   RidgeRegression(const MSZDataSet &);
   ~RidgeRegression();
+
+  void setDelta(double d) { delta = d; }
   
   // Runs ridge regression algorithm and outputs 
   // header file with static definition of model
   // for a given output.
-  Model run(double);
+  virtual Model run();
 
 private:
-  const MSZDataSet &data; ///< Reference to data is kept.
+  double delta;           ///< Delta value for ridge regression
 };
 
 #endif // RIDGEREGRESSION_HH

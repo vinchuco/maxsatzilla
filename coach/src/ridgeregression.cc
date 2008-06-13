@@ -11,7 +11,7 @@
 using std::cerr;
 
 RidgeRegression::RidgeRegression(const MSZDataSet &data) :
-  data(data) { }
+  data(data), delta(1.0) { }
 
 RidgeRegression::~RidgeRegression() { }
 

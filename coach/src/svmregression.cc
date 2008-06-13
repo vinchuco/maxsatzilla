@@ -1,16 +1,10 @@
 #include "svmregression.hh"
 
 SVMRegression::SVMRegression(const MSZDataSet &data) 
-  : data(data), kernelType(DOT) {
-
-
-}
+  : LearningAlgorithm(data), kernelType(DOT) { }
 
 SVMRegression::SVMRegression(SVMKernel kernelType, const MSZDataSet &data)
-  : data(data), kernelType(kernelType) {
-
-
-}
+  : LearningAlgorithm(data), kernelType(kernelType) { }
 
 SVMRegression::~SVMRegression() {
 
@@ -18,7 +12,7 @@ SVMRegression::~SVMRegression() {
 
 }
 
-Model run(const real *params) {
+Model run() {
   
   // Set the dataset for SVM
   Kernel *k = 0;

@@ -14,7 +14,9 @@
 #include "triple.hpp"
 #include "dataset.hh"
 #include "forwardselection.hh"
+#include "learningalgorithm.hh"
 #include "ridgeregression.hh"
+#include "svmregression.hh"
 #include "logmgm.hh"
 
 using std::vector;
@@ -211,17 +213,26 @@ int main(int argc, char *argv[]) {
 
       // Computing the model with ridge regression
       lm->setCategory(LogMgm::RIDREG);
-      LearningAlgorithm *la(*(dss[s].first));
+      LearningAlgorithm *la = 0;
       switch(creader.getLearningAlg()) {
-      case RR:
-	la = new RidgeRegression(*(dss[s].first), creader.getRRDelta());
+      case RR: {
+	RidgeRegression * rr = new RidgeRegression(*(dss[s].first));
+	rr->setDelta(creader.getRRDelta());
+	la = rr;
 	break;
-      case SVM:
-	la = new SVMachine(*(dss[s].first));
+      }
+      case SVM: {
+	SVMRegression *svm = new SVMRegression(*(dss[s].first));
+	la = svm;
 	break;
-      case NN:
-	la = new NNetworks(*(dss[s].first));
+      }
+#if 0
+      case NN: {
+	NNRegression * nn = NNRegression(*(dss[s].first));
+	la = nn;
 	break;
+      }
+#endif
       }
       Model m = la.run();
       lm->endCategory();
