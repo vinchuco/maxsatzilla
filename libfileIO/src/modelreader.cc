@@ -3,11 +3,13 @@
 #include <iostream>
 #include <iterator>
 
+#include <cstdlib>
+
 using std::cerr;
 using std::make_pair;
 
 ModelReader::ModelReader(const string &configFile)
-  : Reader(configFile), featureStd(false), outputStd(false) {
+  : Reader(configFile), featureStd(false), outputStd(false), la(NUM_LA) {
   parseConfig();
   file.close();
 }
@@ -43,6 +45,18 @@ void ModelReader::parseConfig() {
 	outputStd = true;
       else if(paramName == "feastd")
 	featureStd = true;
+      else if(paramName == "la") {
+	string laStr = getString();
+	if(laStr == "RR")
+	  la = RR;
+	else if(laStr == "SVM")
+	  la = SVM;
+	else if(laStr == "NN")
+	  la = NN;
+	else {
+	  cerr << "Warning: Can't recognize Learning Algorithm (la) option in model file. Ignoring.";
+	}
+      }
       else if(paramName == "solvers") {
 	outLabels = getVector<string>();
 	const vector<string>::const_iterator end = outLabels.end();

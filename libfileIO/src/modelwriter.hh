@@ -10,6 +10,7 @@
 
 #include "reader.hh"
 #include "featurelabel.hh" 
+#include "learningalg.hh"
 #include "triple.hpp"
 
 using std::pair;
@@ -33,6 +34,7 @@ public:
   void writeFExpansion(const vector<uint>&);
   void writeFEOrder(uint);
   void writeStdFactors(const string&, const vector<Triple<FeatureLabel, double, double> >&);
+  void writeLearningAlg(LearningAlg);
   void endWrite();
 
 private:

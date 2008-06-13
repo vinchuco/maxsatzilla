@@ -8,6 +8,7 @@
 
 #include "pputils.hh"
 #include "featurelabel.hh"
+#include "learningalg.hh"
 
 using std::map;
 using std::set;
@@ -26,7 +27,7 @@ using std::make_pair;
  */
 class Model {
 public:
-  Model(LearningAlg);
+  Model();
 
   // Const Iterator for the regressors
   typedef map<FeatureLabel, double>::const_iterator const_iterator;
@@ -41,7 +42,6 @@ public:
   void remRegressor(const FeatureLabel&);
   double getRegressor(const FeatureLabel&) const;
 
-  LearningAlg getLearningAlg() const { return la;               }
   double getRegressor() const { return freeRegressor;           }  
   void   delRegressor()       { freeRegressor = 0.0;            }
   uint   nbRegressors() const { return regressorMap.size() + 1; }
@@ -50,7 +50,6 @@ public:
   set<string> computeRawLabels() const;
   
 protected:
-  LearningAlg la; 
   double freeRegressor;
   map<FeatureLabel, double> regressorMap; ///< Map where regressor values are kept by id, which is a string.
 };

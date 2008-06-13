@@ -5,9 +5,11 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
+#include <functional>
 
 #include "pputils.hh"
 #include "reader.hh"
+#include "learningalg.hh"
 
 using std::string;
 using std::vector;
@@ -35,8 +37,9 @@ public:
   uint   getFEPartOrder()                 const { return fePartOrder;              }
   uint   getPercentTest()                 const { return percentTest;              }
   LearningAlg getLearningAlg()            const { return la;                       }
+
 private:
-  struct tolower_op : public unary_function<char, char> {
+  struct tolower_op : public std::unary_function<char, char> {
     char operator()(char x) { return tolower(x); }
   };
 

@@ -1,32 +1,32 @@
 #include "svmregression.hh"
 
+#include <cassert>
+#include <torch/QCTrainer.h>
+#include <torch/SVMRegression.h>
+
 SVMRegression::SVMRegression(const MSZDataSet &data) 
   : LearningAlgorithm(data), kernelType(DOT) { }
 
 SVMRegression::SVMRegression(SVMKernel kernelType, const MSZDataSet &data)
   : LearningAlgorithm(data), kernelType(kernelType) { }
 
-SVMRegression::~SVMRegression() {
+SVMRegression::~SVMRegression() { }
 
-
-
-}
-
-Model run() {
+Model SVMRegression::run() {
   
   // Set the dataset for SVM
-  Kernel *k = 0;
+  Torch::Kernel *k = 0;
 
   // Create SVM
-  switch(kernel) {
+  switch(kernelType) {
   case DOT:
-    k = new DotKernel((real)(params[0]));
+    k = new Torch::DotKernel((real)(params[0]));
     break;
   case POLYNOMIAL:
-    k = new PolynomialKernel((int)(params[0]), (real)(params[1]), (real)(params[2]));
+    k = new Torch::PolynomialKernel((int)(params[0]), (real)(params[1]), (real)(params[2]));
     break;
   case GAUSSIAN:
-    k = new GaussianKernel((real)(params[0]));
+    k = new Torch::GaussianKernel((real)(params[0]));
     break;
   default:
     assert(false);
@@ -34,10 +34,14 @@ Model run() {
   }
   
   // Create Trainer
-  SVMRegression alg(k);
-  QCTrainer trainer(&alg);
+  Torch::SVMRegression alg(k);
+  Torch::QCTrainer trainer(&alg);
+
+  // Transform out dataset to their dataset
 
   // Generate Model
-  
+  trainer.train(ds, NULL);
+
+  // Get results into our model and return
 
 }

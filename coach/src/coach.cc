@@ -13,11 +13,11 @@
 #include "modeltesting.hh"
 #include "triple.hpp"
 #include "dataset.hh"
+#include "logmgm.hh"
 #include "forwardselection.hh"
 #include "learningalgorithm.hh"
 #include "ridgeregression.hh"
 #include "svmregression.hh"
-#include "logmgm.hh"
 
 using std::vector;
 using std::string;
@@ -226,15 +226,18 @@ int main(int argc, char *argv[]) {
 	la = svm;
 	break;
       }
-#if 0
       case NN: {
-	NNRegression * nn = NNRegression(*(dss[s].first));
-	la = nn;
+	//NNRegression * nn = NNRegression(*(dss[s].first));
+	//la = nn;
+	exit(EXIT_FAILURE);
 	break;
       }
-#endif
+      default: 
+	cerr << "No known learning method defined.\n";
+	exit(EXIT_FAILURE);
+	break;
       }
-      Model m = la.run();
+      Model m = la->run();
       lm->endCategory();
 
       // Outputting the model to file

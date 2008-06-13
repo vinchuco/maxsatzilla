@@ -1,5 +1,7 @@
 #include "modelwriter.hh"
 
+#include <cstdlib>
+
 ModelWriter::ModelWriter(const string &path) 
   : file(path.c_str()) {
 
@@ -93,4 +95,25 @@ void ModelWriter::writeStdFactors(const string &sname, const vector<Triple<Featu
 
 void ModelWriter::writeFEOrder(uint feorder) {
   file << "p feorder " << feorder << "\n";
+}
+
+void ModelWriter::writeLearningAlg(LearningAlg la) {
+  string laStr;
+  
+  switch(la) {
+  case RR:
+    laStr = "RR";
+    break;
+  case SVM:
+    laStr = "SVM";
+    break;
+  case NN:
+    laStr = "NN";
+    break;
+  default:
+    cerr << "Trying to write unknown Learning Algorithm descriptor\n";
+    break;
+  }
+
+  file << "p la " << laStr << "\n";
 }

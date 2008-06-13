@@ -13,7 +13,7 @@ learningalgorithm.cc
 
 coach_CPPFLAGS = 
 coach_CXXFLAGS = -std=c++98 -g -Wall #-Weffc++
-coach_LDFLAGS = -g -lgsl -lfileio
+coach_LDFLAGS = -g -lgsl -lfileio -ltorch
 
 if DARWIN
 coach_SOURCES += gslutils.cc

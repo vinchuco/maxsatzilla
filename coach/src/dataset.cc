@@ -8,6 +8,7 @@
 #include <cmath>
 #include <utility>
 #include <map>
+#include <algorithm>
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_combination.h>

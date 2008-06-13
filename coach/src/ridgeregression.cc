@@ -11,11 +11,11 @@
 using std::cerr;
 
 RidgeRegression::RidgeRegression(const MSZDataSet &data) :
-  data(data), delta(1.0) { }
+  LearningAlgorithm(data), delta(1.0) { }
 
 RidgeRegression::~RidgeRegression() { }
 
-Model RidgeRegression::run(double delta) {
+Model RidgeRegression::run() {
 
   const uint nbParams = data.getNFeatures()+1;
 

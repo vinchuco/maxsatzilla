@@ -2,11 +2,13 @@
 
 #include <iostream>
 #include <iterator>
+#include <algorithm>
+#include <cstdlib>
 
 using std::cerr;
 
 ConfigReader::ConfigReader(const string &configFile)
-  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NONE) {
+  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NUM_LA) {
   parseConfig();
   file.close();
 }

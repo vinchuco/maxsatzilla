@@ -4,6 +4,7 @@ AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_SRCDIR([src/configreader.cc])
 AC_CONFIG_HEADER([config.h])
 AC_CONFIG_SUBDIRS([libltdl])
+AC_CONFIG_MACRO_DIR([m4])
 AC_LANG([C++])
 
 # Checks for programs.

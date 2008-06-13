@@ -8,6 +8,7 @@
 
 #include "dataset.hh"
 #include "model.hh"
+#include "learningalgorithm.hh" 
 
 using std::string;
 using std::vector;

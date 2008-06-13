@@ -5,7 +5,7 @@ enum LearningAlg {
   RR,           /// RidgeRegression Algorithm
   SVM,          /// Support Vector Machines
   NN,           /// NeuralNetworks
-  NONE          /// None Selected
+  NUM_LA        /// None Selected
 };
 
 #endif // LEARNINGALG_HH

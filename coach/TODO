@@ -6,3 +6,4 @@
 	* Improve error and warning handling
 	* Choose best forward selection parameter 
 	* Choose best learning algorithm
+	* Reimplement mszreader.hpp

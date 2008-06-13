@@ -2,6 +2,9 @@
 #define SVMREGRESSION_HH
 
 #include "dataset.hh"
+#include "learningalgorithm.hh"
+#include "model.hh"
+#include <torch/general.h>
 
 class SVMRegression : public LearningAlgorithm {
 public:

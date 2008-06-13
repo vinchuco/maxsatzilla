@@ -16,7 +16,7 @@ LogMgm::LogMgm() : setupDone(false), streams(NUMCATS) {
 
 LogMgm::~LogMgm() {
 
-  for(uint i = 0; i < streams.size(); ++i) {
+  for(unsigned int i = 0; i < streams.size(); ++i) {
     streams[i]->close();
     delete streams[i];
   }

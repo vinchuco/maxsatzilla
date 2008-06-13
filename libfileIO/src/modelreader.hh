@@ -27,6 +27,7 @@ public:
   const Model& getModel(const string&) const;
   pair<double, double> getStdFactors(const string&, const FeatureLabel&) const;
   vector<string> getOutputLabels()        const { return outLabels;           }
+  LearningAlg getLearningAlg()            const { return la;                  }
 
 private:
   void parseConfig();
@@ -41,6 +42,7 @@ private:
   vector<vector<uint> > fePartitions;
   map<string, Model> models;
   map<string, vector<Triple<FeatureLabel, double, double> > > factors; ///< Mapping solvers to maps of features to factors
+  LearningAlg la; 
 };
 
 #endif // MODELREADER_HH
