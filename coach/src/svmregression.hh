@@ -4,26 +4,36 @@
 #include "dataset.hh"
 #include "learningalgorithm.hh"
 #include "model.hh"
-#include <torch/general.h>
 
 class SVMRegression : public LearningAlgorithm {
 public:
-  enum SVMKernel {DOT, POLYNOMIAL, GAUSSIAN};
+  enum RegressionType {NU_R, EPSILON_R};
+  enum SVMKernel {LINEAR_K, POLY_K, RBF_K, SIGMOID_K};
 
   SVMRegression(const MSZDataSet &);
   SVMRegression(SVMKernel, const MSZDataSet &);
   ~SVMRegression();
   
-  void setParams(const real p[]) { for(int i = 0; i < 3; ++i) params[i] = p[i]; }
-
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model
   // for a given output
-  virtual Model run();
+  virtual SVMModel* run();
 
 private:
-  SVMKernel kernelType;   ///< Kernel to be used on regression
-  real params[3];         ///< Parameters
+  RegressionType regressionType; ///< Type of regression
+  SVMKernel kernelType;          ///< Kernel to be used on regression
+  
+  int degree;
+  double gamma;
+  double coef0;
+  
+  double cacheSize;
+  double eps;
+  double C;
+  double nu;
+  double p;
+  int shrinking;
+  int probability;
 };
 
 #endif // SVMREGRESSION_HH

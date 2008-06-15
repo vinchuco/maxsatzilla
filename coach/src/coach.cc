@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
   
   ifstream in(creader.getTrainingSetFilename().c_str());
   if (!in.is_open()) {
-    cerr << "Error: Could not open file: "<< creader.getTrainingSetFilename() << "\n";
+    cerr << "Error: Could not open file: " << creader.getTrainingSetFilename() << "\n";
     exit(EXIT_FAILURE);
   }
 

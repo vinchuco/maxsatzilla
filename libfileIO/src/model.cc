@@ -9,10 +9,10 @@
 
 using std::cerr;
 
-Model::Model() 
+RRModel::Model() 
   : freeRegressor(0) { }
 
-void Model::addRegressor(double val, const FeatureLabel& id) {
+void RRModel::addRegressor(double val, const FeatureLabel& id) {
   const_iterator it = regressorMap.find(id);
   
   if(it != end()) {
@@ -23,7 +23,7 @@ void Model::addRegressor(double val, const FeatureLabel& id) {
   regressorMap[id] = val;
 }
 
-void Model::addRegressor(double val) {
+void RRModel::addRegressor(double val) {
   if(freeRegressor != 0) {
     MSZWarn("You're trying to set the free regressor already set to %f, to a new value %f. Delete it first if you really want to add it to the model. For now I'm ignoring your request.", val, freeRegressor);
     return;
@@ -31,7 +31,7 @@ void Model::addRegressor(double val) {
   freeRegressor = val;	    
 }
 
-void Model::remRegressor(const FeatureLabel& id) {
+void RRModel::remRegressor(const FeatureLabel& id) {
   map<FeatureLabel, double>::iterator it = regressorMap.find(id);
 
   if(it == regressorMap.end()) {
@@ -42,7 +42,7 @@ void Model::remRegressor(const FeatureLabel& id) {
   regressorMap.erase(it);
 }
 
-double Model::getRegressor(const FeatureLabel& id) const {
+double RRModel::getRegressor(const FeatureLabel& id) const {
   map<FeatureLabel, double>::const_iterator it = regressorMap.find(id);
 
   if(it == regressorMap.end()) {
@@ -53,7 +53,7 @@ double Model::getRegressor(const FeatureLabel& id) const {
   return it->second;
 }
 
-double Model::computeModelOutput(const map<string, double>& features) const {
+double RRModel::computeModelOutput(const map<string, double>& features) const {
   
   double y = freeRegressor;
   const map<string, double>::const_iterator featuresEnd = features.end();
@@ -70,7 +70,7 @@ double Model::computeModelOutput(const map<string, double>& features) const {
       
       const map<string, double>::const_iterator fval = features.find(f->first);
       if(fval == featuresEnd) {
-	cerr << "Model::computeModelOutput: During model computation, failed to find feature " << f->first << "\n"
+	cerr << "RRModel::computeModelOutput: During model computation, failed to find feature " << f->first << "\n"
 	     << "Dumping list of features found:\n";
 	for(map<string, double>::const_iterator featuresit = features.begin();
 	    featuresit != features.end();
@@ -86,7 +86,7 @@ double Model::computeModelOutput(const map<string, double>& features) const {
   return y;
 }
 
-set<string> Model::computeRawLabels() const {
+set<string> RRModel::computeRawLabels() const {
 
   set<string> rlabels;
   const_iterator endit = end();

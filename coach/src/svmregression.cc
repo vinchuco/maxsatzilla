@@ -1,47 +1,74 @@
 #include "svmregression.hh"
 
+#include <iostream>
+#include <cstdlib>
 #include <cassert>
-#include <torch/QCTrainer.h>
-#include <torch/SVMRegression.h>
+#include <svm.h>
 
 SVMRegression::SVMRegression(const MSZDataSet &data) 
-  : LearningAlgorithm(data), kernelType(DOT) { }
+  : LearningAlgorithm(data), kernelType(LINEAR_K) { }
 
 SVMRegression::SVMRegression(SVMKernel kernelType, const MSZDataSet &data)
   : LearningAlgorithm(data), kernelType(kernelType) { }
 
 SVMRegression::~SVMRegression() { }
 
-Model SVMRegression::run() {
+SVMModel *SVMRegression::run() {
   
-  // Set the dataset for SVM
-  Torch::Kernel *k = 0;
-
   // Create SVM
-  switch(kernelType) {
-  case DOT:
-    k = new Torch::DotKernel((real)(params[0]));
-    break;
-  case POLYNOMIAL:
-    k = new Torch::PolynomialKernel((int)(params[0]), (real)(params[1]), (real)(params[2]));
-    break;
-  case GAUSSIAN:
-    k = new Torch::GaussianKernel((real)(params[0]));
-    break;
-  default:
-    assert(false);
-    break;
+  struct svm_parameter *svm_params = new struct svm_parameter;
+  svm_params->svm_type = regressionType;
+  svm_params->kernel_type = kernelType;
+  
+  svm_params->degree = degree;
+  svm_params->gamma = gamma;
+  svm_params->coef0 = coef0;
+  svm_params->cache_size = cacheSize;
+  svm_params->eps = eps;
+  svm_params->C = C;
+  svm_params->nu = nu;
+  svm_params->p = p;
+  svm_params->shrinking = shrinking;
+  svm_params->probability = probability;
+
+  // Create an SVM problem
+  svm_problem *svmp = new svm_problem;
+  svmp->l = data.getNRows();
+
+  double *y = new double [data.getNRows()];
+  for(unsigned int i = 0; i < data.getNRows(); ++i)
+    y[i] = data.getOutputValue(i);
+  svmp->y = y;
+
+  struct svm_node **x = new struct svm_node* [data.getNRows()];
+  for(unsigned int i = 0; i < data.getNRows(); ++i) {
+    x[i] = new struct svm_node [data.getNFeatures() + 1];
+    
+    for(unsigned int f = 0; f <= data.getNFeatures(); ++f) {
+      if(f != data.getNFeatures()) {
+	x[i][f].index = f+1;
+	x[i][f].value = data.getFeatureValue(i, f);
+      }
+      else
+	x[i][f].index = -1;
+    }
+  }
+  svmp->x = x;
+    
+  // Generate Model
+  
+  // Check validity of parameters
+  const char *err = svm_check_parameter(svmp, svm_params);
+  if(err != NULL) {
+    std::cerr << "SVMParams error: " << err << "\n";
+    exit(EXIT_FAILURE);
   }
   
-  // Create Trainer
-  Torch::SVMRegression alg(k);
-  Torch::QCTrainer trainer(&alg);
-
-  // Transform out dataset to their dataset
-
-  // Generate Model
-  trainer.train(ds, NULL);
+  struct svm_model *model = svm_train(svmp, svm_params);
 
   // Get results into our model and return
+  
+    
 
 }
+

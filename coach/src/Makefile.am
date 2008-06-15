@@ -9,11 +9,12 @@ mszreader.hpp          \
 logmgm.cc              \
 gsladdon.cc            \
 svmregression.cc       \
-learningalgorithm.cc
+learningalgorithm.cc   \
+../../../extlib/libsvm-2.86/svm.cpp
 
-coach_CPPFLAGS = 
+coach_CPPFLAGS = -I../../../extlib/libsvm-2.86/
 coach_CXXFLAGS = -std=c++98 -g -Wall #-Weffc++
-coach_LDFLAGS = -g -lgsl -lfileio -ltorch
+coach_LDFLAGS = -g -lgsl -lfileio
 
 if DARWIN
 coach_SOURCES += gslutils.cc

@@ -1,5 +1,5 @@
-#ifndef MODEL_HH
-#define MODEL_HH
+#ifndef RRMODEL_HH
+#define RRMODEL_HH
 
 #include <string>
 #include <utility>
@@ -25,9 +25,9 @@ using std::make_pair;
  *  where b_i are the coefficients of the model, or regressors (the important stuff) 
  *  and x_i are the variables of the model, the variables with which the model was trained.
  */
-class Model {
+class RRModel : public Model {
 public:
-  Model();
+  RRModel();
 
   // Const Iterator for the regressors
   typedef map<FeatureLabel, double>::const_iterator const_iterator;
@@ -54,4 +54,4 @@ protected:
   map<FeatureLabel, double> regressorMap; ///< Map where regressor values are kept by id, which is a string.
 };
 
-#endif // MODEL_HH
+#endif // RRMODEL_HH
