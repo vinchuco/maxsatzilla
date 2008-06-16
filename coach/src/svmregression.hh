@@ -12,7 +12,7 @@ public:
 
   SVMRegression(const MSZDataSet &);
   SVMRegression(SVMKernel, const MSZDataSet &);
-  ~SVMRegression();
+  virtual ~SVMRegression();
   
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model

@@ -9,6 +9,7 @@
 #include "pputils.hh"
 #include "featurelabel.hh"
 #include "learningalg.hh"
+#include "model.hh"
 
 using std::map;
 using std::set;
