@@ -67,8 +67,8 @@ SVMModel *SVMRegression::run() {
   struct svm_model *model = svm_train(svmp, svm_params);
 
   // Get results into our model and return
-  
-    
+  SVMModel * m = new SVMModel(svmp, model);
 
+  return m;
 }
 

@@ -7,6 +7,8 @@ modelreader.cc         \
 modelwriter.cc         \
 reader.cc              \
 model.cc               \
+svmmodel.cc            \
+rrmodel.cc             \
 configreader.hh        \
 featurelabel.hh        \
 modelreader.hh         \
@@ -14,6 +16,8 @@ modelwriter.hh         \
 pputils.hh             \
 reader.hh              \
 model.hh               \
+svmmodel.hh            \
+rrmodel.hh             \
 triple.hpp
 
 libfileio_la_CPPFLAGS =
