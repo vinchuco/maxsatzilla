@@ -12,7 +12,7 @@ RCOBJS    = $(addsuffix r,  $(COBJS))
 R64COBJS  = $(addsuffix x,  $(COBJS))
 
 EXEC      = minisat+
-MAXSATZILLA_DIR = $(HOME)/Research/maxsatzilla/
+MAXSATZILLA_DIR = $(shell cd ../../../../; pwd)
 
 CXX       = g++
 #CXX      = icpc
