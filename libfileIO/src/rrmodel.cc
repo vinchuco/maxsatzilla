@@ -9,7 +9,7 @@
 
 using std::cerr;
 
-RRModel::Model() 
+RRModel::RRModel() 
   : freeRegressor(0) { }
 
 void RRModel::addRegressor(double val, const FeatureLabel& id) {
