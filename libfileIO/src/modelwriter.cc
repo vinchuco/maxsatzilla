@@ -1,6 +1,9 @@
 #include "modelwriter.hh"
 
+#include <sstream>
 #include <cstdlib>
+
+#include <svm.h>
 
 ModelWriter::ModelWriter(const string &path) 
   : file(path.c_str()) {
@@ -107,9 +110,6 @@ void ModelWriter::writeLearningAlg(LearningAlg la) {
   case SVM:
     laStr = "SVM";
     break;
-  case NN:
-    laStr = "NN";
-    break;
   default:
     cerr << "Trying to write unknown Learning Algorithm descriptor\n";
     break;
@@ -121,18 +121,12 @@ void ModelWriter::writeLearningAlg(LearningAlg la) {
 void ModelWriter::writeModelFilename(struct svm_model *model) {
 
   // Lets create a random name for the model.
-  const int r = rand();
-  const char *r_str = itoa(r);
-  const char *const_str = "svm_model_";
+  std::stringstream out;
+  out << rand();
+  string filename("svm_model_");
+  filename += out.str();
 
-  size_t filename_sz = strlen(const_str) + strlen(r_str) + 1;
-  char *filename = malloc(filename_sz * sizeof(char));
-  filename[filename_sz] = '\0';
-
-  strcpy(filename, const_str);
-  strcpy(filename + strlen(const_str), r_str);
-
-  svm_save_model(filename, model);
+  svm_save_model(filename.c_str(), model);
   file << "p svm_model_file " << filename << "\n";
 
 }

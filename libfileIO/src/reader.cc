@@ -2,6 +2,8 @@
 
 #include <iostream>
 
+#include <cstdlib>
+
 using std::cerr;
 
 Reader::Reader(const string& path) 

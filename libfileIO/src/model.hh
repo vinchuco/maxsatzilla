@@ -1,6 +1,8 @@
 #ifndef MODEL_HH
 #define MODEL_HH
 
+#include "featurelabel.hh"
+
 class Model {
 public:
   Model();
@@ -9,7 +11,7 @@ public:
   virtual void addRegressor(double, const FeatureLabel&) = 0;
   virtual void addRegressor(double) = 0;
  
-private:  
+private:
 
 };
 

@@ -1,5 +1,11 @@
 #include "svmmodel.hh"
 
+#include <iostream>
+
+#include <cstdlib>
+
+using std::cerr;
+
 SVMModel::SVMModel()
   : prob(NULL), model(NULL) { }
 
@@ -13,7 +19,7 @@ SVMModel::SVMModel(const char *fname)
 
 SVMModel::~SVMModel() {
   svm_destroy_model(model);
-  free(prob)
+  free(prob);
 }
 
 void SVMModel::setStructs(struct svm_problem *svmp, struct svm_model *svmm) {

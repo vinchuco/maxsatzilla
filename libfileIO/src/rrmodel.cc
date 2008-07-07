@@ -1,4 +1,4 @@
-#include "model.hh"
+#include "rrmodel.hh"
 
 #include "pputils.hh"
 

@@ -70,7 +70,7 @@ void ModelReader::parseConfig() {
 	const string solverName = getString();
 	const FeatureLabel featureName = parseFeatureLabel();
 	const double value = getDouble();
-	models[solverName].addRegressor(value, featureName);
+	models[solverName]->addRegressor(value, featureName);
 #ifndef NDEBUG
 	cout << "Weight " << solverName << " " << featureName << " " << value << "\n";
 #endif
@@ -78,7 +78,7 @@ void ModelReader::parseConfig() {
       else if(paramName == "freeweight") {
 	const string solverName = getString();
 	const double value = getDouble();
-	models[solverName].addRegressor(value);
+	models[solverName]->addRegressor(value);
 #ifndef NDEBUG
 	cout << "FreeWeight " << solverName << " " << value << "\n";
 #endif
@@ -157,12 +157,11 @@ FeatureLabel ModelReader::parseFeatureLabel() {
 
 /// @returns the learning algorithm used to generate a model for the given solver name.
 /// @returns It returns NUM_LA if no solver with that name is found.
-LearningAlg getLearningAlg(const string& sname) const {
+LearningAlg ModelReader::getLearningAlg(const string& sname) const {
   
   const map<string, LearningAlg>::const_iterator it = las.find(sname);
   if(it == las.end())
     return NUM_LA;
   else
-    return *it;
-
+    return it->second;
 }

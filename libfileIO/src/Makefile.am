@@ -18,7 +18,7 @@ reader.hh              \
 model.hh               \
 svmmodel.hh            \
 rrmodel.hh             \
-triple.hpp
+triple.hpp   
 
 libfileio_la_CPPFLAGS =
 libfileio_la_CXXFLAGS = -Wall -std=c++98
