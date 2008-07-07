@@ -9,6 +9,7 @@
 #include "featurelabel.hh"
 #include "triple.hpp"
 #include "model.hh"
+#include "learningalg.hh"
 
 using std::string;
 using std::map; 

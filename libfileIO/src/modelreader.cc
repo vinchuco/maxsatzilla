@@ -51,8 +51,6 @@ void ModelReader::parseConfig() {
 	  la = RR;
 	else if(laStr == "SVM")
 	  la = SVM;
-	else if(laStr == "NN")
-	  la = NN;
 	else {
 	  cerr << "Warning: Can't recognize Learning Algorithm (la) option in model file. Ignoring.";
 	}

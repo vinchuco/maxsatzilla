@@ -5,6 +5,8 @@
 #include <string>
 #include <ostream>
 
+#include "pputils.hh"
+
 using std::string;
 using std::map;
 
