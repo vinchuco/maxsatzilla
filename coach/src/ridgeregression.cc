@@ -15,7 +15,7 @@ RidgeRegression::RidgeRegression(const MSZDataSet &data) :
 
 RidgeRegression::~RidgeRegression() { }
 
-Model RidgeRegression::run() {
+RRModel *RidgeRegression::run() {
 
   const uint nbParams = data.getNFeatures()+1;
 

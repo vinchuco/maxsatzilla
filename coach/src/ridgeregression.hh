@@ -7,7 +7,7 @@
 #include <gsl/gsl_matrix.h>
 
 #include "dataset.hh"
-#include "model.hh"
+#include "rrmodel.hh"
 #include "learningalgorithm.hh" 
 
 using std::string;
@@ -29,7 +29,7 @@ public:
   // Runs ridge regression algorithm and outputs 
   // header file with static definition of model
   // for a given output.
-  virtual Model run();
+  virtual RRModel * run();
 
 private:
   double delta;           ///< Delta value for ridge regression

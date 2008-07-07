@@ -34,6 +34,8 @@ using namespace iomsz;
  */
 int main(int argc, char *argv[]) {
 
+  /// \todo This function needs to be SERIOUSLY split!
+
   if (argc != 3) {
     cerr << "usage: coach <coachconfigfile> <logdir>\n";
     exit(EXIT_FAILURE);
@@ -49,6 +51,7 @@ int main(int argc, char *argv[]) {
   string *instancesNames;
   double **data;
   
+  // Read training data
   ifstream in(creader.getTrainingSetFilename().c_str());
   if (!in.is_open()) {
     cerr << "Error: Could not open file: " << creader.getTrainingSetFilename() << "\n";
@@ -226,18 +229,12 @@ int main(int argc, char *argv[]) {
 	la = svm;
 	break;
       }
-      case NN: {
-	//NNRegression * nn = NNRegression(*(dss[s].first));
-	//la = nn;
-	exit(EXIT_FAILURE);
-	break;
-      }
       default: 
 	cerr << "No known learning method defined.\n";
 	exit(EXIT_FAILURE);
 	break;
       }
-      Model m = la->run();
+      Model* m = la->run();
       lm->endCategory();
 
       // Outputting the model to file

@@ -3,7 +3,7 @@
 
 #include "dataset.hh"
 #include "learningalgorithm.hh"
-#include "model.hh"
+#include "svmmodel.hh"
 
 class SVMRegression : public LearningAlgorithm {
 public:

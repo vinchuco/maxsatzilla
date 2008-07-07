@@ -6,6 +6,7 @@ AC_INIT([Coach], [0.2.1_Beast], [jp3@ecs.soton.ac.uk])
 AM_INIT_AUTOMAKE([-Wall -Werror])
 AC_CONFIG_SRCDIR([src/ridgeregression.cc])
 AC_CONFIG_HEADER([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 AC_LANG([C++])
 
 # Checks for programs.
