@@ -9,7 +9,7 @@ public:
   virtual void addRegressor(double, const FeatureLabel&) = 0;
   virtual void addRegressor(double) = 0;
  
-private: 
+private:  
 
 };
 
