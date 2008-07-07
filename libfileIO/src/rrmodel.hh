@@ -29,6 +29,7 @@ using std::make_pair;
 class RRModel : public Model {
 public:
   RRModel();
+  ~RRModel();
 
   // Const Iterator for the regressors
   typedef map<FeatureLabel, double>::const_iterator const_iterator;

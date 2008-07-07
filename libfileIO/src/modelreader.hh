@@ -8,27 +8,29 @@
 #include "reader.hh"
 #include "featurelabel.hh"
 #include "triple.hpp"
-#include "model.hh"
 #include "learningalg.hh"
+
+class Model;
 
 using std::string;
 using std::map; 
 using std::pair;
 
+
 class ModelReader : public Reader {
 public:
   ModelReader(const string&);
   
-  string getTrainingSetFilename()         const { return trainingSetFilename; }
-  string getOutputModelFilename()         const { return outputModelFilename; }
-  bool   getFeatureStd()                  const { return featureStd;          }
-  bool   getOutputStd()                   const { return outputStd;           }
-  vector<vector<uint> > getFEPartitions() const { return fePartitions;        }
-  uint   getFEOrder()                     const { return feOrder;             }
-  const Model& getModel(const string&) const;
+  string getTrainingSetFilename()           const { return trainingSetFilename; }
+  string getOutputModelFilename()           const { return outputModelFilename; }
+  bool   getFeatureStd()                    const { return featureStd;          }
+  bool   getOutputStd()                     const { return outputStd;           }
+  vector<vector<uint> > getFEPartitions()   const { return fePartitions;        }
+  uint   getFEOrder()                       const { return feOrder;             }
+  Model *getModel(const string&)            const;
   pair<double, double> getStdFactors(const string&, const FeatureLabel&) const;
-  vector<string> getOutputLabels()        const { return outLabels;           }
-  LearningAlg getLearningAlg()            const { return la;                  }
+  vector<string> getOutputLabels()          const { return outLabels;           }
+  LearningAlg getLearningAlg(const string&) const;
 
 private:
   void parseConfig();
@@ -41,9 +43,9 @@ private:
   uint feOrder;
   vector<string> outLabels;
   vector<vector<uint> > fePartitions;
-  map<string, Model> models;
+  map<string, LearningAlg> las;
+  map<string, Model *> models;
   map<string, vector<Triple<FeatureLabel, double, double> > > factors; ///< Mapping solvers to maps of features to factors
-  LearningAlg la; 
 };
 
 #endif // MODELREADER_HH

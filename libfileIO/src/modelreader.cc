@@ -1,4 +1,6 @@
 #include "modelreader.hh"
+#include "rrmodel.hh"
+#include "svmmodel.hh"
 
 #include <iostream>
 #include <iterator>
@@ -9,7 +11,7 @@ using std::cerr;
 using std::make_pair;
 
 ModelReader::ModelReader(const string &configFile)
-  : Reader(configFile), featureStd(false), outputStd(false), la(NUM_LA) {
+  : Reader(configFile), featureStd(false), outputStd(false) {
   parseConfig();
   file.close();
 }
@@ -46,14 +48,15 @@ void ModelReader::parseConfig() {
       else if(paramName == "feastd")
 	featureStd = true;
       else if(paramName == "la") {
+	string solverName = getString();
 	string laStr = getString();
-	if(laStr == "RR")
-	  la = RR;
-	else if(laStr == "SVM")
-	  la = SVM;
-	else {
+	las[solverName] = RR;
+	if(laStr == "RR") 
+	  models[solverName] = new RRModel();
+	else if(laStr == "SVM") 
+	  models[solverName] = new SVMModel();
+	else 
 	  cerr << "Warning: Can't recognize Learning Algorithm (la) option in model file. Ignoring.";
-	}
       }
       else if(paramName == "solvers") {
 	outLabels = getVector<string>();
@@ -61,7 +64,7 @@ void ModelReader::parseConfig() {
 	for(vector<string>::const_iterator it = outLabels.begin();
 	    it != end;
 	    ++it)
-	  models[*it] = Model();
+	  models[*it] = 0;
       }
       else if(paramName == "weight") {
 	const string solverName = getString();
@@ -99,9 +102,9 @@ void ModelReader::parseConfig() {
   }
 }
 
-const Model& ModelReader::getModel(const string& sname) const {
+Model* ModelReader::getModel(const string& sname) const {
 
-  map<string, Model>::const_iterator it = models.find(sname);
+  map<string, Model*>::const_iterator it = models.find(sname);
 
   if(it == models.end()) {
     cerr << "ModelReader::getModel: can't find model for solver " << sname << "\n";
@@ -109,7 +112,6 @@ const Model& ModelReader::getModel(const string& sname) const {
   }
 
   return it->second;
-  
 }
 
 pair<double, double> ModelReader::getStdFactors(const string& sname, const FeatureLabel& feature) const {
@@ -151,4 +153,16 @@ FeatureLabel ModelReader::parseFeatureLabel() {
   }
   
   return fl;
+}
+
+/// @returns the learning algorithm used to generate a model for the given solver name.
+/// @returns It returns NUM_LA if no solver with that name is found.
+LearningAlg getLearningAlg(const string& sname) const {
+  
+  const map<string, LearningAlg>::const_iterator it = las.find(sname);
+  if(it == las.end())
+    return NUM_LA;
+  else
+    return *it;
+
 }

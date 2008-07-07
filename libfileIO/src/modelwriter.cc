@@ -117,3 +117,22 @@ void ModelWriter::writeLearningAlg(LearningAlg la) {
 
   file << "p la " << laStr << "\n";
 }
+
+void ModelWriter::writeModelFilename(struct svm_model *model) {
+
+  // Lets create a random name for the model.
+  const int r = rand();
+  const char *r_str = itoa(r);
+  const char *const_str = "svm_model_";
+
+  size_t filename_sz = strlen(const_str) + strlen(r_str) + 1;
+  char *filename = malloc(filename_sz * sizeof(char));
+  filename[filename_sz] = '\0';
+
+  strcpy(filename, const_str);
+  strcpy(filename + strlen(const_str), r_str);
+
+  svm_save_model(filename, model);
+  file << "p svm_model_file " << filename << "\n";
+
+}

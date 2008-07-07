@@ -6,8 +6,13 @@
 
 class SVMModel : public Model {
 public:
+  SVMModel();
+  SVMModel(const char *);
   SVMModel(struct svm_problem *, struct svm_model *);
   ~SVMModel();
+
+  void setStructs(struct svm_problem *, struct svm_model *);
+  void setStructsFromFile(const char *);
 
 private:
   struct svm_problem *prob;
