@@ -8,9 +8,7 @@ public:
 
   virtual void addRegressor(double, const FeatureLabel&) = 0;
   virtual void addRegressor(double) = 0;
-  virtual void remRegressor(const FeatureLabel&) = 0;
-  virtual double getRegressor(const FeatureLabel&) const = 0;
-
+ 
 private:
 
 };

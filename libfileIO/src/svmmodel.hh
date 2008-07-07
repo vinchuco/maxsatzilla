@@ -14,6 +14,10 @@ public:
   void setStructs(struct svm_problem *, struct svm_model *);
   void setStructsFromFile(const char *);
 
+  // Not implementable
+  void addRegressor(double, const FeatureLabel&);
+  void addRegressor(double);
+
 private:
   struct svm_problem *prob;
   struct svm_model *model;

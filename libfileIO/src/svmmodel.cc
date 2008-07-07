@@ -26,3 +26,13 @@ void SVMModel::setStructsFromFile(const char *fname) {
   if(model == NULL)
     cerr << "SVMModel : Unable to load model from " << fname << "\n";
 }
+
+void SVMModel::addRegressor(double, const FeatureLabel&) {
+  cerr << "SVMModel : Should not have been called.";
+  exit(EXIT_FAILURE);
+}
+
+void SVMModel::addRegressor(double) {
+  cerr << "SVMModel : Should not have been called.";
+  exit(EXIT_FAILURE);
+}
