@@ -183,8 +183,8 @@ void build_structure() {
     *vars_signs = NONE;  
   }
   for (i=0; i<NB_VAR; i++) { 
-    neg_in[i] = (int *)malloc((neg_nb[i]+1) * sizeof(int));
-    pos_in[i] = (int *)malloc((pos_nb[i]+1) * sizeof(int));
+    neg_in[i] = (int *)malloc((neg_nb[i]+pos_nb[i]+1) * sizeof(int));
+    pos_in[i] = (int *)malloc((pos_nb[i]+neg_nb[i]+1) * sizeof(int));
     neg_in[i][neg_nb[i]]=NONE; pos_in[i][pos_nb[i]]=NONE;
     neg_nb[i] = 0; pos_nb[i] = 0;
     var_state[i] = ACTIVE;

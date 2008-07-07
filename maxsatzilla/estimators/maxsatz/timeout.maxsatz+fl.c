@@ -1452,8 +1452,9 @@ void init() {
 }
  
 #define LOCAL_SEARCH_TIMEOUT 5
+#define BNB_TIMEOUT 5
 #define LOCAL_SEARCH_MAX_RUNS 100
-#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + 5)
+#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
 
 void timeout_handler( int signal ) {
   printf("Time out %d sec.\n", TOTAL_TIMEOUT );
@@ -1470,7 +1471,7 @@ char* emptyFileName() {
   vlineFilename = mktemp(vlineFilename);
   return vlineFilename;
 }
-
+/*
 int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
   char sTimeout[64];
   char sRuns[64];
@@ -1507,7 +1508,7 @@ int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
   fclose(ft);
   return (int)best_solution;
 }
-
+*/
 main(int argc, char *argv[]) {
   char saved_input_file[WORD_LENGTH];
   int i,  var; 
@@ -1530,7 +1531,8 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
+    if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
+    //localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
     init();
     dpl();
     break;
@@ -1544,7 +1546,7 @@ main(int argc, char *argv[]) {
 	        
   printf ("Program terminated in %5.3f seconds.\n",
 	  ((double)(endtime-begintime)/CLK_TCK));
-
+  /*
   fp_time = fopen("timetable", "a");
   fprintf(fp_time, "maxsatz14bis+fl %s %5.3f %ld %ld %d %d %d %d\n", 
 	  saved_input_file, ((double)(endtime-begintime)/CLK_TCK), 
@@ -1555,5 +1557,6 @@ main(int argc, char *argv[]) {
 	 NB_BRANCHE, NB_BACK,
 	 UB, NB_VAR, INIT_NB_CLAUSE, NB_CLAUSE-INIT_NB_CLAUSE);
   fclose(fp_time);
+  */
   return TRUE;
 }

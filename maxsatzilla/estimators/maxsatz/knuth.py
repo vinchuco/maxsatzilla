@@ -3,6 +3,10 @@
 import os, sys, re
 import stats
 
+if len( sys.argv ) < 2:
+   print 'usage: ' + sys.argv[0] + ' <file-name>'
+   sys.exit(-1)
+
 def print_data( list ):
    statistics = stats.Stats( list )
    print 'Average ' + str( statistics.avg() )
@@ -18,7 +22,7 @@ branches = []
 backtracks = []
 
 for i in range( Iterations ):
-   print "Iteration " + str( i )
+   #print "Iteration " + str( i )
    fp = os.popen("./knuth.maxsatz+fl " + sys.argv[1] )
    for line in fp:
       m = re.search( 'NB_MONO= (\d+), NB_UNIT= (\d+), NB_BRANCHE= (\d+), NB_BACK= (\d+)', line)

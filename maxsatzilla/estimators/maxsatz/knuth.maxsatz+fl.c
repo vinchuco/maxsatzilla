@@ -1441,7 +1441,7 @@ char* emptyFileName() {
   vlineFilename = mktemp(vlineFilename);
   return vlineFilename;
 }
-
+/*
 int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
   char sTimeout[64];
   char sRuns[64];
@@ -1478,7 +1478,7 @@ int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
   fclose(ft);
   return (int)best_solution;
 }
-
+*/
 main(int argc, char *argv[]) {
   char saved_input_file[WORD_LENGTH];
   int i,  var; 
@@ -1498,7 +1498,8 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
+    if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
+    //localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
     init();
     dpl();
     break;
