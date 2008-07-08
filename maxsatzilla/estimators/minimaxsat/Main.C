@@ -215,12 +215,13 @@ void parseOptions(int argc, char** argv)
 	       int iaux=atoi(arg+ 3);
 	       if(iaux==0 or iaux==1) opt_lc=iaux;
 	    }
+	    /*
 	    else if (strncmp(arg, "-l="      ,   3) == 0)
 	    {
 	       int iaux=atoi(arg+ 3);
 	       if(iaux==0 or iaux==1) opt_ls=iaux;
 	    }
-
+	    */
 	    else if (strncmp(arg, "-t="      ,   3) == 0)
 	    {
 	       int iaux=atoi(arg+ 3);
@@ -330,6 +331,16 @@ static void SIGTERM_handler(int signum) {
     SatELite::deleteTmpFiles();
     _exit(pb_solver->best_goalvalue == Int_MAX ? 0 : 10); }
 
+#define LOCAL_SEARCH_TIMEOUT 5
+#define BNB_TIMEOUT 5
+#define LOCAL_SEARCH_MAX_RUNS 100
+#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
+
+void SIGALRM_handler( int signal ) {
+  printf("Time out %d sec.\n", TOTAL_TIMEOUT );
+  outputResult(*pb_solver, false);
+  _exit(0);
+}
 
 void printStats(BasicSolverStats& stats, double cpu_time)
 {
@@ -348,6 +359,7 @@ PbSolver::solve_Command convert(Command cmd) {
     case cmd_FirstSolution: return PbSolver::sc_FirstSolution;
     case cmd_AllSolutions:  return PbSolver::sc_AllSolutions;
     default: assert(false); }
+    return PbSolver::sc_Minimize;
 }
 
 
@@ -362,6 +374,8 @@ int main(int argc, char** argv)
     pb_solver = new PbSolver(); // (must be constructed AFTER parsing commandline options -- constructor uses 'opt_solver' to determinte which SAT solver to use)
     signal(SIGINT , SIGINT_handler);
     signal(SIGTERM, SIGTERM_handler);
+    signal( SIGALRM, SIGALRM_handler );
+    alarm ( TOTAL_TIMEOUT );
 
     if(opt_file_type==ft_Pseudo)
     {
@@ -407,8 +421,8 @@ int main(int argc, char** argv)
         reportf("_______________________________________________________________________________\n");
     }
 
-    //exit(pb_solver->best_goalvalue == Int_MAX ? 20 : (pb_solver->goal == NULL || opt_command == cmd_FirstSolution) ? 10 : 30);    // (faster than "return", which will invoke the destructor for 'PbSolver')
-    exit (10);
+    exit(pb_solver->best_goalvalue == Int_MAX ? 20 : (pb_solver->goal == NULL || opt_command == cmd_FirstSolution) ? 10 : 30);    // (faster than "return", which will invoke the destructor for 'PbSolver')
+    //exit (10);
 }
 
 

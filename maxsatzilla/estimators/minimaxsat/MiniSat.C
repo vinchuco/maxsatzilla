@@ -3,8 +3,6 @@
 #include "Sort.h"
 #include <cmath>
 
-#include "libubcsat/ubcsat.h"
-
 namespace MiniSat {
 //=================================================================================================
 // Debug:
@@ -912,44 +910,46 @@ bool Solver::solve(const vec<Lit>& assumps)
     //Var next = irand(random_seed,2);
     
     for (int i = 0; i < assumps.size(); i++)
-        if (!assume(assumps[i]) || propagate() != NULL){
-            cancelUntil(0);
-	    /*
-	    if(opt_sat==0) reportf("RES: %d %g %d\n",toint(UB),cpuTime(),stats.decisions);
-	    else reportf("RES: U %g %d\n",cpuTime(),stats.decisions);
-	    */
-	    
-	    reportf("RES: UNSAT %g %d\n",cpuTime(),stats.decisions);
-            return false; }
+      if (!assume(assumps[i]) || propagate() != NULL){
+	cancelUntil(0);
+	/*
+	  if(opt_sat==0) reportf("RES: %d %g %d\n",toint(UB),cpuTime(),stats.decisions);
+	  else reportf("RES: U %g %d\n",cpuTime(),stats.decisions);
+	*/
+	
+	reportf("RES: UNSAT %g %d\n",cpuTime(),stats.decisions);
+	return false; }
     root_level = decisionLevel();
-
+    
     
     while (status == l_Undef){
-	learn=true;
-	if(opt_ls==1) {
-	  localSearch( 2, 10, 12345 );
-		if(topUB==-1) resultado=true; // UB es una solucion
-		if(topUB!=-1 and UB < topUB) resultado=true; // UB es una solucion
-	}
-	
-	if(topUB!=-1 and topUB < UB) UB = topUB;
-	
-	if(opt_upper>-1) {
-		UB = opt_upper;
-		printf("o %d \n",toint(UB));
-		fflush(stdout);
-		resultado = true;
-		model.growTo(nVars());
-		for(int j=0;j<nVars();j++)
-		{
-			model[j]=l_True;
-		}
-	}
-	
-	DoHardening();
-        status = search((int)nof_conflicts, (int)nof_learnts, params);
-        nof_conflicts *= 1.5;
-        nof_learnts   *= 1.1;
+      learn=true;
+      /*
+      if(opt_ls==1) {
+	localSearch( 2, 10, 12345 );
+	if(topUB==-1) resultado=true; // UB es una solucion
+	if(topUB!=-1 and UB < topUB) resultado=true; // UB es una solucion
+      }
+      */
+      
+      if(topUB!=-1 and topUB < UB) UB = topUB;
+      
+      if(opt_upper>-1) {
+	UB = opt_upper;
+	printf("o %d \n",toint(UB));
+	fflush(stdout);
+	resultado = true;
+	model.growTo(nVars());
+	for(int j=0;j<nVars();j++)
+	  {
+	    model[j]=l_True;
+	  }
+      }
+      
+      DoHardening();
+      status = search((int)nof_conflicts, (int)nof_learnts, params);
+      nof_conflicts *= 1.5;
+      nof_learnts   *= 1.1;
     }
     
     //showNCTable();
@@ -2132,7 +2132,7 @@ void Solver::localSearch( int iTimeOut, int iNumRuns, int iSeed ){
 
   if( opt_file_type != ft_Cnf ) { argv[argc] = "-w"; argc++; }
   
-  if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
+  //if ( ubcsat::main(argc, argv) == 10 ) printf("Instance satisfiable\n");
 
   FILE *ft;
 #define MAX_CARS 1000
