@@ -10,7 +10,7 @@
 using std::cerr;
 
 RRModel::RRModel() 
-  : freeRegressor(0) { }
+  : Model(RR), freeRegressor(0) { }
 
 void RRModel::addRegressor(double val, const FeatureLabel& id) {
   const_iterator it = regressorMap.find(id);

@@ -7,13 +7,13 @@
 using std::cerr;
 
 SVMModel::SVMModel()
-  : prob(NULL), model(NULL) { }
+  : Model(SVM), prob(NULL), model(NULL) { }
 
 SVMModel::SVMModel(struct svm_problem *prob, struct svm_model *model) 
-  : prob(prob), model(model) { }
+  : Model(SVM), prob(prob), model(model) { }
 
 SVMModel::SVMModel(const char *fname) 
-  : prob(NULL) {
+  : Model(SVM), prob(NULL) {
   setStructsFromFile(fname);
 }
 
