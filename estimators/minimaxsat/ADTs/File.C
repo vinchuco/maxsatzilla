@@ -151,4 +151,5 @@ uint64 getUInt(File& in)    // Returns 0 at end-of-file.
         }
         assert(false);
     }
+    return 0;
 }

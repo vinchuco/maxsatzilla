@@ -468,7 +468,7 @@ bool PbSolver::rewriteAlmostClauses()
 //=================================================================================================
 // Main solver/optimizer:
 
-
+/*
 static
 Int evalGoal(Linear& goal, vec<lbool>& model)
 {
@@ -482,6 +482,7 @@ Int evalGoal(Linear& goal, vec<lbool>& model)
     }
     return sum;
 }
+*/
 
 void PbSolver::translateToMaxSAT(vec<Lit>& ps,vec<Int>& Cs,cchar* filename)
 {
