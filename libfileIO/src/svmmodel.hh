@@ -13,6 +13,7 @@ public:
 
   void setStructs(struct svm_problem *, struct svm_model *);
   void setStructsFromFile(const char *);
+  struct svm_model *getSVMModelStruct() const { return model; }
 
   // Not implementable
   void addRegressor(double, const FeatureLabel&);
