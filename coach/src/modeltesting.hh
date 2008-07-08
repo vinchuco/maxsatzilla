@@ -6,7 +6,7 @@
 
 namespace ModelTesting {
 
-  void test(const Model &, const MSZDataSet &);
+  void test(const Model *, const MSZDataSet &);
 
 };
 #endif // MODELTESTING_HH

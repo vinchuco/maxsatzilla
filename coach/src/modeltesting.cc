@@ -6,7 +6,7 @@
 
 using std::cout;
 
-void ModelTesting::test(const Model &m, const MSZDataSet &testDS) {
+void ModelTesting::test(const Model *m, const MSZDataSet &testDS) {
 
   *(LogMgm::Instance()) << "Testing for output: " << testDS.getOutputLabel() << "\n";
   *(LogMgm::Instance()) << "Testing " << testDS.getNRows() << " instances\n";

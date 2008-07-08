@@ -237,9 +237,9 @@ int main(int argc, char *argv[]) {
       Model* m = la->run();
       lm->endCategory();
       
-      const LearningAlg la = m->getLearningAlg();
+      const LearningAlgType lat = m->getLearningAlgType();
       // Outputting the model to file
-      if(la == RR) {
+      if(lat == RR) {
 	RRModel * rrm = dynamic_cast<RRModel *>(m);
 	mwriter.writeFreeWeight(solversNames[s], rrm->getRegressor());
 	for(RRModel::const_iterator it = rrm->begin();
@@ -247,9 +247,9 @@ int main(int argc, char *argv[]) {
 	    it++)
 	  mwriter.writeWeight(solversNames[s], it->first, it->second);
       }
-      else if(la == SVM) {
-	SVMModel *svmm = dynamic_cast<SVMModel *>(m)
-	mwriter->writeModelFilename(svmm->getSVMModelStruct());
+      else if(lat == SVM) {
+	SVMModel *svmm = dynamic_cast<SVMModel *>(m);
+	mwriter.writeModelFilename(svmm->getSVMModelStruct());
       } else {
 	cerr << "Coach: Model reported unknown learning algorithm.\n"
 	     << "Cannot proceed.\n";
