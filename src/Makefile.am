@@ -35,12 +35,6 @@ coach_CPPFLAGS = -I../../../extlib/libsvm-2.86/
 coach_CXXFLAGS = -std=c++98 -g -Wall 
 coach_LDFLAGS = -g -lgsl -lfileio
 
-if DARWIN
-coach_SOURCES += gslutils.cc
-coach_CPPFLAGS += -I/sw/include -DOLDGSL
-coach_LDFLAGS += -L/sw/lib 
-endif
-
 maxsatzilla_bin_SOURCES = \
 main.cc                   \
 MaxSatInstance.cc         \

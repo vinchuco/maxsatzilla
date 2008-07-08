@@ -3,6 +3,7 @@ AC_INIT([MaxSatZilla], [0.2.5_Beauty], [jp3@ecs.soton.ac.uk])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/main.cc])
 AC_CONFIG_HEADER([config.h])
+AC_CONFIG_MACRO_DIR([m4])
 AC_LANG(C++)
 
 # Checks for programs.
