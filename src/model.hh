@@ -13,6 +13,7 @@ public:
   virtual void addRegressor(double) = 0;
  
   virtual LearningAlgType getLearningAlgType() const { return la; }
+  virtual double computeModelOutput(const map<string, double>&) const = 0;
 
 protected:
   LearningAlgType la; ///< Learning algorithm used to learn the model

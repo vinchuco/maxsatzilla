@@ -7,10 +7,10 @@
 using std::cerr;
 
 SVMModel::SVMModel()
-  : Model(SVM), prob(NULL), model(NULL) { }
+  : Model(SVM), prob(NULL), svmmodel(NULL) { }
 
 SVMModel::SVMModel(struct svm_problem *prob, struct svm_model *model) 
-  : Model(SVM), prob(prob), model(model) { }
+  : Model(SVM), prob(prob), svmmodel(model) { }
 
 SVMModel::SVMModel(const char *fname) 
   : Model(SVM), prob(NULL) {
@@ -18,18 +18,18 @@ SVMModel::SVMModel(const char *fname)
 }
 
 SVMModel::~SVMModel() {
-  svm_destroy_model(model);
+  svm_destroy_model(svmmodel);
   free(prob);
 }
 
 void SVMModel::setStructs(struct svm_problem *svmp, struct svm_model *svmm) {
   prob = svmp;
-  model = svmm;
+  svmmodel = svmm;
 }
 
 void SVMModel::setStructsFromFile(const char *fname) {
-  model = svm_load_model(fname);
-  if(model == NULL)
+  svmmodel = svm_load_model(fname);
+  if(svmmodel == NULL)
     cerr << "SVMModel : Unable to load model from " << fname << "\n";
 }
 
@@ -55,10 +55,10 @@ void SVMModel::setFeatureLabel(int index, string name) {
 
 double SVMModel::computeModelOutput(const map<string, double>& model) const {
 
-  struct svm_node *nodes = new struct svm_node [model.size()+1];
+  struct svm_node *x = new struct svm_node [model.size()+1];
   const map<string,double>::const_iterator& modelEnd = model.end();
 
-  nodes[model.size()].index = -1;
+  x[model.size()].index = -1;
 
   uint i = 0;  
   for(map<string, double>::const_iterator it = model.begin();
@@ -71,9 +71,13 @@ double SVMModel::computeModelOutput(const map<string, double>& model) const {
       exit(EXIT_FAILURE);
     }
 
-    nodes[i].index = idxs[it->first];
-    nodes[i].value = it->second;
+    x[i].index = idxit->second;
+    x[i].value = it->second;
   }
-  delete[] nodes;
 
+  const double output = svm_predict(svmmodel, x);
+
+  delete[] x;
+
+  return output;
 }

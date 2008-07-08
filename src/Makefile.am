@@ -56,9 +56,10 @@ reader.hh                 \
 model.hh                  \
 svmmodel.hh               \
 rrmodel.hh                \
-triple.hpp   
+triple.hpp                \
+../../extlib/libsvm-2.86/svm.cpp
 
-maxsatzilla_CPPFLAGS =
+maxsatzilla_CPPFLAGS = -I../../extlib/libsvm-2.86/
 maxsatzilla_CXXFLAGS = -Wall -std=c++98 -ggdb
 maxsatzilla_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
 

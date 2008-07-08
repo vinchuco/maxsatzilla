@@ -17,7 +17,7 @@ public:
 
   void setStructs(struct svm_problem *, struct svm_model *);
   void setStructsFromFile(const char *);
-  struct svm_model *getSVMModelStruct() const { return model; }
+  struct svm_model *getSVMModelStruct() const { return svmmodel; }
   void setFeatureLabel(int, string); ///< Sets label for feature i, 0-based.
   double computeModelOutput(const map<string, double>&) const;
 
@@ -27,7 +27,7 @@ public:
 
 private:
   struct svm_problem *prob;
-  struct svm_model *model;
+  struct svm_model *svmmodel;
   map<string, int> idxs; ///< Labels for features indexed by an int
 };
 
