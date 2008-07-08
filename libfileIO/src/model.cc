@@ -1,4 +1,4 @@
 #include "model.hh"
 
-Model::Model(LearningAlg la) 
+Model::Model(LearningAlgType la) 
   : la(la) { }

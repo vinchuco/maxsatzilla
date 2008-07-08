@@ -10,7 +10,7 @@
 
 #include "reader.hh"
 #include "featurelabel.hh" 
-#include "learningalg.hh"
+#include "learningalgtype.hh"
 #include "triple.hpp"
 
 using std::pair;
@@ -34,7 +34,7 @@ public:
   void writeFExpansion(const vector<uint>&);
   void writeFEOrder(uint);
   void writeStdFactors(const string&, const vector<Triple<FeatureLabel, double, double> >&);
-  void writeLearningAlg(LearningAlg);
+  void writeLearningAlgType(LearningAlgType);
   void writeModelFilename(struct svm_model *); ///< Writes the svm_model to a file and the filename of where the model is kept to the model file.
   void endWrite();
 

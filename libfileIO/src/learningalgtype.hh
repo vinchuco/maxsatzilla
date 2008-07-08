@@ -1,10 +1,10 @@
-#ifndef LEARNINGALG_HH
-#define LEARNINGALG_HH
+#ifndef LEARNINGALGTYPE_HH
+#define LEARNINGALGTYPE_HH
 
-enum LearningAlg { 
+enum LearningAlgType { 
   RR,           /// RidgeRegression Algorithm
   SVM,          /// Support Vector Machines
   NUM_LA        /// None Selected
 };
 
-#endif // LEARNINGALG_HH
+#endif // LEARNINGALGTYPE_HH

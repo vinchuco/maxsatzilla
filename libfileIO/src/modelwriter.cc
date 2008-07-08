@@ -100,7 +100,7 @@ void ModelWriter::writeFEOrder(uint feorder) {
   file << "p feorder " << feorder << "\n";
 }
 
-void ModelWriter::writeLearningAlg(LearningAlg la) {
+void ModelWriter::writeLearningAlgType(LearningAlgType la) {
   string laStr;
   
   switch(la) {

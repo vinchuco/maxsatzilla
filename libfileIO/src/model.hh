@@ -2,20 +2,20 @@
 #define MODEL_HH
 
 #include "featurelabel.hh"
-#include "learningalg.hh"
+#include "learningalgtype.hh"
 
 class Model {
 public:
-  Model(LearningAlg);
+  Model(LearningAlgType);
   virtual ~Model();
 
   virtual void addRegressor(double, const FeatureLabel&) = 0;
   virtual void addRegressor(double) = 0;
  
-  virtual LearningAlg getLearningAlg() const { return la; }
+  virtual LearningAlgType getLearningAlgType() const { return la; }
 
 protected:
-  LearningAlg la; ///< Learning algorithm used to learn the model
+  LearningAlgType la; ///< Learning algorithm used to learn the model
 };
 
 #endif // MODEL_HH

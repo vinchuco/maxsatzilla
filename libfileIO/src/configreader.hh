@@ -9,7 +9,7 @@
 
 #include "pputils.hh"
 #include "reader.hh"
-#include "learningalg.hh"
+#include "learningalgtype.hh"
 
 using std::string;
 using std::vector;
@@ -36,7 +36,7 @@ public:
   bool   getOutputStd ()                  const { return outputStd;                }
   uint   getFEPartOrder()                 const { return fePartOrder;              }
   uint   getPercentTest()                 const { return percentTest;              }
-  LearningAlg getLearningAlg()            const { return la;                       }
+  LearningAlgType getLearningAlg()            const { return la;                       }
 
 private:
   struct tolower_op : public std::unary_function<char, char> {
@@ -58,7 +58,7 @@ private:
   bool featureStd;                    ///< Flag which determines if standardization of features should be performed.
   bool outputStd;                     ///< Flag which determines if standardization of outputs should be performed.
   uint fePartOrder;                   ///< Order of the function basis expansion.
-  LearningAlg la;                     ///< Learning algorithm selected
+  LearningAlgType la;                     ///< Learning algorithm selected
 };
 
 #endif // CONFIGREADER_HH

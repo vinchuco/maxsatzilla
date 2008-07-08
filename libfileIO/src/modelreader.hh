@@ -8,7 +8,7 @@
 #include "reader.hh"
 #include "featurelabel.hh"
 #include "triple.hpp"
-#include "learningalg.hh"
+#include "learningalgtype.hh"
 
 class Model;
 
@@ -30,7 +30,7 @@ public:
   Model *getModel(const string&)            const;
   pair<double, double> getStdFactors(const string&, const FeatureLabel&) const;
   vector<string> getOutputLabels()          const { return outLabels;           }
-  LearningAlg getLearningAlg(const string&) const;
+  LearningAlgType getLearningAlgType(const string&) const;
 
 private:
   void parseConfig();
@@ -43,7 +43,7 @@ private:
   uint feOrder;
   vector<string> outLabels;
   vector<vector<uint> > fePartitions;
-  map<string, LearningAlg> las;
+  map<string, LearningAlgType> las;
   map<string, Model *> models;
   map<string, vector<Triple<FeatureLabel, double, double> > > factors; ///< Mapping solvers to maps of features to factors
 };

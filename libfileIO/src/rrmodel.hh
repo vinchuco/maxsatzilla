@@ -8,7 +8,7 @@
 
 #include "pputils.hh"
 #include "featurelabel.hh"
-#include "learningalg.hh"
+#include "learningalgtype.hh"
 #include "model.hh"
 
 using std::map;

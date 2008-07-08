@@ -157,9 +157,9 @@ FeatureLabel ModelReader::parseFeatureLabel() {
 
 /// @returns the learning algorithm used to generate a model for the given solver name.
 /// @returns It returns NUM_LA if no solver with that name is found.
-LearningAlg ModelReader::getLearningAlg(const string& sname) const {
+LearningAlgType ModelReader::getLearningAlgType(const string& sname) const {
   
-  const map<string, LearningAlg>::const_iterator it = las.find(sname);
+  const map<string, LearningAlgType>::const_iterator it = las.find(sname);
   if(it == las.end())
     return NUM_LA;
   else
