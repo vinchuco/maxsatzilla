@@ -236,16 +236,30 @@ int main(int argc, char *argv[]) {
       }
       Model* m = la->run();
       lm->endCategory();
-
+      
+      const LearningAlg la = m->getLearningAlg();
       // Outputting the model to file
-      mwriter.writeFreeWeight(solversNames[s], m.getRegressor());
-      for(Model::const_iterator it = m.begin();
-	  it != m.end();
-	  it++)
-	mwriter.writeWeight(solversNames[s], it->first, it->second);
+      if(la == RR) {
+	RRModel * rrm = dynamic_cast<RRModel *>(m);
+	mwriter.writeFreeWeight(solversNames[s], rrm->getRegressor());
+	for(RRModel::const_iterator it = rrm->begin();
+	    it != rrm->end();
+	    it++)
+	  mwriter.writeWeight(solversNames[s], it->first, it->second);
+      }
+      else if(la == SVM) {
+	SVMModel *svmm = dynamic_cast<SVMModel *>(m)
+	mwriter->writeModelFilename(svmm->getSVMModelStruct());
+      } else {
+	cerr << "Coach: Model reported unknown learning algorithm.\n"
+	     << "Cannot proceed.\n";
+	exit(EXIT_FAILURE);
+      }
+
 
       // Testing model against a test dataset
       ModelTesting::test(m, *(dss[s].second));
+     
     }
 
     mwriter.endWrite();
