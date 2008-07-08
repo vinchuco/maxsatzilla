@@ -1,4 +1,4 @@
-bin_PROGRAMS = coach maxsatzilla.bin getfeatures
+bin_PROGRAMS = coach maxsatzilla getfeatures
 
 coach_SOURCES =        \
 coach.cc               \
@@ -28,14 +28,14 @@ reader.hh              \
 model.hh               \
 svmmodel.hh            \
 rrmodel.hh             \
-triple.hpp   
-../../../extlib/libsvm-2.86/svm.cpp
+triple.hpp             \
+../../extlib/libsvm-2.86/svm.cpp
 
-coach_CPPFLAGS = -I../../../extlib/libsvm-2.86/
+coach_CPPFLAGS = -I../../extlib/libsvm-2.86/
 coach_CXXFLAGS = -std=c++98 -g -Wall 
-coach_LDFLAGS = -g -lgsl -lfileio
+coach_LDFLAGS = -g -lgsl
 
-maxsatzilla_bin_SOURCES = \
+maxsatzilla_SOURCES = \
 main.cc                   \
 MaxSatInstance.cc         \
 argumentsparser.cc        \
@@ -58,9 +58,9 @@ svmmodel.hh               \
 rrmodel.hh                \
 triple.hpp   
 
-maxsatzilla_bin_CPPFLAGS =
-maxsatzilla_bin_CXXFLAGS = -Wall -std=c++98 -ggdb
-maxsatzilla_bin_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
+maxsatzilla_CPPFLAGS =
+maxsatzilla_CXXFLAGS = -Wall -std=c++98 -ggdb
+maxsatzilla_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
 
 getfeatures_SOURCES = \
 features.cc           \

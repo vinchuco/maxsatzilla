@@ -2,3 +2,6 @@
 
 Model::Model(LearningAlgType la) 
   : la(la) { }
+
+Model::~Model() {
+}

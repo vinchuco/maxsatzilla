@@ -106,10 +106,10 @@ RRModel *RidgeRegression::run() {
   assert(final->size1 == nbParams);
   assert(final->size2 == 1);
 
-  Model m;
-  m.addRegressor(gsl_matrix_get(final, 0, 0));
+  RRModel *m = new RRModel;
+  m->addRegressor(gsl_matrix_get(final, 0, 0));
   for(uint i = 1; i < final->size1; i++) 
-    m.addRegressor(gsl_matrix_get(final, i, 0), data.getColLabel(i-1));
+    m->addRegressor(gsl_matrix_get(final, i, 0), data.getColLabel(i-1));
 
   gsl_matrix_free(final);
   return m;

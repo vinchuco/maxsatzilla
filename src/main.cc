@@ -9,6 +9,7 @@
 #include <fstream>
 
 #include <cstdlib>
+#include <cstring>
 
 #include "config.h"
 
@@ -164,8 +165,8 @@ int main(int argc, char *argv[]) {
 #ifndef NDEBUG
     cout << "Computing runtime for " << solvers[s] << ":\n";
 #endif // NDEBUG
-    const Model &m = mreader.getModel(solvers[s]);
-    const double runtime = m.computeModelOutput(solverFeatures);
+    const Model *m = mreader.getModel(solvers[s]);
+    const double runtime = m->computeModelOutput(solverFeatures);
     predRt[solvers[s]] = runtime;
 
 #ifndef NDEBUG
