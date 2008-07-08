@@ -665,163 +665,166 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
     search_state = 1;
     
     for (;;){
- if(search_state == 2)
- { 
-  search_state=1;
-  int res=undoChronological();
-  if(res<root_level)
-  {
-                 //return l_False;
-   restoreAssumption(indexRest());
-   return l_True;
-  }
-  
-  
-	// Assume 
-	Lit next;
-	stats.decisions++;
-	next=~Lit::toLit(trail_dec[trail_dec.size()-1].lit);
-	trail_dec[trail_dec.size()-1].lit=index(next);
-	trail_dec[trail_dec.size()-1].values=0;
-	trail_lim.push(trail.size());
-	check(enqueue(next));
+      if(search_state == 2)
+	{ 
+	  search_state=1;
+	  int res=undoChronological();
+	  if(res<root_level)
+	    {
+	      //return l_False;
+	      restoreAssumption(indexRest());
+	      return l_True;
+	    }
+	  
+	  
+	  // Assume 
+	  Lit next;
+	  stats.decisions++;
+	  next=~Lit::toLit(trail_dec[trail_dec.size()-1].lit);
+	  trail_dec[trail_dec.size()-1].lit=index(next);
+	  trail_dec[trail_dec.size()-1].values=0;
+	  trail_lim.push(trail.size());
+	  check(enqueue(next));
 	}
-	
-        else 
+      
+      else 
 	{
-	Clause* confl=propagate();
-	
-	if(confl !=NULL and not learn) {
-		// To update the branching heuristic!
-		vec<Lit>    learnt_clause;
-        	int         backtrack_level;
-		analyze(confl, learnt_clause, backtrack_level);
-		search_state=2; 
-		}
-		
-	if(LB>=UB) search_state=2;
-	
-	if(confl==NULL)
-	{
-		Lit pick = lit_Undef;
-		if(not order.empty() and opt_sat==0) sug=pruneValues();
-		else sug=-1;
-		
-		if(opt_lc==1 and sug==-1)
+	  Clause* confl=propagate();
+	  
+	  if(confl !=NULL and not learn) {
+	    // To update the branching heuristic!
+	    vec<Lit>    learnt_clause;
+	    int         backtrack_level;
+	    analyze(confl, learnt_clause, backtrack_level);
+	    search_state=2; 
+	  }
+	  
+	  if(LB>=UB) search_state=2;
+	  
+	  if(confl==NULL)
+	    {
+	      Lit pick = lit_Undef;
+	      if(not order.empty() and opt_sat==0) sug=pruneValues();
+	      else sug=-1;
+	      
+	      
+	      if(opt_lc==1 and sug==-1)
 		{
-			Int lb=applyLC();
-			if(lb>=UB) {
-				// MEGA CAMBIO
-				//sug=-1;
-				search_state=2;
-			}
+		  Int lb=applyLC();
+		  if(lb>=UB) {
+		    // MEGA CAMBIO
+		    //sug=-1;
+		    search_state=2;
+		  }
 		}
-	}
-	
-        if (confl != NULL and search_state==1){
+	    }
+	  
+	  if (confl != NULL and search_state==1){
             // CONFLICT
-
+	    
             // EXPERIMENTAL
-		trail_copy.clear();
-		stats.conflicts++; conflictC++;
-		vec<Lit>    learnt_clause;
-		int         backtrack_level;
-		if (decisionLevel() == root_level) {
-			restoreAssumption(indexRest());
-			return l_False;
-		}
-	
-		analyze(confl, learnt_clause, backtrack_level);
-		if(opt_learn==0) search_state=2; 
-		else {
-			assert(backtrack_level < decisionLevel());
-			cancelUntil(max(backtrack_level, root_level));
-			record(learnt_clause);
-			varDecayActivity(); 
-			claDecayActivity();
-		}		
-		
-        }
-	else if(sug!=-1 and search_state==1){
-		search_state=1;
-		// Assume 
-		Lit next=Lit::toLit(sug);
-		
-		stats.decisions++;
-		trail_dec.push_();
-		trail_dec[trail_dec.size()-1].lit=index(next);
-		trail_dec[trail_dec.size()-1].values=0;
-		trail_lim.push(trail.size());
-		check(enqueue(next));
-	}
-	else if(search_state==1) {
+	    trail_copy.clear();
+	    stats.conflicts++; conflictC++;
+	    vec<Lit>    learnt_clause;
+	    int         backtrack_level;
+	    if (decisionLevel() == root_level) {
+	      restoreAssumption(indexRest());
+	      return l_False;
+	    }
+	    
+	    analyze(confl, learnt_clause, backtrack_level);
+	    if(opt_learn==0) search_state=2; 
+	    else {
+	      assert(backtrack_level < decisionLevel());
+	      cancelUntil(max(backtrack_level, root_level));
+	      record(learnt_clause);
+	      varDecayActivity(); 
+	      claDecayActivity();
+	    }		
+	    
+	  }
+	  else if(sug!=-1 and search_state==1){
+	    search_state=1;
+	    // Assume 
+	    Lit next=Lit::toLit(sug);
+	    
+	    stats.decisions++;
+	    trail_dec.push_();
+	    trail_dec[trail_dec.size()-1].lit=index(next);
+	    trail_dec[trail_dec.size()-1].values=0;
+	    trail_lim.push(trail.size());
+	    check(enqueue(next));
+	  }
+	  else if(search_state==1) {
             
 	    if (decisionLevel() == 0)
-                // Simplify the set of problem clauses:
-                simplifyDB(), assert(ok);
-
+	      // Simplify the set of problem clauses:
+	      simplifyDB(), assert(ok);
+	    
             if (nof_learnts >= 0 && learnts.size()-nAssigns() >= nof_learnts)
-                // Reduce the set of learnt clauses:
-                reduceDB();
-
+	      // Reduce the set of learnt clauses:
+	      reduceDB();
+	    
             // New variable decision:
             stats.decisions++;
-
-	    	//calculateStaticOrdering();
-		Lit pick = lit_Undef;
-	
-		Var next = order.select(params.random_var_freq);
-
-		if (next == var_Undef)
-		{
-			//previous=LB;
-			
-			resultado=true;
-			UB=LB;
-			model.growTo(nVars());
-			
-			for (int i = 0; i < nVars(); i++) {
-				model[i] = value(i);
-			}
-
-			printf("o %d \n",toint(UB));
-			fflush(stdout);
-	
-			search_state=2;
+	    
+	    //calculateStaticOrdering();
+	    Lit pick = lit_Undef;
+	    
+	    Var next = order.select(params.random_var_freq);
+	    
+	    if (next == var_Undef)
+	      {
+		//previous=LB;
 		
-			if(UB==0)
-			{    
-				cancelUntil(root_level);
-				return l_True;
-			}
+		resultado=true;
+		UB=LB;
+		model.growTo(nVars());
+		
+		for (int i = 0; i < nVars(); i++) {
+		  model[i] = value(i);
 		}
-  else
-  {
-  
-  if(opt_sat==0 and bNC[next])
-  {
-   if(NC[index(Lit(next))]>=NC[index(~Lit(next))]) check(assume(Lit(next)));
-   else check(assume(~Lit(next)));
-  }
-  else
-  {
-  if (polarity_sug[next] == toInt(l_False))
-  {
-   check(assume(Lit(next)));
-  }
-  else if (polarity_sug[next] == toInt(l_True))
-  {
-   check(assume(Lit(next)));
-  }
-  else
-  {
-   check(assume(Lit(next)));  // Arbitrarly default to negative polarity...
-  }
-  }
-  }
- }
- 
- }
+		
+		printf("o %d \n",toint(UB));
+		fflush(stdout);
+		
+		search_state=2;
+		
+		// Montecarlo method
+		_exit(0);
+		if(UB==0)
+		  {    
+		    cancelUntil(root_level);
+		    return l_True;
+		  }
+	      }
+	    else
+	      {
+		
+		if(opt_sat==0 and bNC[next])
+		  {
+		    if(NC[index(Lit(next))]>=NC[index(~Lit(next))]) check(assume(Lit(next)));
+		    else check(assume(~Lit(next)));
+		  }
+		else
+		  {
+		    if (polarity_sug[next] == toInt(l_False))
+		      {
+			check(assume(Lit(next)));
+		      }
+		    else if (polarity_sug[next] == toInt(l_True))
+		      {
+			check(assume(Lit(next)));
+		      }
+		    else
+		      {
+			check(assume(Lit(next)));  // Arbitrarly default to negative polarity...
+		      }
+		  }
+	      }
+	  }
+	  
+	}
     } // end for
 }
 
@@ -1861,7 +1864,6 @@ int Solver::pruneValues()
  return -1;
 }
 
-
 void Solver::createUnaryClauseAndNC(Lit & p, Lit & first, Clause* c)
 {
  c->setUsed(true);
@@ -1960,64 +1962,64 @@ int Solver::indexRest(){
 
 void Solver::calculateStaticOrdering()
 {
- if(opt_heur==1)
- {
- for(int i=0;i<nVars();i++)
- {
-  Lit p=Lit(i,false);
-  activity[var(p)]=0;
-  if(NC[index(p)]>0)
-   activity[var(p)] += toint(NC[index(p)]);
-  if(NC[index(~p)]>0)
-   activity[var(p)] += toint(NC[index(~p)]);
- }
- 
- for (int i = 0; i < clauses.size(); i++){
-  Clause& c = *clauses[i];
-  
-  if(not c.isUsed())
-  {
-  int cont=0;
-  bool sat=false;
-  for (int j = 0; j < c.size(); j++){ 
-   if(value(c[j])==l_Undef) cont++;
-   if(value(c[j])==l_True) sat=true;}
-  if(not sat)
-  {
-  for (int j = 0; j < c.size(); j++){
-   Lit p=c[j];
-   
-   if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
-   else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
-  }
-  }
-  }
- }
- for (int i = 0; i < comps.size(); i++){
-  Clause& c = *comps[i];
-  if(not c.isUsed())
-  {
-  int cont=0;
-  bool sat=false;
-  for (int j = 0; j < c.size(); j++){ 
-   if(value(c[j])==l_Undef) cont++;
-   if(value(c[j])==l_True) sat=true;}
-  if(not sat) 
-  {
-  for (int j = 0; j < c.size(); j++){
-   Lit p=c[j];
-   if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
-   else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
-  }
-  }
-  }
- }
- 
- for(int i=0;i<nVars();i++)
- {
-  order.update(i);
- }
- }
+  if(opt_heur==1)
+    {
+      for(int i=0;i<nVars();i++)
+	{
+	  Lit p=Lit(i,false);
+	  activity[var(p)]=0;
+	  if(NC[index(p)]>0)
+	    activity[var(p)] += toint(NC[index(p)]);
+	  if(NC[index(~p)]>0)
+	    activity[var(p)] += toint(NC[index(~p)]);
+	}
+      
+      for (int i = 0; i < clauses.size(); i++){
+	Clause& c = *clauses[i];
+	
+	if(not c.isUsed())
+	  {
+	    int cont=0;
+	    bool sat=false;
+	    for (int j = 0; j < c.size(); j++){ 
+	      if(value(c[j])==l_Undef) cont++;
+	      if(value(c[j])==l_True) sat=true;}
+	    if(not sat)
+	      {
+		for (int j = 0; j < c.size(); j++){
+		  Lit p=c[j];
+		  
+		  if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
+		  else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
+		}
+	      }
+	  }
+      }
+      for (int i = 0; i < comps.size(); i++){
+	Clause& c = *comps[i];
+	if(not c.isUsed())
+	  {
+	    int cont=0;
+	    bool sat=false;
+	    for (int j = 0; j < c.size(); j++){ 
+	      if(value(c[j])==l_Undef) cont++;
+	      if(value(c[j])==l_True) sat=true;}
+	    if(not sat) 
+	      {
+		for (int j = 0; j < c.size(); j++){
+		  Lit p=c[j];
+		  if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
+		  else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
+		}
+	      }
+	  }
+      }
+      
+      for(int i=0;i<nVars();i++)
+	{
+	  order.update(i);
+	}
+    }
 }
 
 int Solver::calculateJeroslow()
