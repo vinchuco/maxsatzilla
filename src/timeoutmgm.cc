@@ -74,6 +74,14 @@ void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) 
     //******************************************************************
     // Step 2.1: Predict values for timedout instances with previous fit
     
+    vector<double> predictions(timeoutIdx.size(), 0.0);
+
+    for(uint idx = 0; idx < timeoutIdx.size(); ++idx) {
+      predictions[idx] += gsl_vector_get(betas, 0);
+      for(uint f = 1; f < nfeatures + 1; ++f)
+	predictions[idx] += gsl_vector_get(betas, f) * data.getFeatureValue(*idx, f-1);
+    }
+
     gsl_multifit_linear_free(work);
     gsl_matrix_free(matrix);
     gsl_matrix_free(cov);
@@ -81,7 +89,10 @@ void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) 
     gsl_vector_free(betas);
 
     // Step 2.3: Compute error
-
+    err = 0.0;
+    for(uint i = 0; i < predictions.size(); ++i) 
+      err += fabs(predictions[i] - data.getOutputValue(timeoutIdx[i]));
+    err /= predictions.size();
 
     // Step 2.2: Update values
 
