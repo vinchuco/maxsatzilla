@@ -19,7 +19,6 @@ reader.cc              \
 model.cc               \
 svmmodel.cc            \
 rrmodel.cc             \
-timeoutmgm.cc          \
 configreader.hh        \
 featurelabel.hh        \
 modelreader.hh         \
@@ -29,7 +28,6 @@ reader.hh              \
 model.hh               \
 svmmodel.hh            \
 rrmodel.hh             \
-timeoutmgm.hh          \
 triple.hpp             \
 ../../extlib/libsvm-2.86/svm.cpp
 

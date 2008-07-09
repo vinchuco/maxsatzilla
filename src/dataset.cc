@@ -1,7 +1,5 @@
 #include <iostream>
 #include <fstream>
-
-#include <iostream>
 #include <iterator>
 #include <cstdlib>
 #include <cassert>
@@ -9,9 +7,11 @@
 #include <utility>
 #include <map>
 #include <algorithm>
+#include <limits>
 
 #include <gsl/gsl_math.h>
 #include <gsl/gsl_combination.h>
+#include <gsl/gsl_multifit.h>
 
 #include "dataset.hh"
 #include "logmgm.hh"
@@ -638,24 +638,24 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
  */
 
 
-void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) {
+void MSZDataSet::predictTimeouts(uint timeout, double maxerr) {
 
   // We use multi-parameter least squares fitting from GSL
   uint iter = 0;
-  double err = numeric_limits<double>::max();
+  double err = std::numeric_limits<double>::max();
 
-  const uint nrows = data.getNRows();
-  const uint nfeatures = data.getNFeatures();
+  const uint nrows = getNRows();
+  const uint nfeatures = getNFeatures();
   vector<uint> timeoutIdx; // Indexes of rows with timeouts
   for(uint r = 0; r < nrows; ++r)
-    if(data.getOutputValue(r) == timeout)
+    if(getOutputValue(r) == timeout)
       timeoutIdx.push_back(r);
 
   cout << "Timeout prediction ";
   while(err > maxerr) { // This is where the magic happens    
     cout << ".";
     iter++;
-
+    
     //**********************************
     // Step 1: Run a fit on current data
     gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(nrows, nfeatures+1);
@@ -669,18 +669,18 @@ void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) 
 
     // Set rest of matrix
     for(uint r = 0; r < nrows; ++r)
-      if(uint c = 0; c < nfeatures; ++c)
-	gsl_matrix_set(matrix, r, c+1, data.getFeatureValue(r, c));
+      for(uint c = 0; c < nfeatures; ++c)
+	gsl_matrix_set(matrix, r, c+1, getFeatureValue(r, c));
 
     gsl_vector *y = gsl_vector_alloc(nrows);
     for(uint r = 0; r < nrows; ++r)
-      gsl_vector_set(y, r, data.getOutputValue(r));
+      gsl_vector_set(y, r, getOutputValue(r));
 
     gsl_vector *betas = gsl_vector_alloc(nfeatures+1);
     gsl_matrix *cov = gsl_matrix_alloc(nfeatures + 1, nfeatures + 1);
     double chisq;
 
-    int fit = gsl_multifit_linear(matrix, y, betas, cov, &chisq, work);
+    gsl_multifit_linear(matrix, y, betas, cov, &chisq, work);
     
     //******************************************************************
     // Step 2.1: Predict values for timedout instances with previous fit
@@ -690,7 +690,7 @@ void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) 
     for(uint idx = 0; idx < timeoutIdx.size(); ++idx) {
       predictions[idx] += gsl_vector_get(betas, 0);
       for(uint f = 1; f < nfeatures + 1; ++f)
-	predictions[idx] += gsl_vector_get(betas, f) * data.getFeatureValue(*idx, f-1);
+	predictions[idx] += gsl_vector_get(betas, f) * getFeatureValue(timeoutIdx[idx], f-1);
     }
 
     gsl_multifit_linear_free(work);
@@ -702,12 +702,12 @@ void TimeoutMgm::predictTimeouts(MSZDataSet &data, uint timeout, double maxerr) 
     // Step 2.3: Compute error
     err = 0.0;
     for(uint i = 0; i < predictions.size(); ++i) 
-      err += fabs(predictions[i] - data.getOutputValue(timeoutIdx[i]));
+      err += fabs(predictions[i] - getOutputValue(timeoutIdx[i]));
     err /= predictions.size();
 
     // Step 2.2: Update values
-    
-
+    for(uint idx = 0; idx < timeoutIdx.size(); ++idx) 
+      setVValue(timeoutIdx[idx], predictions[idx]);
   }
-  cout << iter << "\n";
+  cout << iter << "(error: " << err << ")\n";
 }
