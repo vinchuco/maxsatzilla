@@ -70,6 +70,16 @@ public:
   /// Remove features which are harmful, like sdv == 0.
   void removeHarmfulFeatures();
 
+  /// Predict timeout values
+  /*
+   * This method implements the management of timeouts as
+   * censored data as described in the paper
+   * "A simple method for regression analysis with censored data"
+   * - Schmee and Hahn
+   * Technometrics 1979
+   */
+  void predictTimeouts(uint, double);
+
 private:
   double *getMColumn(uint c)           const { return matrix[c];    }
   double  getMValue(uint r, uint c)    const { return matrix[c][r]; }
