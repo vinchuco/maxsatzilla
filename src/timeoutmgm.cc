@@ -1,5 +1,7 @@
 #include "timeoutmgm.hh"
 
+#include "logmgm.hh"
+
 #include <iostream>
 #include <limits>
 #include <vector>
@@ -45,35 +47,42 @@ void TimeoutMgm::predictTimeouts(double **fmatrix, uint nrows, uint ncols, doubl
     if(ovec[r] == timeout)
       timeoutIdx.push_back(r);
 
-  cout << "Timeout prediction ";
-  while(err > maxerr) { // This is where the magic happens    
-    cout << ".";
-    iter++;
+  *(LogMgm::Instance()) << "Predicting Timeouts\n"
+			<< "Dataset has " << timeoutIdx.size() << " / " << nrows << " timeouts\n";
+
+  gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(nrows, ncols+1);
+  gsl_vector *vec1 = gsl_vector_alloc(nrows);
+  gsl_vector_set_all(vec1, 1.0);
+
+  gsl_matrix *matrix = gsl_matrix_alloc(nrows, ncols+1);
     
+  // Set first column to ones
+  gsl_matrix_set_col(matrix, 0, vec1);
+  gsl_vector_free(vec1);
+
+  // Set rest of matrix
+  for(uint r = 0; r < nrows; ++r)
+    for(uint c = 0; c < ncols; ++c)
+      gsl_matrix_set(matrix, r, c+1, fmatrix[r][c]);
+
+  gsl_vector *y = gsl_vector_alloc(nrows);
+  gsl_vector *betas = gsl_vector_alloc(ncols+1);
+  gsl_matrix *cov = gsl_matrix_alloc(ncols + 1, ncols + 1);
+
+  *(LogMgm::Instance()) << "Timeout prediction ";
+  while(err > maxerr) { // This is where the magic happens    
+    *(LogMgm::Instance()) << ".";
+    iter++;
+
+    if(iter % 100 == 0)
+      *(LogMgm::Instance()) << err << "\n";
+
     //**********************************
     // Step 1: Run a fit on current data
-    gsl_multifit_linear_workspace *work = gsl_multifit_linear_alloc(nrows, ncols+1);
-    gsl_matrix *matrix = gsl_matrix_alloc(nrows, ncols+1);
-    
-    // Set first column to ones
-    gsl_vector *vec1 = gsl_vector_alloc(nrows);
-    gsl_vector_set_all(vec1, 1.0);
-    gsl_matrix_set_col(matrix, 0, vec1);
-    gsl_vector_free(vec1);
-
-    // Set rest of matrix
-    for(uint r = 0; r < nrows; ++r)
-      for(uint c = 0; c < ncols; ++c)
-	gsl_matrix_set(matrix, r, c+1, fmatrix[r][c]);
-
-    gsl_vector *y = gsl_vector_alloc(nrows);
     for(uint r = 0; r < nrows; ++r)
       gsl_vector_set(y, r, ovec[r]);
 
-    gsl_vector *betas = gsl_vector_alloc(ncols+1);
-    gsl_matrix *cov = gsl_matrix_alloc(ncols + 1, ncols + 1);
     double chisq;
-
     gsl_multifit_linear(matrix, y, betas, cov, &chisq, work);
     
     //******************************************************************
@@ -87,12 +96,6 @@ void TimeoutMgm::predictTimeouts(double **fmatrix, uint nrows, uint ncols, doubl
 	predictions[idx] += gsl_vector_get(betas, f) * fmatrix[timeoutIdx[idx]][f-1];
     }
 
-    gsl_multifit_linear_free(work);
-    gsl_matrix_free(matrix);
-    gsl_matrix_free(cov);
-    gsl_vector_free(y);
-    gsl_vector_free(betas);
-
     // Step 2.3: Compute error
     err = 0.0;
     for(uint i = 0; i < predictions.size(); ++i) 
@@ -103,6 +106,20 @@ void TimeoutMgm::predictTimeouts(double **fmatrix, uint nrows, uint ncols, doubl
     for(uint idx = 0; idx < timeoutIdx.size(); ++idx) 
       ovec[timeoutIdx[idx]] =  predictions[idx];
   }
-  cout << iter << "(error: " << err << ")\n";
-  
+  *(LogMgm::Instance()) << iter << "(error: " << err << ")\n";
+
+  gsl_multifit_linear_free(work);
+  gsl_matrix_free(matrix);
+  gsl_vector_free(y);
+  gsl_matrix_free(cov);
+  gsl_vector_free(betas);
+
+  uint fails = 0;
+  for(uint idx = 0; idx < timeoutIdx.size(); ++idx) {
+    if(ovec[timeoutIdx[idx]] < timeout) {
+      *(LogMgm::Instance()) << "After prediction " << timeoutIdx[idx] << " became " << ovec[timeoutIdx[idx]] << " (timeout: " << timeout << ")\n";
+      fails++;
+    }
+  }
+  *(LogMgm::Instance()) << "Prediction predicted " << fails << " timedout instances as non-timeouts.\n";
 }

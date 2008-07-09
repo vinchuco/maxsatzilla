@@ -87,9 +87,11 @@ int main(int argc, char *argv[]) {
       for(uint i = 0; i < nbInstances; i++)
 	outputs[i] = data[i][s];
 
+      lm->setCategory(LogMgm::TOHAND);
       if(creader.getHandleTimeouts())
 	TimeoutMgm::predictTimeouts(fdata, nbInstances, nbFeatures, outputs, timeOut, creader.getTimeoutError());
-      
+      lm->endCategory();
+
       if(percentTest > 0)
 	dss[s] = createDataSets(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s], timeOut, percentTest);
       else
