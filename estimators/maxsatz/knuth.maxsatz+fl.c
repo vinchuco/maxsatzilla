@@ -1363,6 +1363,7 @@ int choose_and_instantiate_variable() {
     return NONE;
   for (var = 0; var < NB_VAR; var++) {
     if (var_state[var] == ACTIVE) {
+      //! Conditional
       poid = (float)random();
       if (poid>max_poid) {
 	chosen_var=var;
@@ -1432,7 +1433,17 @@ void init() {
 }
  
 #define LOCAL_SEARCH_TIMEOUT 5
+#define BNB_TIMEOUT 5
 #define LOCAL_SEARCH_MAX_RUNS 100
+#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
+
+void timeout_handler( int signal ) {
+  printf("Time out %d sec.\n", TOTAL_TIMEOUT );
+  printf("Best Solution=%d\n", UB);
+  printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
+	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
+  exit(0);
+}
 
 char* emptyFileName() {
   char *vlineFilename = malloc( sizeof(char) * 512 );  
@@ -1492,6 +1503,9 @@ main(int argc, char *argv[]) {
   }
   for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
 
+  signal( SIGALRM, timeout_handler );
+  alarm ( TOTAL_TIMEOUT );
+
   a_tms = ( struct tms *) malloc( sizeof (struct tms));
   mess=times(a_tms); begintime = a_tms->tms_utime;
 
@@ -1510,10 +1524,10 @@ main(int argc, char *argv[]) {
   printf("Best Solution=%d\n", UB);
   printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
 	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
-  /*	        
+  	        
   printf ("Program terminated in %5.3f seconds.\n",
 	  ((double)(endtime-begintime)/CLK_TCK));
-  
+  /*  
   fp_time = fopen("timetable", "a");
   fprintf(fp_time, "maxsatz14bis+fl %s %5.3f %ld %ld %d %d %d %d\n", 
 	  saved_input_file, ((double)(endtime-begintime)/CLK_TCK), 
