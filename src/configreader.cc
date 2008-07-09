@@ -8,7 +8,7 @@
 using std::cerr;
 
 ConfigReader::ConfigReader(const string &configFile)
-  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NUM_LA) {
+  : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NUM_LA), handleTimeout(false), timeoutError(0.0) {
   parseConfig();
   file.close();
 }
@@ -68,6 +68,10 @@ void ConfigReader::parseConfig() {
 	featureStd = true;
       else if(paramName == "pertest")
 	percentTest = getUInt();
+      else if(paramName == "timeouthandle") {
+	handleTimeout = true;
+	timeoutError = getDouble();
+      }
       else if(paramName == "learning")  {
 	string lAlg = getString();
 	std::transform(lAlg.begin(), lAlg.end(), lAlg.begin(), tolower_op());

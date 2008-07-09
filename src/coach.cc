@@ -18,6 +18,7 @@
 #include "learningalgorithm.hh"
 #include "ridgeregression.hh"
 #include "svmregression.hh"
+#include "timeoutmgm.hh"
 
 using std::vector;
 using std::string;
@@ -86,6 +87,9 @@ int main(int argc, char *argv[]) {
       for(uint i = 0; i < nbInstances; i++)
 	outputs[i] = data[i][s];
 
+      if(creader.getHandleTimeouts())
+	TimeoutMgm::predictTimeouts(fdata, nbInstances, nbFeatures, outputs, timeOut, creader.getTimeoutError());
+      
       if(percentTest > 0)
 	dss[s] = createDataSets(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s], timeOut, percentTest);
       else
@@ -130,9 +134,9 @@ int main(int argc, char *argv[]) {
       if(percentTest > 0)
 	dss[s].second->dumpPlotFiles(LogMgm::Instance()->getLogPath() + "/coachTest_org");
       
-      if(percentTest == 0)
-	dss[s].first->removeTimeouts(timeOut); // Make sure timeout removal happens BEFORE standardization of outputs
-      
+      if(percentTest == 0) 
+	  dss[s].first->removeTimeouts(timeOut); // Make sure timeout removal happens BEFORE standardization of outputs
+
       if(creader.getOutputStd()) {
 	dss[s].first->standardizeOutput();
 	dss[s].second->standardizeOutput();

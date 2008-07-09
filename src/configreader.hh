@@ -36,8 +36,10 @@ public:
   bool   getOutputStd ()                  const { return outputStd;                }
   uint   getFEPartOrder()                 const { return fePartOrder;              }
   uint   getPercentTest()                 const { return percentTest;              }
-  LearningAlgType getLearningAlg()            const { return la;                       }
-
+  LearningAlgType getLearningAlg()        const { return la;                       }
+  double getTimeoutError()                const { return timeoutError;             }
+  bool   getHandleTimeouts()              const { return handleTimeout;            }
+  
 private:
   struct tolower_op : public std::unary_function<char, char> {
     char operator()(char x) { return tolower(x); }
@@ -59,6 +61,8 @@ private:
   bool outputStd;                     ///< Flag which determines if standardization of outputs should be performed.
   uint fePartOrder;                   ///< Order of the function basis expansion.
   LearningAlgType la;                     ///< Learning algorithm selected
+  bool handleTimeout;                 ///< If true coach will handle timeouts
+  double timeoutError;                ///< If handleTimeout is set this will be the error allows for timeout fitting.
 };
 
 #endif // CONFIGREADER_HH
