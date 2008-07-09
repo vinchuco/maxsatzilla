@@ -173,7 +173,10 @@ void parseOptions(int argc, char** argv)
 	    }
 
 	    else if (oneof(arg, "one-branch" )) opt_one_branch_only = true;
-
+	    else if (strncmp(arg, "-TO=", 4) == 0 ) 
+	      {
+		alarm ( atoi(arg+4) );
+	      }
             else if (oneof(arg, "ca,adders" )) opt_convert = ct_Adders;
             else if (oneof(arg, "cs,sorters")) opt_convert = ct_Sorters;
             else if (oneof(arg, "cb,bdds"   )) opt_convert = ct_BDDs;
@@ -332,13 +335,13 @@ static void SIGTERM_handler(int signum) {
     SatELite::deleteTmpFiles();
     _exit(pb_solver->best_goalvalue == Int_MAX ? 0 : 10); }
 
-#define LOCAL_SEARCH_TIMEOUT 5
-#define BNB_TIMEOUT 5
-#define LOCAL_SEARCH_MAX_RUNS 100
-#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
+//#define LOCAL_SEARCH_TIMEOUT 5
+//#define BNB_TIMEOUT 5
+//#define LOCAL_SEARCH_MAX_RUNS 100
+//#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
 
 void SIGALRM_handler( int signal ) {
-  printf("Time out %d sec.\n", TOTAL_TIMEOUT );
+  printf("c Time out %d sec.\n", signal );
   outputResult(*pb_solver, false);
   _exit(0);
 }
@@ -376,7 +379,6 @@ int main(int argc, char** argv)
     signal(SIGINT , SIGINT_handler);
     signal(SIGTERM, SIGTERM_handler);
     signal( SIGALRM, SIGALRM_handler );
-    alarm ( TOTAL_TIMEOUT );
 
     if(opt_file_type==ft_Pseudo)
     {
