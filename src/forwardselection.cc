@@ -9,10 +9,6 @@
 #include <gsl/gsl_fit.h>
 #include <gsl/gsl_multifit.h>
 
-#ifdef OLDGSL
-#include "gslutils.hh"
-#endif // OLDGSL
-
 using std::cout;
 using std::pair;
 using std::make_pair;
