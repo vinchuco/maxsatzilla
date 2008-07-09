@@ -73,8 +73,8 @@ void ConfigReader::parseConfig() {
 	std::transform(lAlg.begin(), lAlg.end(), lAlg.begin(), tolower_op());
 	if(lAlg == "rr")
 	  la = RR;
-	//else if(lAlg == "svm")
-	//  la = SVM;
+	else if(lAlg == "svm")
+	  la = SVM;
 	//else if(lAlg == "nn")
 	//  la = NN;
 	else {
