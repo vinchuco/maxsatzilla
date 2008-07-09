@@ -21,6 +21,7 @@ CFLAGS    = -Wall -ffloat-store
 CFLAGS   += -O3 -IADTs -include Global.h -include Main.h -D_FILE_OFFSET_BITS=64 
 CFLAGS   += -I$(MAXSATZILLA_DIR)/extlib/gmp-4.2.2/include/
 LDFLAGS  += -L$(MAXSATZILLA_DIR)/extlib/gmp-4.2.2/lib/ -lz -lgmp
+COBJS    += $(MAXSATZILLA_DIR)/extlib/gmp-4.2.2/include/gmp.h
 COPTIMIZE = #-fomit-frame-pointer # -falign-loops=4 -falign-functions=16 -foptimize-sibling-calls -finline-functions -fcse-follow-jumps -fcse-skip-blocks -frerun-cse-after-loop -frerun-loop-opt -fgcse
 
 
