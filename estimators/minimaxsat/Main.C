@@ -53,6 +53,7 @@ int 	 opt_ls=1;
 int 	 opt_learn=1;
 int 	 opt_prob=1;
 bool     opt_one_branch_only = false;
+int      opt_timeout = -1;
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -175,7 +176,8 @@ void parseOptions(int argc, char** argv)
 	    else if (oneof(arg, "one-branch" )) opt_one_branch_only = true;
 	    else if (strncmp(arg, "-TO=", 4) == 0 ) 
 	      {
-		alarm ( atoi(arg+4) );
+		opt_timeout = atoi(arg+4);
+		alarm ( opt_timeout );
 	      }
             else if (oneof(arg, "ca,adders" )) opt_convert = ct_Adders;
             else if (oneof(arg, "cs,sorters")) opt_convert = ct_Sorters;
@@ -335,13 +337,8 @@ static void SIGTERM_handler(int signum) {
     SatELite::deleteTmpFiles();
     _exit(pb_solver->best_goalvalue == Int_MAX ? 0 : 10); }
 
-//#define LOCAL_SEARCH_TIMEOUT 5
-//#define BNB_TIMEOUT 5
-//#define LOCAL_SEARCH_MAX_RUNS 100
-//#define TOTAL_TIMEOUT (LOCAL_SEARCH_TIMEOUT + BNB_TIMEOUT)
-
 void SIGALRM_handler( int signal ) {
-  printf("c Time out %d sec.\n", signal );
+  printf("c Time out %d sec.\n", opt_timeout );
   outputResult(*pb_solver, false);
   _exit(0);
 }

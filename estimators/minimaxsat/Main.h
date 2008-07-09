@@ -24,7 +24,6 @@ extern int	opt_heur;
 extern int	opt_trans;
 extern bool     opt_one_branch_only;
 
-
 // -- solver options:
 extern FileT    opt_file_type;
 extern SolverT  opt_solver;
