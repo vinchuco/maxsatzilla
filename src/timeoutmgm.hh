@@ -9,4 +9,10 @@
  * Technometrics 1979
  */
 
+namespace TimeoutMgm {
+
+  void predictTimeouts(MSZDataSet &, uint, double);
+
+};
+
 #endif // TIMEOUTMGM_HH
