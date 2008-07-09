@@ -52,6 +52,7 @@ int      opt_size=3;
 int 	 opt_ls=1;
 int 	 opt_learn=1;
 int 	 opt_prob=1;
+bool     opt_one_branch_only = false;
 
 //- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
@@ -171,7 +172,7 @@ void parseOptions(int argc, char** argv)
 	       opt_prob= iaux;
 	    }
 
-
+	    else if (oneof(arg, "one-branch" )) opt_one_branch_only = true;
 
             else if (oneof(arg, "ca,adders" )) opt_convert = ct_Adders;
             else if (oneof(arg, "cs,sorters")) opt_convert = ct_Sorters;

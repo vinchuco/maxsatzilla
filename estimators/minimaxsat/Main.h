@@ -22,6 +22,7 @@ extern bool     opt_try;
 extern int	opt_lc;
 extern int	opt_heur;
 extern int	opt_trans;
+extern bool     opt_one_branch_only;
 
 
 // -- solver options:

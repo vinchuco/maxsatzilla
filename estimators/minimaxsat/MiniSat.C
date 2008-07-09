@@ -768,7 +768,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
             // New variable decision:
             stats.decisions++;
 	    
-	    //calculateStaticOrdering();
+	    // if(opt_heur==1) calculateStaticOrdering();
 	    Lit pick = lit_Undef;
 	    
 	    Var next = order.select(params.random_var_freq);
@@ -791,7 +791,7 @@ lbool Solver::search(int nof_conflicts, int nof_learnts, const SearchParams& par
 		search_state=2;
 		
 		// Montecarlo method
-		_exit(0);
+		if( opt_one_branch_only ) _exit(0);
 		if(UB==0)
 		  {    
 		    cancelUntil(root_level);
@@ -1703,51 +1703,43 @@ void Solver::applyAC(int lev)
 
 Int Solver::applyLC()
 {
- Int tot;
- tot=0;
- 
- currentMark++;
- 
- 	if(decisionLevel()==0) {
-		
-		
-		//if(opt_heur==1)
-		{
-			if(opt_prob==1 || opt_prob==2) {
-				applyAC(2);
-				applyAC(3);
-			}
-		}
-		tot+=computeLB(-1);
-		calculateStaticOrdering();
-		
-		
-		
-		
-	}
-	else {
-		if(opt_prob==2) {
-			applyAC(2);
-			applyAC(3);
-		}
-
-		tot+=computeLB(-1);
-	}
- 
-	for(int i=reasons.restNC.size()-1;i>=0;i--) {
-	changeUnaryCost(Lit::toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
-	reasons.restNC.pop_();
- }
- /*
- for(int i=reasons.restMarkCla.size()-1;i>=0;i--) {
-  Clause *c = reasons.restMarkCla[i].clause;
-  c->setWeight(c->getWeight()+reasons.restMarkCla[i].cost);
-  reasons.restMarkCla.pop_();
- }
- */
- 
- return tot+LB;
-
+  Int tot;
+  tot=0;  
+  currentMark++;
+  
+  if(decisionLevel()==0) {				
+    //if(opt_heur==1) {
+    if(opt_prob==1 || opt_prob==2) {
+      applyAC(2);
+      applyAC(3);
+    }
+    //}
+    tot+=computeLB(-1);
+    if(opt_heur==1) calculateStaticOrdering();
+    else if (opt_heur==4) calculateRandomOrdering();
+  }
+  else {
+    if(opt_prob==2) {
+      applyAC(2);
+      applyAC(3);
+    }
+    
+    tot+=computeLB(-1);
+  }
+  
+  for(int i=reasons.restNC.size()-1;i>=0;i--) {
+    changeUnaryCost(Lit::toLit(reasons.restNC[i].lit),-reasons.restNC[i].cost);
+    reasons.restNC.pop_();
+  }
+  /*
+    for(int i=reasons.restMarkCla.size()-1;i>=0;i--) {
+    Clause *c = reasons.restMarkCla[i].clause;
+    c->setWeight(c->getWeight()+reasons.restMarkCla[i].cost);
+    reasons.restMarkCla.pop_();
+    }
+  */
+  
+  return tot+LB;  
 }
 
 /************************ TRANSFORMATION AND RESTORATION FUNCTIONS *************************+*/
@@ -1960,65 +1952,71 @@ int Solver::indexRest(){
  else return nVars()*2;
 }
 
+void Solver::calculateRandomOrdering()
+{
+  printf("c Heuristic: Random ordering\n");
+  srandom( time( NULL ) );
+  for(int v=0;v<nVars();v++) {
+    activity[v] = random() % nVars();
+  }
+}
+
 void Solver::calculateStaticOrdering()
 {
-  if(opt_heur==1)
+  for(int i=0;i<nVars();i++)
     {
-      for(int i=0;i<nVars();i++)
-	{
-	  Lit p=Lit(i,false);
-	  activity[var(p)]=0;
-	  if(NC[index(p)]>0)
-	    activity[var(p)] += toint(NC[index(p)]);
-	  if(NC[index(~p)]>0)
-	    activity[var(p)] += toint(NC[index(~p)]);
-	}
-      
-      for (int i = 0; i < clauses.size(); i++){
-	Clause& c = *clauses[i];
-	
-	if(not c.isUsed())
+      Lit p=Lit(i,false);
+      activity[var(p)]=0;
+      if(NC[index(p)]>0)
+	activity[var(p)] += toint(NC[index(p)]);
+      if(NC[index(~p)]>0)
+	activity[var(p)] += toint(NC[index(~p)]);
+    }
+  
+  for (int i = 0; i < clauses.size(); i++){
+    Clause& c = *clauses[i];
+    
+    if(not c.isUsed())
+      {
+	int cont=0;
+	bool sat=false;
+	for (int j = 0; j < c.size(); j++){ 
+	  if(value(c[j])==l_Undef) cont++;
+	  if(value(c[j])==l_True) sat=true;}
+	if(not sat)
 	  {
-	    int cont=0;
-	    bool sat=false;
-	    for (int j = 0; j < c.size(); j++){ 
-	      if(value(c[j])==l_Undef) cont++;
-	      if(value(c[j])==l_True) sat=true;}
-	    if(not sat)
-	      {
-		for (int j = 0; j < c.size(); j++){
-		  Lit p=c[j];
-		  
-		  if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
-		  else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
-		}
-	      }
+	    for (int j = 0; j < c.size(); j++){
+	      Lit p=c[j];
+	      
+	      if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
+	      else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
+	    }
 	  }
       }
-      for (int i = 0; i < comps.size(); i++){
-	Clause& c = *comps[i];
-	if(not c.isUsed())
+  }
+  for (int i = 0; i < comps.size(); i++){
+    Clause& c = *comps[i];
+    if(not c.isUsed())
+      {
+	int cont=0;
+	bool sat=false;
+	for (int j = 0; j < c.size(); j++){ 
+	  if(value(c[j])==l_Undef) cont++;
+	  if(value(c[j])==l_True) sat=true;}
+	if(not sat) 
 	  {
-	    int cont=0;
-	    bool sat=false;
-	    for (int j = 0; j < c.size(); j++){ 
-	      if(value(c[j])==l_Undef) cont++;
-	      if(value(c[j])==l_True) sat=true;}
-	    if(not sat) 
-	      {
-		for (int j = 0; j < c.size(); j++){
-		  Lit p=c[j];
-		  if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
-		  else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
-		}
-	      }
+	    for (int j = 0; j < c.size(); j++){
+	      Lit p=c[j];
+	      if(c.isHard() and maxPseudo>0) activity[var(p)] += toint(maxPseudo)/pow(2,cont);
+	      else activity[var(p)] += toint(c.getWeight())/pow(2,cont);
+	    }
 	  }
       }
-      
-      for(int i=0;i<nVars();i++)
-	{
-	  order.update(i);
-	}
+  }
+  
+  for(int i=0;i<nVars();i++)
+    {
+      order.update(i);
     }
 }
 

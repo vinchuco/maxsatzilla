@@ -333,6 +333,7 @@ private:
     // Activity:
     //
     void    calculateStaticOrdering(void);
+    void    calculateRandomOrdering(void);
     void    localSearch(int,int,int);
     void    DoHardening(void);
     int     calculateJeroslow(void);
