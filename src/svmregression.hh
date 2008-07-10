@@ -13,6 +13,9 @@ public:
   SVMRegression(const MSZDataSet &);
   SVMRegression(RegressionType, KernelType, const MSZDataSet &);
   virtual ~SVMRegression();
+
+  void setRegressionType(RegressionType rt) { regressionType = rt; }
+  void setKernelType(KernelType kt) { kernelType = kt; }
   
   void setDegree(uint d)  { degree = d;      }
   void setGamma(double g) { gamma = g;       }
