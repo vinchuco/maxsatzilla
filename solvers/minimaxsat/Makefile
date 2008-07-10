@@ -13,7 +13,7 @@ R64COBJS  = $(addsuffix x,  $(COBJS))
 R32COBJS  = $(addsuffix i,  $(COBJS))
 
 EXEC      = minimaxsat
-MAXSATZILLA_DIR = MAXSATZILLA_DIR = $(realpath ../../../../)
+MAXSATZILLA_DIR = $(realpath ../../../../)
 
 CXX       = g++
 #CXX      = icpc
