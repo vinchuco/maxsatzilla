@@ -8,7 +8,7 @@
 SVMRegression::SVMRegression(const MSZDataSet &data) 
   : LearningAlgorithm(data), kernelType(LINEAR_K) { }
 
-SVMRegression::SVMRegression(SVMKernel kernelType, const MSZDataSet &data)
+SVMRegression::SVMRegression(KernelType kernelType, const MSZDataSet &data)
   : LearningAlgorithm(data), kernelType(kernelType) { }
 
 SVMRegression::~SVMRegression() { }

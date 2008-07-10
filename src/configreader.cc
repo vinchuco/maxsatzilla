@@ -56,8 +56,54 @@ void ConfigReader::parseConfig() {
 	  MSZError("In your coach config file you have set delta to %f and you're now trying to set the instances. Only one is possible.", fsDelta);
 	}
       }
-      else if(paramName == "rrdelta")
+      else if(paramName == "rr_factor")
 	rrDelta = getDouble();
+      else if(paramName == "svm_degree")
+	svmDegree = getUInt();
+      else if(paramName == "svm_gamma")
+	svmGamma = getDouble();
+      else if(paramName == "svm_coef0")
+	svmCoef0 = getDouble();
+      else if(paramName == "svm_c")
+	svmC = getDouble();
+      else if(paramName == "svm_p")
+	svmP = getDouble();
+      else if(paramName == "svm_nu")
+	svmNu = getDouble();
+      else if(paramName == "svm_cache_size")
+	svmCacheSize = getDouble();
+      else if(paramName == "svm_eps")
+	svmStopCrit = getDouble();
+      else if(paramName == "svm_shrinking")
+	svmShrink = getUInt();
+      else if(paramName == "svm_probability")
+	svmProbability = getUInt();
+      else if(paramName == "svm_regression_type") {
+	string type = getString();
+	std::transform(type.begin(), type.end(), type.begin(), tolower_op());
+	if(type == "nu")
+	  svmRegressionType = SVMRegression::NU_R;
+	else if(type == "epsilon")
+	  svmRegressionType = SVMRegression::EPSILON_R;
+	else {
+	  MSZError("In your coach config file you have not set the svm regression type to a known value.");
+	}
+      }
+      else if(paramName == "svm_kernel_type") {
+	string kernel = getString();
+	std::transform(kernel.begin(), kernel.end(), kernel.begin(), tolower_op());
+	if(kernel == "linear")
+	  svmKernelType = SVMRegression::LINEAR_K;
+	else if(kernel == "poly")
+	  svmKernelType = SVMRegression::POLY_K;
+	else if(kernel == "rbf")
+	  svmKernelType = SVMRegression::RBF_K;
+	else if(kernel == "sigmoid")
+	  svmKernelType = SVMRegression::SIGMOID_K;
+	else {
+	  MSZError("In your coach config file you have not set the svm kernel type to a known value.");
+	}
+      }
       else if(paramName == "part")
 	fePartitions.push_back(getVector<uint>());
       else if(paramName == "partorder")

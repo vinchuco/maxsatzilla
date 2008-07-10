@@ -10,6 +10,7 @@
 #include "pputils.hh"
 #include "reader.hh"
 #include "learningalgtype.hh"
+#include "svmregression.hh"
 
 using std::string;
 using std::vector;
@@ -63,6 +64,20 @@ private:
   LearningAlgType la;                     ///< Learning algorithm selected
   bool handleTimeout;                 ///< If true coach will handle timeouts
   double timeoutError;                ///< If handleTimeout is set this will be the error allows for timeout fitting.
+  
+  // Support Vector Machine Options
+  uint svmDegree;                    ///< Degree of polynomio
+  double svmGamma;                   ///< Kernel multiplier
+  double svmCoef0;                   ///< Kernel adder
+  double svmC;                       ///< cost of constraint violation
+  double svmP;                       ///< epsilon in epsilon insensitive function
+  double svmNu;                      ///< nu parameter in nu-svm
+  double svmCacheSize;               ///< size of available cache in Mb
+  double svmStopCrit;                ///< Stop Criterion
+  uint svmShrink;                    ///< Shrinking flag
+  uint svmProbability;               ///< Probability flag
+  SVMRegression::RegressionType svmRegressionType; ///< Type of SVM Regression
+  SVMRegression::KernelType svmKernelType; ///< Type of SVM kernel to use
 };
 
 #endif // CONFIGREADER_HH
