@@ -6,10 +6,10 @@
 #include <svm.h>
 
 SVMRegression::SVMRegression(const MSZDataSet &data) 
-  : LearningAlgorithm(data), kernelType(LINEAR_K) { }
+  : LearningAlgorithm(data), regressionType(NU_R), kernelType(RBF_K) { }
 
-SVMRegression::SVMRegression(KernelType kernelType, const MSZDataSet &data)
-  : LearningAlgorithm(data), kernelType(kernelType) { }
+SVMRegression::SVMRegression(RegressionType regressionType, KernelType kernelType, const MSZDataSet &data)
+  : LearningAlgorithm(data), regressionType(regressionType), kernelType(kernelType) { }
 
 SVMRegression::~SVMRegression() { }
 
@@ -25,7 +25,7 @@ SVMModel *SVMRegression::run() {
   svm_params->coef0 = coef0;
   svm_params->cache_size = cacheSize;
   svm_params->eps = eps;
-  svm_params->C = C;
+  svm_params->C = c;
   svm_params->nu = nu;
   svm_params->p = p;
   svm_params->shrinking = shrinking;
