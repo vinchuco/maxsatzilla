@@ -226,12 +226,18 @@ int main(int argc, char *argv[]) {
       switch(creader.getLearningAlg()) {
       case RR: {
 	RidgeRegression * rr = new RidgeRegression(*(dss[s].first));
+	
+	// Set ridge regression options
 	rr->setDelta(creader.getRRDelta());
 	la = rr;
 	break;
       }
       case SVM: {
 	SVMRegression *svm = new SVMRegression(*(dss[s].first));
+	
+	// Set svm regressions options
+	svm->setRegressionType(creader.getSVMRegressionType());
+	svm->setKernelType(creader.getSVMKernelType());
 	la = svm;
 	break;
       }

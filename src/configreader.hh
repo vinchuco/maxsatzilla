@@ -40,7 +40,21 @@ public:
   LearningAlgType getLearningAlg()        const { return la;                       }
   double getTimeoutError()                const { return timeoutError;             }
   bool   getHandleTimeouts()              const { return handleTimeout;            }
-  
+
+  // SVM Options
+  uint getSVMDegree()                     const { return svmDegree;                }
+  double getSVMGamma()                    const { return svmGamma;                 }
+  double getSVMCoef0()                    const { return svmCoef0;                 }
+  double getSVMC()                        const { return svmC;                     }
+  double getSVMP()                        const { return svmP;                     }
+  double getSVMNu()                       const { return svmNu;                    }
+  double getSVMCacheSize()                const { return svmCacheSize;             }
+  double getSVMStopCrit()                 const { return svmStopCrit;              }
+  uint getShrink()                        const { return svmShrink;                }
+  uint getProbability()                   const { return svmProbability;           }
+  SVMRegression::RegressionType getSVMRegressionType() const { return svmRegressionType; }
+  SVMRegression::KernelType getSVMKernelType() const { return svmKernelType; }
+
 private:
   struct tolower_op : public std::unary_function<char, char> {
     char operator()(char x) { return tolower(x); }
