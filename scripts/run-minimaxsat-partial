@@ -1,5 +1,5 @@
 #! /bin/sh
 WCNF_FILE=`basename $1`.wcnf
-/home/jplanes/mse08/solvers/PauloMatos.maxsatzilla/scripts/pmcnf2wcnf $1 > $WCNF_FILE
+./scripts/pmcnf2wcnf $1 > $WCNF_FILE
 ./solvers/minimaxsat/minimaxsat -F=2 $WCNF_FILE
 rm $WCNF_FILE
