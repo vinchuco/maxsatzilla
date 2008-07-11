@@ -25,10 +25,8 @@ public:
   void setC(double c_)    { c = c_;          }
   void setNu(double nu_)  { nu = nu_;        }
   void setP(double p_)    { p = p_;          }
-  void setShrinking()     { shrinking = true;}
-  void clearShrinking()   { shrinking = false;}
-  void setProbability()   { probability = true; }
-  void clearProbability() { probability = false; }
+  void setShrinking(bool v)     { shrinking = v;}
+  void setProbability(bool v)   { probability = v; }
 
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model

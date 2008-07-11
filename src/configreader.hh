@@ -50,8 +50,8 @@ public:
   double getSVMNu()                       const { return svmNu;                    }
   double getSVMCacheSize()                const { return svmCacheSize;             }
   double getSVMStopCrit()                 const { return svmStopCrit;              }
-  bool getShrink()                        const { return svmShrink;                }
-  bool getProbability()                   const { return svmProbability;           }
+  bool getSVMShrinking()                        const { return svmShrink;                }
+  bool getSVMProbability()                   const { return svmProbability;           }
   SVMRegression::RegressionType getSVMRegressionType() const { return svmRegressionType; }
   SVMRegression::KernelType getSVMKernelType() const { return svmKernelType; }
 

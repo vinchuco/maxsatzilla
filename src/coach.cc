@@ -239,6 +239,13 @@ int main(int argc, char *argv[]) {
 	// Set svm regressions options
 	svm->setRegressionType(creader.getSVMRegressionType());
 	svm->setKernelType(creader.getSVMKernelType());
+	
+	svm->setCacheSize(creader.getSVMCacheSize());
+	svm->setStopCrit(creader.getSVMStopCrit());
+	svm->setNu(creader.getSVMNu());
+	svm->setShrinking(creader.getSVMShrinking());
+	svm->setProbability(creader.getSVMProbability());
+	
 	la = svm;
 	break;
       }
