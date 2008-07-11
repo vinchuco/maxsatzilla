@@ -1,1 +1,2 @@
-maxsatzilla.bin --solverscfg=/home/jplanes/mse08/solvers/PauloMatos.maxsatzilla/partial.cfg models/real+structured-1075_fe2.best.model $1
+#!/bin/sh
+./maxsatzilla.bin --solverscfg=./config/partial.cfg models/real+structured-1075_fe2.best.model $1
