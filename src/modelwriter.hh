@@ -35,7 +35,8 @@ public:
   void writeFEOrder(uint);
   void writeStdFactors(const string&, const vector<Triple<FeatureLabel, double, double> >&);
   void writeLearningAlgType(LearningAlgType);
-  void writeModelFilename(struct svm_model *); ///< Writes the svm_model to a file and the filename of where the model is kept to the model file.
+  void writeModelFilename(const string, struct svm_model *); ///< Writes the svm_model to a file and the filename of where the model is kept to the model file.
+  void writeModelOrderedLabels(const string, const vector<FeatureLabel>&);
   void endWrite();
 
 private:

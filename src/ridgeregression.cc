@@ -10,7 +10,7 @@
 
 using std::cerr;
 
-RidgeRegression::RidgeRegression(const MSZDataSet &data) :
+RidgeRegression::RidgeRegression(const DataSet &data) :
   LearningAlgorithm(data), delta(1.0) { }
 
 RidgeRegression::~RidgeRegression() { }

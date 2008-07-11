@@ -7,11 +7,11 @@
 
 class SVMRegression : public LearningAlgorithm {
 public:
-  enum RegressionType {NU_R, EPSILON_R};
-  enum KernelType {LINEAR_K, POLY_K, RBF_K, SIGMOID_K};
+  enum RegressionType {NU_R = NU_SVR, EPSILON_R = EPSILON_SVR};
+  enum KernelType {LINEAR_K = LINEAR, POLY_K = POLY, RBF_K = RBF, SIGMOID_K = SIGMOID};
 
-  SVMRegression(const MSZDataSet &);
-  SVMRegression(RegressionType, KernelType, const MSZDataSet &);
+  SVMRegression(const DataSet &);
+  SVMRegression(RegressionType, KernelType, const DataSet &);
   virtual ~SVMRegression();
 
   void setRegressionType(RegressionType rt) { regressionType = rt; }

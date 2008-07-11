@@ -9,7 +9,7 @@
 using std::cout;
 using std::cerr;
 
-void ModelTesting::test(const Model *m, const MSZDataSet &testDS) {
+void ModelTesting::test(const Model *m, const DataSet &testDS) {
   
   const LearningAlgType lat = m->getLearningAlgType();
   
@@ -23,7 +23,7 @@ void ModelTesting::test(const Model *m, const MSZDataSet &testDS) {
   }
 }
 
-void ModelTesting::testRRModel(const RRModel *m, const MSZDataSet &testDS) {
+void ModelTesting::testRRModel(const RRModel *m, const DataSet &testDS) {
 
   *(LogMgm::Instance()) << "Testing for output: " << testDS.getOutputLabel() << "\n";
   *(LogMgm::Instance()) << "Testing " << testDS.getNRows() << " instances\n";
@@ -55,7 +55,7 @@ void ModelTesting::testRRModel(const RRModel *m, const MSZDataSet &testDS) {
   *(LogMgm::Instance()) << "Squared Sum of Errors for the model on the test data: " << sse << "\n";
 }
 
-void ModelTesting::testSVMModel(const SVMModel *m, const MSZDataSet &testDS) {
+void ModelTesting::testSVMModel(const SVMModel *m, const DataSet &testDS) {
   
   *(LogMgm::Instance()) << "Testing for output: " << testDS.getOutputLabel() << "\n";
   *(LogMgm::Instance()) << "Testing " << testDS.getNRows() << " instances\n";

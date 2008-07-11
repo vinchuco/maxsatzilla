@@ -21,7 +21,7 @@ using std::vector;
  */
 class RidgeRegression : public LearningAlgorithm {
 public:
-  RidgeRegression(const MSZDataSet &);
+  RidgeRegression(const DataSet &);
   virtual ~RidgeRegression();
 
   void setDelta(double d) { delta = d; }

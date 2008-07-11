@@ -22,7 +22,7 @@ using std::pair;
 using std::make_pair;
 using std::map;
 
-MSZDataSet::MSZDataSet(const double* const* m, uint nrows, uint ncols, const string* mlabels, const double* ov, const string& olabel)
+DataSet::DataSet(const double* const* m, uint nrows, uint ncols, const string* mlabels, const double* ov, const string& olabel)
   : nrows(nrows), ncols(ncols), stdDone(false), oStdDone(false) {
 
   // Recomputing matrix to be made of columns instead of lines
@@ -57,7 +57,7 @@ MSZDataSet::MSZDataSet(const double* const* m, uint nrows, uint ncols, const str
   }
 }
   
-MSZDataSet::MSZDataSet(const MSZDataSet& ds) 
+DataSet::DataSet(const DataSet& ds) 
   : nrows(ds.nrows), ncols(ds.ncols), stdDone(ds.stdDone), oStdDone(ds.oStdDone) {
 
   // Now we just need to copy the matrix.
@@ -80,7 +80,7 @@ MSZDataSet::MSZDataSet(const MSZDataSet& ds)
   
 }
 
-MSZDataSet::~MSZDataSet() {
+DataSet::~DataSet() {
   // Please God, do not let this Seg Fault!
 
   // Clean up matrix by deleting each line.
@@ -91,7 +91,7 @@ MSZDataSet::~MSZDataSet() {
   delete[] ovec;
 }
 
-void MSZDataSet::printRawMatrix() {
+void DataSet::printRawMatrix() {
 
   cerr << "Printing all matrix [" << nrows << ", " << ncols << "]\n";
   for(uint r = 0; r < nrows; r++) {
@@ -104,7 +104,7 @@ void MSZDataSet::printRawMatrix() {
 
 }
 
-void MSZDataSet::dumpPlotFiles(const string &prefix) const {
+void DataSet::dumpPlotFiles(const string &prefix) const {
   // Dump the files for plotting features against output
   for(uint f = 0; f < ncols; f++) {
     ofstream file;
@@ -129,7 +129,7 @@ void MSZDataSet::dumpPlotFiles(const string &prefix) const {
   }
 }
 
-void MSZDataSet::printSolverStats(uint timeout) {
+void DataSet::printSolverStats(uint timeout) {
 
   uint nbTimeouts = 0;
 
@@ -144,18 +144,18 @@ void MSZDataSet::printSolverStats(uint timeout) {
 
 }
 
-double MSZDataSet::getOutputValue(uint row) const {
+double DataSet::getOutputValue(uint row) const {
   assert(row < nrows);
   return getVValue(row);
 }
 
-double MSZDataSet::getFeatureValue(uint row, uint col) const {
+double DataSet::getFeatureValue(uint row, uint col) const {
   assert(row < nrows);
   assert(col < ncols);
   return getMValue(row, col);
 }
 
-vector<Triple<FeatureLabel, double, double> > MSZDataSet::standardize() {
+vector<Triple<FeatureLabel, double, double> > DataSet::standardize() {
 
   vector<Triple<FeatureLabel, double, double> > mfactors;
 
@@ -169,7 +169,7 @@ vector<Triple<FeatureLabel, double, double> > MSZDataSet::standardize() {
   return mfactors;
 }
 
-void MSZDataSet::standardize(const vector<Triple<FeatureLabel, double, double> > &factors) {
+void DataSet::standardize(const vector<Triple<FeatureLabel, double, double> > &factors) {
   
   cout << "Standardizing features forall k . x_k = `q(x_k - x')/sdv_i(x_i)...\n";
 
@@ -191,7 +191,7 @@ void MSZDataSet::standardize(const vector<Triple<FeatureLabel, double, double> >
       for(uint r = 0; r < nrows; r++) {
 	const double val = (getMValue(r, c) - mean) / sdv;
 	if(isnan(val)) {
-	  cerr << "MSZDataSet::standardize: NaN Error!\n"
+	  cerr << "DataSet::standardize: NaN Error!\n"
 	       << "Output Label " << getOutputLabel() << "\n"
 	       << "Row, Col: " << r << ", " << c << "\n"
 	       << "Feature: " << labels[c] << "\n"
@@ -216,7 +216,7 @@ void MSZDataSet::standardize(const vector<Triple<FeatureLabel, double, double> >
  *  @returns a pair with the centering factor (mean) and the
  *  @returns scaling factor (std deviation).
  */
-pair<double, double> MSZDataSet::computeStdFactors(uint c) {
+pair<double, double> DataSet::computeStdFactors(uint c) {
   
   // Compute column mean and compute column standard deviation.
   double mean = 0.0;
@@ -233,7 +233,7 @@ pair<double, double> MSZDataSet::computeStdFactors(uint c) {
   return make_pair(mean, sdv);
 }
 
-void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
+void DataSet::removeFeatures(const vector<uint> &keepVec) {
   // We need to remove the feature indexes in vec from the current data.
   
   cout << "[" << getOutputLabel() << "] Keeping features in dataset: ";
@@ -284,7 +284,7 @@ void MSZDataSet::removeFeatures(const vector<uint> &keepVec) {
   labels = newLabels;
 }
 
-void MSZDataSet::standardizeOutput() {
+void DataSet::standardizeOutput() {
 
   cout << "Standardizing outputs... ";
 
@@ -298,7 +298,7 @@ void MSZDataSet::standardizeOutput() {
 
 }
 
-void MSZDataSet::expand(uint n) { 
+void DataSet::expand(uint n) { 
   vector<uint> pvec(ncols); 
   for(uint i = 0; i < pvec.size(); i++)
     pvec[i] = i;
@@ -306,12 +306,12 @@ void MSZDataSet::expand(uint n) {
   expandOnPartition(n, pvec);
 }
 
-void MSZDataSet::expand(uint n, const vector<vector<uint> > &pvec) {
+void DataSet::expand(uint n, const vector<vector<uint> > &pvec) {
   for(uint i = 0; i < pvec.size(); i++)
     expandOnPartition(n, pvec[i]);
 }
 
-void MSZDataSet::expandOnPartition(uint k, const vector<uint> &pvec) {
+void DataSet::expandOnPartition(uint k, const vector<uint> &pvec) {
   
   // expansion is quadratic at the minimum and 
   // and be bigger than partition size.
@@ -402,14 +402,14 @@ void MSZDataSet::expandOnPartition(uint k, const vector<uint> &pvec) {
 
 }
 
-double MSZDataSet::computeCrossProduct(uint r, uint *ind, uint k, const vector<uint> &vec) {
+double DataSet::computeCrossProduct(uint r, uint *ind, uint k, const vector<uint> &vec) {
   double cp = 1.0; // Cross-product
   for(uint i = 0; i < k; i++)
     cp *= getMValue(r, vec[ind[i]]);
   return cp;
 }
 
-void MSZDataSet::removeTimeouts(uint timeout) {
+void DataSet::removeTimeouts(uint timeout) {
 
   if(oStdDone) {
     cout << "Output standardization already performed. Cannot remove timeouts.\n";
@@ -458,7 +458,7 @@ void MSZDataSet::removeTimeouts(uint timeout) {
 
 }
 
-void MSZDataSet::toCsv(const string& path) const {
+void DataSet::toCsv(const string& path) const {
   ofstream file(path.c_str());
 
   // Output first line with headers
@@ -482,7 +482,7 @@ void MSZDataSet::toCsv(const string& path) const {
 /** 
  * Removes features containing an sdv == 0, i.e., all variables are the same.
  */ 
-void MSZDataSet::removeHarmfulFeatures() {
+void DataSet::removeHarmfulFeatures() {
 
   vector<uint> keepVec;
 
@@ -507,7 +507,7 @@ void MSZDataSet::removeHarmfulFeatures() {
 /////////////////////////////////////////
 /////////////////////////////////////////
 
-MSZDataSet *createDataSet(const double* const* matrix, 
+DataSet *createDataSet(const double* const* matrix, 
 			  uint nrows, 
 			  uint ncols, 
 			  const string* labels, 
@@ -521,7 +521,7 @@ MSZDataSet *createDataSet(const double* const* matrix,
 #endif // NDEBUG
 
   // The call!
-  MSZDataSet *ds = new MSZDataSet(matrix, nrows, ncols, labels, ovec, ovecLabel);
+  DataSet *ds = new DataSet(matrix, nrows, ncols, labels, ovec, ovecLabel);
   
   return ds;
 }
@@ -532,7 +532,7 @@ MSZDataSet *createDataSet(const double* const* matrix,
  * and split according to the percentTest value.
  * @returns a pair with the training dataset in car and test dataset in cdr.
  */
-pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix, 
+pair<DataSet *, DataSet *> createDataSets(double** matrix, 
 						uint nrows, 
 						uint ncols, 
 						const string* labels, 
@@ -601,8 +601,8 @@ pair<MSZDataSet *, MSZDataSet *> createDataSets(double** matrix,
   assert(trainingRow == nbTrainingRows);
   assert(testRow == nbTestRows);
 
-  MSZDataSet *trainingDataSet = new MSZDataSet(trainingMatrix, nbTrainingRows, ncols, labels, trainingOVec, ovecLabel);
-  MSZDataSet *testDataSet = new MSZDataSet(testMatrix, nbTestRows, ncols, labels, testOVec, ovecLabel);
+  DataSet *trainingDataSet = new DataSet(trainingMatrix, nbTrainingRows, ncols, labels, trainingOVec, ovecLabel);
+  DataSet *testDataSet = new DataSet(testMatrix, nbTestRows, ncols, labels, testOVec, ovecLabel);
 
   delete[] trainingMatrix;
   delete[] trainingOVec;

@@ -1,4 +1,4 @@
 #include "learningalgorithm.hh"
 
-LearningAlgorithm::LearningAlgorithm(const MSZDataSet &ds) 
+LearningAlgorithm::LearningAlgorithm(const DataSet &ds) 
   : data(ds) { }

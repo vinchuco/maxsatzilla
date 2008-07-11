@@ -71,7 +71,7 @@ int main(int argc, char *argv[]) {
 
     // Creating a vector of pairs of datasets, one for each solver.
     // If there is a test set, we create the test set, otherwise we create a dataset and the test position is 0.
-    vector<pair<MSZDataSet *, MSZDataSet *> > dss(nbSolvers, make_pair((MSZDataSet*)0, (MSZDataSet*)0));
+    vector<pair<DataSet *, DataSet *> > dss(nbSolvers, make_pair((DataSet*)0, (DataSet*)0));
 
     double **fdata = new double* [nbInstances];
     for(uint f = 0; f < nbInstances; f++)
@@ -95,7 +95,7 @@ int main(int argc, char *argv[]) {
       if(percentTest > 0)
 	dss[s] = createDataSets(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s], timeOut, percentTest);
       else
-	dss[s] = std::make_pair(createDataSet(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s]), (MSZDataSet*)0);
+	dss[s] = std::make_pair(createDataSet(fdata, nbInstances, nbFeatures, featuresNames, outputs, solversNames[s]), (DataSet*)0);
 
       delete[] outputs;
     }
@@ -269,7 +269,12 @@ int main(int argc, char *argv[]) {
       }
       else if(lat == SVM) {
 	SVMModel *svmm = dynamic_cast<SVMModel *>(m);
-	mwriter.writeModelFilename(svmm->getSVMModelStruct());
+
+	vector<FeatureLabel> featureLabels(dss[s].first->getNFeatures());
+	for(uint i = 0; i < featureLabels.size(); ++i)
+	  featureLabels[i] = dss[s].first->getColLabel(i);
+	mwriter.writeModelFilename(solversNames[s], svmm->getSVMModelStruct());
+	mwriter.writeModelOrderedLabels(solversNames[s], featureLabels);
       } else {
 	cerr << "Coach: Model reported unknown learning algorithm.\n"
 	     << "Cannot proceed.\n";
@@ -278,8 +283,7 @@ int main(int argc, char *argv[]) {
 
 
       // Testing model against a test dataset
-      ModelTesting::test(m, *(dss[s].second));
-     
+      ModelTesting::test(m, *(dss[s].second));     
     }
 
     mwriter.endWrite();

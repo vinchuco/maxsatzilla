@@ -6,12 +6,12 @@
 
 class LearningAlgorithm {
 public:
-  LearningAlgorithm(const MSZDataSet &);
+  LearningAlgorithm(const DataSet &);
 
   virtual Model *run() = 0;
 
 protected:
-  const MSZDataSet &data; ///< Reference to data is kept.
+  const DataSet &data; ///< Reference to data is kept.
 };
 
 #endif // LEARNINGALGORITHM_HH

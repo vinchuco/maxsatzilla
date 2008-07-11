@@ -118,7 +118,7 @@ void ModelWriter::writeLearningAlgType(LearningAlgType la) {
   file << "p la " << laStr << "\n";
 }
 
-void ModelWriter::writeModelFilename(struct svm_model *model) {
+void ModelWriter::writeModelFilename(const string sname, struct svm_model *model) {
 
   // Lets create a random name for the model.
   std::stringstream out;
@@ -127,6 +127,16 @@ void ModelWriter::writeModelFilename(struct svm_model *model) {
   filename += out.str();
 
   svm_save_model(filename.c_str(), model);
-  file << "p svm_model_file " << filename << "\n";
+  file << "p svm_model_file " << sname << " " << filename << "\n";
 
+}
+
+void ModelWriter::writeModelOrderedLabels(const string sname, const vector<FeatureLabel> &flabels) {
+
+  const uint nlabels = flabels.size();
+  
+  file << "p nlabels " << sname << " " << nlabels << "\n";
+  
+  for(uint i = 0; i < nlabels; ++i)
+    file << "p featurelabel " << sname << " " << i << " " << flabels[i] << "\n";
 }

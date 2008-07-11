@@ -7,9 +7,9 @@
 
 namespace ModelTesting {
 
-  void test(const Model *, const MSZDataSet &);
-  void testRRModel(const RRModel *, const MSZDataSet &);
-  void testSVMModel(const SVMModel *, const MSZDataSet &);
+  void test(const Model *, const DataSet &);
+  void testRRModel(const RRModel *, const DataSet &);
+  void testSVMModel(const SVMModel *, const DataSet &);
 
 };
 #endif // MODELTESTING_HH

@@ -13,7 +13,7 @@ using std::cout;
 using std::pair;
 using std::make_pair;
 
-ForwardSelection::ForwardSelection(const MSZDataSet &ds) {
+ForwardSelection::ForwardSelection(const DataSet &ds) {
 
   /// \todo No error checking is being done on GSL output
   

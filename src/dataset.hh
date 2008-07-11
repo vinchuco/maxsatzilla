@@ -1,4 +1,3 @@
-
 #ifndef DATASET_HH
 #define DATASET_HH
 
@@ -16,11 +15,11 @@ using std::vector;
 using std::pair;
 using std::map;
 
-class MSZDataSet {
+class DataSet {
 public:
-  MSZDataSet(const double* const*, uint, uint, const string*, const double*, const string&);
-  MSZDataSet(const MSZDataSet&);
-  ~MSZDataSet();
+  DataSet(const double* const*, uint, uint, const string*, const double*, const string&);
+  DataSet(const DataSet&);
+  ~DataSet();
 
   /// Given a vector of labels for matrix columns and a prefix for file names, 
   /// dumps all the files, in a readable format for GNUPlot to use.
@@ -97,14 +96,14 @@ private:
 
 /// API entrace function to create dataset to be used with other
 /// functions. This function NEVER returns a 0 pointer.
-MSZDataSet *createDataSet(const double* const*, 
+DataSet *createDataSet(const double* const*, 
 			  uint, 
 			  uint, 
 			  const string*, 
 			  const double*, 
 			  const string&);
 
-pair<MSZDataSet *, MSZDataSet *> createDataSets(double**, 
+pair<DataSet *, DataSet *> createDataSets(double**, 
 						uint, 
 						uint, 
 						const string*, 

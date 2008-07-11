@@ -5,10 +5,10 @@
 #include <cassert>
 #include <svm.h>
 
-SVMRegression::SVMRegression(const MSZDataSet &data) 
+SVMRegression::SVMRegression(const DataSet &data) 
   : LearningAlgorithm(data), regressionType(NU_R), kernelType(RBF_K) { }
 
-SVMRegression::SVMRegression(RegressionType regressionType, KernelType kernelType, const MSZDataSet &data)
+SVMRegression::SVMRegression(RegressionType regressionType, KernelType kernelType, const DataSet &data)
   : LearningAlgorithm(data), regressionType(regressionType), kernelType(kernelType) { }
 
 SVMRegression::~SVMRegression() { }
@@ -28,8 +28,8 @@ SVMModel *SVMRegression::run() {
   svm_params->C = c;
   svm_params->nu = nu;
   svm_params->p = p;
-  svm_params->shrinking = shrinking;
-  svm_params->probability = probability;
+  svm_params->shrinking = shrinking ? 1 : 0;
+  svm_params->probability = probability ? 1 : 0;
 
   // Create an SVM problem
   svm_problem *svmp = new svm_problem;

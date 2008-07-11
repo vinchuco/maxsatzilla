@@ -15,7 +15,7 @@ using std::vector;
 // dataset with multiple inputs and multiple outputs.
 class ForwardSelection {
 public:
-  ForwardSelection(const MSZDataSet &);
+  ForwardSelection(const DataSet &);
   ~ForwardSelection();
 
   /// Given a double which is the fin target to add regressors,
