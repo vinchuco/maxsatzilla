@@ -75,9 +75,9 @@ void ConfigReader::parseConfig() {
       else if(paramName == "svm_eps")
 	svmStopCrit = getDouble();
       else if(paramName == "svm_shrinking")
-	svmShrink = getUInt();
+	svmShrink = true;
       else if(paramName == "svm_probability")
-	svmProbability = getUInt();
+	svmProbability = true;
       else if(paramName == "svm_regression_type") {
 	string type = getString();
 	std::transform(type.begin(), type.end(), type.begin(), tolower_op());

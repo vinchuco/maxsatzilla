@@ -25,21 +25,10 @@ public:
   void setC(double c_)    { c = c_;          }
   void setNu(double nu_)  { nu = nu_;        }
   void setP(double p_)    { p = p_;          }
-  void setShrinking()     { shrinking = 1;   }
-  void clearShrinking()   { shrinking = 0;   }
-  void setProbability()   { probability = 1; }
-  void clearProbability() { probability = 0; }
-
-  uint getDegree() const { return degree; }
-  double getGamma() const { return gamma; }
-  double getCoef0() const { return coef0; }
-  double getCacheSize() const { return cacheSize; }
-  double getStopCrit() const { return eps; }
-  double getC() const { return c; }
-  double getNu() const { return nu; }
-  double getP() const { return p; }
-  int getShrinking() const { return shrinking; }
-  int getProbability() const { return probability; }
+  void setShrinking()     { shrinking = true;}
+  void clearShrinking()   { shrinking = false;}
+  void setProbability()   { probability = true; }
+  void clearProbability() { probability = false; }
 
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model
@@ -59,8 +48,8 @@ private:
   double c;
   double nu;
   double p;
-  int shrinking;
-  int probability;
+  bool shrinking;
+  bool probability;
 };
 
 #endif // SVMREGRESSION_HH

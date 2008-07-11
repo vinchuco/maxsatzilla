@@ -221,10 +221,10 @@ int main(int argc, char *argv[]) {
       }
 
       // Computing the model with ridge regression
-      lm->setCategory(LogMgm::RIDREG);
       LearningAlgorithm *la = 0;
       switch(creader.getLearningAlg()) {
       case RR: {
+	lm->setCategory(LogMgm::RIDREG);
 	RidgeRegression * rr = new RidgeRegression(*(dss[s].first));
 	
 	// Set ridge regression options
@@ -233,6 +233,7 @@ int main(int argc, char *argv[]) {
 	break;
       }
       case SVM: {
+	lm->setCategory(LogMgm::SVMREG);
 	SVMRegression *svm = new SVMRegression(*(dss[s].first));
 	
 	// Set svm regressions options

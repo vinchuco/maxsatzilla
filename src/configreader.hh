@@ -50,8 +50,8 @@ public:
   double getSVMNu()                       const { return svmNu;                    }
   double getSVMCacheSize()                const { return svmCacheSize;             }
   double getSVMStopCrit()                 const { return svmStopCrit;              }
-  uint getShrink()                        const { return svmShrink;                }
-  uint getProbability()                   const { return svmProbability;           }
+  bool getShrink()                        const { return svmShrink;                }
+  bool getProbability()                   const { return svmProbability;           }
   SVMRegression::RegressionType getSVMRegressionType() const { return svmRegressionType; }
   SVMRegression::KernelType getSVMKernelType() const { return svmKernelType; }
 
@@ -88,8 +88,8 @@ private:
   double svmNu;                      ///< nu parameter in nu-svm
   double svmCacheSize;               ///< size of available cache in Mb
   double svmStopCrit;                ///< Stop Criterion
-  uint svmShrink;                    ///< Shrinking flag
-  uint svmProbability;               ///< Probability flag
+  bool svmShrink;                    ///< Shrinking flag
+  bool svmProbability;               ///< Probability flag
   SVMRegression::RegressionType svmRegressionType; ///< Type of SVM Regression
   SVMRegression::KernelType svmKernelType; ///< Type of SVM kernel to use
 };
