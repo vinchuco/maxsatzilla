@@ -17,7 +17,7 @@ class LogMgm {
 public:
   LogMgm();
   ~LogMgm();
-  enum LogCat {FORSEL = 0, RIDREG, SYSTEM, PARSER, SVMREG, TOHAND, NUMCATS};
+  enum LogCat {FORSEL = 0, RIDREG, SYSTEM, PARSER, SVMREG, TOHAND, TESTNG, NUMCATS};
 
   static LogMgm *Instance();
 

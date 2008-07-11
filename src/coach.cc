@@ -281,9 +281,10 @@ int main(int argc, char *argv[]) {
 	exit(EXIT_FAILURE);
       }
 
-
+      lm->setCategory(LogMgm::TESTNG);
       // Testing model against a test dataset
       ModelTesting::test(m, *(dss[s].second));     
+      lm->endCategory();
     }
 
     mwriter.endWrite();

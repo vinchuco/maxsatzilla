@@ -37,7 +37,8 @@ void LogMgm::setOutputPath(const string& path) {
     streams[PARSER] = new ofstream((path + "/parsing.log").c_str());
     streams[SVMREG] = new ofstream((path + "/svmregression.log").c_str());
     streams[TOHAND] = new ofstream((path + "/timeout_handle.log").c_str());
-
+    streams[TESTNG] = new ofstream((path + "/testing.log").c_str());
+    
     setupDone = true;
     logPath = path;
     return;
