@@ -1,0 +1,10 @@
+#! /bin/sh
+MSUNCORE_DIR="./solvers/msuncore"
+INIT_DIR=`pwd`
+OPB_FILE=`basename $1`.opb
+
+cd $MSUNCORE_DIR
+./src/genmsopb $1 $OPB_FILE
+./minisat+ -s -gs -cb -M -a $OPB_FILE
+rm $OPB_FILE
+cd $INIT_DIR

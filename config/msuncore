@@ -1,0 +1,7 @@
+#! /bin/sh
+MSUNCORE_DIR="./solvers/msuncore"
+INIT_DIR=`pwd`
+
+cd $MSUNCORE_DIR
+./src/msuncore $@
+cd $INIT_DIR
