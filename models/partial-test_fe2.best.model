@@ -1,0 +1,190 @@
+p training ../partial-test.msz
+p solvers minimaxsat-a-e mspbo-a-e msuncore-a1-ec msuncore-a31-es
+
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestSolution_Mean 1 48.7787 52.913
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestSolution_CoeffVariance 1 0.869169 0.814438
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestStep_Mean 1 1966.4 2629.88
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestStep_CoeffVariance 1 0.224603 0.108675
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestStep_Median 1 1975.76 2744.64
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestStep_Q_10 1 1472.4 1805.17
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestStep_Q_90 1 2414.03 3172.9
+p stdfactor minimaxsat-a-e 1 feature_novelty+_AvgImproveToBest_Mean 1 568403 3.71741e+06
+p stdfactor minimaxsat-a-e 1 feature_novelty+_AvgImproveToBest_CoeffVariance 1 1.38916 5.44687
+p stdfactor minimaxsat-a-e 1 feature_novelty+_FirstLMRatio_Mean 1 452827 1.52471e+06
+p stdfactor minimaxsat-a-e 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 9.30424 7.15236
+p stdfactor minimaxsat-a-e 1 feature_novelty+_BestCV_Mean 1 0.646588 0.172806
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestSolution_Mean 1 88.7078 186.163
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestSolution_CoeffVariance 1 0.568648 0.698469
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestStep_Mean 1 4361.87 5044.58
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestStep_CoeffVariance 1 0.401389 0.236694
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestStep_Median 1 4138.08 5088.79
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestStep_Q_10 1 2525.59 4102.35
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestStep_Q_90 1 5595.34 5801.02
+p stdfactor minimaxsat-a-e 1 feature_gwsat_AvgImproveToBest_Mean 1 65110.3 838881
+p stdfactor minimaxsat-a-e 1 feature_gwsat_AvgImproveToBest_CoeffVariance 1 0.552011 1.52639
+p stdfactor minimaxsat-a-e 1 feature_gwsat_FirstLMRatio_Mean 1 647614 1.64767e+06
+p stdfactor minimaxsat-a-e 1 feature_gwsat_FirstLMRatio_CoeffVariance 1 3.33349 3.29657
+p stdfactor minimaxsat-a-e 1 feature_gwsat_BestCV_Mean 1 0.696368 0.193664
+p stdfactor minimaxsat-a-e 1 Number_of_Variables 1 1492.49 1583.3
+p stdfactor minimaxsat-a-e 1 Number_of_Clauses 1 6863.89 7904.09
+p stdfactor minimaxsat-a-e 1 Ratio_Clauses/Variables 1 4.04863 1.20971
+p stdfactor minimaxsat-a-e 1 Ratio_Negative_Clauses 1 1.35557 0.304555
+p stdfactor minimaxsat-a-e 1 Ratio_Positive_Clauses 1 2.77584 6.35127
+p stdfactor minimaxsat-a-e 1 Ratio_Clauses/Variables 1 4.04863 1.20971
+p stdfactor minimaxsat-a-e 1 Number_of_Hard_Clauses 1 6732.36 7914.43
+p stdfactor minimaxsat-a-e 1 Ratio_Hard_Clauses/Total_Clauses 1 0.900298 0.166118
+p stdfactor minimaxsat-a-e 1 Ratio_Hard_Unit_Clauses 1 0.0538346 0.135662
+p stdfactor minimaxsat-a-e 1 Ratio_Hard_Binary_Clauses 1 0.340679 0.194498
+p stdfactor minimaxsat-a-e 1 Ratio_Hard_Ternary_Clauses 1 0.436217 0.222045
+p stdfactor mspbo-a-e 1 feature_novelty+_BestSolution_Mean 1 89.2796 533.633
+p stdfactor mspbo-a-e 1 feature_novelty+_BestSolution_CoeffVariance 1 0.932796 0.932224
+p stdfactor mspbo-a-e 1 feature_novelty+_BestStep_Mean 1 2131.2 2697.99
+p stdfactor mspbo-a-e 1 feature_novelty+_BestStep_CoeffVariance 1 0.219381 0.108381
+p stdfactor mspbo-a-e 1 feature_novelty+_BestStep_Median 1 2139.73 2802.47
+p stdfactor mspbo-a-e 1 feature_novelty+_BestStep_Q_10 1 1641.23 1984.98
+p stdfactor mspbo-a-e 1 feature_novelty+_BestStep_Q_90 1 2582.59 3191.19
+p stdfactor mspbo-a-e 1 feature_novelty+_AvgImproveToBest_Mean 1 530297 3.59345e+06
+p stdfactor mspbo-a-e 1 feature_novelty+_AvgImproveToBest_CoeffVariance 1 1.32839 5.26692
+p stdfactor mspbo-a-e 1 feature_novelty+_FirstLMRatio_Mean 1 422324 1.4771e+06
+p stdfactor mspbo-a-e 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 8.68449 6.99102
+p stdfactor mspbo-a-e 1 feature_novelty+_BestCV_Mean 1 0.658974 0.184249
+p stdfactor mspbo-a-e 1 feature_gwsat_BestSolution_Mean 1 175.195 1163.29
+p stdfactor mspbo-a-e 1 feature_gwsat_BestSolution_CoeffVariance 1 0.575227 0.686762
+p stdfactor mspbo-a-e 1 feature_gwsat_BestStep_Mean 1 4795.48 5271.85
+p stdfactor mspbo-a-e 1 feature_gwsat_BestStep_CoeffVariance 1 0.406417 0.236277
+p stdfactor mspbo-a-e 1 feature_gwsat_BestStep_Median 1 4627.91 5415.53
+p stdfactor mspbo-a-e 1 feature_gwsat_BestStep_Q_10 1 2706.09 4095.57
+p stdfactor mspbo-a-e 1 feature_gwsat_BestStep_Q_90 1 5945.84 5853
+p stdfactor mspbo-a-e 1 feature_gwsat_AvgImproveToBest_Mean 1 60745.4 810438
+p stdfactor mspbo-a-e 1 feature_gwsat_AvgImproveToBest_CoeffVariance 1 0.556837 1.47761
+p stdfactor mspbo-a-e 1 feature_gwsat_FirstLMRatio_Mean 1 610663 1.59836e+06
+p stdfactor mspbo-a-e 1 feature_gwsat_FirstLMRatio_CoeffVariance 1 3.31915 3.63388
+p stdfactor mspbo-a-e 1 feature_gwsat_BestCV_Mean 1 0.704161 0.18463
+p stdfactor mspbo-a-e 1 Number_of_Variables 1 1796.27 3315.56
+p stdfactor mspbo-a-e 1 Number_of_Clauses 1 8040.46 14781.9
+p stdfactor mspbo-a-e 1 Ratio_Clauses/Variables 1 4.03597 1.18926
+p stdfactor mspbo-a-e 1 Ratio_Negative_Clauses 1 1.36282 0.286907
+p stdfactor mspbo-a-e 1 Ratio_Positive_Clauses 1 2.30434 4.69846
+p stdfactor mspbo-a-e 1 Ratio_Clauses/Variables 1 4.03597 1.18926
+p stdfactor mspbo-a-e 1 Number_of_Hard_Clauses 1 7851.23 14671
+p stdfactor mspbo-a-e 1 Ratio_Hard_Clauses/Total_Clauses 1 0.903165 0.15822
+p stdfactor mspbo-a-e 1 Ratio_Hard_Unit_Clauses 1 0.0511974 0.131462
+p stdfactor mspbo-a-e 1 Ratio_Hard_Binary_Clauses 1 0.359555 0.210069
+p stdfactor mspbo-a-e 1 Ratio_Hard_Ternary_Clauses 1 0.424531 0.228008
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestSolution_Mean 1 675.447 6728.65
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestSolution_CoeffVariance 1 1.00899 1.03459
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestStep_Mean 1 2561.96 3336.46
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestStep_CoeffVariance 1 0.21935 0.116445
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestStep_Median 1 2615.22 3559.22
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestStep_Q_10 1 1885.17 2446.43
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestStep_Q_90 1 3046.51 3894.35
+p stdfactor msuncore-a1-ec 1 feature_novelty+_AvgImproveToBest_Mean 1 318147 1.69097e+06
+p stdfactor msuncore-a1-ec 1 feature_novelty+_AvgImproveToBest_CoeffVariance 1 1.40368 5.4823
+p stdfactor msuncore-a1-ec 1 feature_novelty+_FirstLMRatio_Mean 1 460389 1.54772e+06
+p stdfactor msuncore-a1-ec 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 7.87681 7.10319
+p stdfactor msuncore-a1-ec 1 feature_novelty+_BestCV_Mean 1 0.679224 0.216835
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestSolution_Mean 1 701.892 6318.77
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestSolution_CoeffVariance 1 0.545081 0.718905
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestStep_Mean 1 5428.94 6385.64
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestStep_CoeffVariance 1 0.370565 0.258052
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestStep_Median 1 5280.99 6506.98
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestStep_Q_10 1 3625.57 5744.5
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestStep_Q_90 1 6326.8 6649.75
+p stdfactor msuncore-a1-ec 1 feature_gwsat_AvgImproveToBest_Mean 1 67120.2 851649
+p stdfactor msuncore-a1-ec 1 feature_gwsat_AvgImproveToBest_CoeffVariance 1 0.527926 1.55551
+p stdfactor msuncore-a1-ec 1 feature_gwsat_FirstLMRatio_Mean 1 643594 1.67505e+06
+p stdfactor msuncore-a1-ec 1 feature_gwsat_FirstLMRatio_CoeffVariance 1 3.44234 4.02445
+p stdfactor msuncore-a1-ec 1 feature_gwsat_BestCV_Mean 1 0.714162 0.195371
+p stdfactor msuncore-a1-ec 1 Number_of_Variables 1 3199.75 10721.1
+p stdfactor msuncore-a1-ec 1 Number_of_Clauses 1 14764 51021
+p stdfactor msuncore-a1-ec 1 Ratio_Clauses/Variables 1 3.99 1.27495
+p stdfactor msuncore-a1-ec 1 Ratio_Negative_Clauses 1 1.37793 0.297559
+p stdfactor msuncore-a1-ec 1 Ratio_Positive_Clauses 1 2.75969 6.43114
+p stdfactor msuncore-a1-ec 1 Ratio_Clauses/Variables 1 3.99 1.27495
+p stdfactor msuncore-a1-ec 1 Number_of_Hard_Clauses 1 13661.7 45807.9
+p stdfactor msuncore-a1-ec 1 Ratio_Hard_Clauses/Total_Clauses 1 0.890132 0.154978
+p stdfactor msuncore-a1-ec 1 Ratio_Hard_Unit_Clauses 1 0.05517 0.137389
+p stdfactor msuncore-a1-ec 1 Ratio_Hard_Binary_Clauses 1 0.380165 0.227694
+p stdfactor msuncore-a1-ec 1 Ratio_Hard_Ternary_Clauses 1 0.393549 0.240765
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestSolution_Mean 1 558.338 6458.45
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestSolution_CoeffVariance 1 0.992982 0.974489
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestStep_Mean 1 2351.83 2980.07
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestStep_CoeffVariance 1 0.222925 0.112249
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestStep_Median 1 2387.48 3180.68
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestStep_Q_10 1 1710.08 2004.17
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestStep_Q_90 1 2849.39 3558.52
+p stdfactor msuncore-a31-es 1 feature_novelty+_AvgImproveToBest_Mean 1 551880 3.66422e+06
+p stdfactor msuncore-a31-es 1 feature_novelty+_AvgImproveToBest_CoeffVariance 1 1.38254 5.36737
+p stdfactor msuncore-a31-es 1 feature_novelty+_FirstLMRatio_Mean 1 437628 1.50485e+06
+p stdfactor msuncore-a31-es 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 8.50036 6.94825
+p stdfactor msuncore-a31-es 1 feature_novelty+_BestCV_Mean 1 0.672687 0.193652
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestSolution_Mean 1 549.029 5922.38
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestSolution_CoeffVariance 1 0.570963 0.694911
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestStep_Mean 1 5207.33 5846.52
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestStep_CoeffVariance 1 0.393915 0.251878
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestStep_Median 1 5011.19 5961.57
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestStep_Q_10 1 3237.85 5073.92
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestStep_Q_90 1 6302.47 6301.88
+p stdfactor msuncore-a31-es 1 feature_gwsat_AvgImproveToBest_Mean 1 63217.8 826670
+p stdfactor msuncore-a31-es 1 feature_gwsat_AvgImproveToBest_CoeffVariance 1 0.539891 1.50787
+p stdfactor msuncore-a31-es 1 feature_gwsat_FirstLMRatio_Mean 1 626244 1.62791e+06
+p stdfactor msuncore-a31-es 1 feature_gwsat_FirstLMRatio_CoeffVariance 1 3.33074 3.7004
+p stdfactor msuncore-a31-es 1 feature_gwsat_BestCV_Mean 1 0.708103 0.187321
+p stdfactor msuncore-a31-es 1 Number_of_Variables 1 2595.05 9629.53
+p stdfactor msuncore-a31-es 1 Number_of_Clauses 1 11934.1 45609.4
+p stdfactor msuncore-a31-es 1 Ratio_Clauses/Variables 1 4.03634 1.20392
+p stdfactor msuncore-a31-es 1 Ratio_Negative_Clauses 1 1.376 0.28544
+p stdfactor msuncore-a31-es 1 Ratio_Positive_Clauses 1 2.36801 5.34869
+p stdfactor msuncore-a31-es 1 Ratio_Clauses/Variables 1 4.03634 1.20392
+p stdfactor msuncore-a31-es 1 Number_of_Hard_Clauses 1 11240.4 40962.1
+p stdfactor msuncore-a31-es 1 Ratio_Hard_Clauses/Total_Clauses 1 0.904053 0.151465
+p stdfactor msuncore-a31-es 1 Ratio_Hard_Unit_Clauses 1 0.0533172 0.133717
+p stdfactor msuncore-a31-es 1 Ratio_Hard_Binary_Clauses 1 0.376155 0.211987
+p stdfactor msuncore-a31-es 1 Ratio_Hard_Ternary_Clauses 1 0.418517 0.2266
+p feastd
+p outstd
+p freeweight minimaxsat-a-e -1.24579
+p weight minimaxsat-a-e 1 Number_of_Clauses 1 21.9868
+p weight minimaxsat-a-e 1 Number_of_Hard_Clauses 1 -27.4056
+p weight minimaxsat-a-e 2 Number_of_Hard_Clauses 1 feature_novelty+_BestSolution_CoeffVariance 1 -0.370537
+p weight minimaxsat-a-e 1 Number_of_Variables 1 6.81657
+p weight minimaxsat-a-e 2 Number_of_Variables 1 Ratio_Hard_Unit_Clauses 1 -2.10538
+p weight minimaxsat-a-e 1 Ratio_Hard_Unit_Clauses 1 -3.98147
+p weight minimaxsat-a-e 1 Ratio_Hard_Unit_Clauses 2 0.369584
+p weight minimaxsat-a-e 2 Ratio_Negative_Clauses 1 feature_novelty+_BestSolution_CoeffVariance 1 1.76069
+p weight minimaxsat-a-e 2 Ratio_Positive_Clauses 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 -0.467656
+p weight minimaxsat-a-e 2 feature_gwsat_BestCV_Mean 1 feature_novelty+_BestSolution_CoeffVariance 1 0.501793
+p weight minimaxsat-a-e 2 feature_gwsat_BestSolution_Mean 1 feature_novelty+_BestCV_Mean 1 -1.2463
+p weight minimaxsat-a-e 1 feature_gwsat_FirstLMRatio_CoeffVariance 1 -0.438632
+p weight minimaxsat-a-e 2 feature_gwsat_FirstLMRatio_CoeffVariance 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 -0.2785
+p weight minimaxsat-a-e 1 feature_novelty+_BestSolution_CoeffVariance 1 -0.744092
+p weight minimaxsat-a-e 1 feature_novelty+_FirstLMRatio_CoeffVariance 1 0.736359
+p freeweight mspbo-a-e -2.08574
+p weight mspbo-a-e 2 Ratio_Clauses/Variables 1 Ratio_Hard_Binary_Clauses 1 0.524311
+p weight mspbo-a-e 2 Ratio_Hard_Binary_Clauses 1 feature_novelty+_BestSolution_CoeffVariance 1 0.241784
+p weight mspbo-a-e 1 Ratio_Hard_Ternary_Clauses 1 -0.477928
+p weight mspbo-a-e 1 Ratio_Hard_Ternary_Clauses 2 0.903755
+p weight mspbo-a-e 2 Ratio_Hard_Unit_Clauses 1 feature_novelty+_BestStep_Q_10 1 1.48828
+p weight mspbo-a-e 1 Ratio_Negative_Clauses 1 0.115678
+p weight mspbo-a-e 2 Ratio_Positive_Clauses 1 feature_gwsat_BestStep_Mean 1 -1.71342
+p weight mspbo-a-e 2 Ratio_Positive_Clauses 1 feature_novelty+_BestStep_Q_10 1 3.31931
+p weight mspbo-a-e 2 feature_gwsat_BestStep_Mean 1 feature_novelty+_BestStep_Q_10 1 -0.2134
+p weight mspbo-a-e 1 feature_novelty+_BestStep_Q_10 1 2.14449
+p freeweight msuncore-a1-ec -0.0882578
+p weight msuncore-a1-ec 1 Number_of_Variables 1 1.85601
+p weight msuncore-a1-ec 2 Number_of_Variables 1 Ratio_Hard_Unit_Clauses 1 0.979343
+p weight msuncore-a1-ec 2 Number_of_Variables 1 feature_gwsat_BestCV_Mean 1 -1.25959
+p weight msuncore-a1-ec 2 Number_of_Variables 1 feature_novelty+_BestCV_Mean 1 0.920818
+p weight msuncore-a1-ec 1 Ratio_Clauses/Variables 1 0.595229
+p weight msuncore-a1-ec 2 Ratio_Clauses/Variables 1 Ratio_Hard_Unit_Clauses 1 0.121546
+p weight msuncore-a1-ec 2 Ratio_Positive_Clauses 1 feature_gwsat_BestCV_Mean 1 0.102063
+p weight msuncore-a1-ec 2 Ratio_Positive_Clauses 1 feature_novelty+_BestCV_Mean 1 -1.20409
+p weight msuncore-a1-ec 1 Ratio_Positive_Clauses 2 -0.0425314
+p weight msuncore-a1-ec 2 feature_gwsat_AvgImproveToBest_CoeffVariance 1 feature_gwsat_FirstLMRatio_Mean 1 1.43289
+p weight msuncore-a1-ec 2 feature_gwsat_BestCV_Mean 1 feature_gwsat_FirstLMRatio_Mean 1 -0.547755
+p weight msuncore-a1-ec 2 feature_gwsat_BestSolution_Mean 1 feature_gwsat_FirstLMRatio_Mean 1 6.37977
+p freeweight msuncore-a31-es 0.169487
+p weight msuncore-a31-es 1 Ratio_Hard_Ternary_Clauses 1 -0.535505
+p weight msuncore-a31-es 1 Ratio_Hard_Unit_Clauses 1 -0.371134
+p weight msuncore-a31-es 2 Ratio_Hard_Unit_Clauses 1 Ratio_Positive_Clauses 1 0.980956
+p weight msuncore-a31-es 1 feature_gwsat_FirstLMRatio_Mean 1 -0.672432
