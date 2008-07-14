@@ -1404,11 +1404,12 @@ int dpl() {
   int var, nb;
   do {
     if (VARIABLE_STACK_fill_pointer==NB_VAR) {
-      printf("Leaf\n"); break;
+      //printf("Leaf\n"); 
       UB=NB_EMPTY; 
       nb=verify_solution();
       if (nb!=NB_EMPTY)
       	printf("problem nb...");
+      if (one_branch_only == TRUE ) break;
       while (backtracking()==NONE);
       if (VARIABLE_STACK_fill_pointer==0)
 	break;
@@ -1518,10 +1519,12 @@ main(int argc, char *argv[]) {
 
   for(i=argc-1; i >= 2; i--) {
     if ( strcmp( argv[i], "-t" ) == 0 ) {
+      printf("c Flag timeout on\n");
       signal( SIGALRM, timeout_handler );
       alarm ( TOTAL_TIMEOUT );
       argc--;
-    } else if ( strcmp( argv[ i ], "-o" ) ) {
+    } else if ( strcmp( argv[ i ], "-o" ) == 0 ) {
+      printf("c Flag one-branch-only on\n");
       one_branch_only = TRUE;
       argc--;
     }
@@ -1533,7 +1536,7 @@ main(int argc, char *argv[]) {
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
   case TRUE:
-    if (argc>2) UB=atoi(argv[2]); else UB=NB_CLAUSE;
+    if (argc>2) UB=atoi(argv[2]); else UB=INIT_NB_CLAUSE;
     //localSearch(argv[1], LOCAL_SEARCH_TIMEOUT, LOCAL_SEARCH_MAX_RUNS, 12345 );
     init();
     dpl();
