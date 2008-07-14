@@ -1491,23 +1491,23 @@ int localSearch( char* filename, int iTimeOut, int iNumRuns, int iSeed ){
 }
 */
 main(int argc, char *argv[]) {
-  char saved_input_file[WORD_LENGTH];
+  //char saved_input_file[WORD_LENGTH];
   int i,  var; 
-  long begintime, endtime, mess;
-  struct tms *a_tms;
+  //long begintime, endtime, mess;
+  //struct tms *a_tms;
   FILE *fp_time;
 
   if (argc<2) {
     printf("Using format: maxsatz input_instance [upper_bound]\n");
     return FALSE;
   }
-  for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
+  //for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
 
   signal( SIGALRM, timeout_handler );
   alarm ( TOTAL_TIMEOUT );
 
-  a_tms = ( struct tms *) malloc( sizeof (struct tms));
-  mess=times(a_tms); begintime = a_tms->tms_utime;
+  //a_tms = ( struct tms *) malloc( sizeof (struct tms));
+  //mess=times(a_tms); begintime = a_tms->tms_utime;
 
   switch (build_simple_sat_instance(argv[1])) {
   case FALSE: printf("Input file error\n"); return FALSE;
@@ -1519,14 +1519,14 @@ main(int argc, char *argv[]) {
     break;
   case NONE: printf("An empty resolvant is found!\n"); break;
   }
-  mess=times(a_tms); endtime = a_tms->tms_utime;
+  //mess=times(a_tms); endtime = a_tms->tms_utime;
 
-  printf("Best Solution=%d\n", UB);
-  printf("NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
+  printf("c Best Solution=%d\n", UB);
+  printf("c NB_MONO= %ld, NB_UNIT= %ld, NB_BRANCHE= %ld, NB_BACK= %ld \n", 
 	 NB_MONO, NB_UNIT, NB_BRANCHE, NB_BACK);
   	        
-  printf ("Program terminated in %5.3f seconds.\n",
-	  ((double)(endtime-begintime)/CLK_TCK));
+  //printf ("Program terminated in %5.3f seconds.\n",
+  //	  ((double)(endtime-begintime)/CLK_TCK));
   /*  
   fp_time = fopen("timetable", "a");
   fprintf(fp_time, "maxsatz14bis+fl %s %5.3f %ld %ld %d %d %d %d\n", 

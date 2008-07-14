@@ -16,6 +16,7 @@ def print_data( list ):
    print 'Percentile 90: ' + str( statistics.percentile( 90 ) )
 
 Iterations = 20
+solutions = []
 monos = []
 units = []
 branches = []
@@ -25,13 +26,18 @@ for i in range( Iterations ):
    #print "Iteration " + str( i )
    fp = os.popen("./knuth.maxsatz+fl " + sys.argv[1] )
    for line in fp:
-      m = re.search( 'NB_MONO= (\d+), NB_UNIT= (\d+), NB_BRANCHE= (\d+), NB_BACK= (\d+)', line)
+      m = re.search( 'c NB_MONO= (\d+), NB_UNIT= (\d+), NB_BRANCHE= (\d+), NB_BACK= (\d+)', line)
       if ( m ):
          monos.append( int(m.group(1) ) )
          units.append( int( m.group(2) ) )
          branches.append( int( m.group(3) ) )
          backtracks.append( int ( m.group(4) ) )
+      m = re.search( 'c Best Solution=(\d+)', line)
+      if ( m ):
+         solutions.append( int(m.group(1) ) )
 
+print 'number of solutions'
+print_data( solutions )
 print 'number of monos'
 print_data( monos )
 print 'number of unit'
