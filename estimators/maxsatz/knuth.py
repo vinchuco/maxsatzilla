@@ -24,7 +24,7 @@ backtracks = []
 
 for i in range( Iterations ):
    #print "Iteration " + str( i )
-   fp = os.popen("./knuth.maxsatz+fl " + sys.argv[1] )
+   fp = os.popen("./maxsatz " + sys.argv[1] )
    for line in fp:
       m = re.search( 'c NB_MONO= (\d+), NB_UNIT= (\d+), NB_BRANCHE= (\d+), NB_BACK= (\d+)', line)
       if ( m ):

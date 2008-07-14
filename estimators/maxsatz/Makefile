@@ -2,7 +2,7 @@ CFLAGS=-O3
 
 .PHONY: all clean
 
-all: timeout.maxsatz+fl knuth.maxsatz+fl
+all: maxsatz
 
 clean:
-	rm -f timeout.maxsatz+fl knuth.maxsatz+fl
+	rm -f maxsatz
