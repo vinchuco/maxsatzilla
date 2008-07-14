@@ -9,8 +9,26 @@ using std::cerr;
 
 ConfigReader::ConfigReader(const string &configFile)
   : Reader(configFile), percentTest(0), fsopt(NONE), featureStd(false), outputStd(false), fePartOrder(0), la(NUM_LA), handleTimeout(false), timeoutError(0.0) {
+  initSVMParams();
   parseConfig();
   file.close();
+}
+
+void ConfigReader::initSVMParams() {
+  
+  svmParams.degree = make_pair(0, false);
+  svmParams.gamma = make_pair(0, false);
+  svmParams.coef0 = make_pair(0, false);
+  svmParams.cost = make_pair(0, false);
+  svmParams.p = make_pair(0, false);
+  svmParams.nu = make_pair(0, false);
+  svmParams.cacheSize = make_pair(0, false);
+  svmParams.eps = make_pair(0, false);
+  svmParams.shrinking = make_pair(false, false);
+  svmParams.probability = make_pair(false, false);
+  svmParams.regressionType = make_pair(0, false);
+  svmParams.kernelType = make_pair(0, false);
+
 }
 
 void ConfigReader::parseConfig() {
@@ -59,32 +77,32 @@ void ConfigReader::parseConfig() {
       else if(paramName == "rr_factor")
 	rrDelta = getDouble();
       else if(paramName == "svm_degree")
-	svmDegree = getUInt();
+	svmParams.degree = make_pair(getUInt(), true);
       else if(paramName == "svm_gamma")
-	svmGamma = getDouble();
+	svmParams.gamma = make_pair(getDouble(), true);
       else if(paramName == "svm_coef0")
-	svmCoef0 = getDouble();
+	svmParams.coef0 = make_pair(getDouble(), true);
       else if(paramName == "svm_c")
-	svmC = getDouble();
+	svmParams.cost = make_pair(getDouble(), true);
       else if(paramName == "svm_p")
-	svmP = getDouble();
+	svmParams.p = make_pair(getDouble(), true);
       else if(paramName == "svm_nu")
-	svmNu = getDouble();
+	svmParams.nu = make_pair(getDouble(), true);
       else if(paramName == "svm_cache_size")
-	svmCacheSize = getDouble();
+	svmParams.cacheSize = make_pair(getDouble(), true);
       else if(paramName == "svm_eps")
-	svmStopCrit = getDouble();
+	svmParams.eps = make_pair(getDouble(), true);
       else if(paramName == "svm_shrinking")
-	svmShrink = true;
+	svmParams.shrinking = make_pair(true, true);
       else if(paramName == "svm_probability")
-	svmProbability = true;
+	svmParams.probability = make_pair(true, true);
       else if(paramName == "svm_regression_type") {
 	string type = getString();
 	std::transform(type.begin(), type.end(), type.begin(), tolower_op());
 	if(type == "nu")
-	  svmRegressionType = SVMRegression::NU_R;
+	  svmParams.regressionType = make_pair(SVMRegression::NU_R, true);
 	else if(type == "epsilon")
-	  svmRegressionType = SVMRegression::EPSILON_R;
+	  svmParams.regressionType = make_pair(SVMRegression::EPSILON_R, true);
 	else {
 	  MSZError("In your coach config file you have not set the svm regression type to a known value.");
 	}
@@ -93,13 +111,13 @@ void ConfigReader::parseConfig() {
 	string kernel = getString();
 	std::transform(kernel.begin(), kernel.end(), kernel.begin(), tolower_op());
 	if(kernel == "linear")
-	  svmKernelType = SVMRegression::LINEAR_K;
+	  svmParams.kernelType = make_pair(SVMRegression::LINEAR_K, true);
 	else if(kernel == "poly")
-	  svmKernelType = SVMRegression::POLY_K;
+	  svmParams.kernelType = make_pair(SVMRegression::POLY_K, true);
 	else if(kernel == "rbf")
-	  svmKernelType = SVMRegression::RBF_K;
+	  svmParams.kernelType = make_pair(SVMRegression::RBF_K, true);
 	else if(kernel == "sigmoid")
-	  svmKernelType = SVMRegression::SIGMOID_K;
+	  svmParams.kernelType = make_pair(SVMRegression::SIGMOID_K, true);
 	else {
 	  MSZError("In your coach config file you have not set the svm kernel type to a known value.");
 	}

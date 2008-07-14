@@ -34,7 +34,8 @@ private:
 
   template<class T> friend
   LogMgm& operator<<(LogMgm &lm, const T& t) {
-    *(lm.streams[lm.catStack.top()]) << t;
+    if(lm.setupDone)
+      *(lm.streams[lm.catStack.top()]) << t;
     return lm;
   }
 

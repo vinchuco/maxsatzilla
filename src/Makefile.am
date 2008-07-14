@@ -1,4 +1,4 @@
-bin_PROGRAMS = coach furious getfeatures
+bin_PROGRAMS = coach furius getfeatures
 
 coach_SOURCES =        \
 coach.cc               \
@@ -37,7 +37,7 @@ coach_CPPFLAGS = -I../../extlib/libsvm-2.86/
 coach_CXXFLAGS = -std=c++98 -g -Wall 
 coach_LDFLAGS = -g -lgsl
 
-furious_SOURCES = \
+furius_SOURCES = \
 main.cc                   \
 MaxSatInstance.cc         \
 argumentsparser.cc        \
@@ -61,9 +61,9 @@ rrmodel.hh                \
 triple.hpp                \
 ../../extlib/libsvm-2.86/svm.cpp
 
-furious_CPPFLAGS = -I../../extlib/libsvm-2.86/
-furious_CXXFLAGS = -Wall -std=c++98 -ggdb
-furious_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
+furius_CPPFLAGS = -I../../extlib/libsvm-2.86/
+furius_CXXFLAGS = -Wall -std=c++98 -ggdb
+furius_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
 
 getfeatures_SOURCES = \
 features.cc           \
