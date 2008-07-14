@@ -174,6 +174,8 @@ int saved_nb_clause[tab_variable_size];
 int saved_saved_clauses[tab_variable_size];
 int saved_new_clauses[tab_variable_size];
 
+int one_branch_only = FALSE;
+
 #include "input.c"
 
 void remove_clauses(int var) {
@@ -1363,8 +1365,18 @@ int choose_and_instantiate_variable() {
     return NONE;
   for (var = 0; var < NB_VAR; var++) {
     if (var_state[var] == ACTIVE) {
-      //! Conditional
-      poid = (float)random();
+      if ( one_branch_only == TRUE ) {
+	poid = (float)random();
+      } else {
+	reduce_if_positive[var]=nb_neg_clause_of_length1[var]*2+
+	  nb_neg_clause_of_length2[var]*4+ 
+	  nb_neg_clause_of_length3[var];
+	reduce_if_negative[var]=nb_pos_clause_of_length1[var]*2+
+	  nb_pos_clause_of_length2[var]*4+ 
+	  nb_pos_clause_of_length3[var];
+	poid=reduce_if_positive[var]*reduce_if_negative[var]*64+
+	  reduce_if_positive[var]+reduce_if_negative[var];
+      }
       if (poid>max_poid) {
 	chosen_var=var;
 	max_poid=poid;
@@ -1498,13 +1510,22 @@ main(int argc, char *argv[]) {
   FILE *fp_time;
 
   if (argc<2) {
-    printf("Using format: maxsatz input_instance [upper_bound]\n");
+    printf("Using format: maxsatz input_instance [upper_bound] [options]\n");
+    printf("Options: \n\t-t\t timeout\n\t-o\t one branch only\n");
     return FALSE;
   }
   //for (i=0; i<WORD_LENGTH; i++) saved_input_file[i]=argv[1][i];
 
-  signal( SIGALRM, timeout_handler );
-  alarm ( TOTAL_TIMEOUT );
+  for(i=argc-1; i >= 2; i--) {
+    if ( strcmp( argv[i], "-t" ) == 0 ) {
+      signal( SIGALRM, timeout_handler );
+      alarm ( TOTAL_TIMEOUT );
+      argc--;
+    } else if ( strcmp( argv[ i ], "-o" ) ) {
+      one_branch_only = TRUE;
+      argc--;
+    }
+  }     
 
   //a_tms = ( struct tms *) malloc( sizeof (struct tms));
   //mess=times(a_tms); begintime = a_tms->tms_utime;
