@@ -10,23 +10,8 @@ public:
   enum RegressionType {NU_R = NU_SVR, EPSILON_R = EPSILON_SVR};
   enum KernelType {LINEAR_K = LINEAR, POLY_K = POLY, RBF_K = RBF, SIGMOID_K = SIGMOID};
 
-  SVMRegression(const DataSet &);
-  SVMRegression(RegressionType, KernelType, const DataSet &);
+  SVMRegression(const SVMParams &, const DataSet &);
   virtual ~SVMRegression();
-
-  void setRegressionType(RegressionType rt) { regressionType = rt; }
-  void setKernelType(KernelType kt) { kernelType = kt; }
-  
-  void setDegree(uint d)  { degree = d; degreeDefault = false; }
-  void setGamma(double g) { gamma = g; gammaDefault = false;     }
-  void setCoef0(double c0){ coef0 = c0; coef0Default = false; } 
-  void setCacheSize(double cs){ cacheSize = cs; cacheSizeDefault = false;}
-  void setStopCrit(double sc) { eps = sc; epsDefault = false; }
-  void setCost(double c)    { cost = c; costDefault = false; }
-  void setNu(double nu_)  { nu = nu_; nuDefault = false;}
-  void setP(double p_)    { p = p_; pDefault = false; }
-  void setShrinking(bool v)     { shrinking = v; shrinkingDefault = false; }
-  void setProbability(bool v)   { probability = v; probabilityDefault = false; }
 
   // Runs an SVM regression algorithm and outputs
   // header file with static definition of model

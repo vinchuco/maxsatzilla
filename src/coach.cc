@@ -234,18 +234,7 @@ int main(int argc, char *argv[]) {
       }
       case SVM: {
 	lm->setCategory(LogMgm::SVMREG);
-	SVMRegression *svm = new SVMRegression(*(dss[s].first));
-	
-	// Set svm regressions options
-	svm->setRegressionType(creader.getSVMRegressionType());
-	svm->setKernelType(creader.getSVMKernelType());
-	
-	svm->setCacheSize(creader.getSVMCacheSize());
-	svm->setStopCrit(creader.getSVMStopCrit());
-	svm->setNu(creader.getSVMNu());
-	svm->setShrinking(creader.getSVMShrinking());
-	svm->setProbability(creader.getSVMProbability());
-	
+	SVMRegression *svm = new SVMRegression(creader.getSVMParams(), *(dss[s].first));
 	la = svm;
 	break;
       }
