@@ -1,0 +1,7 @@
+
+To make the executable:
+
+autoreconf -if
+./configure
+make
+
