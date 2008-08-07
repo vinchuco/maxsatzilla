@@ -2,4 +2,5 @@
 CXXFLAGS=-O3 -I../
 
 getfeatures: MaxSatInstance.o features.o ../ubcsat/libubcsat.a
-	g++ -o $@ $<
+	g++ -o $@ $^
+
