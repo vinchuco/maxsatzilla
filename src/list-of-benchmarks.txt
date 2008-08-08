@@ -1,0 +1,13 @@
+# List of benchmarks from MSE 2008
+# Random
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX2SAT/60VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX2SAT/100VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX2SAT/140VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX3SAT/40VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX3SAT/50VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX3SAT/60VARS/
+/home/jplanes/mse08/benchmarks/maxsat/random/MAX3SAT/70VARS/
+# Crafted
+/home/jplanes/mse08/benchmarks/maxsat/crafted/MAXCUT/DIMACS_MOD/
+/home/jplanes/mse08/benchmarks/maxsat/crafted/MAXCUT/RANDOM/
+/home/jplanes/mse08/benchmarks/maxsat/crafted/MAXCUT/SPINGLASS/
