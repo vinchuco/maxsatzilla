@@ -17,7 +17,7 @@ benchpath = None
 for dir in open( list_of_benchs ):
    if dir.startswith( '#localpath' ):
       benchpath = dir.split()[1]
-      print benchpath
+      print 'Benchmarks path is : ' + benchpath
       continue
    if dir.startswith( '#' ):
       continue

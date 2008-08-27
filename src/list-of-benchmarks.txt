@@ -1,4 +1,5 @@
 # List of benchmarks from MSE 2008
+#localpath /home/jplanes/mse08/benchmarks/
 # Random
 /home/jplanes/mse08/benchmarks/maxsat/random/MAX2SAT/60VARS/
 /home/jplanes/mse08/benchmarks/maxsat/random/MAX2SAT/100VARS/
