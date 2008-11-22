@@ -1,6 +1,14 @@
+Furius
+------
+ -- You don't want to see the Furius furious!
+ -- Jordi Planes & Paulo Matos
 
-To make the executable:
+Next Conference Deadlines:
+--------------------------
+SAT 2009 - Feb 20, 2009  [Abstract, paper is a week later]
 
+Making the software (coach and furius executable):
+--------------------------------------------------
 autoreconf -if
 ./configure
 make
