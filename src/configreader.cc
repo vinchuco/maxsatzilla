@@ -4,7 +4,9 @@
 #include <iterator>
 #include <algorithm>
 #include <cstdlib>
+#include <utility>
 
+using std::make_pair;
 using std::cerr;
 
 ConfigReader::ConfigReader(const string &configFile)
