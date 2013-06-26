@@ -409,6 +409,7 @@ void ActivateColumn(unsigned int iColID, const char *sItem) {
 void ActivateStat(unsigned int iStatID, const char *sItem) {
 
   REPORTSTAT *pStat;
+  char *sItem_dup = strdup (sItem); // XXX: This might leak
   char *pPos;
   char *pPos2;
 
@@ -418,7 +419,7 @@ void ActivateStat(unsigned int iStatID, const char *sItem) {
     pStat->bActive = 1;
     pStat->iActiveID = iNumStatsActive++;
 
-    pPos = strchr(sItem,'[');
+    pPos = strchr(sItem_dup,'[');
     if (pPos) {
       pPos++;
       pPos2 = strchr(pPos,']');
