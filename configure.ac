@@ -14,6 +14,7 @@ AC_PROG_LEX
 AC_PROG_MAKE_SET
 AC_PROG_LIBTOOL
 
+# TODO: Check for presence of libsvm through svm.h
 # Checks for libraries.
 # FIXME: Replace `main' with a function in `-lblas':
 #AC_CHECK_LIB([blas], [main])
