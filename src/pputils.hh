@@ -4,6 +4,8 @@
 #ifndef PPUTILS_HH
 #define PPUTILS_HH
 
+#include <cstdio>
+
 #define MSZWarn(msg, ...)					\
   fprintf(stderr, "WARNING (%s:%d) ", __FILE__,  __LINE__);     \
   fprintf(stderr, msg, ##__VA_ARGS__);                          \
