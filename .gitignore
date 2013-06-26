@@ -1,0 +1,13 @@
+*.o
+*.Plo
+*.Po
+*.lo
+*.a
+*.la
+*~
+*.so
+*.so.*
+*.lai
+config.log
+config.status
+autom4te.cache/
