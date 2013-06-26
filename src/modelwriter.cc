@@ -3,7 +3,7 @@
 #include <sstream>
 #include <cstdlib>
 
-#include <svm.h>
+#include <libsvm/svm.h>
 
 ModelWriter::ModelWriter(const string &path) 
   : file(path.c_str()) {

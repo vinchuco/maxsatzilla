@@ -1,7 +1,6 @@
 #include "svmmodel.hh"
 
 #include <iostream>
-
 #include <cstdlib>
 
 using std::cerr;
@@ -18,7 +17,7 @@ SVMModel::SVMModel(const char *fname)
 }
 
 SVMModel::~SVMModel() {
-  svm_destroy_model(svmmodel);
+  svm_free_and_destroy_model(&svmmodel);
   free(prob);
 }
 
