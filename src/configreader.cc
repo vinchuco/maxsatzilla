@@ -28,8 +28,8 @@ void ConfigReader::initSVMParams() {
   svmParams.eps = make_pair(0, false);
   svmParams.shrinking = make_pair(false, false);
   svmParams.probability = make_pair(false, false);
-  svmParams.regressionType = make_pair(0, false);
-  svmParams.kernelType = make_pair(0, false);
+  svmParams.regressionType = make_pair(SVMRegression::NU_R, false); // NU_R made default
+  svmParams.kernelType = make_pair(SVMRegression::LINEAR_K, false); // LINEAR_K made default
 
 }
 
