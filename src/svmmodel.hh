@@ -2,7 +2,7 @@
 #define SVMMODEL_HH
 
 #include "model.hh"
-#include <svm.h>
+#include <libsvm/svm.h>
 
 #include <map>
 
