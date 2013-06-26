@@ -5,7 +5,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <cassert>
-#include <svm.h>
+#include <libsvm/svm.h>
 
 SVMRegression::SVMRegression(const DataSet &data) 
   : LearningAlgorithm(data), regressionType(NU_R), kernelType(RBF_K),
@@ -20,6 +20,10 @@ SVMRegression::SVMRegression(const DataSet &data)
     shrinking(true), shrinkingDefault(true),
     probability(false), probabilityDefault(true)
 { }
+
+SVMRegression::SVMRegression(const SVMParams &params, const DataSet &data)
+  : LearningAlgorithm(data)
+{ /* TODO */ }
 
 SVMRegression::SVMRegression(RegressionType regressionType, KernelType kernelType, const DataSet &data)
   : LearningAlgorithm(data), regressionType(regressionType), kernelType(kernelType),
