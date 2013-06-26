@@ -4,13 +4,14 @@
 #include "dataset.hh"
 #include "learningalgorithm.hh"
 #include "svmmodel.hh"
+#include "configreader.hh"
 
 class SVMRegression : public LearningAlgorithm {
 public:
   enum RegressionType {NU_R = NU_SVR, EPSILON_R = EPSILON_SVR};
   enum KernelType {LINEAR_K = LINEAR, POLY_K = POLY, RBF_K = RBF, SIGMOID_K = SIGMOID};
 
-  SVMRegression(const SVMParams &, const DataSet &);
+  SVMRegression(const struct SVMParams &, const DataSet &);
   virtual ~SVMRegression();
 
   // Runs an SVM regression algorithm and outputs
