@@ -1,11 +1,18 @@
 Furius
 ------
  -- You don't want to see the Furius furious!
- -- Jordi Planes & Paulo Matos
+ -- Developers: Paulo Matos & Jordi Planes
+ -- Collaborators: Joao Marques-Silva
 
-Next Conference Deadlines:
---------------------------
-SAT 2009 - Feb 20, 2009  [Abstract, paper is a week later]
+Needed packages
+---------------
+autoconf
+automake
+libtool
+libsvm
+libsvm-devel
+gsl
+gsl-devel
 
 Making the software (coach and furius executable):
 --------------------------------------------------

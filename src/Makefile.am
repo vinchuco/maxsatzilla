@@ -30,12 +30,11 @@ model.hh               \
 svmmodel.hh            \
 rrmodel.hh             \
 timeoutmgm.hh          \
-triple.hpp             \
-../../extlib/libsvm-2.86/svm.cpp
+triple.hpp             
 
-coach_CPPFLAGS = -I../../extlib/libsvm-2.86/
+coach_CPPFLAGS = 
 coach_CXXFLAGS = -std=c++98 -g -Wall 
-coach_LDFLAGS = -g -lgsl
+coach_LDFLAGS = -g -lgsl -lsvm
 
 furius_SOURCES = \
 main.cc                   \
@@ -58,17 +57,16 @@ reader.hh                 \
 model.hh                  \
 svmmodel.hh               \
 rrmodel.hh                \
-triple.hpp                \
-../../extlib/libsvm-2.86/svm.cpp
+triple.hpp                
 
-furius_CPPFLAGS = -I../../extlib/libsvm-2.86/
+furius_CPPFLAGS = 
 furius_CXXFLAGS = -Wall -std=c++98 -ggdb
-furius_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
+furius_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl -lsvm
 
 getfeatures_SOURCES = \
 features.cc           \
 MaxSatInstance.cc
 
 getfeatures_CXXFLAGS = -Wall -std=c++98 -ggdb
-getfeatures_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la
+getfeatures_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lsvm
 
