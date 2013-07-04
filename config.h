@@ -128,7 +128,7 @@
 #define PACKAGE "furius"
 
 /* Define to the address where bug reports for this package should be sent. */
-#define PACKAGE_BUGREPORT "jp3@ecs.soton.ac.uk"
+#define PACKAGE_BUGREPORT "paulo@matos-sorge.com jordi.planes@gmail.com"
 
 /* Define to the full name of this package. */
 #define PACKAGE_NAME "Furius"

@@ -1,5 +1,5 @@
 AC_PREREQ(2.59)
-AC_INIT([Furius], [3.0], [jp3@ecs.soton.ac.uk])
+AC_INIT([Furius], [3.0], [paulo@matos-sorge.com jordi.planes@gmail.com])
 AM_INIT_AUTOMAKE
 AC_CONFIG_SRCDIR([src/main.cc])
 AC_CONFIG_HEADER([config.h])
@@ -30,6 +30,10 @@ AC_PROG_LIBTOOL
 #AC_CHECK_LIB([m], [main])
 # FIXME: Replace `main' with a function in `-lz':
 #AC_CHECK_LIB([z], [main])
+
+AC_SEARCH_LIBS([svm_train], [svm], [], [
+  AC_MSG_ERROR([unable to find svm_train in libsvm, libsvm required])
+])
 
 # Checks for header files.
 AC_HEADER_STDC

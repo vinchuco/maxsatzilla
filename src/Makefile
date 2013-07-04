@@ -75,8 +75,7 @@ am_coach_OBJECTS = coach-coach.$(OBJEXT) coach-dataset.$(OBJEXT) \
 	coach-featurelabel.$(OBJEXT) coach-modelreader.$(OBJEXT) \
 	coach-modelwriter.$(OBJEXT) coach-reader.$(OBJEXT) \
 	coach-model.$(OBJEXT) coach-svmmodel.$(OBJEXT) \
-	coach-rrmodel.$(OBJEXT) coach-timeoutmgm.$(OBJEXT) \
-	coach-svm.$(OBJEXT)
+	coach-rrmodel.$(OBJEXT) coach-timeoutmgm.$(OBJEXT)
 coach_OBJECTS = $(am_coach_OBJECTS)
 coach_LDADD = $(LDADD)
 coach_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
@@ -88,7 +87,7 @@ am_furius_OBJECTS = furius-main.$(OBJEXT) \
 	furius-featurelabel.$(OBJEXT) furius-modelreader.$(OBJEXT) \
 	furius-modelwriter.$(OBJEXT) furius-reader.$(OBJEXT) \
 	furius-model.$(OBJEXT) furius-svmmodel.$(OBJEXT) \
-	furius-rrmodel.$(OBJEXT) furius-svm.$(OBJEXT)
+	furius-rrmodel.$(OBJEXT)
 furius_OBJECTS = $(am_furius_OBJECTS)
 furius_LDADD = $(LDADD)
 furius_LINK = $(LIBTOOL) --tag=CXX $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
@@ -174,7 +173,7 @@ LEX = flex
 LEXLIB = 
 LEX_OUTPUT_ROOT = lex.yy
 LIBOBJS = 
-LIBS = 
+LIBS = -lsvm 
 LIBTOOL = $(SHELL) $(top_builddir)/libtool
 LIPO = 
 LN_S = ln -s
@@ -189,7 +188,7 @@ OBJEXT = o
 OTOOL = 
 OTOOL64 = 
 PACKAGE = furius
-PACKAGE_BUGREPORT = jp3@ecs.soton.ac.uk
+PACKAGE_BUGREPORT = paulo@matos-sorge.com jordi.planes@gmail.com
 PACKAGE_NAME = Furius
 PACKAGE_STRING = Furius 3.0
 PACKAGE_TARNAME = furius
@@ -287,12 +286,11 @@ model.hh               \
 svmmodel.hh            \
 rrmodel.hh             \
 timeoutmgm.hh          \
-triple.hpp             \
-../../extlib/libsvm-2.86/svm.cpp
+triple.hpp             
 
-coach_CPPFLAGS = -I../../extlib/libsvm-2.86/
+coach_CPPFLAGS = 
 coach_CXXFLAGS = -std=c++98 -g -Wall 
-coach_LDFLAGS = -g -lgsl
+coach_LDFLAGS = -g -lgsl -lsvm
 furius_SOURCES = \
 main.cc                   \
 MaxSatInstance.cc         \
@@ -314,22 +312,21 @@ reader.hh                 \
 model.hh                  \
 svmmodel.hh               \
 rrmodel.hh                \
-triple.hpp                \
-../../extlib/libsvm-2.86/svm.cpp
+triple.hpp                
 
-furius_CPPFLAGS = -I../../extlib/libsvm-2.86/
+furius_CPPFLAGS = 
 furius_CXXFLAGS = -Wall -std=c++98 -ggdb
-furius_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl
+furius_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lgsl -lsvm
 getfeatures_SOURCES = \
 features.cc           \
 MaxSatInstance.cc
 
 getfeatures_CXXFLAGS = -Wall -std=c++98 -ggdb
-getfeatures_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la
+getfeatures_LDFLAGS = $(top_srcdir)/ubcsat/libubcsat.la -lsvm
 all: all-am
 
 .SUFFIXES:
-.SUFFIXES: .cc .cpp .lo .o .obj
+.SUFFIXES: .cc .lo .o .obj
 $(srcdir)/Makefile.in:  $(srcdir)/Makefile.am  $(am__configure_deps)
 	@for dep in $?; do \
 	  case '$(am__configure_deps)' in \
@@ -437,7 +434,6 @@ include ./$(DEPDIR)/coach-modelwriter.Po
 include ./$(DEPDIR)/coach-reader.Po
 include ./$(DEPDIR)/coach-ridgeregression.Po
 include ./$(DEPDIR)/coach-rrmodel.Po
-include ./$(DEPDIR)/coach-svm.Po
 include ./$(DEPDIR)/coach-svmmodel.Po
 include ./$(DEPDIR)/coach-svmregression.Po
 include ./$(DEPDIR)/coach-timeoutmgm.Po
@@ -451,7 +447,6 @@ include ./$(DEPDIR)/furius-modelreader.Po
 include ./$(DEPDIR)/furius-modelwriter.Po
 include ./$(DEPDIR)/furius-reader.Po
 include ./$(DEPDIR)/furius-rrmodel.Po
-include ./$(DEPDIR)/furius-svm.Po
 include ./$(DEPDIR)/furius-svmmodel.Po
 include ./$(DEPDIR)/getfeatures-MaxSatInstance.Po
 include ./$(DEPDIR)/getfeatures-features.Po
@@ -729,20 +724,6 @@ coach-timeoutmgm.obj: timeoutmgm.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(coach_CPPFLAGS) $(CPPFLAGS) $(coach_CXXFLAGS) $(CXXFLAGS) -c -o coach-timeoutmgm.obj `if test -f 'timeoutmgm.cc'; then $(CYGPATH_W) 'timeoutmgm.cc'; else $(CYGPATH_W) '$(srcdir)/timeoutmgm.cc'; fi`
 
-coach-svm.o: ../../extlib/libsvm-2.86/svm.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(coach_CPPFLAGS) $(CPPFLAGS) $(coach_CXXFLAGS) $(CXXFLAGS) -MT coach-svm.o -MD -MP -MF $(DEPDIR)/coach-svm.Tpo -c -o coach-svm.o `test -f '../../extlib/libsvm-2.86/svm.cpp' || echo '$(srcdir)/'`../../extlib/libsvm-2.86/svm.cpp
-	$(am__mv) $(DEPDIR)/coach-svm.Tpo $(DEPDIR)/coach-svm.Po
-#	source='../../extlib/libsvm-2.86/svm.cpp' object='coach-svm.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(coach_CPPFLAGS) $(CPPFLAGS) $(coach_CXXFLAGS) $(CXXFLAGS) -c -o coach-svm.o `test -f '../../extlib/libsvm-2.86/svm.cpp' || echo '$(srcdir)/'`../../extlib/libsvm-2.86/svm.cpp
-
-coach-svm.obj: ../../extlib/libsvm-2.86/svm.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(coach_CPPFLAGS) $(CPPFLAGS) $(coach_CXXFLAGS) $(CXXFLAGS) -MT coach-svm.obj -MD -MP -MF $(DEPDIR)/coach-svm.Tpo -c -o coach-svm.obj `if test -f '../../extlib/libsvm-2.86/svm.cpp'; then $(CYGPATH_W) '../../extlib/libsvm-2.86/svm.cpp'; else $(CYGPATH_W) '$(srcdir)/../../extlib/libsvm-2.86/svm.cpp'; fi`
-	$(am__mv) $(DEPDIR)/coach-svm.Tpo $(DEPDIR)/coach-svm.Po
-#	source='../../extlib/libsvm-2.86/svm.cpp' object='coach-svm.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(coach_CPPFLAGS) $(CPPFLAGS) $(coach_CXXFLAGS) $(CXXFLAGS) -c -o coach-svm.obj `if test -f '../../extlib/libsvm-2.86/svm.cpp'; then $(CYGPATH_W) '../../extlib/libsvm-2.86/svm.cpp'; else $(CYGPATH_W) '$(srcdir)/../../extlib/libsvm-2.86/svm.cpp'; fi`
-
 furius-main.o: main.cc
 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -MT furius-main.o -MD -MP -MF $(DEPDIR)/furius-main.Tpo -c -o furius-main.o `test -f 'main.cc' || echo '$(srcdir)/'`main.cc
 	$(am__mv) $(DEPDIR)/furius-main.Tpo $(DEPDIR)/furius-main.Po
@@ -897,20 +878,6 @@ furius-rrmodel.obj: rrmodel.cc
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -c -o furius-rrmodel.obj `if test -f 'rrmodel.cc'; then $(CYGPATH_W) 'rrmodel.cc'; else $(CYGPATH_W) '$(srcdir)/rrmodel.cc'; fi`
 
-furius-svm.o: ../../extlib/libsvm-2.86/svm.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -MT furius-svm.o -MD -MP -MF $(DEPDIR)/furius-svm.Tpo -c -o furius-svm.o `test -f '../../extlib/libsvm-2.86/svm.cpp' || echo '$(srcdir)/'`../../extlib/libsvm-2.86/svm.cpp
-	$(am__mv) $(DEPDIR)/furius-svm.Tpo $(DEPDIR)/furius-svm.Po
-#	source='../../extlib/libsvm-2.86/svm.cpp' object='furius-svm.o' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -c -o furius-svm.o `test -f '../../extlib/libsvm-2.86/svm.cpp' || echo '$(srcdir)/'`../../extlib/libsvm-2.86/svm.cpp
-
-furius-svm.obj: ../../extlib/libsvm-2.86/svm.cpp
-	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -MT furius-svm.obj -MD -MP -MF $(DEPDIR)/furius-svm.Tpo -c -o furius-svm.obj `if test -f '../../extlib/libsvm-2.86/svm.cpp'; then $(CYGPATH_W) '../../extlib/libsvm-2.86/svm.cpp'; else $(CYGPATH_W) '$(srcdir)/../../extlib/libsvm-2.86/svm.cpp'; fi`
-	$(am__mv) $(DEPDIR)/furius-svm.Tpo $(DEPDIR)/furius-svm.Po
-#	source='../../extlib/libsvm-2.86/svm.cpp' object='furius-svm.obj' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(furius_CPPFLAGS) $(CPPFLAGS) $(furius_CXXFLAGS) $(CXXFLAGS) -c -o furius-svm.obj `if test -f '../../extlib/libsvm-2.86/svm.cpp'; then $(CYGPATH_W) '../../extlib/libsvm-2.86/svm.cpp'; else $(CYGPATH_W) '$(srcdir)/../../extlib/libsvm-2.86/svm.cpp'; fi`
-
 getfeatures-features.o: features.cc
 	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(getfeatures_CXXFLAGS) $(CXXFLAGS) -MT getfeatures-features.o -MD -MP -MF $(DEPDIR)/getfeatures-features.Tpo -c -o getfeatures-features.o `test -f 'features.cc' || echo '$(srcdir)/'`features.cc
 	$(am__mv) $(DEPDIR)/getfeatures-features.Tpo $(DEPDIR)/getfeatures-features.Po
@@ -938,27 +905,6 @@ getfeatures-MaxSatInstance.obj: MaxSatInstance.cc
 #	source='MaxSatInstance.cc' object='getfeatures-MaxSatInstance.obj' libtool=no \
 #	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
 #	$(CXX) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(getfeatures_CXXFLAGS) $(CXXFLAGS) -c -o getfeatures-MaxSatInstance.obj `if test -f 'MaxSatInstance.cc'; then $(CYGPATH_W) 'MaxSatInstance.cc'; else $(CYGPATH_W) '$(srcdir)/MaxSatInstance.cc'; fi`
-
-.cpp.o:
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-#	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ $<
-
-.cpp.obj:
-	$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ `$(CYGPATH_W) '$<'`
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Po
-#	source='$<' object='$@' libtool=no \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(CXXCOMPILE) -c -o $@ `$(CYGPATH_W) '$<'`
-
-.cpp.lo:
-	$(LTCXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<
-	$(am__mv) $(DEPDIR)/$*.Tpo $(DEPDIR)/$*.Plo
-#	source='$<' object='$@' libtool=yes \
-#	DEPDIR=$(DEPDIR) $(CXXDEPMODE) $(depcomp) \
-#	$(LTCXXCOMPILE) -c -o $@ $<
 
 mostlyclean-libtool:
 	-rm -f *.lo
