@@ -34,6 +34,9 @@ AC_PROG_LIBTOOL
 AC_SEARCH_LIBS([svm_train], [svm], [], [
   AC_MSG_ERROR([unable to find svm_train in libsvm, libsvm required])
 ])
+AC_SEARCH_LIBS([gsl_vector_alloc], [gsl], [], [
+  AC_MSG_ERROR([unable to find gsl_vector_alloc in libgsl, libgsl required])
+], [-lblas])
 
 # Checks for header files.
 AC_HEADER_STDC

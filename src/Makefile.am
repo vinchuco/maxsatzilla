@@ -34,7 +34,7 @@ triple.hpp
 
 coach_CPPFLAGS = 
 coach_CXXFLAGS = -std=c++98 -g -Wall 
-coach_LDFLAGS = -g -lgsl -lsvm
+coach_LDFLAGS = -g -lgsl -lsvm -lcblas
 
 furius_SOURCES = \
 main.cc                   \
